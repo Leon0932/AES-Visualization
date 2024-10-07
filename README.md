@@ -29,7 +29,7 @@ cd AES-Visualization
 ### 3. Open the Xcode project
 
 ```bash
-open AES-Visualization.xcodeproj/project.xcworkspace/
+open AES-Visualization.xcodeproj
 ```
 
 ### 4. Build and run the project
