@@ -91,13 +91,13 @@ struct MainView: View {
             Button {
                 viewModel.showAuthor.toggle()
             } label: {
-                Text("Zeige Urheber")
+                Text("Urheber der App")
                     .font(.headline)
                     .foregroundColor(.accentColor)
             }
-#if os(macOS)
-.buttonStyle(.plain)
-#endif
+            #if os(macOS)
+            .buttonStyle(.plain)
+            #endif
         }
     }
     
