@@ -59,13 +59,7 @@ extension AnimationViewModel {
         }
         
         while index < animationSteps.count && index >= 0 {
-            print("CANCEL \(Task.isCancelled)")
-            guard !Task.isCancelled else {
-                print("Task is canceled \(operationDetails.operationName)")
-                return
-            }
-            
-            print("Index: \(index), Operation: \(operationDetails.operationName)")
+            guard !Task.isCancelled else { return }
             
             if !animationControl.isBackward {
                 await animationSteps[index].animation()
