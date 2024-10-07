@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+/// This is a test command
 protocol AnimationViewModel: ObservableObject {
     /// View Variables
     var operationDetails: OperationDetails { get }
