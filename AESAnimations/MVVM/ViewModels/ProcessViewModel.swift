@@ -297,7 +297,7 @@ class ProcessViewModel: AnimationViewModel {
         })
         
         normalSteps.append(AnimationStep(animation: { withAnimation(.linear(duration: 0.5)) { self.ballPosition += 10 } },
-                                         delay: 250_000_000))
+                                         delay: short))
         
         if round < aesCipher.nrOfRounds - 1 { normalSteps.append(contentsOf: moveBallToLoop()) }
         
