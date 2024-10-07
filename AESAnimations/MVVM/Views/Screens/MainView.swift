@@ -23,10 +23,11 @@ struct MainView: View {
                 }
                 .padding()
                 .navigationTitle("Visualisierung von AES")
+                .toolbar(content: toolbarItem)
+                .sheet(isPresented: $viewModel.showAuthor) { AuthorView() }
                 #if os(iOS)
                 .sheet(isPresented: $viewModel.showSettings) { SettingsView() }
                 #endif
-                .toolbar(content: toolbarItem)
                 
             }
         }
@@ -62,29 +63,42 @@ struct MainView: View {
     
     // MARK: - Button View
     private var actionButtons: some View {
-        HStack(spacing: 32) {
+        VStack(alignment: .center, spacing: 25) {
+            HStack(spacing: 32) {
+                
+                CustomButton(
+                    title: "Decrypt",
+                    icon: "lock.open",
+                    isDisabled: !viewModel.stateMatrix.areAllFieldsValid || !viewModel.keyMatrix.areAllFieldsValid,
+                    destination: {
+                        ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: true))
+                    },
+                    action: {}
+                )
+                
+                CustomButton(
+                    title: "Encrypt",
+                    icon: "lock",
+                    isDisabled: !viewModel.stateMatrix.areAllFieldsValid || !viewModel.keyMatrix.areAllFieldsValid,
+                    destination: {
+                        ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: false))
+                    },
+                    action: {}
+                )
+            }
+            .padding(.horizontal, 50)
             
-            CustomButton(
-                title: "Decrypt",
-                icon: "lock.open",
-                isDisabled: !viewModel.stateMatrix.areAllFieldsValid || !viewModel.keyMatrix.areAllFieldsValid,
-                destination: {
-                    ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: true))
-                },
-                action: {}
-            )
-            
-            CustomButton(
-                title: "Encrypt",
-                icon: "lock",
-                isDisabled: !viewModel.stateMatrix.areAllFieldsValid || !viewModel.keyMatrix.areAllFieldsValid,
-                destination: {
-                    ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: false))
-                },
-                action: {}
-            )
+            Button {
+                viewModel.showAuthor.toggle()
+            } label: {
+                Text("Zeige Urheber")
+                    .font(.headline)
+                    .foregroundColor(.accentColor)
+            }
+#if os(macOS)
+.buttonStyle(.plain)
+#endif
         }
-        .padding(.horizontal, 50)
     }
     
     // MARK: - Toolbar Item
@@ -120,7 +134,7 @@ struct MainView: View {
         #if os(macOS)
         120
         #else
-        isPad13Size() ? 120 : 60
+        isPad13Size() ? 120 : 45
         #endif
     }
 }

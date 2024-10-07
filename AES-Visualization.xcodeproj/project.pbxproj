@@ -56,6 +56,7 @@
 		C38735002C6EABFA00E835DB /* KeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38734FF2C6EABFA00E835DB /* KeyViewModel.swift */; };
 		C38735022C6EACBE00E835DB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38735012C6EACBE00E835DB /* MainViewModel.swift */; };
 		C38B28B32CB4092900FCE203 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C38B28B22CB4092900FCE203 /* README.md */; };
+		C38B28D32CB44FFA00FCE203 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38B28D22CB44FFA00FCE203 /* AuthorView.swift */; };
 		C3AEE3D72CAB19F4002F60CE /* CipherHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AEE3D62CAB19F4002F60CE /* CipherHistoryView.swift */; };
 		C3AEE3DB2CAB4653002F60CE /* ProcessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AEE3DA2CAB4653002F60CE /* ProcessViewModel.swift */; };
 		C3BDC13F2CB2BDCE00847363 /* PositionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDC13E2CB2BDCE00847363 /* PositionType.swift */; };
@@ -138,6 +139,7 @@
 		C38734FF2C6EABFA00E835DB /* KeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyViewModel.swift; sourceTree = "<group>"; };
 		C38735012C6EACBE00E835DB /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		C38B28B22CB4092900FCE203 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C38B28D22CB44FFA00FCE203 /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
 		C3AEE3D62CAB19F4002F60CE /* CipherHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CipherHistoryView.swift; sourceTree = "<group>"; };
 		C3AEE3DA2CAB4653002F60CE /* ProcessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessViewModel.swift; sourceTree = "<group>"; };
 		C3BDC13E2CB2BDCE00847363 /* PositionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionType.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				C3C476D62C593C11009D718D /* ProcessView.swift */,
 				C36566352C61F6BD007A4A1E /* SettingsView.swift */,
 				C38734F72C6EA49F00E835DB /* TestView.swift */,
+				C38B28D22CB44FFA00FCE203 /* AuthorView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -581,6 +584,7 @@
 				C3CD1D3F2CA9D732006C9804 /* ShiftRowRound.swift in Sources */,
 				C34310132C948AA10004F4C7 /* OperationDetails.swift in Sources */,
 				C3C476DB2C5958FC009D718D /* AESConstants.swift in Sources */,
+				C38B28D32CB44FFA00FCE203 /* AuthorView.swift in Sources */,
 				C33940182C56D746008802BC /* EncryptionMode.swift in Sources */,
 				C3AEE3DB2CAB4653002F60CE /* ProcessViewModel.swift in Sources */,
 				C38735002C6EABFA00E835DB /* KeyViewModel.swift in Sources */,

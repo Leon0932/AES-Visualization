@@ -16,6 +16,7 @@ class MainViewModel: ObservableObject {
     
     @Published var showKeyView = false
     @Published var showSettings = false
+    @Published var showAuthor = false
     
     // MARK: - View-Functions
     func handleEncryptionModeChange(newValue: EncryptionMode) {
