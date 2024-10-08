@@ -100,7 +100,7 @@ struct ProcessView: View {
             Circle()
                 .frame(width: 20, height: 20)
                 .offset(x: viewModel.ballPositionX, y: viewModel.ballPosition)
-                .foregroundColor(.blue)
+                .foregroundColor(.accentColor)
             
         }
     }
