@@ -27,7 +27,6 @@ class ProcessViewModel: AnimationViewModel {
     
     @Published var currentRoundKey: [[Byte]] = []
     @Published var currentState: [[Byte]] = []
-    @Published var currentRoundNumber = 0
     @Published var highlightOperation: [Int : [Bool]] = [
         0: [false],
         1: [false, false, false],
@@ -35,12 +34,19 @@ class ProcessViewModel: AnimationViewModel {
         3: [false, false, false],
     ]
     
+    @Published var currentRoundNumber = 0
+    @Published var currentRoundKeyNumber = 0
+    
     @Published var animationControl = AnimationControl()
     var animationTask: Task<Void, Never>? = nil
     var animationSteps: [AnimationStep] = []
     var reverseAnimationSteps: [AnimationStep] = []
     
     @Published var horizontalLineHeight: CGFloat = 0
+    
+    @Published var ballIsUp = false
+    @Published var mainRoundDistance: CGFloat = 250
+    @Published var distanceCounter: CGFloat = 0
     
     // MARK: - Operation ViewModels
     var keyViewModel: KeyViewModel { KeyViewModel(aesCipher: aesCipher) }
@@ -226,49 +232,42 @@ class ProcessViewModel: AnimationViewModel {
         phaseZeroSteps()
         createPhase(phase: 1, round: 0, phaseAnimations: phaseOne)
         
-        let moveToMainSteps = moveBall(coordinates: 15)
-        animationSteps.append(moveToMainSteps.0)
-        reverseAnimationSteps.append(moveToMainSteps.1)
+        let updateRoundNumber = updateRoundNumber()
+        let moveToMainSteps = moveBall(for: 15, delay: 150_000_000)
+        let moveToLastSteps = moveBall(for: 5, delay: 50_000_000)
+        
+        animationSteps.append(contentsOf: [moveToMainSteps.0, updateRoundNumber.0])
+        reverseAnimationSteps.append(contentsOf: [moveToLastSteps.1, updateRoundNumber.1])
         
         phaseTwoSteps()
         
-        let moveToLastSteps = moveBall()
-        animationSteps.append(moveToLastSteps.0)
-        reverseAnimationSteps.append(moveToLastSteps.1)
+        animationSteps.append(contentsOf: [moveToLastSteps.0, updateRoundNumber.0])
+        reverseAnimationSteps.append(contentsOf: [moveToMainSteps.1, updateRoundNumber.1])
         
         createPhase(phase: 3, round: aesCipher.nrOfRounds, phaseAnimations: phaseThree)
+        addShowHideRoundKeySteps(hide: 0.0, show: 1.0)
         
-        animationSteps.append(AnimationStep { withAnimation { self.showRoundKeyColumn = 0.0 } })
-        reverseAnimationSteps.append(AnimationStep { withAnimation { self.showRoundKeyColumn = 1.0 } })
+        let moveToEnd = moveBall(for: 10, delay: 100_000_000)
+        animationSteps.append(moveToEnd.0)
+        reverseAnimationSteps.append(moveToEnd.1)
         
         startAnimations()
     }
     
-    // MARK: - Animation Phase Helper Functions
-    func phaseZeroSteps() {
-        let keyExpSteps = addKeyExpansionSteps()
-        animationSteps.append(contentsOf: keyExpSteps.0)
-        reverseAnimationSteps.append(contentsOf: keyExpSteps.1)
-    }
+    // MARK: - Animation Phase Creation Functions
+    func phaseZeroSteps() { addSteps(addKeyExpansionSteps()) }
     
     func phaseTwoSteps() {
-        for round in 1..<aesCipher.nrOfRounds {
-            let aesLoopSteps = createAESLoop(round: round)
-            animationSteps.append(contentsOf: aesLoopSteps.0)
-            reverseAnimationSteps.append(contentsOf: aesLoopSteps.1)
-        }
+        for round in 1..<aesCipher.nrOfRounds { addSteps(createAESLoop(round: round)) }
     }
     
     func createPhase(phase: Int, round: Int, phaseAnimations: [ProcessPhaseAnimation]) {
         for process in phaseAnimations {
-            let highlightOp = highlightOperation(phase: phase,
-                                                 index: process.index,
-                                                 round: round,
-                                                 keyPath: process.keyPath,
-                                                 reverseKeyPath: process.reverseKeyPath)
-            
-            animationSteps.append(contentsOf: highlightOp.0)
-            reverseAnimationSteps.append(contentsOf: highlightOp.1)
+            addSteps(highlightOperation(phase: phase,
+                                        index: process.index,
+                                        round: round,
+                                        keyPath: process.keyPath,
+                                        reverseKeyPath: process.reverseKeyPath))
         }
     }
     
@@ -276,8 +275,8 @@ class ProcessViewModel: AnimationViewModel {
         let highlightMoveBallSteps = highlightOperation(phase: 0, index: 0)
         let firstRoundKey = AnimationStep { withAnimation { self.currentRoundKey = self.cipherHistory[0].roundKey } }
         
-        let firstBallMove = moveBall(coordinates: 50, duration: 0.5, delay: 250_000_000)
-        let secondBallMove = moveBall(coordinates: 15, duration: 0.25, delay: 125_000_000)
+        let firstBallMove = moveBall(for: 50, delay: 250_000_000)
+        let secondBallMove = moveBall(for: 15, delay: 150_000_000)
         
         let normalSteps = [firstBallMove.0] + highlightMoveBallSteps.0 +
         [
@@ -296,18 +295,45 @@ class ProcessViewModel: AnimationViewModel {
         return (normalSteps, reverseSteps)
     }
     
+    func addSteps(_ steps: ([AnimationStep], [AnimationStep])) {
+        animationSteps.append(contentsOf: steps.0)
+        reverseAnimationSteps.append(contentsOf: steps.1)
+    }
+    
+    func addShowHideRoundKeySteps(hide: Double, show: Double) {
+        animationSteps.append(AnimationStep { withAnimation { self.showRoundKeyColumn = hide } })
+        reverseAnimationSteps.append(AnimationStep { withAnimation { self.showRoundKeyColumn = show } })
+    }
+    
+    // MARK: - Animation Steps Helper Functions
     func createAESLoop(round: Int) -> ([AnimationStep], [AnimationStep]) {
         var normalSteps: [AnimationStep] = []
         var reverseSteps: [AnimationStep] = []
         
         if round > 1 {
             let loopSteps = moveBallToLoop()
+            let updateRoundNumber = AnimationStep {
+                withAnimation {
+                    if self.currentRoundNumber >= 2 { self.currentRoundNumber -= 1 }
+                }
+            }
+            reverseSteps.append(updateRoundNumber)
             reverseSteps.append(contentsOf: loopSteps.1)
         }
         
-        let moveToNextPhaseSteps = moveBall(delay: 250_000_000)
+        let moveUp = AnimationStep(animation: {
+            await self.checkDoubleAnimation(for: 0)
+            withAnimation(.linear) {
+                let number = Int(self.ballPosition)
+                let secondNumber = (number / 10) % 10
+                if secondNumber % 2 == 0 { return }
+                
+                self.ballPosition -= 10
+            }
+        }, delay: 300_000_000)
+
+        reverseSteps.append(moveUp)
         
-        reverseSteps.append(moveToNextPhaseSteps.1)
         
         for process in phaseTwo  {
             let highlightOp = highlightOperation(phase: 2,
@@ -319,41 +345,82 @@ class ProcessViewModel: AnimationViewModel {
             reverseSteps += highlightOp.1
             
         }
-        
-        normalSteps.append(moveToNextPhaseSteps.0)
+        let moveDown = AnimationStep(animation: {
+            withAnimation(.linear) {
+                let number = Int(self.ballPosition)
+                let secondNumber = (number / 10) % 10
+                if secondNumber % 2 != 0 { return }
+                self.ballPosition += 10
+                
+            }
+        }, delay: 300_000_000)
+        normalSteps.append(moveDown)
         
         if round < aesCipher.nrOfRounds - 1 {
             let loopSteps = moveBallToLoop()
+            let updateRoundNumber = updateRoundNumber()
             normalSteps.append(contentsOf: loopSteps.0)
+            normalSteps.append(updateRoundNumber.0)
         }
         
-        
         return (normalSteps, reverseSteps)
     }
     
-    // MARK: - Animation Steps Creation Helper Functions
     func moveBallToLoop() -> ([AnimationStep], [AnimationStep]) {
-        let moveRight = AnimationStep(animation: { withAnimation(.linear(duration: 0.5)) { self.ballPositionX += 125 } },
-                                      delay: short)
+        let moveRight = AnimationStep(animation: {
+            await self.checkDoubleAnimation(for: 150_000_000)
+            withAnimation(.linear) {
+                if self.ballPositionX > 0 { return }
+                self.ballPositionX += 125
+                self.ballIsUp = self.animationControl.isBackward ? true : false
+            }
+        }, delay: short)
         
-        let moveUp = moveBall(coordinates: 250, duration: 0.25, delay: 250_000_000)
+        let moveUp = AnimationStep(animation: {
+            await self.checkDoubleAnimation(for: 150_000_000)
+            if self.ballIsUp { return }
+            withAnimation(.linear) {
+                self.ballPosition -= self.mainRoundDistance
+                self.ballIsUp = true
+            }
+        }, delay: short)
         
-        let moveLeft = AnimationStep(animation: { withAnimation(.linear(duration: 0.5)) { self.ballPositionX -= 125 } },
-                                     delay: short)
+        let moveDown = AnimationStep(animation: {
+            await self.checkDoubleAnimation(for: 150_000_000)
+            withAnimation(.linear) {
+                if !self.ballIsUp { return }
+                self.ballPosition += self.mainRoundDistance
+                self.ballIsUp = false
+            }
+        }, delay: short)
         
-        let normalSteps = [moveRight, moveUp.1, moveLeft]
-        let reverseSteps = [moveLeft, moveUp.0, moveRight]
+        let moveLeft = AnimationStep(animation: {
+            await self.checkDoubleAnimation(for: 150_000_000)
+            withAnimation(.linear) {
+                if self.ballPositionX <= 0 { return }
+                self.ballPositionX -= 125
+                self.ballIsUp = false
+            }
+        }, delay: short)
+        
+        let normalSteps = [moveRight, moveUp, moveLeft]
+        let reverseSteps = [moveLeft, moveDown, moveRight]
         
         return (normalSteps, reverseSteps)
     }
     
-    func moveBall(coordinates: CGFloat = 10,
-                  duration: CGFloat = 0.25,
-                  delay: UInt64 = 125_000_000) -> (AnimationStep, AnimationStep) {
-        let normalStep = AnimationStep(animation: { withAnimation(.linear(duration: duration)) { self.ballPosition += coordinates } },
-                                       delay: delay)
-        let reverseStep = AnimationStep(animation: { withAnimation(.linear(duration: duration)) { self.ballPosition -= coordinates } },
-                                        delay: delay)
+    func moveBall(for positions: CGFloat,
+                  delay: UInt64,
+                  doubleDelay: UInt64 = 0) -> (AnimationStep, AnimationStep) {
+        let normalStep = AnimationStep(animation: {
+            await self.checkDoubleAnimation(for: doubleDelay)
+            withAnimation(.linear) { self.ballPosition += positions }
+        }, delay: delay)
+        
+        let reverseStep = AnimationStep(animation: {
+            await self.checkDoubleAnimation(for: doubleDelay)
+            withAnimation(.linear) { self.ballPosition -= positions }
+        }, delay: delay)
         
         return (normalStep, reverseStep)
     }
@@ -363,50 +430,49 @@ class ProcessViewModel: AnimationViewModel {
                             round: Int? = nil,
                             keyPath: KeyPath<CipherRound, [[Byte]]>? = nil,
                             reverseKeyPath: KeyPath<CipherRound, [[Byte]]>? = nil) -> ([AnimationStep], [AnimationStep]) {
-        let highlightOperation = AnimationStep { withAnimation { self.highlightOperation[phase]?[index] = true } }
-        let moveBall = moveBall(coordinates: 30, duration: 0.5, delay: 250_000_000)
         
-        let normalSteps = [
-            highlightOperation,
-            moveBall.0, moveBall.0,
-            
-            AnimationStep {
-                withAnimation {
-                    self.highlightOperation[phase]?[index] = false
-                    guard let keyPath, let round else { return }
-                    
-                    self.currentState = self.cipherHistory[round][keyPath: keyPath]
-                    if keyPath == \.afterAddRound {
-                        self.currentRoundKey = self.cipherHistory[round + 1][keyPath: \.roundKey]
-                        if self.currentRoundNumber < self.aesCipher.nrOfRounds {
-                            self.currentRoundNumber += 1
-                        }
+        let highlightOperation = AnimationStep { withAnimation { self.highlightOperation[phase]?[index] = true } }
+        let moveBallFirst = moveBall(for: 30, delay: 250_000_000)
+        let moveBallSecond = moveBall(for: 30, delay: 125_000_000)
+        
+        let normalSteps = [highlightOperation, moveBallFirst.0, moveBallSecond.0,
+                           
+                           AnimationStep {
+            withAnimation {
+                self.highlightOperation[phase]?[index] = false
+                guard let keyPath, let round else { return }
+                
+                self.currentState = self.cipherHistory[round][keyPath: keyPath]
+                if keyPath == \.afterAddRound {
+                    self.currentRoundKey = self.cipherHistory[round + 1][keyPath: \.roundKey]
+                    if self.currentRoundKeyNumber < self.aesCipher.nrOfRounds {
+                        self.currentRoundKeyNumber += 1
                     }
                 }
             }
+        }
         ]
         
-        let reverseSteps = [
-            AnimationStep {
-                withAnimation {
-                    self.highlightOperation[phase]?[index] = false
-                    guard let reverseKeyPath, let round else { return }
-                    self.currentState = self.cipherHistory[round][keyPath: reverseKeyPath]
-                    
-                    if keyPath == \.afterAddRound {
-                        if round != 0 {
-                            self.currentRoundKey = self.cipherHistory[round - 1].roundKey
-                            self.currentRoundNumber -= 1
-                        }
-                    }
+        let reverseSteps = [AnimationStep {
+            withAnimation {
+                self.highlightOperation[phase]?[index] = false
+                guard let reverseKeyPath, let round else { return }
+                self.currentState = self.cipherHistory[round][keyPath: reverseKeyPath]
+                
+                if keyPath == \.afterAddRound, round != 0 {
+                    self.currentRoundKey = self.cipherHistory[round - 1].roundKey
+                    self.currentRoundKeyNumber -= 1
                 }
-            },
-            
-            moveBall.1, moveBall.1,
-            highlightOperation
-        ]
+            }
+        }, moveBallSecond.1, moveBallFirst.1, highlightOperation]
         
         return (normalSteps, reverseSteps)
+    }
+    
+    func updateRoundNumber() -> (AnimationStep, AnimationStep) {
+        return (AnimationStep { withAnimation { self.currentRoundNumber += 1 } },
+                AnimationStep { withAnimation { self.currentRoundNumber -= 1 } }
+        )
     }
     
     // MARK: - Animation Control
@@ -423,7 +489,7 @@ class ProcessViewModel: AnimationViewModel {
     ///   - showResult: Controls whether the result is visible after resetting.
     func resetAnimationState(state newState: [[Byte]], showResult: Double) {
         withAnimation {
-            ballPosition = showResult == 1.0 ? horizontalLineHeight - 15 : -60
+            ballPosition = showResult == 1.0 ? horizontalLineHeight : -60
             ballPositionX = 0
             currentState = showResult == 1.0 ? result : cipherHistory[0].startOfRound
             currentRoundKey = showResult == 1.0 ? cipherHistory[aesCipher.nrOfRounds].roundKey : cipherHistory[0].roundKey
@@ -436,25 +502,17 @@ class ProcessViewModel: AnimationViewModel {
             ]
             
             currentRoundNumber = showResult == 1.0 ? aesCipher.nrOfRounds : 0
+            currentRoundKeyNumber = showResult == 1.0 ? aesCipher.nrOfRounds : 0
         }
     }
-    
-    /*
-    @MainActor
-    func processAnimations() async {
-        print("Hello World")
-    }
-    
-    @MainActor
-    func startAnimations() {
-        animationTask = Task {
-            animationControl.isPaused = false
-            await sleep(for: short)
-            await processAnimations()
-        }
-    }
-    */
 }
+
+
+
+
+
+
+
 
 
 
