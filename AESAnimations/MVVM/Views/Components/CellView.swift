@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-enum ValueFormat {
-    case oneDigit
-    case twoDigit
-    case number
-}
-
 struct CellView: View {
     // MARK: - Properties
     let value: Byte
