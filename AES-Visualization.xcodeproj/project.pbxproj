@@ -55,6 +55,7 @@
 		C38734FE2C6EAADF00E835DB /* ShiftRowsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38734FD2C6EAADF00E835DB /* ShiftRowsViewModel.swift */; };
 		C38735002C6EABFA00E835DB /* KeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38734FF2C6EABFA00E835DB /* KeyViewModel.swift */; };
 		C38735022C6EACBE00E835DB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38735012C6EACBE00E835DB /* MainViewModel.swift */; };
+		C38AD2B62CB747E900001702 /* ValueFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38AD2B52CB747E900001702 /* ValueFormat.swift */; };
 		C38B28B32CB4092900FCE203 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C38B28B22CB4092900FCE203 /* README.md */; };
 		C38B28D32CB44FFA00FCE203 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38B28D22CB44FFA00FCE203 /* AuthorView.swift */; };
 		C3AEE3D72CAB19F4002F60CE /* CipherHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AEE3D62CAB19F4002F60CE /* CipherHistoryView.swift */; };
@@ -138,6 +139,7 @@
 		C38734FD2C6EAADF00E835DB /* ShiftRowsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftRowsViewModel.swift; sourceTree = "<group>"; };
 		C38734FF2C6EABFA00E835DB /* KeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyViewModel.swift; sourceTree = "<group>"; };
 		C38735012C6EACBE00E835DB /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		C38AD2B52CB747E900001702 /* ValueFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueFormat.swift; sourceTree = "<group>"; };
 		C38B28B22CB4092900FCE203 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C38B28D22CB44FFA00FCE203 /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
 		C3AEE3D62CAB19F4002F60CE /* CipherHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CipherHistoryView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				C3709D222CAEEBCB00BBFB80 /* RoundType.swift */,
 				C3BDC13E2CB2BDCE00847363 /* PositionType.swift */,
 				C3BDC1402CB2BDE800847363 /* OpacityType.swift */,
+				C38AD2B52CB747E900001702 /* ValueFormat.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				C31E69BD2C8721B900230D22 /* ColumnView.swift in Sources */,
 				C3E1F2C22C7B6EE80030B994 /* KeyExpansionViewModel.swift in Sources */,
 				C38734FE2C6EAADF00E835DB /* ShiftRowsViewModel.swift in Sources */,
+				C38AD2B62CB747E900001702 /* ValueFormat.swift in Sources */,
 				C3CD1D412CA9DE5F006C9804 /* GenericDataView.swift in Sources */,
 				C3C476D92C595876009D718D /* AESKeySize.swift in Sources */,
 				C31E69C82C88BF7400230D22 /* AnimationStep.swift in Sources */,
