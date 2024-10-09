@@ -64,7 +64,7 @@ struct ProcessView: View {
                     alignment: .leading
                 )
                 StateView(
-                    title: "Rundenschlüssel \(viewModel.currentRoundNumber)",
+                    title: "Rundenschlüssel \(viewModel.currentRoundKeyNumber)",
                     state: viewModel.currentRoundKey,
                     backgroundColor: .reducedAccentColor,
                     alignment: .leading
@@ -87,7 +87,8 @@ struct ProcessView: View {
                 
                 roundView(phase: 2, data: viewModel.phaseTwo)
                     .background(HorizontalLine(mainRounds: viewModel.aesCipher.nrOfRounds,
-                                               currentRound: $viewModel.currentRoundNumber))
+                                               currentRound: $viewModel.currentRoundNumber)
+                    )
                 
                 roundView(phase: 3, data: viewModel.phaseThree)
                     .frame(maxWidth: .infinity)
@@ -139,9 +140,9 @@ struct ProcessView: View {
             } label: {
                 operationRectangleView(text: text, color: color)
             }
-            #if os(macOS)
+#if os(macOS)
             .buttonStyle(.plain)
-            #endif
+#endif
         } else {
             operationRectangleView(text: text, color: color)
         }
