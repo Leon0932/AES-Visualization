@@ -62,14 +62,22 @@ extension AnimationViewModel {
             guard !Task.isCancelled else { return }
             
             if !animationControl.isBackward {
+                let delay = animationSteps[index].delay
+                let shortDelay = delay > 0 ? delay - 50_000_000 : 0
+                let extraShortDelay = shortDelay / 2
+                
                 await animationSteps[index].animation()
                 await sleep(for: animationControl.isForward
-                            ? (animationControl.isDouble ? 200_000_000 : 400_000_000)
+                            ? (animationControl.isDouble ? extraShortDelay : shortDelay)
                             : animationSteps[index].delay)
                 index += 1
             } else {
+                let delay = reverseAnimationSteps[index].delay
+                let shortDelay = delay > 0 ? delay - 50_000_000 : 0
+                let extraShortDelay = shortDelay / 2
+                
                 await reverseAnimationSteps[index].animation()
-                await sleep(for: animationControl.isDouble ? 200_000_000 : reverseAnimationSteps[index].delay)
+                await sleep(for: animationControl.isDouble ? extraShortDelay : reverseAnimationSteps[index].delay)
                 index -= 1
             }
             
