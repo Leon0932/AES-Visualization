@@ -70,7 +70,6 @@ final class AESStateTests: XCTestCase {
                           temp: [0x89, 0xf1, 0x1a, 0x3b],
                           shifts: [[0xf1, 0x1a, 0x3b, 0x89], [0x1a, 0x3b, 0x89, 0xf1], [0x3b, 0x89, 0xf1, 0x1a]]),
         ]
-
         let historyExceptedOutputOneRev: [ShiftRowRound] = [
             ShiftRowRound(index: 1,
                           temp: [0x60, 0xe1, 0x04, 0x09],
