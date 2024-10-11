@@ -38,7 +38,7 @@ struct AnimationControlsView: View {
                 }
             }
             
-            CustomButton<Never>(title: "Umgekehrte Animation starten", useMaxWidth: false) {
+            CustomButton<Never>(title: "Umgekehrt starten", useMaxWidth: false) {
                 withAnimation {
                     completeAnimations()
                     animationControl.isBackward = true
@@ -56,7 +56,7 @@ struct AnimationControlsView: View {
     
     // MARK: - Control buttons
     private var controlButtons: some View {
-        HStack(spacing: 60) {
+        HStack(spacing: 50) {
             controlButton(imageName: "arrow.uturn.left.circle.fill", action: resetAnimation)
             backwardControl
             pausePlayControl

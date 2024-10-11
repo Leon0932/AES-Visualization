@@ -18,6 +18,7 @@ struct ProcessView: View {
                 buildStateColumn(leftColumn: true)
                 Spacer()
                 buildCenterColumn()
+                    .padding(.bottom, 65)
                 Spacer()
                 buildStateColumn(leftColumn: false)
             }
