@@ -33,15 +33,15 @@ extension AnimationViewModel {
     /// 1 nanosecond
     var normal: UInt64 { return 1_000_000_000 }
     
-    /// 0,5 nanoseconds
+    /// 0.5 nanoseconds
     var short: UInt64 { return 500_000_000 }
     
     func sleep(for nanoseconds: UInt64) async {
         try? await Task.sleep(nanoseconds: nanoseconds)
     }
     
-    // General implementation for calculating the title
-    // -1: Only the description is shown (useful for KeyExpansion, Encryption and Decryption)
+    /// General implementation for calculating the title
+    /// -1: Only the description is shown (useful for KeyExpansion, Encryption and Decryption)
     var navigationTitle: String {
         if operationDetails.currentRound == -1 { return operationDetails.operationName.description }
         
@@ -52,6 +52,7 @@ extension AnimationViewModel {
     @MainActor
     func processAnimations() async {
         var index = animationControl.isBackward ? reverseAnimationSteps.count - 1 : 0
+        print(reverseAnimationSteps.count)
         
         withAnimation {
             animationControl.isPaused = false
@@ -60,7 +61,7 @@ extension AnimationViewModel {
         
         while index < animationSteps.count && index >= 0 {
             guard !Task.isCancelled else { return }
-            
+
             if !animationControl.isBackward {
                 let delay = animationSteps[index].delay
                 let shortDelay = delay > 0 ? delay - 50_000_000 : 0
@@ -104,17 +105,12 @@ extension AnimationViewModel {
     private func cancelAndResetAnimation(state: [[Byte]], showResult: Double) {
         animationTask?.cancel()
         Task { await sleep(for: normal) }
-        
         self.resetAnimationState(state: state, showResult: showResult)
-        
-        
+
         withAnimation{
             self.animationControl.resetAnimationFlags()
             self.animationControl.isDone = true
         }
-        
-        
-        
     }
     
     func resetAnimations() {
