@@ -135,9 +135,10 @@ class AESCipher {
         }
         
         let startKey = roundKeys[0].convertToState()
-        
+        var lastRound = CipherRound(index: currentIndex, startOfRound: result, roundKey: startKey)
         state.addRoundKey(state: &result, key: startKey)
-        cipherHistory.append(CipherRound(index: currentIndex, startOfRound: result, afterAddRound: result, roundKey: startKey))
+        lastRound.afterAddRound = result
+        cipherHistory.append(lastRound)
         cipherHistory.append(CipherRound(index: currentIndex + 1, startOfRound: result))
         
         
