@@ -40,16 +40,13 @@ extension Array where Element == [Byte] {
 
 extension Array where Element == Byte {
     func convertToState() -> [[Byte]] {
-        // Berechne die Anzahl der Spalten (oder besser gesagt, die Anzahl der "Wörter")
-        let count = self.count / 4  // Dies ist die Anzahl der Spalten für AES (in 4 Byte Blöcken)
-        
-        // Initialisiere die Matrix mit der richtigen Größe (4 Zeilen und entsprechende Anzahl an Spalten)
+        let count = self.count / 4
+
         var result = [[Byte]](repeating: [Byte](repeating: 0, count: count), count: 4)
         
-        // Fülle die Matrix spaltenweise mit den Werten aus dem Byte-Array
         for (index, value) in self.enumerated() {
-            let col = index / 4  // Spalte wird durch die Anzahl der Zeilen (4) definiert
-            let row = index % 4  // Zeile wird durch den Modulo 4 berechnet
+            let col = index / 4
+            let row = index % 4
             result[row][col] = value
         }
         

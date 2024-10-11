@@ -54,7 +54,7 @@ struct Matrix {
     
     func toByteArray() -> [Byte] {
         var byteArray: [Byte] = []
-        
+
         for column in 0..<columns {
             for row in 0..<rows {
                 let hexString = data[row][column]

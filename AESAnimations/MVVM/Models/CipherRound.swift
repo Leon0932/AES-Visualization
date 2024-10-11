@@ -11,7 +11,7 @@ struct CipherRound: Identifiable, Equatable {
     let id: UUID = UUID()
     let index: Int
     let startOfRound: [[Byte]]
-    var afterAddRound: [[Byte]] = [[]] // Needed for decryption
+    var afterAddRound: [[Byte]] = [[]]
     var afterSubBytes: [[Byte]] = [[]]
     var afterShiftRows: [[Byte]] = [[]]
     var afterMixColumns: [[Byte]] = [[]]
