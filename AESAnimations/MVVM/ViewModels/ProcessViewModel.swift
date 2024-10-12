@@ -264,6 +264,15 @@ class ProcessViewModel: AnimationViewModel {
         for round in 1..<aesCipher.nrOfRounds { addSteps(createAESLoop(round: round)) }
     }
     
+    /// Creates animation steps for a given phase and round in the AES encryption process.
+    ///
+    /// This function generates animation steps for a specific `phase` and `round` by iterating through a list of `phaseAnimations`.
+    /// It highlights the operation at each index, based on the provided key paths and reverse key paths, and adds these steps to the animation sequence.
+    ///
+    /// - Parameters:
+    ///   - phase: The phase of the AES encryption process to create animations for.
+    ///   - round: The AES encryption round for which the phase is being animated.
+    ///   - phaseAnimations: An array of `ProcessPhaseAnimation` objects that define the operations to be animated for the given phase.
     func createPhase(phase: Int, round: Int, phaseAnimations: [ProcessPhaseAnimation]) {
         for process in phaseAnimations {
             addSteps(highlightOperation(phase: phase,
@@ -274,6 +283,13 @@ class ProcessViewModel: AnimationViewModel {
         }
     }
     
+    /// Adds the steps required for the key expansion phase of the AES encryption process.
+    ///
+    /// This function generates a sequence of animation steps for the operation key expansion. It includes moving the ball,
+    /// highlighting operations, and updating the current round key. The steps are created for both forward and reverse animations.
+    ///
+    /// - Returns: A tuple containing two arrays of `AnimationStep` objects. The first array handles the forward animation,
+    ///   and the second array handles the reverse animation.
     func addKeyExpansionSteps() -> ([AnimationStep], [AnimationStep]) {
         let highlightMoveBallSteps = highlightOperation(phase: 0, index: 0)
         let firstRoundKey = AnimationStep { withAnimation { self.currentRoundKey = self.cipherHistory[0].roundKey } }
@@ -298,17 +314,40 @@ class ProcessViewModel: AnimationViewModel {
         return (normalSteps, reverseSteps)
     }
     
+    /// Adds forward and reverse animation steps to the respective arrays.
+    ///
+    /// This function appends the provided animation steps to the `animationSteps` array for forward animations and to the `reverseAnimationSteps` array for reverse animations.
+    /// The `steps` parameter contains two arrays, where the first array represents the forward animation sequence and the second array represents the reverse sequence.
+    ///
+    /// - Parameter steps: A tuple containing two arrays of `AnimationStep` objects. The first array handles the forward animation,
+    ///   and the second array handles the reverse animation.
     func addSteps(_ steps: ([AnimationStep], [AnimationStep])) {
         animationSteps.append(contentsOf: steps.0)
         reverseAnimationSteps.append(contentsOf: steps.1)
     }
     
+    /// Adds animation steps to hide and show the round key column.
+    ///
+    /// This function appends animation steps to the `animationSteps` array that hide the round key column by setting its visibility to the `hide` value.
+    /// Similarly, it appends reverse animation steps to the `reverseAnimationSteps` array that show the round key column by setting its visibility to the `show` value.
+    ///
+    /// - Parameters:
+    ///   - hide: The value that controls hiding the round key column
+    ///   - show: The value that controls showing the round key column
     func addShowHideRoundKeySteps(hide: Double, show: Double) {
         animationSteps.append(AnimationStep { withAnimation { self.showRoundKeyColumn = hide } })
         reverseAnimationSteps.append(AnimationStep { withAnimation { self.showRoundKeyColumn = show } })
     }
     
     // MARK: - Animation Steps Helper Functions
+    /// Creates a loop of animation steps for an AES encryption round, handling both forward and reverse animations.
+    ///
+    /// This function generates a sequence of animations that represents a full loop for a given AES encryption `round`. It includes movements,
+    /// updates to the round number, and highlights specific operations.
+    ///
+    /// - Parameter round: The AES encryption round for which the loop of animations is being created.
+    /// - Returns: A tuple containing two arrays of `AnimationStep` objects. The first array handles the forward animation,
+    ///   and the second array handles the reverse animation.
     func createAESLoop(round: Int) -> ([AnimationStep], [AnimationStep]) {
         var normalSteps: [AnimationStep] = []
         var reverseSteps: [AnimationStep] = []
@@ -372,6 +411,13 @@ class ProcessViewModel: AnimationViewModel {
         return (normalSteps, reverseSteps)
     }
     
+    /// Animates the ball's movement in the AES-Loop, moving right, up, left, and optionally down, based on the ball's position and direction.
+    ///
+    /// This function creates a sequence of animation steps that move the ball in an AES-Loop, adjusting its X and Y positions.
+    /// The loop consists of right, up, and left movements for normal animation, and left, down, and right movements for reverse animation.
+    ///
+    /// - Returns: A tuple containing two arrays of `AnimationStep` objects. The first array handles the forward animation,
+    ///   and the second array handles the reverse animation.
     func moveBallToLoop() -> ([AnimationStep], [AnimationStep]) {
         let moveRight = AnimationStep(animation: {
             await self.checkDoubleAnimation(for: 150_000_000)
@@ -415,6 +461,17 @@ class ProcessViewModel: AnimationViewModel {
         return (normalSteps, reverseSteps)
     }
     
+    /// Moves the ball by a specified amount with an optional delay and double delay, returning both forward and reverse animations.
+    ///
+    /// This function animates the movement of a ball by a given number of `positions`. It supports both a forward and reverse animation sequence.
+    /// The delay can be specified, and the double delay is used if a double forward/reverse animation is active
+    ///
+    /// - Parameters:
+    ///   - positions: The amount by which the ball's position will be moved.
+    ///   - delay: The delay before the animation starts, in nanoseconds.
+    ///   - doubleDelay: An optional double delay to account for longer animations, in nanoseconds. Defaults to 0.
+    /// - Returns: A tuple containing of `AnimationStep` objects. The first array handles the forward animation,
+    ///   and the second array handles the reverse animation.
     func moveBall(for positions: CGFloat,
                   delay: UInt64,
                   doubleDelay: UInt64 = 0) -> (AnimationStep, AnimationStep) {
@@ -431,6 +488,20 @@ class ProcessViewModel: AnimationViewModel {
         return (normalStep, reverseStep)
     }
     
+    /// Highlights the operation for a specific phase and index, optionally for a specific round, and moves a ball between positions.
+    ///
+    /// This function animates the highlighting of an operation at the given `phase` and `index`. It can also modify the cipher state by applying transformations
+    /// according to a given `round` and associated `keyPath` and `reverseKeyPath`. The function moves a ball's position and returns two sets of animation steps:
+    /// one for normal forward animations and one for reverse.
+    ///
+    /// - Parameters:
+    ///   - phase: The phase of the operation to highlight.
+    ///   - index: The index within the phase to highlight.
+    ///   - round: An optional parameter for the specific AES round being processed.
+    ///   - keyPath: An optional `KeyPath` pointing to the cipher round's state to be applied after the animation.
+    ///   - reverseKeyPath: An optional `KeyPath` used for reverting the cipher round's state in reverse animations.
+    /// - Returns: A tuple containing two arrays of `AnimationStep` objects. The first array handles the forward animation,
+    ///   and the second array handles the reverse animation.
     func highlightOperation(phase: Int,
                             index: Int,
                             round: Int? = nil,
@@ -500,6 +571,13 @@ class ProcessViewModel: AnimationViewModel {
         return (normalSteps, reverseSteps)
     }
     
+    /// Updates the current round number
+    ///
+    /// The function returns a tuple of two `AnimationStep` instances. The first instance
+    /// increments the `currentRoundNumber`, while the second one decrements (reverse animation) it.
+    ///
+    /// - Returns: A tuple containing of `AnimationStep` objects. The first array handles the forward animation,
+    ///   and the second array handles the reverse animation.
     func updateRoundNumber() -> (AnimationStep, AnimationStep) {
         return (AnimationStep { withAnimation { self.currentRoundNumber += 1 } },
                 AnimationStep { withAnimation { self.currentRoundNumber -= 1 } }
@@ -510,9 +588,7 @@ class ProcessViewModel: AnimationViewModel {
     /// Resets all variables related to the animation to their initial values.
     ///
     /// This function reinitializes the values of various animation-related variables, such as the ball positions, round number, current state and
-    /// current round Key . It is used to reset the animation to the starting point.
-    ///
-    /// The `newState` parameter is included for potential  modification after the animation,
+    /// current round Key . It is used to reset the animation to the starting point. The `newState` parameter is included for potential  modification after the animation,
     /// but in this case, it is not utilized.
     ///
     /// - Parameters:
