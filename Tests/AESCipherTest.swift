@@ -457,13 +457,30 @@ final class AESCipherTest: XCTestCase {
         
         cipher.encryptState()
         
-        XCTAssertEqual(cipher.result,
-                       expectedOutput,
-                       "Encrypted state is not as expected")
+        XCTAssertEqual(cipher.result, expectedOutput)
         
-        for (index, expectedRound) in expectedCipherHistory.enumerated() {
-            let actualRound = cipher.getCipherHistory[index]
-            XCTAssertEqual(actualRound, expectedRound, "Mismatch in history at round \(index): Expected \(expectedRound), but got \(actualRound).")
+        for (index, actualRound) in cipher.getCipherHistory.enumerated() {
+            let expectedRound = expectedCipherHistory[index]
+            
+            XCTAssertEqual(actualRound.index,
+                           expectedRound.index,
+                           "Round \(index): Index does not match.")
+            XCTAssertEqual(actualRound.afterAddRound,
+                           expectedRound.afterAddRound,
+                           "After AddRoundKey \(index): After AddRoundKey value does not match.")
+            XCTAssertEqual(actualRound.afterShiftRows,
+                           expectedRound.afterShiftRows,
+                           "After ShiftRows \(index): After ShiftRows does not match.")
+            XCTAssertEqual(actualRound.afterSubBytes,
+                           expectedRound.afterSubBytes,
+                           "After SubBytes \(index): After SubBytes does not match.")
+            XCTAssertEqual(actualRound.afterMixColumns,
+                           expectedRound.afterMixColumns,
+                           "After MixColumns \(index): After MixColumns does not match.")
+            XCTAssertEqual(actualRound.roundKey,
+                           expectedRound.roundKey,
+                           "Round Key \(index): Round Key does not match.")
+            
         }
         
     }
@@ -980,16 +997,31 @@ final class AESCipherTest: XCTestCase {
         cipher.key = key
         cipher.encryptState()
         
-        XCTAssertEqual(cipher.result,
-                       expectedOutput,
-                       "Input and expected output do not match")
+        XCTAssertEqual(cipher.result, expectedOutput)
         
-        for (index, expectedRound) in expectedCipherHistory.enumerated() {
-            let actualRound = cipher.getCipherHistory[index]
-            XCTAssertEqual(actualRound, expectedRound, "Mismatch in history at round \(index): Expected \(expectedRound), but got \(actualRound).")
+        for (index, actualRound) in cipher.getCipherHistory.enumerated() {
+            let expectedRound = expectedCipherHistory[index]
+            
+            XCTAssertEqual(actualRound.index,
+                           expectedRound.index,
+                           "Round \(index): Index does not match.")
+            XCTAssertEqual(actualRound.afterAddRound,
+                           expectedRound.afterAddRound,
+                           "After AddRoundKey \(index): After AddRoundKey value does not match.")
+            XCTAssertEqual(actualRound.afterShiftRows,
+                           expectedRound.afterShiftRows,
+                           "After ShiftRows \(index): After ShiftRows does not match.")
+            XCTAssertEqual(actualRound.afterSubBytes,
+                           expectedRound.afterSubBytes,
+                           "After SubBytes \(index): After SubBytes does not match.")
+            XCTAssertEqual(actualRound.afterMixColumns,
+                           expectedRound.afterMixColumns,
+                           "After MixColumns \(index): After MixColumns does not match.")
+            XCTAssertEqual(actualRound.roundKey,
+                           expectedRound.roundKey,
+                           "Round Key \(index): Round Key does not match.")
+            
         }
-        
-        
     }
     
     func testEncryption256() {
@@ -1581,13 +1613,30 @@ final class AESCipherTest: XCTestCase {
         cipher.key = key
         cipher.encryptState()
         
-        XCTAssertEqual(cipher.result,
-                       expectedOutput,
-                       "Input and expected output do not match")
+        XCTAssertEqual(cipher.result, expectedOutput)
         
-        for (index, expectedRound) in expectedCipherHistory.enumerated() {
-            let actualRound = cipher.getCipherHistory[index]
-            XCTAssertEqual(actualRound, expectedRound, "Mismatch in history at round \(index): Expected \(expectedRound), but got \(actualRound).")
+        for (index, actualRound) in cipher.getCipherHistory.enumerated() {
+            let expectedRound = expectedCipherHistory[index]
+            
+            XCTAssertEqual(actualRound.index,
+                           expectedRound.index,
+                           "Round \(index): Index does not match.")
+            XCTAssertEqual(actualRound.afterAddRound,
+                           expectedRound.afterAddRound,
+                           "After AddRoundKey \(index): After AddRoundKey value does not match.")
+            XCTAssertEqual(actualRound.afterShiftRows,
+                           expectedRound.afterShiftRows,
+                           "After ShiftRows \(index): After ShiftRows does not match.")
+            XCTAssertEqual(actualRound.afterSubBytes,
+                           expectedRound.afterSubBytes,
+                           "After SubBytes \(index): After SubBytes does not match.")
+            XCTAssertEqual(actualRound.afterMixColumns,
+                           expectedRound.afterMixColumns,
+                           "After MixColumns \(index): After MixColumns does not match.")
+            XCTAssertEqual(actualRound.roundKey,
+                           expectedRound.roundKey,
+                           "Round Key \(index): Round Key does not match.")
+            
         }
         
     }
@@ -1754,7 +1803,6 @@ final class AESCipherTest: XCTestCase {
                     [0x1a, 0x8c, 0x4d, 0x26]
                 ]
             ),
-            
             CipherRound(
                 index: 4,
                 startOfRound: [
@@ -1769,7 +1817,6 @@ final class AESCipherTest: XCTestCase {
                     [0xee, 0x7f, 0x04, 0xd0],
                     [0x74, 0x55, 0x9c, 0x36],
                 ],
-                
                 afterSubBytes: [
                     [0xc8, 0x9b, 0x25, 0xb0],
                     [0x16, 0x7a, 0x02, 0x26],
@@ -1795,7 +1842,6 @@ final class AESCipherTest: XCTestCase {
                     [0x7d, 0x96, 0xc1, 0x6b]
                 ]
             ),
-            
             CipherRound(
                 index: 5,
                 startOfRound: [
@@ -1836,7 +1882,6 @@ final class AESCipherTest: XCTestCase {
                     [0xe8, 0xeb, 0x57, 0xaa]
                 ]
             ),
-            
             CipherRound(
                 index: 6,
                 startOfRound: [
@@ -1891,7 +1936,6 @@ final class AESCipherTest: XCTestCase {
                     [0x1e, 0xf0, 0x86, 0xf2],
                     [0x66, 0x76, 0x8e, 0x56]
                 ],
-                
                 afterSubBytes: [
                     [0x49, 0x55, 0xda, 0x1f],
                     [0x15, 0xe5, 0xca, 0x0a],
@@ -1931,7 +1975,6 @@ final class AESCipherTest: XCTestCase {
                     [0x96, 0x6a, 0x51, 0xd0],
                     [0x84, 0x51, 0xfa, 0x09]
                 ],
-                
                 afterSubBytes: [
                     [0x89, 0x85, 0x2d, 0xcb],
                     [0xd8, 0x5a, 0x18, 0x12],
@@ -1997,7 +2040,6 @@ final class AESCipherTest: XCTestCase {
                     [0xfd, 0xfa, 0xf1, 0xfe]
                 ]
             ),
-            
             CipherRound(
                 index: 10,
                 startOfRound: [
@@ -2019,7 +2061,6 @@ final class AESCipherTest: XCTestCase {
                     [0x03, 0x07, 0x0b, 0x0f]
                 ]
             ),
-            
             CipherRound(
                 index: 11,
                 startOfRound: [
@@ -2035,13 +2076,30 @@ final class AESCipherTest: XCTestCase {
         cipher.key = key
         cipher.decryptState()
         
-        XCTAssertEqual(cipher.result,
-                       expectedOutput,
-                       "Input and expected output do not match")
+        XCTAssertEqual(cipher.result, expectedOutput)
         
         for (index, actualRound) in cipher.getCipherHistory.enumerated() {
             let expectedRound = expectedCipherHistory[index]
-            XCTAssertEqual(actualRound, expectedRound, "Mismatch in history at round \(index): Expected \(expectedRound), but got \(actualRound).")
+            
+            XCTAssertEqual(actualRound.index,
+                           expectedRound.index,
+                           "Round \(index): Index does not match.")
+            XCTAssertEqual(actualRound.afterAddRound,
+                           expectedRound.afterAddRound,
+                           "After AddRoundKey \(index): After AddRoundKey value does not match.")
+            XCTAssertEqual(actualRound.afterShiftRows,
+                           expectedRound.afterShiftRows,
+                           "After ShiftRows \(index): After ShiftRows does not match.")
+            XCTAssertEqual(actualRound.afterSubBytes,
+                           expectedRound.afterSubBytes,
+                           "After SubBytes \(index): After SubBytes does not match.")
+            XCTAssertEqual(actualRound.afterMixColumns,
+                           expectedRound.afterMixColumns,
+                           "After MixColumns \(index): After MixColumns does not match.")
+            XCTAssertEqual(actualRound.roundKey,
+                           expectedRound.roundKey,
+                           "Round Key \(index): Round Key does not match.")
+            
         }
     }
     
@@ -2565,9 +2623,7 @@ final class AESCipherTest: XCTestCase {
         cipher.key = key
         cipher.decryptState()
         
-        XCTAssertEqual(cipher.result,
-                       expectedOutput,
-                       "Input and expected output do not match")
+        XCTAssertEqual(cipher.result, expectedOutput)
         
         for (index, actualRound) in cipher.getCipherHistory.enumerated() {
             let expectedRound = expectedCipherHistory[index]
@@ -3192,9 +3248,7 @@ final class AESCipherTest: XCTestCase {
         cipher.key = key
         cipher.decryptState()
         
-        XCTAssertEqual(cipher.result,
-                       expectedOutput,
-                       "Input and expected output do not match")
+        XCTAssertEqual(cipher.result, expectedOutput)
         
         for (index, actualRound) in cipher.getCipherHistory.enumerated() {
             let expectedRound = expectedCipherHistory[index]

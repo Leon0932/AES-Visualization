@@ -491,11 +491,11 @@ final class AESKeySchedTests: XCTestCase {
         keySched.keyExpansion(key: key)
         XCTAssertEqual(keySched.getNrOfRounds(),
                        10,
-                       "Wrong number of rounds: Expected 14 but got \(keySched.getNrOfRounds())")
+                       "Wrong number of rounds: Expected 10 but got \(keySched.getNrOfRounds())")
         
         XCTAssertEqual(keySched.getNk(),
                        4,
-                       "Wrong number of key size: Expected 8 but got \(keySched.getNk())")
+                       "Wrong number of key size: Expected 4 but got \(keySched.getNk())")
         
         let keySize = AESKeySize(rawValue: 4)!
         XCTAssertEqual(keySched.getKeySize(),
@@ -1010,11 +1010,11 @@ final class AESKeySchedTests: XCTestCase {
         keySched.keyExpansion(key: key)
         XCTAssertEqual(keySched.getNrOfRounds(),
                        12,
-                       "Wrong number of rounds: Expected 14 but got \(keySched.getNrOfRounds())")
+                       "Wrong number of rounds: Expected 12 but got \(keySched.getNrOfRounds())")
         
         XCTAssertEqual(keySched.getNk(),
                        6,
-                       "Wrong number of key size: Expected 8 but got \(keySched.getNk())")
+                       "Wrong number of key size: Expected 6 but got \(keySched.getNk())")
         
         let keySize = AESKeySize(rawValue: 6)!
         XCTAssertEqual(keySched.getKeySize(),
