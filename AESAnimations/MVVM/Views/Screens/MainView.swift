@@ -54,7 +54,7 @@ struct MainView: View {
                                buttonTitle: "Generate Random-State",
                                matrix: $viewModel.stateMatrix)
             
-            EditableMatrixView(titleLabel: "Key",
+            EditableMatrixView(titleLabel: "Schlüssel",
                                iconLabel: "key",
                                buttonTitle: "Generate Random-Key",
                                matrix: $viewModel.keyMatrix)
@@ -67,7 +67,7 @@ struct MainView: View {
             HStack(spacing: 32) {
                 
                 CustomButton(
-                    title: "Decrypt",
+                    title: "Entschlüsseln",
                     icon: "lock.open",
                     isDisabled: !viewModel.stateMatrix.areAllFieldsValid || !viewModel.keyMatrix.areAllFieldsValid,
                     destination: {
@@ -77,7 +77,7 @@ struct MainView: View {
                 )
                 
                 CustomButton(
-                    title: "Encrypt",
+                    title: "Verschlüsseln",
                     icon: "lock",
                     isDisabled: !viewModel.stateMatrix.areAllFieldsValid || !viewModel.keyMatrix.areAllFieldsValid,
                     destination: {

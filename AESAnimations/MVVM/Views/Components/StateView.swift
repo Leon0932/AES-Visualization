@@ -20,7 +20,6 @@ struct StateView: View {
     var alignment: HorizontalAlignment = .center
     var spacing: CGFloat = 10
     
-    var showFourColumns = false
     // MARK: -
     var body: some View {
         VStack(alignment: alignment, spacing: spacing) {
@@ -44,7 +43,7 @@ struct StateView: View {
     // MARK: - Matrix View
     func matrixView(row: Int) -> some View {
         HStack(spacing: spacing) {
-            ForEach(showFourColumns ? 0..<4 : 0..<state[row].count, id: \.self) { col in
+            ForEach(0..<state[row].count, id: \.self) { col in
                 CellView(
                     value: state[row][col],
                     boxSize: boxSize,

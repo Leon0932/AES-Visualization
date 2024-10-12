@@ -53,10 +53,7 @@ struct ProcessView: View {
                     backgroundColor: .reducedAccentColor,
                     alignment: .leading
                 )
-                keyMatrixView(showFourColumns: true)
-                    .onTapGesture {
-                        viewModel.showFullKey.toggle()
-                    }
+                keyView()
             } else {
                 StateView(
                     title: viewModel.animationControl.isDone ? "Ergebnis" : "Aktueller State",
@@ -74,6 +71,22 @@ struct ProcessView: View {
                 
             }
         }
+    }
+    
+    private func keyView() -> some View {
+        HStack {
+            Text("Schlüssel (\(viewModel.aesCipher.keySize * 32)-Bit)")
+            
+            Spacer()
+            
+            Button("Full Key") { viewModel.showFullKey.toggle() }
+            #if os(macOS)
+                .buttonStyle(.plain)
+            #endif
+        }
+        .font(.system(size: 17))
+        .fontWeight(.semibold)
+        .frame(width: 230, height: 250, alignment: .topLeading)
     }
     
     // MARK: - Center Column with Animation and Rounds
@@ -141,9 +154,9 @@ struct ProcessView: View {
             } label: {
                 operationRectangleView(text: text, color: color)
             }
-#if os(macOS)
+            #if os(macOS)
             .buttonStyle(.plain)
-#endif
+            #endif
         } else {
             operationRectangleView(text: text, color: color)
         }
@@ -163,7 +176,12 @@ struct ProcessView: View {
     // MARK: - Sheet View
     private func sheetView() -> some View {
         VStack(alignment: .center, spacing: 25) {
-            keyMatrixView(showFourColumns: false)
+            StateView(
+                title: "Schlüssel (\(viewModel.aesCipher.keySize * 32)-Bit)",
+                state: viewModel.key,
+                backgroundColor: .reducedAccentColor,
+                alignment: .leading
+            )
             
             CustomButton<Never>(title: "Close", useMaxWidth: false) {
                 viewModel.showFullKey.toggle()
@@ -191,16 +209,6 @@ struct ProcessView: View {
         default:
             Text("Hi")
         }
-    }
-    
-    func keyMatrixView(showFourColumns: Bool) -> some View {
-        StateView(
-            title: "Schlüssel (\(viewModel.aesCipher.keySize * 32)-Bit)",
-            state: viewModel.key,
-            backgroundColor: .reducedAccentColor,
-            alignment: .leading,
-            showFourColumns: showFourColumns
-        )
     }
 }
 
