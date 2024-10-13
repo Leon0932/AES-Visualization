@@ -52,7 +52,6 @@ extension AnimationViewModel {
     @MainActor
     func processAnimations() async {
         var index = animationControl.isBackward ? reverseAnimationSteps.count - 1 : 0
-        print(reverseAnimationSteps.count)
         
         withAnimation {
             animationControl.isPaused = false
