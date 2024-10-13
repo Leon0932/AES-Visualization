@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 @main
 struct AESAnimationsApp: App {
@@ -15,7 +16,6 @@ struct AESAnimationsApp: App {
     #if os(macOS)
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #endif
-
     
     var body: some Scene {
         WindowGroup {

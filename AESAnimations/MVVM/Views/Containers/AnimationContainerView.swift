@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: View {
+    // MARK: - Properties
     @Environment(\.dismiss) var dismiss
     
     @ObservedObject var viewModel: ViewModel
     let content: Content
     
+    // MARK: - Initializer
     init(viewModel: ViewModel,
          @ViewBuilder content: () -> Content) {
         
@@ -20,6 +22,7 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
         self.content = content()
     }
     
+    // MARK: -
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
@@ -50,23 +53,25 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
         .navigationBarTitleDisplayMode(.inline)
         #else
         .navigationBarBackButtonHidden(true)
-        .toolbar {
-            if viewModel.animationControl.isDone {
-                ToolbarItem(placement: .navigation) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.backward")
-                    }
-                }
-            }
-        }
+        .toolbar(content: toolbarItem)
         #endif
-        }
+    }
     
+    // MARK: - Helper functions
     func checkSubOrAddRoundKey() -> Bool {
         let operationName = viewModel.operationDetails.operationName
         
         return operationName == .subBytes || operationName == .addRoundKey
+    }
+    
+    func toolbarItem() -> some ToolbarContent {
+        ToolbarItem(placement: .navigation) {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.backward")
+            }
+            .opacity(viewModel.animationControl.isDone ? 1 : 0)
+        }
     }
 }

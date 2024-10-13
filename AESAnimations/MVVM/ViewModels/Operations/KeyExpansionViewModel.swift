@@ -554,7 +554,6 @@ class KeyExpansionViewModel: AnimationViewModel {
     private func checkIfSubBytesIsDone() async {
         repeat {
             await sleep(for: short)
-            print("Stuck in the loop")
         } while !subBytesViewModel.animationControl.isDone
         
         assignColumTwoFromSub()
@@ -562,7 +561,6 @@ class KeyExpansionViewModel: AnimationViewModel {
         await sleep(for: short)
         
         withAnimation { showSubBytes = false }
-        print("Escaped in the loop")
         
         await sleep(for: normal)
     }

@@ -596,7 +596,6 @@ class ProcessViewModel: AnimationViewModel {
     ///   - showResult: Controls whether the result is visible after resetting.
     func resetAnimationState(state newState: [[Byte]], showResult: Double) {
         withAnimation {
-            print(horizontalLineHeight)
             ballPosition = showResult == 1.0 ? horizontalLineHeight : -60
             ballPositionX = 0
             currentState = showResult == 1.0 ? result : cipherHistory[0].startOfRound
