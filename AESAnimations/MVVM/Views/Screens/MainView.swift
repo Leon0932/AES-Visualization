@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct MainView: View {
     @Environment(\.openWindow) var openWindow
     
     @StateObject var viewModel = MainViewModel()
-    
     // MARK: -
     var body: some View {
         NavigationStack {
@@ -109,12 +109,7 @@ struct MainView: View {
             #else
             .automatic
             #endif
-        }(),
-                    content: toolbarContent)
-    }
-    
-    private func toolbarContent() -> some View {
-        HStack(spacing: 16) {
+        }()) {
             Button(action: toggleSettings) {
                 Image(systemName: "gear")
             }
