@@ -14,9 +14,7 @@ final class AESCipherTest: XCTestCase {
     override func setUpWithError() throws {
         let math = AESMath()
         cipher = AESCipher(keySchedule: AESKeySchedule(math: math),
-                           state: AESState(math: math),
-                           input: [],
-                           key: [])
+                           state: AESState(math: math))
         super.setUp()
     }
     
@@ -451,13 +449,11 @@ final class AESCipherTest: XCTestCase {
                 ]
             )
         ]
-        
-        cipher.input = input
-        cipher.key = key
-        
+
+        cipher.set(input: input, key: key)
         cipher.encryptState()
         
-        XCTAssertEqual(cipher.result, expectedOutput)
+        XCTAssertEqual(cipher.getResult(), expectedOutput)
         
         for (index, actualRound) in cipher.getCipherHistory.enumerated() {
             let expectedRound = expectedCipherHistory[index]
@@ -993,11 +989,10 @@ final class AESCipherTest: XCTestCase {
             )
         ]
         
-        cipher.input = input
-        cipher.key = key
+        cipher.set(input: input, key: key)
         cipher.encryptState()
         
-        XCTAssertEqual(cipher.result, expectedOutput)
+        XCTAssertEqual(cipher.getResult(), expectedOutput)
         
         for (index, actualRound) in cipher.getCipherHistory.enumerated() {
             let expectedRound = expectedCipherHistory[index]
@@ -1609,11 +1604,10 @@ final class AESCipherTest: XCTestCase {
             ),
         ]
         
-        cipher.input = input
-        cipher.key = key
+        cipher.set(input: input, key: key)
         cipher.encryptState()
         
-        XCTAssertEqual(cipher.result, expectedOutput)
+        XCTAssertEqual(cipher.getResult(), expectedOutput)
         
         for (index, actualRound) in cipher.getCipherHistory.enumerated() {
             let expectedRound = expectedCipherHistory[index]
@@ -2072,11 +2066,10 @@ final class AESCipherTest: XCTestCase {
             ),
         ]
         
-        cipher.input = input
-        cipher.key = key
+        cipher.set(input: input, key: key)
         cipher.decryptState()
         
-        XCTAssertEqual(cipher.result, expectedOutput)
+        XCTAssertEqual(cipher.getResult(), expectedOutput)
         
         for (index, actualRound) in cipher.getCipherHistory.enumerated() {
             let expectedRound = expectedCipherHistory[index]
@@ -2619,11 +2612,10 @@ final class AESCipherTest: XCTestCase {
             )
         ]
         
-        cipher.input = input
-        cipher.key = key
+        cipher.set(input: input, key: key)
         cipher.decryptState()
         
-        XCTAssertEqual(cipher.result, expectedOutput)
+        XCTAssertEqual(cipher.getResult(), expectedOutput)
         
         for (index, actualRound) in cipher.getCipherHistory.enumerated() {
             let expectedRound = expectedCipherHistory[index]
@@ -3244,11 +3236,10 @@ final class AESCipherTest: XCTestCase {
             )
         ]
         
-        cipher.input = input
-        cipher.key = key
+        cipher.set(input: input, key: key)
         cipher.decryptState()
         
-        XCTAssertEqual(cipher.result, expectedOutput)
+        XCTAssertEqual(cipher.getResult(), expectedOutput)
         
         for (index, actualRound) in cipher.getCipherHistory.enumerated() {
             let expectedRound = expectedCipherHistory[index]

@@ -95,9 +95,9 @@ class ProcessViewModel: AnimationViewModel {
     }
     
     // Computed Properties
-    var state: [[Byte]] { aesCipher.input.convertToState() }
-    var key: [[Byte]] { aesCipher.key.convertToState() }
-    var result: [[Byte]] { aesCipher.result }
+    var state: [[Byte]] { aesCipher.getInput().convertToState() }
+    var key: [[Byte]] { aesCipher.getKey().convertToState() }
+    var result: [[Byte]] { aesCipher.getResult() }
     var cipherHistory: [CipherRound] { aesCipher.getCipherHistory }
     
     // MARK: - Initializer

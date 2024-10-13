@@ -11,22 +11,37 @@ class AESCipher {
     let keySchedule: AESKeySchedule
     let state: AESState
     
-    var input: [Byte]
-    var key: [Byte]
-    var result: [[Byte]] = []
+    private var input: [Byte] = []
+    private var key: [Byte] = []
+    private var result: [[Byte]] = []
     private var cipherHistory: [CipherRound] = []
     
-    init(keySchedule: AESKeySchedule, state: AESState, input: [Byte], key: [Byte]) {
+    init(keySchedule: AESKeySchedule, state: AESState) {
         self.keySchedule = keySchedule
         self.state = state
-        self.input = input
-        self.key = key
     }
     
     var nrOfRounds: Int { keySchedule.getNrOfRounds() }
     var roundKeys: [[Byte]] { keySchedule.getRoundKeys() }
     var keySize: Int { keySchedule.getNk() }
     var getCipherHistory: [CipherRound] { cipherHistory }
+    
+    func set(input: [Byte], key: [Byte]) {
+        self.input = input
+        self.key = key
+    }
+    
+    func getResult() -> [[Byte]] {
+        return result
+    }
+    
+    func getInput() -> [Byte] {
+        return input
+    }
+    
+    func getKey() -> [Byte] {
+        return key
+    }
     
     private func createKeyExpansion() {
         result = []
