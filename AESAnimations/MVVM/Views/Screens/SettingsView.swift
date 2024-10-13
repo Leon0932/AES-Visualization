@@ -23,7 +23,7 @@ struct SettingsView: View {
             #if os(macOS)
             .preferredColorScheme(selectedColorScheme == .device ? nil : selectedColorScheme == .dark ? .dark : .light)
             #endif
-            .navigationTitle("Settings")
+            .navigationTitle("Einstellungen")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { closeButton { dismiss() } }
@@ -33,7 +33,7 @@ struct SettingsView: View {
     
     // MARK: - Color Scheme Selection
     private var colorSchemeSection: some View {
-        Section(header: Text("Select Color Scheme (\(selectedColorScheme.rawValue.uppercased()))")) {
+        Section(header: Text("Wähle Erscheinungsbild (\(selectedColorScheme.rawValue.uppercased()))")) {
             HStack(spacing: 16) {
                 configurableButton(
                     title: "System",
@@ -61,7 +61,7 @@ struct SettingsView: View {
     
     // MARK: - Primary Color Selection
     private var primaryColorSection: some View {
-        Section(header: Text("Select Primary Color (\(selectedPrimaryColor.rawValue.uppercased()))")) {
+        Section(header: Text("Wähle Akzentfarbe (\(selectedPrimaryColor.rawValue.uppercased()))")) {
             HStack(spacing: 16) {
                 ForEach(PrimaryColor.allCases, id: \.self) { color in
                     configurableButton(

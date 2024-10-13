@@ -23,7 +23,7 @@ struct AuthorView: View {
             Text("Die App wurde von **Leon Chamoun** im Rahmen einer Bachelorarbeit entwickelt, die von **Prof. Dr. Christoph Karg** betreut wurde.")
                 .multilineTextAlignment(.center)
 
-            CustomButton<Never>(title: "Close", useMaxWidth: false) {
+            CustomButton<Never>(title: "Schließen", useMaxWidth: false) {
                 dismiss()
             }
             

@@ -80,6 +80,7 @@ struct ProcessView: View {
             Spacer()
             
             Button("Full Key") { viewModel.showFullKey.toggle() }
+                .foregroundColor(.accentColor)
             #if os(macOS)
                 .buttonStyle(.plain)
             #endif
@@ -183,7 +184,7 @@ struct ProcessView: View {
                 alignment: .leading
             )
             
-            CustomButton<Never>(title: "Close", useMaxWidth: false) {
+            CustomButton<Never>(title: "Schließen", useMaxWidth: false) {
                 viewModel.showFullKey.toggle()
             }
         }
