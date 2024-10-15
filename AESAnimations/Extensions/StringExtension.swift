@@ -7,12 +7,17 @@
 
 import SwiftUI
 
-struct StringExtension: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+extension String {
+    func leftPadding(toSize: Int, with character: Character) -> String {
+           let paddingCount = toSize - self.count
+           if paddingCount > 0 {
+               return String(repeating: character, count: paddingCount) + self
+           } else {
+               return self
+           }
+       }
+    
+    func toIntArray() -> [Int] {
+        self.compactMap { Int(String($0)) }
     }
-}
-
-#Preview {
-    StringExtension()
 }
