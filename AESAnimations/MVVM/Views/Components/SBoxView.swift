@@ -20,7 +20,7 @@ struct SBoxView: View {
         Array(repeating: .init(.fixed(boxSize()), spacing: 4), count: 16)
     }
     
-    let aesMath = AESMath()
+    let aesMath = AESMath.shared
 
     // MARK: -
     var body: some View {

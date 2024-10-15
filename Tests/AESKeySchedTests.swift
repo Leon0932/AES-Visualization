@@ -12,7 +12,7 @@ final class AESKeySchedTests: XCTestCase {
     var keySched: AESKeySchedule!
     
     override func setUpWithError() throws {
-        keySched = AESKeySchedule(math: AESMath())
+        keySched = AESKeySchedule()
         super.setUp()
     }
     

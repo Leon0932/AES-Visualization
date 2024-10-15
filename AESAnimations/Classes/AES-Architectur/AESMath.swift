@@ -8,12 +8,14 @@
 import Foundation
 
 class AESMath {
+    static let shared = AESMath()
+    
     private var logTable: [Byte]
     private var expTable: [Byte]
     private var sBox: [Byte]
     private var invSBox: [Byte]
     
-    init() {
+    private init() {
         expTable = [Byte](repeating: 0, count: 256)
         logTable = [Byte](repeating: 0, count: 256)
         sBox = [Byte](repeating: 0, count: 256)

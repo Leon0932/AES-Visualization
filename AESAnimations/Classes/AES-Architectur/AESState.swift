@@ -8,9 +8,7 @@
 import Foundation
 
 class AESState {
-    let math: AESMath
-    
-    init(math: AESMath) { self.math = math }
+    let math = AESMath.shared
     
     /// Performs the AES SubBytes operation.
     ///

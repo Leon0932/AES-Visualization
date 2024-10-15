@@ -8,7 +8,7 @@
 import Foundation
 
 class AESKeySchedule {
-    let math: AESMath
+    let math = AESMath.shared
     private var keySchedule: [[Byte]] = []
     private var roundKeys: [[Byte]] = []
     private var keyExpRounds: [KeyExpansionRound] = []
@@ -19,8 +19,7 @@ class AESKeySchedule {
     private let nb: Int = 4
     private var rCon: [[Byte]]
     
-    init(math: AESMath) {
-        self.math = math
+    init() {
         rCon = AESConstants.rcon
     }
     

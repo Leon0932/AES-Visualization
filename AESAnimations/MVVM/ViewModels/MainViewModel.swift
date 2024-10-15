@@ -24,14 +24,14 @@ class MainViewModel: ObservableObject {
     }
     
     func createProcessViewModel(isDecryption: Bool) -> ProcessViewModel {
-        let math = AESMath()
-        let state = AESState(math: math)
-        let keySched = AESKeySchedule(math: math)
+        let state = AESState()
+        let keySched = AESKeySchedule()
         
         let cipher = AESCipher(keySchedule: keySched,
                                state: state)
         
-        cipher.set(input: stateMatrix.toByteArray(), key: keyMatrix.toByteArray())
+        cipher.set(input: stateMatrix.toByteArray(),
+                   key: keyMatrix.toByteArray())
         
         isDecryption ? cipher.decryptState() : cipher.encryptState()
         

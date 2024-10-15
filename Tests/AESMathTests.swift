@@ -12,7 +12,7 @@ final class AESMathTests: XCTestCase {
     var math: AESMath!
 
     override func setUpWithError() throws {
-        math = AESMath()
+        math = AESMath.shared
         super.setUp()
     }
 

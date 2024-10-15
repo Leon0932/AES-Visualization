@@ -12,9 +12,8 @@ final class AESCipherTest: XCTestCase {
     var cipher: AESCipher!
     
     override func setUpWithError() throws {
-        let math = AESMath()
-        cipher = AESCipher(keySchedule: AESKeySchedule(math: math),
-                           state: AESState(math: math))
+        cipher = AESCipher(keySchedule: AESKeySchedule(),
+                           state: AESState())
         super.setUp()
     }
     

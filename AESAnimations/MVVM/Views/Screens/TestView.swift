@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TestView: View {
-    let math = AESMath()
+    let math = AESMath.shared
     
     @State private var currentState: [[Byte]] = [
         [0x05, 0xC9, 0x1A, 0x13],
@@ -161,14 +161,14 @@ struct TestView: View {
         resultMixColumns = currentState
         resultAddRoundKey = currentState
         
-        let state = AESState(math: math)
+        let state = AESState()
         
         state.subBytes(state: &resultSubBytes, isInverse: false)
         shiftRowsRound = state.shiftRows(state: &resultShiftRows, isInverse: false)
         state.mixColumns(state: &resultMixColumns, isInverse: false)
         state.addRoundKey(state: &resultAddRoundKey, key: key)
         
-        let keySched = AESKeySchedule(math: math)
+        let keySched = AESKeySchedule()
         keySched.keyExpansion(key: key128Bit)
         roundKeys128Bit = keySched.getRoundKeys()
         roundKeysHistory128Bit = keySched.getDetailedKeySchedule()
