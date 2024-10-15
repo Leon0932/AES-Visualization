@@ -35,13 +35,9 @@ class AESCipher {
         return result
     }
     
-    func getInput() -> [Byte] {
-        return input
-    }
+    func getInput() -> [Byte] { return input }
     
-    func getKey() -> [Byte] {
-        return key
-    }
+    func getKey() -> [Byte] { return key }
     
     private func createKeyExpansion() {
         result = []

@@ -79,7 +79,13 @@ class SubBytesViewModel: AnimationViewModel {
     func createAnimationSteps(with geometry: GeometryProxy) {
         // The state position is further to the left and slightly above the center. Therefore, a cell
         // is shifted by 75 units along the x-axis and its height is adjusted by 35% on the y-axis.
-        let position = Position(x: geometry.size.width * 0.75, y: geometry.size.height * 0.35)
+        var position = Position(x: geometry.size.width * 0.75,
+                                y: geometry.size.height * 0.35)
+        
+        #if os(iOS)
+        // Position on iPad is too high
+        position.y = geometry.size.height * 0.32
+        #endif
         
         // The calculation was made as follows:
         // The text "Search State" should display the position where the "Cell" is located,
