@@ -13,7 +13,7 @@ protocol AnimationViewModel: ObservableObject {
     
     /// State Variable
     var result: [[Byte]] { get }
-    var copyOfState: [[Byte]] { get }
+    var copyOfMatrix: [[Byte]] { get }
     
     /// Animation Controllers
     var animationControl: AnimationControl { get set }
@@ -113,7 +113,7 @@ extension AnimationViewModel {
     }
     
     func resetAnimations() {
-        cancelAndResetAnimation(state: copyOfState, showResult: 0.0)  
+        cancelAndResetAnimation(state: copyOfMatrix, showResult: 0.0)  
     }
     
     func completeAnimations() {

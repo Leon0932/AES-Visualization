@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OperationDetails {
-    var operationName: AESOperations
+    var operationName: OperationNames
     var isInverseMode: Bool
     var currentRound: Int
 }
