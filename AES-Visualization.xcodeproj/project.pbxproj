@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C30E9AFA2CBE43E100DF5AE5 /* SBoxAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AF92CBE43E100DF5AE5 /* SBoxAnimationView.swift */; };
+		C30E9AFC2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AFB2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift */; };
+		C30E9AFE2CBECD1200DF5AE5 /* ByteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AFD2CBECD1200DF5AE5 /* ByteExtension.swift */; };
+		C30E9B002CBECEAB00DF5AE5 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AFF2CBECEAB00DF5AE5 /* StringExtension.swift */; };
 		C310C9112C6FCA1000E91AB7 /* MixColumnAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9102C6FCA1000E91AB7 /* MixColumnAnimationView.swift */; };
 		C310C9152C714DED00E91AB7 /* MixColumnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9142C714DED00E91AB7 /* MixColumnViewModel.swift */; };
 		C310C9192C7152A200E91AB7 /* AnimationContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9182C7152A200E91AB7 /* AnimationContainerView.swift */; };
@@ -74,7 +78,7 @@
 		C3E1F2BD2C7B347F0030B994 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E1F2BC2C7B347F0030B994 /* Position.swift */; };
 		C3E1F2C02C7B6ECE0030B994 /* KeyExpansionAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E1F2BF2C7B6ECE0030B994 /* KeyExpansionAnimationView.swift */; };
 		C3E1F2C22C7B6EE80030B994 /* KeyExpansionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E1F2C12C7B6EE80030B994 /* KeyExpansionViewModel.swift */; };
-		C3E1F2C42C7B6FF80030B994 /* AESOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E1F2C32C7B6FF80030B994 /* AESOperations.swift */; };
+		C3E1F2C42C7B6FF80030B994 /* OperationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E1F2C32C7B6FF80030B994 /* OperationNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +92,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C30E9AF92CBE43E100DF5AE5 /* SBoxAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBoxAnimationView.swift; sourceTree = "<group>"; };
+		C30E9AFB2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBoxAnimationViewModel.swift; sourceTree = "<group>"; };
+		C30E9AFD2CBECD1200DF5AE5 /* ByteExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteExtension.swift; sourceTree = "<group>"; };
+		C30E9AFF2CBECEAB00DF5AE5 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		C310C9102C6FCA1000E91AB7 /* MixColumnAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixColumnAnimationView.swift; sourceTree = "<group>"; };
 		C310C9142C714DED00E91AB7 /* MixColumnViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixColumnViewModel.swift; sourceTree = "<group>"; };
 		C310C9182C7152A200E91AB7 /* AnimationContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContainerView.swift; sourceTree = "<group>"; };
@@ -158,7 +166,7 @@
 		C3E1F2BC2C7B347F0030B994 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		C3E1F2BF2C7B6ECE0030B994 /* KeyExpansionAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExpansionAnimationView.swift; sourceTree = "<group>"; };
 		C3E1F2C12C7B6EE80030B994 /* KeyExpansionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExpansionViewModel.swift; sourceTree = "<group>"; };
-		C3E1F2C32C7B6FF80030B994 /* AESOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESOperations.swift; sourceTree = "<group>"; };
+		C3E1F2C32C7B6FF80030B994 /* OperationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationNames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -198,6 +206,7 @@
 				C3CD1D402CA9DE5F006C9804 /* GenericDataView.swift */,
 				C3CD1D452CA9E27F006C9804 /* ShiftRowHistory.swift */,
 				C3AEE3D62CAB19F4002F60CE /* CipherHistoryView.swift */,
+				C30E9AF92CBE43E100DF5AE5 /* SBoxAnimationView.swift */,
 			);
 			path = Attachments;
 			sourceTree = "<group>";
@@ -210,7 +219,7 @@
 				C3C476DA2C5958FC009D718D /* AESConstants.swift */,
 				C36566332C61F696007A4A1E /* ColorSchemeOptions.swift */,
 				C38734D92C68DAD000E835DB /* PrimaryColor.swift */,
-				C3E1F2C32C7B6FF80030B994 /* AESOperations.swift */,
+				C3E1F2C32C7B6FF80030B994 /* OperationNames.swift */,
 				C351F31E2C8C605D000890AF /* AppScheme.swift */,
 				C3709D222CAEEBCB00BBFB80 /* RoundType.swift */,
 				C3BDC13E2CB2BDCE00847363 /* PositionType.swift */,
@@ -250,6 +259,7 @@
 				C38734FF2C6EABFA00E835DB /* KeyViewModel.swift */,
 				C38735012C6EACBE00E835DB /* MainViewModel.swift */,
 				C3AEE3DA2CAB4653002F60CE /* ProcessViewModel.swift */,
+				C30E9AFB2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -365,6 +375,8 @@
 				C38734E62C692F2000E835DB /* ViewExtensions.swift */,
 				C38734F32C6E2BB500E835DB /* ArrayExtensions.swift */,
 				C310C9242C72529200E91AB7 /* ColorExtensions.swift */,
+				C30E9AFD2CBECD1200DF5AE5 /* ByteExtension.swift */,
+				C30E9AFF2CBECEAB00DF5AE5 /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -545,9 +557,10 @@
 				C33940232C56D859008802BC /* AESState.swift in Sources */,
 				C3CD1D462CA9E27F006C9804 /* ShiftRowHistory.swift in Sources */,
 				C38734F82C6EA49F00E835DB /* TestView.swift in Sources */,
+				C30E9AFA2CBE43E100DF5AE5 /* SBoxAnimationView.swift in Sources */,
 				C310C9292C7254BA00E91AB7 /* AddRoundKeyViewModel.swift in Sources */,
 				C38734F22C6943E600E835DB /* ShiftRowsAnimationView.swift in Sources */,
-				C3E1F2C42C7B6FF80030B994 /* AESOperations.swift in Sources */,
+				C3E1F2C42C7B6FF80030B994 /* OperationNames.swift in Sources */,
 				C31E69BD2C8721B900230D22 /* ColumnView.swift in Sources */,
 				C3E1F2C22C7B6EE80030B994 /* KeyExpansionViewModel.swift in Sources */,
 				C38734FE2C6EAADF00E835DB /* ShiftRowsViewModel.swift in Sources */,
@@ -559,6 +572,7 @@
 				C38734F62C6EA47F00E835DB /* SubBytesViewModel.swift in Sources */,
 				C3AEE3D72CAB19F4002F60CE /* CipherHistoryView.swift in Sources */,
 				C37BA07F2C397D5800C87BB7 /* AESAnimationsApp.swift in Sources */,
+				C30E9AFC2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift in Sources */,
 				C33940212C56D839008802BC /* AESKeySchedule.swift in Sources */,
 				C38734E72C692F2000E835DB /* ViewExtensions.swift in Sources */,
 				C351F31F2C8C605D000890AF /* AppScheme.swift in Sources */,
@@ -572,6 +586,7 @@
 				C34310152C948AB10004F4C7 /* AnimationControl.swift in Sources */,
 				C3BDC1432CB32F5700847363 /* NavigationBackButtonModifier.swift in Sources */,
 				C3BDC1412CB2BDE800847363 /* OpacityType.swift in Sources */,
+				C30E9B002CBECEAB00DF5AE5 /* StringExtension.swift in Sources */,
 				C38734DC2C68DC5D00E835DB /* Matrix.swift in Sources */,
 				C33E45082C7A9B2100F38593 /* OperationSymbolView.swift in Sources */,
 				C38734E92C692FA100E835DB /* CellView.swift in Sources */,
@@ -591,6 +606,7 @@
 				C38B28D32CB44FFA00FCE203 /* AuthorView.swift in Sources */,
 				C33940182C56D746008802BC /* EncryptionMode.swift in Sources */,
 				C3AEE3DB2CAB4653002F60CE /* ProcessViewModel.swift in Sources */,
+				C30E9AFE2CBECD1200DF5AE5 /* ByteExtension.swift in Sources */,
 				C38735002C6EABFA00E835DB /* KeyViewModel.swift in Sources */,
 				C33E450A2C7A9D0800F38593 /* StateView.swift in Sources */,
 				C38735022C6EACBE00E835DB /* MainViewModel.swift in Sources */,

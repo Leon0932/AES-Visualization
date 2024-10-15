@@ -13,7 +13,7 @@ class ProcessViewModel: AnimationViewModel {
     let aesState: AESState
     let aesCipher: AESCipher
     
-    var copyOfState: [[Byte]] = []
+    var copyOfMatrix: [[Byte]] = []
     
     @Published var ballPosition: CGFloat = -60
     @Published var ballPositionX: CGFloat = 0
