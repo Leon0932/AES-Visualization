@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum AESOperations: CustomStringConvertible {
-    case shiftRows, subBytes, mixColumns, addRoundKey, keyExpansion, encryptionProcess, decryptionProcess
+enum OperationNames: CustomStringConvertible {
+    case shiftRows, subBytes, mixColumns, addRoundKey, keyExpansion, encryptionProcess, decryptionProcess, invSBox, sBox
     
     var description: String {
         switch self {
@@ -26,6 +26,10 @@ enum AESOperations: CustomStringConvertible {
             return "Verschlüsselungsprozess"
         case .decryptionProcess:
             return "Entschlüsselungsprozess"
+        case .invSBox:
+            return "Inverse S-Box Erstellung"
+        case .sBox:
+            return "S-Box Erstellung"
         }
     }
 }

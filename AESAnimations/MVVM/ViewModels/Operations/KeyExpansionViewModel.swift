@@ -17,7 +17,7 @@ class KeyExpansionViewModel: AnimationViewModel {
     /// they wil be not modified during the animations, but are protocol required
     @Published var roundKeys: [[Byte]]
     let result: [[Byte]] = []
-    let copyOfState: [[Byte]] = []
+    let copyOfMatrix: [[Byte]] = []
     
     // For RotWord necessary
     @Published var positionKey: [Position] = Position.default1DPositions(count: 4)

@@ -13,7 +13,7 @@ class MixColumnsViewModel: AnimationViewModel {
     
     @Published var state: [[Byte]]
     let result: [[Byte]]
-    let copyOfState: [[Byte]]
+    let copyOfMatrix: [[Byte]]
     
     // Additional properties
     @Published var columnPositions: [Position] = Position.default1DPositions(count: 4)
@@ -40,7 +40,7 @@ class MixColumnsViewModel: AnimationViewModel {
         self.operationDetails = operationDetails
         self.transformationMatrix = operationDetails.isInverseMode ? AESConstants.invMixColumnMatrix : AESConstants.mixColumnMatrix
         
-        copyOfState = state
+        copyOfMatrix = state
     }
     
     // MARK: - Animation Steps Creation

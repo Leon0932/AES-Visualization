@@ -14,7 +14,7 @@ class SubBytesViewModel: AnimationViewModel {
     // State Properties
     @Published var state: [[Byte]]
     let result: [[Byte]]
-    let copyOfState: [[Byte]]
+    let copyOfMatrix: [[Byte]]
     
     // Flags for CurrentByte which is substituted
     @Published var currentByte: Byte = 0x00
@@ -34,6 +34,8 @@ class SubBytesViewModel: AnimationViewModel {
     // Modifier for Searching the Byte in the S-Box
     @Published var splitByte: [[Bool]] = Array.create2DArray(repeating: false, rows: 4, cols: 4)
     
+    @Published var showSBoxAnimation = false
+    
     // Task und Steps Handler
     @Published var animationControl: AnimationControl
     var animationTask: Task<Void, Never>? = nil
@@ -42,6 +44,15 @@ class SubBytesViewModel: AnimationViewModel {
     
     // Helper Variables for View and Calculating the S-Box
     private let boxSize = 50
+    
+    // Computed Properties
+    var sBoxAnimationViewModel: SBoxAnimationViewModel {
+        var copyOfOperationDet = operationDetails
+        copyOfOperationDet.operationName = operationDetails.isInverseMode ? .invSBox : .sBox
+        copyOfOperationDet.currentRound = -1
+        
+        return SBoxAnimationViewModel(operationDetails: copyOfOperationDet)
+    }
     
     // MARK: - Initializer
     init(state: [[Byte]],
@@ -54,7 +65,7 @@ class SubBytesViewModel: AnimationViewModel {
         self.animationControl = animationControl
         
         self.searchStatePosition = Position(x: -1, y: -1)
-        copyOfState = state
+        copyOfMatrix = state
     }
     
     // MARK: - Animation Steps Creation
@@ -229,10 +240,10 @@ class SubBytesViewModel: AnimationViewModel {
         ]
         
         let reverseSteps = [
-            AnimationStep(animation: { self.modifyState(row: row, col: col, for: (self.copyOfState[row][col], true)) }, delay: short),
-            AnimationStep(animation: { self.setSearchState(for: (self.copyOfState[row][col],
-                                                                 (self.copyOfState[row][col] & 0xF0) >> 4,
-                                                                 self.copyOfState[row][col] & 0x0F),
+            AnimationStep(animation: { self.modifyState(row: row, col: col, for: (self.copyOfMatrix[row][col], true)) }, delay: short),
+            AnimationStep(animation: { self.setSearchState(for: (self.copyOfMatrix[row][col],
+                                                                 (self.copyOfMatrix[row][col] & 0xF0) >> 4,
+                                                                 self.copyOfMatrix[row][col] & 0x0F),
                                                            showText: 1)
             }, delay: normal)
         ]

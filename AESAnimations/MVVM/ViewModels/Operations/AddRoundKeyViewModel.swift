@@ -13,7 +13,7 @@ class AddRoundKeyViewModel: AnimationViewModel {
     
     // State variables
     @Published var state: [[Byte]]
-    var copyOfState: [[Byte]]
+    var copyOfMatrix: [[Byte]]
     let key: [[Byte]]
     let result: [[Byte]]
     
@@ -54,7 +54,7 @@ class AddRoundKeyViewModel: AnimationViewModel {
         self.result = result
         self.operationDetails = operationDetails
         
-        copyOfState = state
+        copyOfMatrix = state
     }
     
     // MARK: - Animation Steps Creation

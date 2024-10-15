@@ -14,7 +14,7 @@ class ShiftRowsViewModel: AnimationViewModel {
     // State Properties
     @Published var state: [[Byte]]
     let result: [[Byte]]
-    let copyOfState: [[Byte]]
+    let copyOfMatrix: [[Byte]]
     
     @Published var showShiftRounds = false
     var shiftRowRounds: [ShiftRowRound]
@@ -47,7 +47,7 @@ class ShiftRowsViewModel: AnimationViewModel {
         self.operationDetails = operationDetails
         self.shiftRowRounds = shiftRowRounds
         
-        copyOfState = state
+        copyOfMatrix = state
         shiftRowsHelper = ShiftRowsHelper(boxSize: self.boxSize,
                                           spacing: self.spacing)
     }
