@@ -19,6 +19,10 @@ struct SubBytesAnimationView: View {
                     .padding(.top, 50)
             }
         }
+        .toolbar(content: sBoxAnimationButton)
+        .platformSpecificNavigation(isPresented: $viewModel.showSBoxAnimation) {
+            SBoxAnimationView(viewModel: viewModel.sBoxAnimationViewModel)
+        }
     }
     
     // MARK: - State View
@@ -104,5 +108,16 @@ struct SubBytesAnimationView: View {
             searchX: viewModel.searchX,
             searchY: viewModel.searchY
         )
+    }
+    
+    // MARK: - Toolbar Item
+    private func sBoxAnimationButton() -> some ToolbarContent {
+        ToolbarItem {
+            Button("Zeige S-Box Berechnung") {
+                viewModel.showSBoxAnimation.toggle()
+            }
+            .buttonStyle(BorderedButtonStyle())
+            .opacity(viewModel.animationControl.isDone ? 1 : 0)
+        }
     }
 }

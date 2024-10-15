@@ -14,6 +14,7 @@ struct SBoxView: View {
     
     var searchX: Byte? = nil
     var searchY: Byte? = nil
+    var opacityOfValues: [[Double]] = Array.create2DArray(repeating: 1.0, rows: 16, cols: 16)
 
     private var gridItems: [GridItem] {
         Array(repeating: .init(.fixed(boxSize()), spacing: 4), count: 16)
@@ -43,6 +44,7 @@ struct SBoxView: View {
                     backgroundColor: headerBackgroundColor(for: col),
                     valueFormat: .oneDigit
                 )
+                .opacity(opacityOfValues[0][col])
             }
         }
     }
@@ -56,6 +58,7 @@ struct SBoxView: View {
                 backgroundColor: rowBackgroundColor(for: row),
                 valueFormat: .oneDigit
             )
+            .opacity(opacityOfValues[row][0])
             
             LazyVGrid(columns: gridItems, spacing: 4) {
                 ForEach(0..<16, id: \.self) { col in
@@ -63,6 +66,7 @@ struct SBoxView: View {
                         .scaleEffect(searchResult != nil && Int(searchResult ?? 0) == (row * 16 + col) 
                                      ? 2
                                      : 1)
+                        .opacity(opacityOfValues[row][col])
                 }
             }
         }

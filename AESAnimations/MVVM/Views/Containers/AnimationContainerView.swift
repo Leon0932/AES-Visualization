@@ -61,7 +61,7 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
     func checkSubOrAddRoundKey() -> Bool {
         let operationName = viewModel.operationDetails.operationName
         
-        return operationName == .subBytes || operationName == .addRoundKey
+        return operationName == .subBytes || operationName == .addRoundKey || operationName == .invSBox || operationName == .sBox
     }
     
     func toolbarItem() -> some ToolbarContent {
