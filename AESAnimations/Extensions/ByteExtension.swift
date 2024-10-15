@@ -7,12 +7,8 @@
 
 import SwiftUI
 
-struct ByteExtension: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+extension Byte {
+    func toBinary() -> String {
+        return String(self, radix: 2).leftPadding(toSize: 8, with: "0")
     }
-}
-
-#Preview {
-    ByteExtension()
 }
