@@ -11,6 +11,7 @@
 		C30E9AFC2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AFB2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift */; };
 		C30E9AFE2CBECD1200DF5AE5 /* ByteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AFD2CBECD1200DF5AE5 /* ByteExtension.swift */; };
 		C30E9B002CBECEAB00DF5AE5 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AFF2CBECEAB00DF5AE5 /* StringExtension.swift */; };
+		C30E9B022CBF00D400DF5AE5 /* SBoxRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9B012CBF00D400DF5AE5 /* SBoxRound.swift */; };
 		C310C9112C6FCA1000E91AB7 /* MixColumnAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9102C6FCA1000E91AB7 /* MixColumnAnimationView.swift */; };
 		C310C9152C714DED00E91AB7 /* MixColumnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9142C714DED00E91AB7 /* MixColumnViewModel.swift */; };
 		C310C9192C7152A200E91AB7 /* AnimationContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9182C7152A200E91AB7 /* AnimationContainerView.swift */; };
@@ -96,6 +97,7 @@
 		C30E9AFB2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBoxAnimationViewModel.swift; sourceTree = "<group>"; };
 		C30E9AFD2CBECD1200DF5AE5 /* ByteExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteExtension.swift; sourceTree = "<group>"; };
 		C30E9AFF2CBECEAB00DF5AE5 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		C30E9B012CBF00D400DF5AE5 /* SBoxRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBoxRound.swift; sourceTree = "<group>"; };
 		C310C9102C6FCA1000E91AB7 /* MixColumnAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixColumnAnimationView.swift; sourceTree = "<group>"; };
 		C310C9142C714DED00E91AB7 /* MixColumnViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixColumnViewModel.swift; sourceTree = "<group>"; };
 		C310C9182C7152A200E91AB7 /* AnimationContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContainerView.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				C3CD1D3E2CA9D732006C9804 /* ShiftRowRound.swift */,
 				C35F80252CAAA40F00C54393 /* CipherRound.swift */,
 				C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */,
+				C30E9B012CBF00D400DF5AE5 /* SBoxRound.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				C310C9112C6FCA1000E91AB7 /* MixColumnAnimationView.swift in Sources */,
 				C31E69C32C887D9D00230D22 /* ShiftRowsHelper.swift in Sources */,
 				C37BA0812C397D5800C87BB7 /* MainView.swift in Sources */,
+				C30E9B022CBF00D400DF5AE5 /* SBoxRound.swift in Sources */,
 				C34310112C9373DA0004F4C7 /* AnimationViewModel.swift in Sources */,
 				C310C9152C714DED00E91AB7 /* MixColumnViewModel.swift in Sources */,
 				C35F80262CAAA40F00C54393 /* CipherRound.swift in Sources */,

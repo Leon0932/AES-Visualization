@@ -19,7 +19,7 @@ class KeyViewModel: ObservableObject {
     var aesCipher: AESCipher
     
     // MARK: - Computed Properties
-    var roundKeys: [[Byte]] { aesCipher.keySchedule.getRoundKeys() }
+    var roundKeys: [[Byte]] { aesCipher.keySchedule.getRoundKeys }
     var keyExpansionViewModel: KeyExpansionViewModel {
         let keySched = aesCipher.keySchedule
         
@@ -27,8 +27,8 @@ class KeyViewModel: ObservableObject {
                                      operationDetails: OperationDetails(operationName: .keyExpansion,
                                                                         isInverseMode: false,
                                                                         currentRound: -1),
-                                     keyExpRounds: keySched.getDetailedKeySchedule(),
-                                     keySize: keySched.getKeySize()!)
+                                     keyExpRounds: keySched.getDetailedKeySchedule,
+                                     keySize: keySched.getKeySize!)
     }
     
     // MARK: - Initializer

@@ -75,7 +75,7 @@ struct ProcessView: View {
     
     private func keyView() -> some View {
         HStack {
-            Text("Schlüssel (\(viewModel.aesCipher.keySize * 32)-Bit)")
+            Text("Schlüssel (\(viewModel.aesCipher.getNk * 32)-Bit)")
             
             Spacer()
             
@@ -101,7 +101,7 @@ struct ProcessView: View {
                     .frame(maxWidth: .infinity)
                 
                 roundView(phase: 2, data: viewModel.phaseTwo)
-                    .background(HorizontalLine(mainRounds: viewModel.aesCipher.nrOfRounds,
+                    .background(HorizontalLine(mainRounds: viewModel.aesCipher.getNrOfRounds,
                                                currentRound: $viewModel.currentRoundNumber)
                     )
                 
@@ -178,7 +178,7 @@ struct ProcessView: View {
     private func sheetView() -> some View {
         VStack(alignment: .center, spacing: 25) {
             StateView(
-                title: "Schlüssel (\(viewModel.aesCipher.keySize * 32)-Bit)",
+                title: "Schlüssel (\(viewModel.aesCipher.getNk * 32)-Bit)",
                 state: viewModel.key,
                 backgroundColor: .reducedAccentColor,
                 alignment: .leading
@@ -276,7 +276,10 @@ extension ProcessView {
                         Text("Aktuelle Runde:")
                             .font(.headline)
                         
-                        CellView(value: Byte(currentRound), boxSize: 50, backgroundColor: .lightGray, valueFormat: .number)
+                        CellView(value: Byte(currentRound),
+                                 boxSize: 50,
+                                 backgroundColor: .lightGray,
+                                 valueFormat: .number)
                     }
                     .position(x: geometry.size.width / 2 - 200, y: geometry.size.height / 2)
                 }

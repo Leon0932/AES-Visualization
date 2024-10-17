@@ -8,22 +8,27 @@
 import Foundation
 
 class AESMath {
+    // MARK: - Properties
     static let shared = AESMath()
     
     private var logTable: [Byte]
     private var expTable: [Byte]
+    private var invTable: [Byte]
     private var sBox: [Byte]
     private var invSBox: [Byte]
+    private var sBoxHistory: [SBoxRound] = []
     
+    // MARK: - Initializer
     private init() {
         expTable = [Byte](repeating: 0, count: 256)
         logTable = [Byte](repeating: 0, count: 256)
         sBox = [Byte](repeating: 0, count: 256)
         invSBox = [Byte](repeating: 0, count: 256)
+        invTable = [Byte](repeating: 0, count: 256)
         
         initializeTables()
     }
-    
+
     /// Initializes the following tables:
     /// - Exponentiation table
     /// - Logarithm table
@@ -45,15 +50,45 @@ class AESMath {
         logTable[1] = 0xFF
         
         // Initialize the S-Box and inverse S-Box tables
+        initializeSBox()
+    }
+    
+    /// Initializes the S-Box and inverse S-Box lookup tables.
+    ///
+    /// This function sets up both the S-Box and the inverse S-Box tables. Additionally, it saves the transformation history in the
+    /// `sBoxHistory` array.
+    private func initializeSBox() {
         for i in 0..<256 {
             let x: Byte = inv(b: Byte(i))
             let y: Byte = aTrans(x: x)
             
+            let xBinary = x.toBinary().toIntArray()
+            let sBoxRound = SBoxRound(index: i,
+                                      inv: x,
+                                      invBinar: xBinary,
+                                      invFirstShift: xBinary.shiftRow(by: 1),
+                                      invSecondShift: xBinary.shiftRow(by: 2),
+                                      invThirdShift: xBinary.shiftRow(by: 3),
+                                      invFourdShift: xBinary.shiftRow(by: 4),
+                                      result: y,
+                                      resultBinar: y.toBinary().toIntArray())
+            sBoxHistory.append(sBoxRound)
+ 
+            invTable[i] = x
             sBox[i] = y
             invSBox[Int(y)] = Byte(i)
         }
     }
     
+    // MARK: - Computed Properites
+    /// Returns the S-Box History
+    ///
+    /// This function provides the S-Box History based on `SBoxRound`
+    ///
+    /// - Returns: An array of `SBoxRound` objects representing the history of S-Box transformations.
+    var getSBoxHistory: [SBoxRound] { sBoxHistory }
+    
+    // MARK: - Helper functions
     /// Exponential function in GF(256)
     ///
     /// This function returns the exponential value of a byte `i` in the Galois Field GF(256)
@@ -61,7 +96,7 @@ class AESMath {
     ///
     /// - Parameter i: The input value as a byte
     /// - Returns: The exponential value of the input in GF(256)
-    func exp(_ i: Byte) -> Byte { return expTable[Int(i)] }
+    func exp(_ i: Byte) -> Byte { expTable[Int(i)] }
     
     /// Logarithm function in GF(256)
     ///
@@ -70,7 +105,7 @@ class AESMath {
     ///
     /// - Parameter b: The input value as a byte
     /// - Returns: The logarithm of the input value in GF(256)
-    func log(_ b: Byte) -> Byte { return logTable[Int(b)] }
+    func log(_ b: Byte) -> Byte { logTable[Int(b)] }
     
     /// S-Box lookup in GF(256)
     ///
@@ -78,7 +113,7 @@ class AESMath {
     ///
     /// - Parameter b: The byte to be transformed
     /// - Returns: The transformed byte from the S-Box
-    func sBox(_ b: Byte) -> Byte { return sBox[Int(b)] }
+    func sBox(_ b: Byte) -> Byte { sBox[Int(b)] }
     
     /// Inverse S-Box lookup in GF(256)
     ///
@@ -86,7 +121,7 @@ class AESMath {
     ///
     /// - Parameter b: The byte to be transformed
     /// - Returns: The transformed byte from the inverse S-Box
-    func invSBox(_ b: Byte) -> Byte { return invSBox[Int(b)] }
+    func invSBox(_ b: Byte) -> Byte { invSBox[Int(b)] }
     
     /// Addition of two bytes in GF(256)
     ///
@@ -97,8 +132,9 @@ class AESMath {
     ///   - a: The first byte
     ///   - b: The second byte
     /// - Returns: The result of the addition of the two bytes
-    func add(a: Byte, b: Byte) -> Byte { return a ^ b }
+    func add(a: Byte, b: Byte) -> Byte { a ^ b }
     
+    // MARK: - Main functions
     /// Doubling a byte in GF(256)
     ///
     /// This function doubles a byte `b` in the Galois Field GF(256).

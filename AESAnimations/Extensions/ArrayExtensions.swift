@@ -53,3 +53,16 @@ extension Array where Element == Byte {
         return result
     }
 }
+
+extension Array where Element == Int {
+    func shiftRow(by shift: Int) -> [Int] {
+        var result = self
+        
+        for _ in 0..<shift {
+            result.removeLast()
+            result.insert(0, at: 0)
+        }
+        
+        return result
+    }
+}

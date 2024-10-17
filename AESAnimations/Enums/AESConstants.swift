@@ -39,4 +39,6 @@ enum AESConstants {
         [0x1B, 0x00, 0x00, 0x00],
         [0x36, 0x00, 0x00, 0x00]
     ]
+    
+    static let affineConstBinary: [Int] = [0, 1, 1, 0, 0, 0, 1, 1]
 }

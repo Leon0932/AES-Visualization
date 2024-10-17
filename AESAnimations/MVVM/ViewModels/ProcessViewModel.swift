@@ -95,9 +95,9 @@ class ProcessViewModel: AnimationViewModel {
     }
     
     // Computed Properties
-    var state: [[Byte]] { aesCipher.getInput().convertToState() }
-    var key: [[Byte]] { aesCipher.getKey().convertToState() }
-    var result: [[Byte]] { aesCipher.getResult() }
+    var state: [[Byte]] { aesCipher.getInput.convertToState() }
+    var key: [[Byte]] { aesCipher.getKey.convertToState() }
+    var result: [[Byte]] { aesCipher.getResult }
     var cipherHistory: [CipherRound] { aesCipher.getCipherHistory }
     
     // MARK: - Initializer
@@ -245,7 +245,7 @@ class ProcessViewModel: AnimationViewModel {
         animationSteps.append(contentsOf: [moveToLastSteps.0, updateRoundNumber.0])
         reverseAnimationSteps.append(contentsOf: [moveToMainSteps.1, updateRoundNumber.1])
         
-        createPhase(phase: 3, round: aesCipher.nrOfRounds, phaseAnimations: phaseThree)
+        createPhase(phase: 3, round: aesCipher.getNrOfRounds, phaseAnimations: phaseThree)
         addShowHideRoundKeySteps(hide: 0.0, show: 1.0)
         
         let moveToEnd = moveBall(for: 20, delay: 200_000_000)
@@ -261,7 +261,7 @@ class ProcessViewModel: AnimationViewModel {
     func phaseZeroSteps() { addSteps(addKeyExpansionSteps()) }
     
     func phaseTwoSteps() {
-        for round in 1..<aesCipher.nrOfRounds { addSteps(createAESLoop(round: round)) }
+        for round in 1..<aesCipher.getNrOfRounds { addSteps(createAESLoop(round: round)) }
     }
     
     /// Creates animation steps for a given phase and round in the AES encryption process.
@@ -397,11 +397,11 @@ class ProcessViewModel: AnimationViewModel {
         }, delay: 300_000_000)
         normalSteps.append(moveDown)
         
-        if round < aesCipher.nrOfRounds - 1 {
+        if round < aesCipher.getNrOfRounds - 1 {
             let loopSteps = moveBallToLoop()
             let updateRoundNumber = AnimationStep {
                 withAnimation {
-                    if self.currentRoundNumber < self.aesCipher.nrOfRounds - 1 { self.currentRoundNumber += 1 }
+                    if self.currentRoundNumber < self.aesCipher.getNrOfRounds - 1 { self.currentRoundNumber += 1 }
                 }
             }
             normalSteps.append(contentsOf: loopSteps.0)
@@ -547,7 +547,7 @@ class ProcessViewModel: AnimationViewModel {
                 self.currentState = self.cipherHistory[round][keyPath: keyPath]
                 if keyPath == \.afterAddRound {
                     self.currentRoundKey = self.cipherHistory[round + 1][keyPath: \.roundKey]
-                    if self.currentRoundKeyNumber < self.aesCipher.nrOfRounds {
+                    if self.currentRoundKeyNumber < self.aesCipher.getNrOfRounds {
                         self.currentRoundKeyNumber += 1
                     }
                 }
@@ -599,7 +599,7 @@ class ProcessViewModel: AnimationViewModel {
             ballPosition = showResult == 1.0 ? horizontalLineHeight : -60
             ballPositionX = 0
             currentState = showResult == 1.0 ? result : cipherHistory[0].startOfRound
-            currentRoundKey = showResult == 1.0 ? cipherHistory[aesCipher.nrOfRounds].roundKey : cipherHistory[0].roundKey
+            currentRoundKey = showResult == 1.0 ? cipherHistory[aesCipher.getNrOfRounds].roundKey : cipherHistory[0].roundKey
             showRoundKeyColumn = 0.0
             highlightOperation = [
                 0: [false],
@@ -608,8 +608,8 @@ class ProcessViewModel: AnimationViewModel {
                 3: [false, false, false],
             ]
             
-            currentRoundNumber = showResult == 1.0 ? aesCipher.nrOfRounds : 0
-            currentRoundKeyNumber = showResult == 1.0 ? aesCipher.nrOfRounds : 0
+            currentRoundNumber = showResult == 1.0 ? aesCipher.getNrOfRounds : 0
+            currentRoundKeyNumber = showResult == 1.0 ? aesCipher.getNrOfRounds : 0
             savedPositionMoved = 0
         }
     }

@@ -8,6 +8,7 @@
 import Foundation
 
 class AESKeySchedule {
+    // MARK: - Properties
     let math = AESMath.shared
     private var keySchedule: [[Byte]] = []
     private var roundKeys: [[Byte]] = []
@@ -19,10 +20,63 @@ class AESKeySchedule {
     private let nb: Int = 4
     private var rCon: [[Byte]]
     
+    // MARK: - Initializer
     init() {
         rCon = AESConstants.rcon
     }
     
+    // MARK: - Computed Properites
+    /// Returns the number of rounds in the encryption process.
+    ///
+    /// This function provides the total number of rounds used during
+    /// the encryption or decryption process, based on the key size.
+    ///
+    /// - Returns: An integer representing the number of rounds.
+    var getNrOfRounds: Int { return nr }
+    
+    /// Returns the size of the key in words.
+    ///
+    /// This function provides the number of words
+    /// in the key based on its size.
+    ///
+    /// - Returns: An integer representing the key size in words.
+    var getNk: Int { return nk }
+    
+    /// Returns the AES key size based on the current key value.
+    ///
+    /// This function checks if the key size corresponds to one of the
+    /// predefined AES key sizes (128, 192, or 256 bits) and returns the appropriate
+    /// `AESKeySize` enum. If the key size is invalid, it returns `nil`.
+    ///
+    /// - Returns: An optional `AESKeySize` enum representing the key size, or `nil` if the key size is invalid.
+    var getKeySize: AESKeySize? {
+        if let keySize = AESKeySize(rawValue: nk) {
+            return keySize
+        }
+        
+        return nil
+    }
+    
+    /// Returns the round keys generated during the key expansion process.
+    ///
+    /// This function provides the complete set of round keys that were derived
+    /// from the initial key through the key expansion process. Each round key
+    /// is represented as an array of bytes.
+    ///
+    /// - Returns: A 2D array of `Byte` objects, where each inner array represents
+    ///            a round key from the key expansion process.
+    var getRoundKeys: [[Byte]] { roundKeys }
+    
+    /// Returns the detailed history of the key expansion rounds.
+    ///
+    /// This function provides a list of all key expansion rounds that were generated
+    /// during the key scheduling process.
+    ///
+    /// - Returns: An array of `KeyExpansionRound` objects representing the detailed
+    ///            history of each round in the key expansion process.
+    var getDetailedKeySchedule: [KeyExpansionRound] { keyExpRounds }
+    
+    // MARK: - Helper functions
     /// Retrieves the round key for a specific round in the key expansion process.
     ///
     /// This function extracts and returns the round key for the specified round.
@@ -45,57 +99,7 @@ class AESKeySchedule {
         return roundKey
     }
     
-    /// Returns the number of rounds in the encryption process.
-    ///
-    /// This function provides the total number of rounds used during
-    /// the encryption or decryption process, based on the key size.
-    ///
-    /// - Returns: An integer representing the number of rounds.
-    func getNrOfRounds() -> Int { return nr }
-    
-    /// Returns the size of the key in words.
-    ///
-    /// This function provides the number of words
-    /// in the key based on its size.
-    ///
-    /// - Returns: An integer representing the key size in words.
-    func getNk() -> Int { return nk }
-    
-    /// Returns the AES key size based on the current key value.
-    ///
-    /// This function checks if the key size corresponds to one of the
-    /// predefined AES key sizes (128, 192, or 256 bits) and returns the appropriate
-    /// `AESKeySize` enum. If the key size is invalid, it returns `nil`.
-    ///
-    /// - Returns: An optional `AESKeySize` enum representing the key size, or `nil` if the key size is invalid.
-    func getKeySize() -> AESKeySize? {
-        if let keySize = AESKeySize(rawValue: nk) {
-            return keySize
-        }
-        
-        return nil
-    }
-    
-    /// Returns the round keys generated during the key expansion process.
-    ///
-    /// This function provides the complete set of round keys that were derived
-    /// from the initial key through the key expansion process. Each round key
-    /// is represented as an array of bytes.
-    ///
-    /// - Returns: A 2D array of `Byte` objects, where each inner array represents
-    ///            a round key from the key expansion process.
-    func getRoundKeys() -> [[Byte]] { return roundKeys }
-    
-    /// Returns the detailed history of the key expansion rounds.
-    ///
-    /// This function provides a list of all key expansion rounds that were generated
-    /// during the key scheduling process.
-    ///
-    /// - Returns: An array of `KeyExpansionRound` objects representing the detailed
-    ///            history of each round in the key expansion process.
-    func getDetailedKeySchedule() -> [KeyExpansionRound] { return keyExpRounds }
-    
-    
+    // MARK: - Main functions
     /// Rotates the input word (array of bytes) by moving the first byte to the end.
     ///
     /// This function shifts all bytes in the input array one position to the left,

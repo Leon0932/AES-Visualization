@@ -170,16 +170,16 @@ struct TestView: View {
         
         let keySched = AESKeySchedule()
         keySched.keyExpansion(key: key128Bit)
-        roundKeys128Bit = keySched.getRoundKeys()
-        roundKeysHistory128Bit = keySched.getDetailedKeySchedule()
+        roundKeys128Bit = keySched.getRoundKeys
+        roundKeysHistory128Bit = keySched.getDetailedKeySchedule
         
         keySched.keyExpansion(key: key192Bit)
-        roundKeys192Bit = keySched.getRoundKeys()
-        roundKeysHistory192Bit = keySched.getDetailedKeySchedule()
+        roundKeys192Bit = keySched.getRoundKeys
+        roundKeysHistory192Bit = keySched.getDetailedKeySchedule
         
         keySched.keyExpansion(key: key256Bit)
-        roundKeys256Bit = keySched.getRoundKeys()
-        roundKeysHistory256Bit = keySched.getDetailedKeySchedule()
+        roundKeys256Bit = keySched.getRoundKeys
+        roundKeysHistory256Bit = keySched.getDetailedKeySchedule
         
     }
 }
