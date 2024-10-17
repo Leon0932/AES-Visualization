@@ -75,6 +75,7 @@ class AESMath {
             sBoxHistory.append(sBoxRound)
  
             invTable[i] = x
+            
             sBox[i] = y
             invSBox[Int(y)] = Byte(i)
         }

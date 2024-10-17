@@ -44,7 +44,7 @@ struct SBoxView: View {
                     backgroundColor: headerBackgroundColor(for: col),
                     valueFormat: .oneDigit
                 )
-                .opacity(opacityOfValues[0][col])
+                .opacity(checkOpacity() ? 1.0 : 0.0)
             }
         }
     }
@@ -58,7 +58,7 @@ struct SBoxView: View {
                 backgroundColor: rowBackgroundColor(for: row),
                 valueFormat: .oneDigit
             )
-            .opacity(opacityOfValues[row][0])
+            .opacity(checkOpacity() ? 1.0 : 0.0)
             
             LazyVGrid(columns: gridItems, spacing: 4) {
                 ForEach(0..<16, id: \.self) { col in
@@ -117,6 +117,10 @@ struct SBoxView: View {
     private func cellForegroundColor(for index: Int) -> Color {
         guard let searchResult = searchResult else { return .primary }
         return Int(searchResult) == index ? .white : .primary
+    }
+    
+    private func checkOpacity() -> Bool {
+        opacityOfValues.contains { $0.contains { $0 == 1.0 } }
     }
 }
 

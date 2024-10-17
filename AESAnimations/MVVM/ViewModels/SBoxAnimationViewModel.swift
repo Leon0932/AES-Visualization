@@ -20,11 +20,13 @@ class SBoxAnimationViewModel: AnimationViewModel {
     @Published var currentByte: Byte = 0x00
     @Published var currentMultInv: Byte = 0x00
     @Published var resultSBox: Byte = 0x00
+    @Published var indexOfSBox: Byte = 0x00
     
     @Published var showTitleOfAff: Double = 0.0
     @Published var showCurrentByte: Double = 0.0
     @Published var showCurrentMultInv: Double = 0.0
     @Published var showResultSBox: Double = 0.0
+    @Published var showIndexOfSBox: Double = 0.0
     
     @Published var showValues: [Double] = Array.create1DArray(repeating: 0.0, count: 7)
     @Published var showOperators: [Double] = Array.create1DArray(repeating: 0.0, count: 6)
@@ -177,18 +179,32 @@ class SBoxAnimationViewModel: AnimationViewModel {
         let normalSteps = [
             AnimationStep(animation: {
                 await self.checkDoubleAnimation()
-                withAnimation { self.resultSBox = self.sBoxHistory[index].result }
+                withAnimation {
+                    self.resultSBox = self.sBoxHistory[index].result
+                    self.indexOfSBox = Byte(index)
+                }
             },
-                          delay: normal),
-            
-            AnimationStep(animation: { withAnimation { self.showResultSBox = 1.0 } },
                           delay: normal),
             
             AnimationStep(animation: {
                 withAnimation {
-                    let row = index / 16
-                    let col = index % 16
-                    self.opacityOfSBox[row][col] = 1.0
+                    self.showResultSBox = 1.0
+                    self.showIndexOfSBox = 1.0
+                }
+            },
+                          delay: normal),
+            
+            AnimationStep(animation: {
+                withAnimation {
+                    if self.operationDetails.isInverseMode {
+                        let row = Int(self.resultSBox) / 16
+                        let col = Int(self.resultSBox) % 16
+                        self.opacityOfSBox[row][col] = 1.0
+                    } else {
+                        let row = index / 16
+                        let col = index % 16
+                        self.opacityOfSBox[row][col] = 1.0
+                    }
                 }
             },
                           delay: short),
@@ -198,14 +214,25 @@ class SBoxAnimationViewModel: AnimationViewModel {
         ]
         
         var reverseSteps = [
-            AnimationStep(animation: { withAnimation { self.showResultSBox = 0.0 } },
+            AnimationStep(animation: {
+                withAnimation {
+                    self.showResultSBox = 0.0
+                    self.showIndexOfSBox = 0.0
+                }
+            },
                           delay: normal),
             
             AnimationStep(animation: {
                 withAnimation {
-                    let row = index / 16
-                    let col = index % 16
-                    self.opacityOfSBox[row][col] = 0.0
+                    if self.operationDetails.isInverseMode {
+                        let row = Int(self.resultSBox) / 16
+                        let col = Int(self.resultSBox) % 16
+                        self.opacityOfSBox[row][col] = 0.0
+                    } else {
+                        let row = index / 16
+                        let col = index % 16
+                        self.opacityOfSBox[row][col] = 0.0
+                    }
                 }
             },
                           delay: short),
@@ -226,7 +253,12 @@ class SBoxAnimationViewModel: AnimationViewModel {
         reverseSteps += [
             AnimationStep { withAnimation { self.currentByte = Byte(index) } },
             AnimationStep { withAnimation { self.currentMultInv = self.sBoxHistory[index].inv } },
-            AnimationStep { withAnimation { self.resultSBox = self.sBoxHistory[index].result } }
+            AnimationStep {
+                withAnimation {
+                    self.indexOfSBox = Byte(index)
+                    self.resultSBox = self.sBoxHistory[index].result
+                }
+            }
         ]
         
         return (normalSteps, reverseSteps)
@@ -248,6 +280,7 @@ class SBoxAnimationViewModel: AnimationViewModel {
         showCurrentByte = value
         showTitleOfAff = value
         showCurrentMultInv = value
+        showIndexOfSBox = value
     }
     
     
@@ -261,7 +294,7 @@ class SBoxAnimationViewModel: AnimationViewModel {
     ///   are retrieved.
     ///
     /// - Returns: A 2D array of `Int` values representing different stages of the S-box transformation for
-    ///   the given round. 
+    ///   the given round.
     func getValuesOfRound(index: Int) -> [[Int]] {
         let roundSBox = sBoxHistory[index]
         return [roundSBox.invBinar,

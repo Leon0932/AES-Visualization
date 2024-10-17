@@ -113,7 +113,7 @@ struct SubBytesAnimationView: View {
     // MARK: - Toolbar Item
     private func sBoxAnimationButton() -> some ToolbarContent {
         ToolbarItem {
-            Button("Zeige S-Box Berechnung") {
+            Button("Zeige \(viewModel.operationDetails.isInverseMode ? "inverse" : "") S-Box Berechnung") {
                 viewModel.showSBoxAnimation.toggle()
             }
             .buttonStyle(BorderedButtonStyle())

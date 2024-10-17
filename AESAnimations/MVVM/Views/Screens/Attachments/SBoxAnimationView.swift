@@ -48,9 +48,22 @@ struct SBoxAnimationView: View {
                      value: viewModel.currentMultInv,
                      opacity: viewModel.showCurrentMultInv)
             
-            byteCell(title: "Ergebnis",
-                     value: viewModel.resultSBox,
-                     opacity: viewModel.showResultSBox)
+            if viewModel.operationDetails.isInverseMode {
+                byteCell(title: "Position der S-Box",
+                         value: viewModel.resultSBox,
+                         opacity: viewModel.showResultSBox)
+            }
+            
+            if viewModel.operationDetails.isInverseMode {
+                byteCell(title: "Wert der S-Box",
+                         value: viewModel.indexOfSBox,
+                         opacity: viewModel.showIndexOfSBox)
+            } else {
+                byteCell(title: "Ergebnis",
+                         value: viewModel.resultSBox,
+                         opacity: viewModel.showResultSBox)
+            }
+   
         }
     }
     
@@ -74,29 +87,34 @@ struct SBoxAnimationView: View {
                     let shiftValues = ["b'", "b' >> 1", "b' >> 2", "b' >> 3", "b' >> 4", "0x63", "Ergebnis"]
                     let operators = ["⊕", "⊕", "⊕", "⊕", "⊕", "="]
                     
-                    transformationRow(shiftValue: shiftValues[index],
-                                      binaryValues: viewModel.values[index],
-                                      opacity: viewModel.showValues[index])
-                    
-                    if index < 6 {
-                        Text(operators[index])
-                            .opacity(viewModel.showOperators[index])
-                    }
+                    transformationRow(index: index, shiftValues: shiftValues, operators: operators)
+                
                 }
             }
         }
     }
     
-    private func transformationRow(shiftValue: String, binaryValues: [Int], opacity: Double) -> some View {
+    private func transformationRow(index: Int, shiftValues: [String], operators: [String]) -> some View {
         HStack {
-            Text(shiftValue)
-                .font(.subheadline)
+            Text(shiftValues[index])
+                .font(.headline)
+                .padding(.bottom, 30)
             Spacer()
-            ForEach(Array(binaryValues.enumerated()), id: \.offset) { (_, value) in
-                CellView(value: Byte(value), boxSize: 35, backgroundColor: .lightGray, valueFormat: .number)
+            VStack(alignment: .center, spacing: 15) {
+                HStack {
+                    ForEach(Array(viewModel.values[index].enumerated()), id: \.offset) { (_, value) in
+                        CellView(value: Byte(value), boxSize: 35, backgroundColor: .lightGray, valueFormat: .number)
+                    }
+                }
+                
+                if index < 6 {
+                    Text(operators[index])
+                        .font(.headline)
+                        .opacity(viewModel.showOperators[index])
+                }
             }
         }
-        .opacity(opacity)
+        .opacity(viewModel.showValues[index])
         .frame(width: 425)
     }
 }
