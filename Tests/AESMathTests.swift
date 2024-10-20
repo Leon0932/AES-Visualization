@@ -10,12 +10,12 @@ import XCTest
 
 final class AESMathTests: XCTestCase {
     var math: AESMath!
-
+    
     override func setUpWithError() throws {
         math = AESMath.shared
         super.setUp()
     }
-
+    
     override func tearDownWithError() throws {
         math = nil
         super.tearDown()
@@ -32,7 +32,7 @@ final class AESMathTests: XCTestCase {
                            "Addition failed: Expected \(results[index]) but got \(math.add(a: a[index], b: b[index])) for input \(a[index]) and \(b[index])")
         }
     }
-
+    
     func testXtime() throws {
         let testValues: [Byte] = [0x57, 0xab, 0x65, 0x91, 0xF9, 0x8E, 0x01, 0x4B]
         let results: [Byte] = [0xAE, 0x4D, 0xCA, 0x39, 0xE9, 0x07, 0x02, 0x96]
@@ -146,6 +146,108 @@ final class AESMathTests: XCTestCase {
             XCTAssertEqual(invSBox[i],
                            math.invSBox(Byte(i)),
                            "Inv S-Box failed: Expected \(invSBox[i]) but got \(math.invSBox(Byte(i))) for index \(String(describing: index))")
+        }
+    }
+    
+    func testSBoxRound() {
+        let expectedOutput: [SBoxRound] = [
+            SBoxRound(
+                index: 0,
+                multInv: 0x00,
+                multInvBinar: [0, 0, 0, 0, 0, 0, 0, 0],
+                firstShift: [0, 0, 0, 0, 0, 0, 0, 0],
+                secondShift: [0, 0, 0, 0, 0, 0, 0, 0],
+                thirdShift: [0, 0, 0, 0, 0, 0, 0, 0],
+                fourthShift: [0, 0, 0, 0, 0, 0, 0, 0],
+                result: 0x63,
+                resultBinar: [0, 1, 1, 0, 0, 0, 1, 1]
+            ),
+            SBoxRound(
+                index: 1,
+                multInv: 0x01,
+                multInvBinar: [0, 0, 0, 0, 0, 0, 0, 1],
+                firstShift: [0, 0, 0, 0, 0, 0, 0, 0],
+                secondShift: [0, 0, 0, 0, 0, 0, 0, 0],
+                thirdShift: [0, 0, 0, 0, 0, 0, 0, 0],
+                fourthShift: [0, 0, 0, 0, 0, 0, 0, 0],
+                result: 0x7C,
+                resultBinar: [0, 1, 1, 1, 1, 1, 0, 0]
+            ),
+            SBoxRound(
+                index: 2,
+                multInv: 0x8D,
+                multInvBinar: [1, 0, 0, 0, 1, 1, 0, 1],
+                firstShift: [0, 1, 0, 0, 0, 1, 1, 0],
+                secondShift: [0, 0, 1, 0, 0, 0, 1, 1],
+                thirdShift: [0, 0, 0, 1, 0, 0, 0, 1],
+                fourthShift: [0, 0, 0, 0, 1, 0, 0, 0],
+                result: 0x77,
+                resultBinar: [0, 1, 1, 1, 0, 1, 1, 1]
+            ),
+            SBoxRound(
+                index: 3,
+                multInv: 0xF6,
+                multInvBinar: [1, 1, 1, 1, 0, 1, 1, 0],
+                firstShift: [0, 1, 1, 1, 1, 0, 1, 1],
+                secondShift: [0, 0, 1, 1, 1, 1, 0, 1],
+                thirdShift: [0, 0, 0, 1, 1, 1, 1, 0],
+                fourthShift: [0, 0, 0, 0, 1, 1, 1, 1],
+                result: 0x7B,
+                resultBinar: [0, 1, 1, 1, 1, 0, 1, 1]
+            ),
+            SBoxRound(
+                index: 4,
+                multInv: 0xCB,
+                multInvBinar: [1, 1, 0, 0, 1, 0, 1, 1],
+                firstShift: [0, 1, 1, 0, 0, 1, 0, 1],
+                secondShift: [0, 0, 1, 1, 0, 0, 1, 0],
+                thirdShift: [0, 0, 0, 1, 1, 0, 0, 1],
+                fourthShift: [0, 0, 0, 0, 1, 1, 0, 0],
+                result: 0xF2,
+                resultBinar: [1, 1, 1, 1, 0, 0, 1, 0]
+            ),
+            SBoxRound(
+                index: 5,
+                multInv: 0x52,
+                multInvBinar: [0, 1, 0, 1, 0, 0, 1, 0],
+                firstShift: [0, 0, 1, 0, 1, 0, 0, 1],
+                secondShift: [0, 0, 0, 1, 0, 1, 0, 0],
+                thirdShift: [0, 0, 0, 0, 1, 0, 1, 0],
+                fourthShift: [0, 0, 0, 0, 0, 1, 0, 1],
+                result: 0x6B,
+                resultBinar: [0, 1, 1, 0, 1, 0, 1, 1]
+            )
+        ]
+        
+        for (index, expected) in expectedOutput.enumerated() {
+            let round = math.getSBoxHistory[index]
+            XCTAssertEqual(expected.index,
+                           round.index,
+                           "Index \(index): Round does not match")
+            XCTAssertEqual(expected.multInv,
+                           round.multInv,
+                           "Index \(index): Multi-inverse does not match")
+            XCTAssertEqual(expected.multInvBinar,
+                           round.multInvBinar,
+                           "Index \(index): Multi-inverse binary does not match")
+            XCTAssertEqual(expected.firstShift,
+                           round.firstShift,
+                           "Index \(index): First shift does not match")
+            XCTAssertEqual(expected.secondShift,
+                           round.secondShift,
+                           "Index \(index): Second shift does not match")
+            XCTAssertEqual(expected.thirdShift,
+                           round.thirdShift,
+                           "Index \(index): Third shift does not match")
+            XCTAssertEqual(expected.fourthShift,
+                           round.fourthShift,
+                           "Index \(index): Fourth shift does not match")
+            XCTAssertEqual(expected.result,
+                           round.result,
+                           "Index \(index): Result shift does not match")
+            XCTAssertEqual(expected.resultBinar,
+                           round.resultBinar,
+                           "Index \(index): Result binary does not match")
         }
     }
 }

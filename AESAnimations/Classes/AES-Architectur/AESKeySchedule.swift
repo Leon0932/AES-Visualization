@@ -28,7 +28,7 @@ class AESKeySchedule {
     // MARK: - Computed Properites
     /// Returns the number of rounds in the encryption process.
     ///
-    /// This function provides the total number of rounds used during
+    /// This computed property provides the total number of rounds used during
     /// the encryption or decryption process, based on the key size.
     ///
     /// - Returns: An integer representing the number of rounds.
@@ -36,7 +36,7 @@ class AESKeySchedule {
     
     /// Returns the size of the key in words.
     ///
-    /// This function provides the number of words
+    /// This computed property provides the number of words
     /// in the key based on its size.
     ///
     /// - Returns: An integer representing the key size in words.
@@ -44,7 +44,7 @@ class AESKeySchedule {
     
     /// Returns the AES key size based on the current key value.
     ///
-    /// This function checks if the key size corresponds to one of the
+    /// This computed property checks if the key size corresponds to one of the
     /// predefined AES key sizes (128, 192, or 256 bits) and returns the appropriate
     /// `AESKeySize` enum. If the key size is invalid, it returns `nil`.
     ///
@@ -59,7 +59,7 @@ class AESKeySchedule {
     
     /// Returns the round keys generated during the key expansion process.
     ///
-    /// This function provides the complete set of round keys that were derived
+    /// This computed property provides the complete set of round keys that were derived
     /// from the initial key through the key expansion process. Each round key
     /// is represented as an array of bytes.
     ///
@@ -69,7 +69,7 @@ class AESKeySchedule {
     
     /// Returns the detailed history of the key expansion rounds.
     ///
-    /// This function provides a list of all key expansion rounds that were generated
+    /// This computed property provides a list of all key expansion rounds that were generated
     /// during the key scheduling process.
     ///
     /// - Returns: An array of `KeyExpansionRound` objects representing the detailed
@@ -195,8 +195,6 @@ class AESKeySchedule {
             
         }
         
-        for round in 0..<nr + 1 {
-            roundKeys.append(getRoundKey(round: round))
-        }
+        for round in 0..<nr + 1 { roundKeys.append(getRoundKey(round: round)) }
     }
 }

@@ -92,7 +92,7 @@ class SBoxAnimationViewModel: AnimationViewModel {
             
             AnimationStep(animation: {
                 await self.checkDoubleAnimation()
-                withAnimation { self.currentMultInv = self.sBoxHistory[index].inv }
+                withAnimation { self.currentMultInv = self.sBoxHistory[index].multInv }
             },
                           delay: short),
             
@@ -252,7 +252,7 @@ class SBoxAnimationViewModel: AnimationViewModel {
         
         reverseSteps += [
             AnimationStep { withAnimation { self.currentByte = Byte(index) } },
-            AnimationStep { withAnimation { self.currentMultInv = self.sBoxHistory[index].inv } },
+            AnimationStep { withAnimation { self.currentMultInv = self.sBoxHistory[index].multInv } },
             AnimationStep {
                 withAnimation {
                     self.indexOfSBox = Byte(index)
@@ -297,11 +297,11 @@ class SBoxAnimationViewModel: AnimationViewModel {
     ///   the given round.
     func getValuesOfRound(index: Int) -> [[Int]] {
         let roundSBox = sBoxHistory[index]
-        return [roundSBox.invBinar,
-                roundSBox.invFirstShift,
-                roundSBox.invSecondShift,
-                roundSBox.invThirdShift,
-                roundSBox.invFourdShift,
+        return [roundSBox.multInvBinar,
+                roundSBox.firstShift,
+                roundSBox.secondShift,
+                roundSBox.thirdShift,
+                roundSBox.fourthShift,
                 AESConstants.affineConstBinary,
                 roundSBox.resultBinar]
     }

@@ -10,8 +10,6 @@ import SwiftUI
 protocol AnimationViewModel: ObservableObject {
     /// View Variables
     var operationDetails: OperationDetails { get }
-    
-    /// State Variable
     var result: [[Byte]] { get }
     var copyOfMatrix: [[Byte]] { get }
     
@@ -28,7 +26,6 @@ protocol AnimationViewModel: ObservableObject {
 }
 
 extension AnimationViewModel {
-    
     // Standard values for the animation duration
     /// 1 nanosecond
     var normal: UInt64 { return 1_000_000_000 }
@@ -36,9 +33,7 @@ extension AnimationViewModel {
     /// 0.5 nanoseconds
     var short: UInt64 { return 500_000_000 }
     
-    func sleep(for nanoseconds: UInt64) async {
-        try? await Task.sleep(nanoseconds: nanoseconds)
-    }
+    func sleep(for nanoseconds: UInt64) async { try? await Task.sleep(nanoseconds: nanoseconds) }
     
     /// General implementation for calculating the title
     /// -1: Only the description is shown (useful for KeyExpansion, Encryption and Decryption)
@@ -106,20 +101,14 @@ extension AnimationViewModel {
         Task { await sleep(for: normal) }
         self.resetAnimationState(state: state, showResult: showResult)
 
-        withAnimation{
+        withAnimation {
             self.animationControl.resetAnimationFlags()
             self.animationControl.isDone = true
         }
     }
     
-    func resetAnimations() {
-        cancelAndResetAnimation(state: copyOfMatrix, showResult: 0.0)  
-    }
-    
-    func completeAnimations() {
-        cancelAndResetAnimation(state: result, showResult: 1.0)
-        
-    }
+    func resetAnimations() { cancelAndResetAnimation(state: copyOfMatrix, showResult: 0.0) }
+    func completeAnimations() { cancelAndResetAnimation(state: result, showResult: 1.0) }
     
     func checkDoubleAnimation(for nanoseconds: UInt64 = 200_000_000) async {
         if animationControl.isDouble {

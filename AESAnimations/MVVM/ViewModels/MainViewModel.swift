@@ -20,6 +20,11 @@ class MainViewModel: ObservableObject {
     
     // MARK: - View-Functions
     func handleEncryptionModeChange(newValue: EncryptionMode) {
+        for i in 0..<255 {
+            let format = String(format: "%02X", i)
+            let string = "\(Byte(i))"
+            print(format + " " + string)
+        }
         keyMatrix = Matrix(rows: 4, columns: newValue.keyMatrixColumns)
     }
     

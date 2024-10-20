@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 typealias Byte = UInt8
-typealias Word = UInt32
 
 #if os(iOS)
 typealias PlatformColor = UIColor

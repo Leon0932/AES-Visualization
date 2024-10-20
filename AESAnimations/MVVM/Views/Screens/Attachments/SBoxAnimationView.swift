@@ -63,7 +63,7 @@ struct SBoxAnimationView: View {
                          value: viewModel.resultSBox,
                          opacity: viewModel.showResultSBox)
             }
-   
+            
         }
     }
     
@@ -88,31 +88,44 @@ struct SBoxAnimationView: View {
                     let operators = ["⊕", "⊕", "⊕", "⊕", "⊕", "="]
                     
                     transformationRow(index: index, shiftValues: shiftValues, operators: operators)
-                
+                    
                 }
             }
         }
     }
     
-    private func transformationRow(index: Int, shiftValues: [String], operators: [String]) -> some View {
-        HStack {
-            Text(shiftValues[index])
-                .font(.headline)
-                .padding(.bottom, 30)
-            Spacer()
-            VStack(alignment: .center, spacing: 15) {
-                HStack {
+    private func transformationRow(index: Int,
+                                   shiftValues: [String],
+                                   operators: [String]) -> some View {
+        VStack(spacing: 15) {
+            // Text and box perfectly aligned center
+            HStack {
+                Text(shiftValues[index])
+                    .font(.headline)
+                Spacer()
+                
+                HStack(spacing: 5) {
                     ForEach(Array(viewModel.values[index].enumerated()), id: \.offset) { (_, value) in
-                        CellView(value: Byte(value), boxSize: 35, backgroundColor: .lightGray, valueFormat: .number)
+                        CellView(value: Byte(value),
+                                 boxSize: 35,
+                                 backgroundColor: .lightGray,
+                                 valueFormat: .number)
                     }
                 }
-                
-                if index < 6 {
+            }
+            
+            if index < 6 {
+                HStack {
+                    Spacer()
+                    
                     Text(operators[index])
                         .font(.headline)
                         .opacity(viewModel.showOperators[index])
+                        .frame(width: 315, alignment: .center)
+                    
                 }
             }
+            
         }
         .opacity(viewModel.showValues[index])
         .frame(width: 425)

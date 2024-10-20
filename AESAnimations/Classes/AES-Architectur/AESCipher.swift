@@ -58,7 +58,7 @@ class AESCipher {
     
     /// Retrieves the final result of the cipher operation.
     ///
-    /// This function returns the computed result of the cipher process, stored as a 2D array of `Byte` values.
+    /// This computed property returns the computed result of the cipher process, stored as a 2D array of `Byte` values.
     /// The result represents the current state of the encryption or decryption process.
     ///
     /// - Returns: A 2D array of `Byte` values representing the cipher result.
@@ -66,14 +66,15 @@ class AESCipher {
     
     /// Retrieves the input for the cipher operation.
     ///
-    /// This function returns the input data used in the encryption or decryption process, represented as an array of `Byte` values.
+    /// This computed property returns the input data used in the encryption or decryption process,
+    /// represented as an array of `Byte` values.
     ///
     /// - Returns: An array of `Byte` values representing the input.
     var getInput: [Byte] { input }
 
     /// Retrieves the key used for the cipher operation.
     ///
-    /// This function returns the encryption or decryption key, represented as an array of `Byte` values.
+    /// This computed property returns the encryption or decryption key, represented as an array of `Byte` values.
     ///
     /// - Returns: An array of `Byte` values representing the key.
     var getKey: [Byte] { key }

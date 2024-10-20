@@ -64,12 +64,12 @@ class AESMath {
             
             let xBinary = x.toBinary().toIntArray()
             let sBoxRound = SBoxRound(index: i,
-                                      inv: x,
-                                      invBinar: xBinary,
-                                      invFirstShift: xBinary.shiftRow(by: 1),
-                                      invSecondShift: xBinary.shiftRow(by: 2),
-                                      invThirdShift: xBinary.shiftRow(by: 3),
-                                      invFourdShift: xBinary.shiftRow(by: 4),
+                                      multInv: x,
+                                      multInvBinar: xBinary,
+                                      firstShift: xBinary.shiftRow(by: 1),
+                                      secondShift: xBinary.shiftRow(by: 2),
+                                      thirdShift: xBinary.shiftRow(by: 3),
+                                      fourthShift: xBinary.shiftRow(by: 4),
                                       result: y,
                                       resultBinar: y.toBinary().toIntArray())
             sBoxHistory.append(sBoxRound)
@@ -84,7 +84,7 @@ class AESMath {
     // MARK: - Computed Properites
     /// Returns the S-Box History
     ///
-    /// This function provides the S-Box History based on `SBoxRound`
+    /// This computed property provides the S-Box History based on `SBoxRound`
     ///
     /// - Returns: An array of `SBoxRound` objects representing the history of S-Box transformations.
     var getSBoxHistory: [SBoxRound] { sBoxHistory }
