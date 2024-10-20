@@ -12,13 +12,16 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
     @Environment(\.dismiss) var dismiss
     
     @ObservedObject var viewModel: ViewModel
+    var showRepeatButtons: Bool
     let content: Content
     
     // MARK: - Initializer
     init(viewModel: ViewModel,
+         showRepeatButtons: Bool = true,
          @ViewBuilder content: () -> Content) {
         
         self.viewModel = viewModel
+        self.showRepeatButtons = showRepeatButtons
         self.content = content()
     }
     
@@ -39,7 +42,8 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
                         AnimationControlsView(animationControl: $viewModel.animationControl,
                                               startAnimations: viewModel.startAnimations,
                                               completeAnimations: viewModel.completeAnimations,
-                                              resetAnimation: viewModel.resetAnimations)
+                                              resetAnimation: viewModel.resetAnimations,
+                                              showRepeatButtons: showRepeatButtons)
                         .padding(.bottom, 10)
                         .padding(checkSubOrAddRoundKey() ? 10 : 0)
                     }

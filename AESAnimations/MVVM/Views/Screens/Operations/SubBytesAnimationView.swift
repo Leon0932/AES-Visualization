@@ -9,10 +9,11 @@ import SwiftUI
 
 struct SubBytesAnimationView: View {
     @StateObject var viewModel: SubBytesViewModel
+    var showRepeatButtons: Bool = true
     
     // MARK: -
     var body: some View {
-        AnimationContainerView(viewModel: viewModel) {
+        AnimationContainerView(viewModel: viewModel, showRepeatButtons: showRepeatButtons) {
             HStack {
                 currentStateView
                 sBoxView

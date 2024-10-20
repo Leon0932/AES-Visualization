@@ -15,11 +15,13 @@ struct AnimationControlsView: View {
     var completeAnimations: () -> Void
     var resetAnimation: () -> Void
     
+    var showRepeatButtons: Bool = true
+    
     // MARK: -
     var body: some View {
         ZStack {
             if animationControl.isDone {
-                controlButtonsDone
+                if showRepeatButtons { controlButtonsDone }
             } else {
                 controlButtons
             }

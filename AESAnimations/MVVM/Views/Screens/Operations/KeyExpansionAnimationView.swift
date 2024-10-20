@@ -15,7 +15,7 @@ struct KeyExpansionAnimationView: View {
     // MARK: -
     var body: some View {
         if viewModel.showSubBytes {
-            SubBytesAnimationView(viewModel: viewModel.subBytesViewModel)
+            SubBytesAnimationView(viewModel: viewModel.subBytesViewModel, showRepeatButtons: false)
         } else {
             AnimationContainerView(viewModel: viewModel) {
                 VStack(alignment: .leading, spacing: 50) {
