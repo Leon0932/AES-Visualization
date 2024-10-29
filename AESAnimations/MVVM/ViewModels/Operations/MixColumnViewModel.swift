@@ -26,9 +26,7 @@ class MixColumnsViewModel: AnimationViewModel {
     @Published var resultOfMixColumn: [Byte] = Array(repeating: 0x00, count: 4)
      
     @Published var animationControl = AnimationControl()
-    var animationTask: Task<Void, Never>?
-    var animationSteps: [AnimationStep] = []
-    var reverseAnimationSteps: [AnimationStep] = []
+    var animationData = AnimationData()
     
     let boxSize: CGFloat = 50.0
     var transformationMatrix: [[Byte]]
@@ -56,8 +54,8 @@ class MixColumnsViewModel: AnimationViewModel {
         
         for index in 0..<4 {
             let animations = animateColumnTransformation(width: width, index: index)
-            animationSteps.append(contentsOf: animations.0)
-            reverseAnimationSteps.append(contentsOf: animations.1)
+            animationData.animationSteps.append(contentsOf: animations.0)
+            animationData.reverseAnimationSteps.append(contentsOf: animations.1)
         }
         
         startAnimations()

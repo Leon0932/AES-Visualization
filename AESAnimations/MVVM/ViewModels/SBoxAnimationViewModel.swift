@@ -33,9 +33,7 @@ class SBoxAnimationViewModel: AnimationViewModel {
     @Published var values: [[Int]] = Array.create2DArray(repeating: 0, rows: 7, cols: 8)
     
     @Published var animationControl = AnimationControl()
-    var animationTask: Task<Void, Never>? = nil
-    var animationSteps: [AnimationStep] = []
-    var reverseAnimationSteps: [AnimationStep] = []
+    var animationData = AnimationData()
     
     // MARK: - Initializer
     init(operationDetails: OperationDetails) {
@@ -59,8 +57,8 @@ class SBoxAnimationViewModel: AnimationViewModel {
             let steps = start.0 + affineCalc.0 + end.0
             let reverse = start.1 + affineCalc.1 + end.1
             
-            animationSteps.append(contentsOf: steps)
-            reverseAnimationSteps.append(contentsOf: reverse)
+            animationData.animationSteps.append(contentsOf: steps)
+            animationData.reverseAnimationSteps.append(contentsOf: reverse)
         }
         
         startAnimations()

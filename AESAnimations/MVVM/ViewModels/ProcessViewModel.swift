@@ -38,9 +38,7 @@ class ProcessViewModel: AnimationViewModel {
     @Published var currentRoundKeyNumber = 0
     
     @Published var animationControl = AnimationControl()
-    var animationTask: Task<Void, Never>? = nil
-    var animationSteps: [AnimationStep] = []
-    var reverseAnimationSteps: [AnimationStep] = []
+    var animationData = AnimationData()
     
     @Published var horizontalLineHeight: CGFloat = 0
     
@@ -234,7 +232,7 @@ class ProcessViewModel: AnimationViewModel {
     ///
     /// - Parameter geometry: The `GeometryProxy` object used to calculate the view's layout for positioning animations.
     func createAnimationSteps(with geometry: GeometryProxy) {
-        guard animationSteps.isEmpty else { return }
+        guard animationData.animationSteps.isEmpty else { return }
         
         phaseZeroSteps()
         createPhase(phase: 1, round: 0, phaseAnimations: phaseOne)
@@ -243,13 +241,13 @@ class ProcessViewModel: AnimationViewModel {
         let moveToMainSteps = moveBall(for: 15, delay: 150_000_000)
         let moveToLastSteps = moveBall(for: 5, delay: 50_000_000)
         
-        animationSteps.append(contentsOf: [moveToMainSteps.0, updateRoundNumber.0])
-        reverseAnimationSteps.append(contentsOf: [moveToLastSteps.1, updateRoundNumber.1])
+        animationData.animationSteps.append(contentsOf: [moveToMainSteps.0, updateRoundNumber.0])
+        animationData.reverseAnimationSteps.append(contentsOf: [moveToLastSteps.1, updateRoundNumber.1])
         
         phaseTwoSteps()
         
-        animationSteps.append(contentsOf: [moveToLastSteps.0, updateRoundNumber.0])
-        reverseAnimationSteps.append(contentsOf: [moveToMainSteps.1, updateRoundNumber.1])
+        animationData.animationSteps.append(contentsOf: [moveToLastSteps.0, updateRoundNumber.0])
+        animationData.reverseAnimationSteps.append(contentsOf: [moveToMainSteps.1, updateRoundNumber.1])
         
         createPhase(phase: 3, round: aesCipher.getNrOfRounds, phaseAnimations: phaseThree)
         
@@ -257,8 +255,8 @@ class ProcessViewModel: AnimationViewModel {
         let moveToEnd = moveBall(for: 20, delay: 200_000_000)
         let resetSavedPosition = AnimationStep { self.savedPositionMoved = 0 }
         
-        animationSteps.append(contentsOf: [moveToEnd.0, resetSavedPosition])
-        reverseAnimationSteps.append(contentsOf: [moveToEnd.1, resetSavedPosition])
+        animationData.animationSteps.append(contentsOf: [moveToEnd.0, resetSavedPosition])
+        animationData.reverseAnimationSteps.append(contentsOf: [moveToEnd.1, resetSavedPosition])
         addShowHideRoundKeySteps(hide: 0.0, show: 1.0)
         
         startAnimations()
@@ -329,8 +327,8 @@ class ProcessViewModel: AnimationViewModel {
     /// - Parameter steps: A tuple containing two arrays of `AnimationStep` objects. The first array handles the forward animation,
     ///   and the second array handles the reverse animation.
     func addSteps(_ steps: ([AnimationStep], [AnimationStep])) {
-        animationSteps.append(contentsOf: steps.0)
-        reverseAnimationSteps.append(contentsOf: steps.1)
+        animationData.animationSteps.append(contentsOf: steps.0)
+        animationData.reverseAnimationSteps.append(contentsOf: steps.1)
     }
     
     /// Adds animation steps to hide and show the round key column.
@@ -342,8 +340,8 @@ class ProcessViewModel: AnimationViewModel {
     ///   - hide: The value that controls hiding the round key column
     ///   - show: The value that controls showing the round key column
     func addShowHideRoundKeySteps(hide: Double, show: Double) {
-        animationSteps.append(AnimationStep { withAnimation { self.showRoundKeyColumn = hide } })
-        reverseAnimationSteps.append(AnimationStep { withAnimation { self.showRoundKeyColumn = show } })
+        animationData.animationSteps.append(AnimationStep { withAnimation { self.showRoundKeyColumn = hide } })
+        animationData.reverseAnimationSteps.append(AnimationStep { withAnimation { self.showRoundKeyColumn = show } })
     }
     
     // MARK: - Animation Steps Helper Functions

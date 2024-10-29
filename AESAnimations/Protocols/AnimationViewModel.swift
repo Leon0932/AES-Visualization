@@ -15,10 +15,8 @@ protocol AnimationViewModel: ObservableObject {
     
     /// Animation Controllers
     var animationControl: AnimationControl { get set }
-    var animationTask: Task<Void, Never>? { get set }
-    var animationSteps: [AnimationStep] { get set }
-    var reverseAnimationSteps: [AnimationStep] { get set }
-    
+    var animationData: AnimationData { get set }
+
     @MainActor
     func createAnimationSteps(with geometry: GeometryProxy)
     func resetAnimationState(state newState: [[Byte]], showResult: Double)
@@ -45,6 +43,14 @@ extension AnimationViewModel {
         
         let inversePrefix = operationDetails.isInverseMode ? "Inverse " : ""
         return "\(inversePrefix)\(description) (Runde \(operationDetails.currentRound))"
+    }
+    
+    private var reverseAnimationSteps: [AnimationStep] {
+        animationData.reverseAnimationSteps
+    }
+    
+    private var animationSteps: [AnimationStep] {
+        animationData.animationSteps
     }
     
     @MainActor
@@ -91,7 +97,7 @@ extension AnimationViewModel {
     
     @MainActor
     func startAnimations() {
-        animationTask = Task {
+        animationData.animationTask = Task {
             animationControl.changePause(to: false)
             await sleep(for: short)
             await processAnimations()
@@ -99,7 +105,7 @@ extension AnimationViewModel {
     }
     
     private func cancelAndResetAnimation(state: [[Byte]], showResult: Double) {
-        animationTask?.cancel()
+        animationData.animationTask?.cancel()
         Task { await sleep(for: normal) }
         self.resetAnimationState(state: state, showResult: showResult)
 

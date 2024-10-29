@@ -60,9 +60,7 @@ class KeyExpansionViewModel: AnimationViewModel {
     
     // Task und Steps Handler
     @Published var animationControl = AnimationControl()
-    var animationTask: Task<Void, Never>? = nil
-    var animationSteps: [AnimationStep] = []
-    var reverseAnimationSteps: [AnimationStep] = []
+    var animationData = AnimationData()
     
     // For SubBytes
     var resultSubBytes: [[Byte]] = []
@@ -108,22 +106,22 @@ class KeyExpansionViewModel: AnimationViewModel {
     @MainActor
     func createAnimationSteps(with geometry: GeometryProxy) {
         // Check Empyt Array
-        if animationSteps.isEmpty || reverseAnimationSteps.isEmpty {
+        if animationData.animationSteps.isEmpty || animationData.reverseAnimationSteps.isEmpty {
             // Using the Key Expansion Algorithm
             for index in nK..<arraySize {
                 if index % nK == 0 {
                     let roundKeyWithOps = performRoundKeyWithOperations(index: index)
-                    animationSteps.append(contentsOf: roundKeyWithOps.0)
-                    reverseAnimationSteps.append(contentsOf: roundKeyWithOps.1)
+                    animationData.animationSteps.append(contentsOf: roundKeyWithOps.0)
+                    animationData.reverseAnimationSteps.append(contentsOf: roundKeyWithOps.1)
                     
                 } else if keySize == .key256 && index % nK == 4 {
                     let subBytesAnimation = performSubBytesFor256(index: index)
-                    animationSteps.append(contentsOf: subBytesAnimation.0)
-                    reverseAnimationSteps.append(contentsOf: subBytesAnimation.1)
+                    animationData.animationSteps.append(contentsOf: subBytesAnimation.0)
+                    animationData.reverseAnimationSteps.append(contentsOf: subBytesAnimation.1)
                 } else {
                     let roundKeyAnimation = performRoundKey(index: index)
-                    animationSteps.append(contentsOf: roundKeyAnimation.0)
-                    reverseAnimationSteps.append(contentsOf: roundKeyAnimation.1)
+                    animationData.animationSteps.append(contentsOf: roundKeyAnimation.0)
+                    animationData.reverseAnimationSteps.append(contentsOf: roundKeyAnimation.1)
                 }
             }
             startAnimations()

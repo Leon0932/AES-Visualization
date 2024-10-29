@@ -38,9 +38,7 @@ class SubBytesViewModel: AnimationViewModel {
     
     // Task und Steps Handler
     @Published var animationControl: AnimationControl
-    var animationTask: Task<Void, Never>? = nil
-    var animationSteps: [AnimationStep] = []
-    var reverseAnimationSteps: [AnimationStep] = []
+    var animationData = AnimationData()
     
     // Helper Variables for View and Calculating the S-Box
     private let boxSize = 50
@@ -96,8 +94,8 @@ class SubBytesViewModel: AnimationViewModel {
         for row in 0..<state.count {
             for col in 0..<state[row].count {
                 let animations = processGridCell(row: row, col: col, targetPosition: position)
-                animationSteps.append(contentsOf: animations.0)
-                reverseAnimationSteps.append(contentsOf: animations.1)
+                animationData.animationSteps.append(contentsOf: animations.0)
+                animationData.reverseAnimationSteps.append(contentsOf: animations.1)
             }
         }
         

@@ -35,9 +35,7 @@ class AddRoundKeyViewModel: AnimationViewModel {
     
     // Controling the animation
     @Published var animationControl = AnimationControl()
-    var animationTask: Task<Void, Never>? = nil
-    var animationSteps: [AnimationStep] = []
-    var reverseAnimationSteps: [AnimationStep] = []
+    var animationData = AnimationData()
     
     // Constants
     private let verticalOffset: CGFloat = 140
@@ -70,8 +68,8 @@ class AddRoundKeyViewModel: AnimationViewModel {
         for row in 0..<4 {
             for col in 0..<4 {
                 let animations = animateRoundKeyAddition(row: row, col: col, width: width)
-                animationSteps.append(contentsOf: animations.0)
-                reverseAnimationSteps.append(contentsOf: animations.1)
+                animationData.animationSteps.append(contentsOf: animations.0)
+                animationData.reverseAnimationSteps.append(contentsOf: animations.1)
             }
         }
         

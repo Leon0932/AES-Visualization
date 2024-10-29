@@ -26,9 +26,7 @@ class ShiftRowsViewModel: AnimationViewModel {
 
     // Animation Control
     @Published var animationControl = AnimationControl()
-    var animationTask: Task<Void, Never>? = nil
-    var animationSteps: [AnimationStep] = []
-    var reverseAnimationSteps: [AnimationStep] = []
+    var animationData = AnimationData()
     
     // Helper variables for the animations
     let boxSize: CGFloat = 70
@@ -62,8 +60,8 @@ class ShiftRowsViewModel: AnimationViewModel {
     @MainActor
     func createAnimationSteps(with geometry: GeometryProxy) {
         let animations = performShiftRowsSequentially()
-        animationSteps.append(contentsOf: animations.0)
-        reverseAnimationSteps.append(contentsOf: animations.1)
+        animationData.animationSteps.append(contentsOf: animations.0)
+        animationData.reverseAnimationSteps.append(contentsOf: animations.1)
         
         startAnimations()
     }
