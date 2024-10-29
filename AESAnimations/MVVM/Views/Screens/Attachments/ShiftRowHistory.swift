@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ShiftRowHistory: View {
+    let navigationTitle: String
     let shiftRowRounds: [ShiftRowRound]
     
     let header: [(String, CGFloat)] = [
@@ -32,7 +33,7 @@ struct ShiftRowHistory: View {
     
     var body: some View {
         GenericDataView(
-            navigationTitle: "ShiftRows-Verlauf",
+            navigationTitle: navigationTitle,
             data: shiftRowData,
             header: header
         )

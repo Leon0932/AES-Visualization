@@ -8,20 +8,28 @@
 import SwiftUI
 
 struct SBoxView: View {
-    // MARK: - Properties 
-    @Binding var searchResult: Byte?
+    // MARK: - Properties
     let isInverseMode: Bool
-    
+    var sBoxIndex: Byte? = nil
+    var searchResult: Byte? = nil
     var searchX: Byte? = nil
     var searchY: Byte? = nil
     var opacityOfValues: [[Double]] = Array.create2DArray(repeating: 1.0, rows: 16, cols: 16)
-
+    
+    // Helper Properties
     private var gridItems: [GridItem] {
-        Array(repeating: .init(.fixed(boxSize()), spacing: 4), count: 16)
+        Array(repeating: .init(.fixed(boxSizeForiPad()), spacing: 4), count: 16)
     }
     
-    let aesMath = AESMath.shared
-
+    private var byteColor: Byte {
+        guard let sBoxIndex else { return 0 }
+        let value = getValue(index: Int(sBoxIndex))
+        
+        return value
+    }
+    
+    private let aesMath = AESMath.shared
+    
     // MARK: -
     var body: some View {
         VStack(spacing: 2) {
@@ -31,31 +39,34 @@ struct SBoxView: View {
             }
         }
     }
-
+    
     // MARK: - Header-Row (Y-Achses) View
     private var headerRow: some View {
         HStack(spacing: 4) {
-            CellView(value: 0x00, boxSize: boxSize(), backgroundColor: .clear, foregroundColor: .clear)
+            CellView(value: 0x00,
+                     boxSize: boxSizeForiPad(),
+                     backgroundColor: .clear,
+                     foregroundStyle: .clear)
             
             ForEach(0..<16, id: \.self) { col in
                 CellView(
                     value: Byte(col),
-                    boxSize: boxSize(),
-                    backgroundColor: headerBackgroundColor(for: col),
+                    boxSize: boxSizeForiPad(),
+                    backgroundColor: Byte(col) == searchY ? .reducedByteColor(byteColor) : .ultraLightGray,
                     valueFormat: .oneDigit
                 )
                 .opacity(checkOpacity() ? 1.0 : 0.0)
             }
         }
     }
-
+    
     // MARK: - Row (with X-Achses) View
     private func rowView(for row: Int) -> some View {
         HStack(spacing: 4) {
             CellView(
                 value: Byte(row),
-                boxSize: boxSize(),
-                backgroundColor: rowBackgroundColor(for: row),
+                boxSize: boxSizeForiPad(),
+                backgroundColor: Byte(row) == searchX ? .reducedByteColor(byteColor) : .ultraLightGray,
                 valueFormat: .oneDigit
             )
             .opacity(checkOpacity() ? 1.0 : 0.0)
@@ -63,7 +74,7 @@ struct SBoxView: View {
             LazyVGrid(columns: gridItems, spacing: 4) {
                 ForEach(0..<16, id: \.self) { col in
                     cellView(row: row, col: col)
-                        .scaleEffect(searchResult != nil && Int(searchResult ?? 0) == (row * 16 + col) 
+                        .scaleEffect(searchResult != nil && Int(searchResult!) == getIndex(row: row, col: col)
                                      ? 2
                                      : 1)
                         .opacity(opacityOfValues[row][col])
@@ -71,52 +82,39 @@ struct SBoxView: View {
             }
         }
     }
-
-    // MARK: - S-Box Values
+    
+    // MARK: - S-Box Value
     private func cellView(row: Int, col: Int) -> some View {
-        let index = row * 16 + col
-        let value = isInverseMode ? aesMath.invSBox(Byte(index)) : aesMath.sBox(Byte(index))
-        
-        return CellView(
-            value: value,
-            boxSize: boxSize(),
-            backgroundColor: cellBackgroundColor(for: index, row: row, col: col),
-            foregroundColor: cellForegroundColor(for: index)
+        CellView(
+            value: getValue(index: getIndex(row: row, col: col)),
+            boxSize: boxSizeForiPad(),
+            backgroundColor: cellBackgroundColor(for: getIndex(row: row, col: col),
+                                                 row: row,
+                                                 col: col)
         )
     }
-
+    
     // MARK: - Helper Functions
-    private func headerBackgroundColor(for col: Int) -> Color {
-        guard let searchY else { return .ultraLightGray }
-        
-        return Byte(col) == searchY ? .reducedAccentColor : .ultraLightGray
+    private func getIndex(row: Int, col: Int) -> Int { row * 16 + col }
+    
+    private func getValue(index: Int) -> Byte {
+        isInverseMode ? aesMath.invSBox(Byte(index)) : aesMath.sBox(Byte(index))
     }
     
-    private func rowBackgroundColor(for row: Int) -> Color {
-        guard let searchX else { return .ultraLightGray }
-        
-        return Byte(row) == searchX ? .reducedAccentColor : .ultraLightGray
-    }
-
     private func cellBackgroundColor(for index: Int, row: Int, col: Int) -> Color {
         if let searchResult = searchResult, Int(searchResult) == index {
-            return .accentColor
+            return .activeByteColor(byteColor, to: 0.8)
         }
         
         if let searchX = searchX, searchX == row {
-            return .reducedAccentColor
+            return .reducedByteColor(byteColor)
         }
         
-        if  let searchY = searchY, searchY == col {
-            return .reducedAccentColor
+        if let searchY = searchY, searchY == col {
+            return .reducedByteColor(byteColor)
         }
         
         return .lightGray
-    }
-
-    private func cellForegroundColor(for index: Int) -> Color {
-        guard let searchResult = searchResult else { return .primary }
-        return Int(searchResult) == index ? .white : .primary
     }
     
     private func checkOpacity() -> Bool {

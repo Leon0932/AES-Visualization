@@ -33,15 +33,18 @@ extension AnimationViewModel {
     /// 0.5 nanoseconds
     var short: UInt64 { return 500_000_000 }
     
-    func sleep(for nanoseconds: UInt64) async { try? await Task.sleep(nanoseconds: nanoseconds) }
+    func sleep(for nanoseconds: UInt64) async {
+        try? await Task.sleep(nanoseconds: nanoseconds)
+    }
     
     /// General implementation for calculating the title
     /// -1: Only the description is shown (useful for KeyExpansion, Encryption and Decryption)
     var navigationTitle: String {
-        if operationDetails.currentRound == -1 { return operationDetails.operationName.description }
+        let description = operationDetails.operationName.description
+        if operationDetails.currentRound == -1 { return description }
         
         let inversePrefix = operationDetails.isInverseMode ? "Inverse " : ""
-        return "\(inversePrefix)\(operationDetails.operationName.description) (Runde \(operationDetails.currentRound))"
+        return "\(inversePrefix)\(description) (Runde \(operationDetails.currentRound))"
     }
     
     @MainActor
@@ -49,30 +52,29 @@ extension AnimationViewModel {
         var index = animationControl.isBackward ? reverseAnimationSteps.count - 1 : 0
         
         withAnimation {
-            animationControl.isPaused = false
+            animationControl.changePause(to: false)
             animationControl.isDone = false
         }
         
         while index < animationSteps.count && index >= 0 {
             guard !Task.isCancelled else { return }
+            
+            // Calculating Delay
+            let stepDelay = animationSteps[index].delay
+            let revStepDelay = reverseAnimationSteps[index].delay
+            let delay = !animationControl.isBackward ? stepDelay : revStepDelay
+            let shortDelay = delay > 0 ? delay - 50_000_000 : 0
+            let extraShortDelay = shortDelay / 2
 
             if !animationControl.isBackward {
-                let delay = animationSteps[index].delay
-                let shortDelay = delay > 0 ? delay - 50_000_000 : 0
-                let extraShortDelay = shortDelay / 2
-                
                 await animationSteps[index].animation()
                 await sleep(for: animationControl.isForward
                             ? (animationControl.isDouble ? extraShortDelay : shortDelay)
-                            : animationSteps[index].delay)
+                            : stepDelay)
                 index += 1
             } else {
-                let delay = reverseAnimationSteps[index].delay
-                let shortDelay = delay > 0 ? delay - 50_000_000 : 0
-                let extraShortDelay = shortDelay / 2
-                
                 await reverseAnimationSteps[index].animation()
-                await sleep(for: animationControl.isDouble ? extraShortDelay : reverseAnimationSteps[index].delay)
+                await sleep(for: animationControl.isDouble ? extraShortDelay : revStepDelay)
                 index -= 1
             }
             
@@ -90,7 +92,7 @@ extension AnimationViewModel {
     @MainActor
     func startAnimations() {
         animationTask = Task {
-            animationControl.isPaused = false
+            animationControl.changePause(to: false)
             await sleep(for: short)
             await processAnimations()
         }

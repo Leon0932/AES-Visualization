@@ -8,12 +8,14 @@
 import Foundation
 
 extension Array {
-    static func create1DArray(repeating element: Element, count: Int) -> [Element] {
+    static func create1DArray(repeating element: Element,
+                              count: Int) -> [Element] {
         return Array(repeating: element, count: count)
     }
     
-    // Funktion zur Erstellung eines zweidimensionalen Arrays
-    static func create2DArray(repeating element: Element, rows: Int, cols: Int) -> [[Element]] where Element: Any {
+    static func create2DArray(repeating element: Element,
+                              rows: Int,
+                              cols: Int) -> [[Element]] where Element: Any {
         return Array<Array<Element>>(repeating: Array<Element>(repeating: element, count: cols), count: rows)
     }
 }

@@ -10,9 +10,8 @@ import Security
 
 struct EditableMatrixView: View {
     // MARK: - Properties
-    let titleLabel: String
-    let iconLabel: String
-    let buttonTitle: String
+    let title: String
+    let icon: String
     @Binding var matrix: Matrix
     
     // MARK: -
@@ -23,21 +22,20 @@ struct EditableMatrixView: View {
             errorText
                 .opacity(matrix.containsInvalidInput ? 1 : 0)
         }
-       
+        
     }
     
     // MARK: - Header View
     private var headerView: some View {
         HStack(spacing: 24) {
-            Label(title: { Text(titleLabel) }, icon: { Image(systemName: iconLabel) })
-                .font(.title)
-            Button {
+            Label(title: { Text(title) },
+                  icon: { Image(systemName: icon) })
+            .font(.title)
+            
+            CustomButtonView(icon: "dice",
+                             buttonStyle: SecondaryButtonStyle(font: .title)) {
                 matrix.generateAndFillRandomBytes()
-            } label: {
-                Image(systemName: "dice")
-                    .font(.title)
             }
-            .buttonStyle(BorderedButtonStyle())
         }
     }
     
@@ -79,17 +77,14 @@ struct EditableMatrixView: View {
             }
         )
         
-        #if os(iOS)
         TextField("", text: binding)
+            #if os(iOS)
             .padding(4)
             .keyboardType(.asciiCapable)
-           
- 
-        #else
-        TextField("", text: binding)
+            #else
             .textFieldStyle(PlainTextFieldStyle())
             .focusable(true)
-        #endif
+            #endif
     }
     
     // MARK: - Helper Functions
@@ -99,7 +94,7 @@ struct EditableMatrixView: View {
     
     private var errorText: some View {
         Text("Gültiges Hex-Byte erforderlich (00-FF)")
-            .foregroundColor(.red)
+            .foregroundStyle(.red)
             .font(.title3)
     }
 }

@@ -9,30 +9,30 @@ import SwiftUI
 
 struct AuthorView: View {
     @Environment(\.dismiss) var dismiss
-    @AppStorage("selectedPrimaryColor") private var selectedPrimaryColor: PrimaryColor = .blue
+    
+    var message: LocalizedStringKey {
+        "Die App wurde von **Leon Chamoun** im Rahmen einer Bachelorarbeit entwickelt, die von **Prof. Dr. Christoph Karg** betreut wurde."
+    }
     
     // MARK: -
     var body: some View {
-        VStack(alignment: .center, spacing: 25) {
-            Image("hs-aalen-logo")
-                .frame(maxWidth: .infinity)
-                .scaledToFit()
-            
-            
-            
-            Text("Die App wurde von **Leon Chamoun** im Rahmen einer Bachelorarbeit entwickelt, die von **Prof. Dr. Christoph Karg** betreut wurde.")
-                .multilineTextAlignment(.center)
-
-            CustomButton<Never>(title: "Schließen", useMaxWidth: false) {
-                dismiss()
+        SheetContainerView(navigationTitle: "Urheber der App") {
+            VStack(alignment: .center, spacing: 25) {
+                Image("hs-aalen-logo")
+                    .frame(maxWidth: .infinity)
+                    .scaledToFit()
+                
+                Text(message)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 25)
+                
             }
-            
         }
-        .accentColor(selectedPrimaryColor.color)
-        .padding(20)
     }
 }
 
 #Preview {
     AuthorView()
 }
+
+

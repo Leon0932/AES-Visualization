@@ -16,23 +16,12 @@ struct SBoxAnimationView: View {
         AnimationContainerView(viewModel: viewModel) {
             VStack(spacing: 25) {
                 byteDisplaySection
-                
-                HStack {
-                    affineTransformationSection
-                    
-                    Spacer()
-                    
-                    SBoxView(searchResult: .constant(nil),
-                             isInverseMode: viewModel.operationDetails.isInverseMode,
-                             opacityOfValues: viewModel.opacityOfSBox)
-                }
+                sBoxSection
             }
             #if os(iOS)
             .toolbar { closeButton { dismiss() } }
             .navigationTitle(viewModel.navigationTitle)
             .navigationBarTitleDisplayMode(.inline)
-            #else
-            .customNavigationBackButton()
             #endif
         }
     }
@@ -52,17 +41,16 @@ struct SBoxAnimationView: View {
                 byteCell(title: "Position der S-Box",
                          value: viewModel.resultSBox,
                          opacity: viewModel.showResultSBox)
-            }
-            
-            if viewModel.operationDetails.isInverseMode {
+                
                 byteCell(title: "Wert der S-Box",
                          value: viewModel.indexOfSBox,
                          opacity: viewModel.showIndexOfSBox)
-            } else {
-                byteCell(title: "Ergebnis",
-                         value: viewModel.resultSBox,
-                         opacity: viewModel.showResultSBox)
             }
+             
+            byteCell(title: "Ergebnis",
+                     value: viewModel.resultSBox,
+                     opacity: viewModel.showResultSBox)
+            
             
         }
     }
@@ -76,28 +64,40 @@ struct SBoxAnimationView: View {
     }
     
     // MARK: - Affine Transformation Section
+    private var sBoxSection: some View {
+        HStack {
+            affineTransformationSection
+            
+            Spacer()
+            
+            SBoxView(isInverseMode: viewModel.operationDetails.isInverseMode,
+                     opacityOfValues: viewModel.opacityOfSBox)
+        }
+    }
+    
     private var affineTransformationSection: some View {
         VStack(spacing: 40) {
             Text("Affine Transformation (b' = inv)")
                 .opacity(viewModel.showTitleOfAff)
                 .font(.headline)
             
-            VStack(spacing: 15) {
+            VStack(spacing: 5) {
                 ForEach(0..<viewModel.values.count, id: \.self) { index in
                     let shiftValues = ["b'", "b' >> 1", "b' >> 2", "b' >> 3", "b' >> 4", "0x63", "Ergebnis"]
                     let operators = ["⊕", "⊕", "⊕", "⊕", "⊕", "="]
                     
                     transformationRow(index: index, shiftValues: shiftValues, operators: operators)
-                    
                 }
             }
         }
+        .padding(.bottom, 40)
+        
     }
     
     private func transformationRow(index: Int,
                                    shiftValues: [String],
                                    operators: [String]) -> some View {
-        VStack(spacing: 15) {
+        VStack(spacing: 5) {
             // Text and box perfectly aligned center
             HStack {
                 Text(shiftValues[index])

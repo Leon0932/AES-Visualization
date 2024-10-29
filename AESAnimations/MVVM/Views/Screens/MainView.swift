@@ -15,24 +15,20 @@ struct MainView: View {
     // MARK: -
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: estimateSpacing) {
-                    modePicker
-                    matrixViews
-                    actionButtons
-                }
-                .padding()
-                .navigationTitle("Visualisierung von AES")
-                .toolbar(content: toolbarItem)
-                .sheet(isPresented: $viewModel.showAuthor) { AuthorView() }
-                #if os(iOS)
-                .sheet(isPresented: $viewModel.showSettings) { SettingsView() }
-                #endif
-                
+            VStack(spacing: estimateSpacing) {
+                modePicker
+                matrixViews
+                actionButtons
             }
+            .padding()
+            .frame(maxHeight: .infinity, alignment: .top)
+            .navigationTitle("Visualisierung von AES")
+            .toolbar(content: toolbarItem)
+            .sheet(isPresented: $viewModel.showAuthor) { AuthorView() }
+            .sheet(isPresented: $viewModel.showSettings) { SettingsView() }
         }
         .onChange(of: viewModel.selectedEncryptionMode) {
-            viewModel.handleEncryptionModeChange(newValue: $1)
+            viewModel.handlePickerChange(newValue: $1)
         }
     }
     
@@ -49,55 +45,28 @@ struct MainView: View {
     // MARK: - State and Key View
     private var matrixViews: some View {
         HStack(spacing: 40) {
-            EditableMatrixView(titleLabel: "State",
-                               iconLabel: "rectangle.split.3x3",
-                               buttonTitle: "Generate Random-State",
-                               matrix: $viewModel.stateMatrix)
-            
-            EditableMatrixView(titleLabel: "Schlüssel",
-                               iconLabel: "key",
-                               buttonTitle: "Generate Random-Key",
-                               matrix: $viewModel.keyMatrix)
+            EditableMatrixView(title: "State", icon: "rectangle.split.3x3", matrix: $viewModel.stateMatrix)
+            EditableMatrixView(title: "Schlüssel", icon: "key", matrix: $viewModel.keyMatrix)
         }
     }
     
     // MARK: - Button View
     private var actionButtons: some View {
-        VStack(alignment: .center, spacing: 25) {
+        let isDisabled = !viewModel.stateMatrix.areAllFieldsValid || !viewModel.keyMatrix.areAllFieldsValid
+        let primaryStyle = PrimaryButtonStyle(useMaxWidth: true, isDisabled: isDisabled)
+        
+        return VStack(alignment: .center, spacing: 25) {
             HStack(spacing: 32) {
+                CustomNavigationButton(title: "Entschlüsseln", icon: "lock.open", buttonStyle: primaryStyle) {
+                    ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: true))
+                }
                 
-                CustomButton(
-                    title: "Entschlüsseln",
-                    icon: "lock.open",
-                    isDisabled: !viewModel.stateMatrix.areAllFieldsValid || !viewModel.keyMatrix.areAllFieldsValid,
-                    destination: {
-                        ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: true))
-                    },
-                    action: {}
-                )
-                
-                CustomButton(
-                    title: "Verschlüsseln",
-                    icon: "lock",
-                    isDisabled: !viewModel.stateMatrix.areAllFieldsValid || !viewModel.keyMatrix.areAllFieldsValid,
-                    destination: {
-                        ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: false))
-                    },
-                    action: {}
-                )
+                CustomNavigationButton(title: "Verschlüsseln", icon: "lock",  buttonStyle: primaryStyle) {
+                    ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: false))
+                }
             }
-            .padding(.horizontal, 50)
             
-            Button {
-                viewModel.showAuthor.toggle()
-            } label: {
-                Text("Urheber der App")
-                    .font(.headline)
-                    .foregroundColor(.accentColor)
-            }
-            #if os(macOS)
-            .buttonStyle(.plain)
-            #endif
+            CustomButtonView(title: "Urheber der App", buttonStyle: .standard, action: viewModel.toggleAuthor)
         }
     }
     
@@ -110,24 +79,16 @@ struct MainView: View {
             .automatic
             #endif
         }()) {
-            Button(action: toggleSettings) {
-                Image(systemName: "gear")
-            }
+            CustomButtonView(icon: "gear",
+                             buttonStyle: StandardButtonStyle(font: .title2),
+                             action: viewModel.toggleSettings)
         }
     }
     
-    // MARK: - Helper Functions / Computed Properties
-    private func toggleSettings() {
-        #if os(iOS)
-        viewModel.showSettings.toggle()
-        #else
-        openWindow(id: "settings")
-        #endif
-    }
-    
+    // MARK: - Computed Properties
     var estimateSpacing: CGFloat {
         #if os(macOS)
-        120
+        105
         #else
         isPad13Size() ? 120 : 45
         #endif

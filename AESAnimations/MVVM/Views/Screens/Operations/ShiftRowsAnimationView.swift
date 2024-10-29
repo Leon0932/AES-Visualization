@@ -10,6 +10,8 @@ import SwiftUI
 struct ShiftRowsAnimationView: View {
     @StateObject var viewModel: ShiftRowsViewModel
     
+    var buttonTitle: String { "ShiftRows-Verlauf" }
+    
     // MARK: -
     var body: some View {
         AnimationContainerView(viewModel: viewModel) {
@@ -18,20 +20,20 @@ struct ShiftRowsAnimationView: View {
                     .font(.title)
                 
                 VStack(spacing: 10) {
-                    ForEach(0..<4, id: \.self) { row in
-                        rowView(for: row)
-                    }
+                    ForEach(0..<4,
+                            id: \.self,
+                            content: rowView(for:))
                 }
             }
             .toolbar(content: keyExpRoundsButton)
-            .platformSpecificNavigation(isPresented: $viewModel.showShiftRounds) {
-                ShiftRowHistory(shiftRowRounds: viewModel.shiftRowRounds)
+            .specificNavigation(isPresented: $viewModel.showShiftRounds) {
+                ShiftRowHistory(navigationTitle: buttonTitle,
+                                shiftRowRounds: viewModel.shiftRowRounds)
             }
         }
     }
     
     // MARK: - Row View
-    @ViewBuilder
     private func rowView(for row: Int) -> some View {
         HStack(spacing: 12) {
             cellRow(for: row)
@@ -48,16 +50,16 @@ struct ShiftRowsAnimationView: View {
     }
     
     // MARK: - Cell View
-    @ViewBuilder
     private func cellRow(for row: Int) -> some View {
         HStack(spacing: 10) {
             ForEach(0..<4, id: \.self) { col in
-                CellView(value: viewModel.state[row][col],
+                let value = viewModel.state[row][col]
+                let positions = viewModel.positionCell[row][col]
+                
+                CellView(value: value,
                          boxSize: 70,
-                         backgroundColor: .accentColor,
-                         foregroundColor: .white)
-                .offset(x: viewModel.positionCell[row][col].x,
-                        y: viewModel.positionCell[row][col].y)
+                         backgroundColor: .reducedByteColor(value))
+                .offset(x: positions.x, y: positions.y)
             }
         }
     }
@@ -65,10 +67,9 @@ struct ShiftRowsAnimationView: View {
     // MARK: - Toolbar Item
     private func keyExpRoundsButton() -> some ToolbarContent {
         ToolbarItem {
-            Button("Zeige ShiftRows-Verlauf") {
-                viewModel.showShiftRounds.toggle()
-            }
-            .buttonStyle(BorderedButtonStyle())
+            CustomButtonView(title: buttonTitle,
+                             buttonStyle: .secondary,
+                             action: viewModel.toggleShiftRounds)
             .opacity(viewModel.animationControl.isDone ? 1 : 0)
         }
     }

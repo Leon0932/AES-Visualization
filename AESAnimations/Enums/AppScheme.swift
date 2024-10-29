@@ -10,5 +10,5 @@ import SwiftUI
 enum AppScheme: String {
     case dark = "Dark"
     case light = "Light"
-    case device = "Device"
+    case system = "System"
 }

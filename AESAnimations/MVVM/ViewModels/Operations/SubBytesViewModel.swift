@@ -83,8 +83,7 @@ class SubBytesViewModel: AnimationViewModel {
                                 y: geometry.size.height * 0.35)
         
         #if os(iOS)
-        // Position on iPad is too high
-        position.y = geometry.size.height * 0.32
+        position.y = geometry.size.height * 0.32 // Position on iPad is too high
         #endif
         
         // The calculation was made as follows:
@@ -167,7 +166,7 @@ class SubBytesViewModel: AnimationViewModel {
         
         return (normalSteps, reverseSteps)
     }
-     
+    
     /// Performs a search operation for a specific cell in the state and updates its state.
     ///
     /// This function animates the search process by splitting the byte, searching for its x and y components,
@@ -193,7 +192,7 @@ class SubBytesViewModel: AnimationViewModel {
             AnimationStep(animation: { withAnimation { self.splitByte[row][col] = false } }, delay: short),
             AnimationStep(animation: { withAnimation { self.searchX = nil } }, delay: short),
             AnimationStep(animation: { withAnimation { self.searchY = nil } }, delay: normal),
-            AnimationStep(animation: { withAnimation { self.searchResult = nil } }, delay: normal)
+            AnimationStep(animation: { withAnimation { self.searchResult = nil } }, delay: normal),
         ]
         
         let updateSteps = updateGridStateAndResetSearch(row: row, col: col)
@@ -248,7 +247,7 @@ class SubBytesViewModel: AnimationViewModel {
         let reverseSteps = [
             AnimationStep(animation: { self.modifyState(row: row, col: col, for: (self.copyOfMatrix[row][col], true)) }, delay: short),
             AnimationStep(animation: { self.setSearchState(for: (self.copyOfMatrix[row][col],
-                                                                 (self.copyOfMatrix[row][col] & 0xF0) >> 4,
+                                                                (self.copyOfMatrix[row][col] & 0xF0) >> 4,
                                                                  self.copyOfMatrix[row][col] & 0x0F),
                                                            showText: 1)
             }, delay: normal)
@@ -326,7 +325,7 @@ class SubBytesViewModel: AnimationViewModel {
             if let x = x {
                 positions[row][col].x = x
             }
-
+            
             if let y = y {
                 positions[row][col].y = y
             }
@@ -353,37 +352,26 @@ class SubBytesViewModel: AnimationViewModel {
     }
     
     // MARK: - UI Helper Functions
-    /// Determines the background color of a specific cell in the state based on its current state.
+    /// Determines the background color of a specific cell in the state based on its active state.
     ///
-    /// This function checks whether the cell contains the `currentByte` and whether it is in the active state.
-    /// If both conditions are true, the background color is set to `accentColor`. If only the active state is true,
-    /// it also returns `accentColor`; otherwise, it returns `reducedAccentColor`.
+    /// This function checks whether the cell is in the active state (`currentStateSubBytes`).
+    /// If the cell is active, it returns the `activeByteColor` for the cell's value.
+    /// If the cell is not active, it returns the `reducedByteColor`.
     ///
     /// - Parameters:
     ///   - row: The row index of the state where the background color is being determined.
     ///   - col: The column index of the state where the background color is being determined.
     /// - Returns: The `Color` to be used as the background for the cell.
     func backgroundColor(row: Int, col: Int) -> Color {
-        let isCurrentByte = state[row][col] == currentByte
+        let value = state[row][col]
         let isActiveState = currentStateSubBytes[row][col]
         
-        return isCurrentByte && isActiveState ? .accentColor : (isActiveState ? .accentColor : .reducedAccentColor)
+        if isActiveState { return .activeByteColor(value, to: 0.8) }
+        
+        return .reducedByteColor(value)
     }
     
-    /// Determines the foreground color of a specific cell in the state based on its current state.
-    ///
-    /// This function checks whether the cell contains the `currentByte` and whether it is in the active state.
-    /// If both conditions are true, the foreground color is set to `white`. If only the active state is true,
-    /// it also returns `white`; otherwise, it returns `primary`.
-    ///
-    /// - Parameters:
-    ///   - row: The row index of the state where the foreground color is being determined.
-    ///   - col: The column index of the state where the foreground color is being determined.
-    /// - Returns: The `Color` to be used as the foreground for the cell.
-    func foregroundColor(row: Int, col: Int) -> Color {
-        let isCurrentByte = state[row][col] == currentByte
-        let isActiveState = currentStateSubBytes[row][col]
-        
-        return isCurrentByte && isActiveState ? .white : (isActiveState ? .white : .primary)
+    func toggleSBoxAnimation() {
+        showSBoxAnimation.toggle()
     }
 }

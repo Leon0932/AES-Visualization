@@ -40,10 +40,11 @@ struct AddRoundKeyAnimationView: View {
     }
     
     private var resultCellView: some View {
-        CellView(value: viewModel.resultOfAdd,
-                 boxSize: 50,
-                 backgroundColor: .accentColor,
-                 foregroundColor: .white)
+        let value = viewModel.resultOfAdd
+        
+        return CellView(value: value,
+                        boxSize: 50,
+                        backgroundColor: .reducedByteColor(value))
         .opacity(viewModel.showResult)
     }
     
@@ -52,15 +53,13 @@ struct AddRoundKeyAnimationView: View {
         HStack {
             StateView(title: "State",
                       state: viewModel.state,
-                      position: .twoD(viewModel.positionState),
-                      backgroundColor: .reducedAccentColor)
+                      position: .twoD(viewModel.positionState))
             
             Spacer()
             
             StateView(title: "Key",
                       state: viewModel.key,
-                      position: .twoD(viewModel.positionKey),
-                      backgroundColor: .lightGray)
+                      position: .twoD(viewModel.positionKey))
         }
         
     }
@@ -69,8 +68,6 @@ struct AddRoundKeyAnimationView: View {
     private var newStateView: some View {
         StateView(title: "Neuer State",
                   state: viewModel.result,
-                  opacity: .twoD(viewModel.showNewState),
-                  backgroundColor: .accentColor,
-                  foregroundColor: .white)
+                  opacity: .twoD(viewModel.showNewState))
     }
 }

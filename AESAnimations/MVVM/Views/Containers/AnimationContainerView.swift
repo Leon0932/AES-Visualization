@@ -29,7 +29,7 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                ZStack(alignment: checkSubOrAddRoundKey() ? .bottomLeading : .center) {
+                ZStack(alignment: checkAlignment() ? .bottomLeading : .center) {
                     content
                         .frame(width: geometry.size.width * 0.95, height: geometry.size.height * 0.95)
                         .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
@@ -45,7 +45,7 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
                                               resetAnimation: viewModel.resetAnimations,
                                               showRepeatButtons: showRepeatButtons)
                         .padding(.bottom, 10)
-                        .padding(checkSubOrAddRoundKey() ? 10 : 0)
+                        .padding(.leading, checkAlignment() ? 10 : 0)
                     }
                 }
                 .frame(width: geometry.size.width)
@@ -62,10 +62,13 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
     }
     
     // MARK: - Helper functions
-    func checkSubOrAddRoundKey() -> Bool {
+    func checkAlignment() -> Bool {
         let operationName = viewModel.operationDetails.operationName
         
-        return operationName == .subBytes || operationName == .addRoundKey || operationName == .invSBox || operationName == .sBox
+        return operationName == .subBytes
+        || operationName == .addRoundKey
+        || operationName == .invSBox
+        || operationName == .sBox
     }
     
     func toolbarItem() -> some ToolbarContent {

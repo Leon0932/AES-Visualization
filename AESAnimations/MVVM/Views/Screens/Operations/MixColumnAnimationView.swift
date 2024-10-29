@@ -44,11 +44,12 @@ struct MixColumnAnimationView: View {
     private var resultCellView: some View {
         VStack(spacing: 10) {
             ForEach(0..<4) { index in
+                let value = viewModel.resultOfMixColumn[index]
+                
                 CellView(
-                    value: viewModel.resultOfMixColumn[index],
+                    value: value,
                     boxSize: 50,
-                    backgroundColor: .accentColor,
-                    foregroundColor: .white
+                    backgroundColor: .reducedByteColor(value)
                 )
                 .opacity(viewModel.isShowingResult)
             }
@@ -60,15 +61,12 @@ struct MixColumnAnimationView: View {
         HStack {
             StateView(title: "Alter State",
                       state: viewModel.state,
-                      position: .oneD(viewModel.columnPositions),
-                      backgroundColor: .reducedAccentColor
+                      position: .oneD(viewModel.columnPositions)
             )
             Spacer()
             StateView(title: "Neuer State",
                       state: viewModel.result,
-                      opacity: .oneD(viewModel.showNewState),
-                      backgroundColor: .accentColor,
-                      foregroundColor: .white)
+                      opacity: .oneD(viewModel.showNewState))
         }
         .padding(.horizontal, 25)
     }

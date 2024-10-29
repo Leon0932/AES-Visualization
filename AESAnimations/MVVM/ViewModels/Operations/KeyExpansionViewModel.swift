@@ -705,4 +705,9 @@ class KeyExpansionViewModel: AnimationViewModel {
             highlightRCon = Array(repeating: false, count: 11)
         }
     }
+    
+    // MARK: - Toggle Functions
+    func toggleKeyExpRounds() {
+        showKeyExpRounds.toggle()
+    }
 }

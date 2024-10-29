@@ -8,24 +8,29 @@
 import SwiftUI
 
 struct KeyExpansionAnimationView: View {
-    @StateObject var viewModel: KeyExpansionViewModel
-    
+    @StateObject var viewModel: KeyExpansionViewModel 
     let columns = Array(repeating: GridItem(.flexible(minimum: 230)), count: 4)
+    
+    var buttonTitle: String { "Rundenschlüssel-Verlauf" }
     
     // MARK: -
     var body: some View {
         if viewModel.showSubBytes {
-            SubBytesAnimationView(viewModel: viewModel.subBytesViewModel, showRepeatButtons: false)
+            SubBytesAnimationView(viewModel: viewModel.subBytesViewModel,
+                                  showRepeatButtons: false)
         } else {
             AnimationContainerView(viewModel: viewModel) {
                 VStack(alignment: .leading, spacing: 50) {
-                    if !viewModel.animationControl.isDone { keyAnimationSection }
+                    if !viewModel.animationControl.isDone {
+                        keyAnimationSection
+                    }
                     roundKeyGrid
                 }
             }
             .toolbar(content: keyExpRoundsButton)
-            .platformSpecificNavigation(isPresented: $viewModel.showKeyExpRounds) {
-                RoundKeyHistory(keyExpRounds: viewModel.keyExpRounds)
+            .specificNavigation(isPresented: $viewModel.showKeyExpRounds) {
+                RoundKeyHistory(navigationTitle: buttonTitle,
+                                keyExpRounds: viewModel.keyExpRounds)
             }
         }
     }
@@ -33,20 +38,9 @@ struct KeyExpansionAnimationView: View {
     // MARK: - Calculation View
     private var keyAnimationSection: some View {
         HStack(spacing: 25) {
-            ColumnView(column: viewModel.columnOne, opacity: viewModel.showColumnOne)
-            
+            columnOne
             OperationSymbolView(text: "⊕", isVisible: viewModel.showFirstXOR)
-            
-            VStack(spacing: 10) {
-                if viewModel.showAnimationText {
-                    Text(viewModel.animationText)
-                        .font(.title)
-                }
-                
-                ColumnView(column: viewModel.columnTwo,
-                           position: viewModel.positionKey,
-                           opacity: viewModel.showColumnTwo)
-            }
+            columnTwo
             
             if viewModel.startRCONAnimation {
                 OperationSymbolView(text: "⊕", isVisible: viewModel.showSecondXOR)
@@ -54,10 +48,34 @@ struct KeyExpansionAnimationView: View {
             }
             
             OperationSymbolView(text: "=", isVisible: viewModel.showEqual)
-            
-            ColumnView(column: viewModel.columnResult, opacity: viewModel.showResult)
+            columnResult
         }
         .frame(maxWidth: .infinity, alignment: .center)
+    }
+    
+    private var columnOne: some View {
+        ColumnView(column: viewModel.columnOne,
+                   opacity: viewModel.showColumnOne,
+                   highlightColumn: true)
+    }
+    
+    private var columnTwo: some View {
+        VStack(spacing: 10) {
+            if viewModel.showAnimationText {
+                Text(viewModel.animationText)
+                    .font(.title)
+            }
+            ColumnView(column: viewModel.columnTwo,
+                       position: viewModel.positionKey,
+                       opacity: viewModel.showColumnTwo,
+                       highlightColumn: true)
+        }
+    }
+    
+    private var columnResult: some View {
+        ColumnView(column: viewModel.columnResult,
+                   opacity: viewModel.showResult,
+                   highlightColumn: true)
     }
     
     // MARK: - RCON View
@@ -66,8 +84,7 @@ struct KeyExpansionAnimationView: View {
             ForEach(1..<viewModel.rConstants.count, id: \.self) { row in
                 ColumnView(
                     column: viewModel.rConstants[row],
-                    backgroundColor: viewModel.highlightRCon[row] ? .yellow : .yellow.opacity(0.3),
-                    foregroundColor: .primary
+                    backgroundColor: viewModel.highlightRCon[row] ? .yellow : .yellow.opacity(0.3)
                 )
             }
         }
@@ -94,11 +111,11 @@ struct KeyExpansionAnimationView: View {
             
             HStack(spacing: 10) {
                 ForEach(0..<4, id: \.self) { row in
-                    ColumnView(column: viewModel.roundKeys[groupIndex * 4 + row],
-                               opacity: viewModel.showRoundKeyColumn[groupIndex * 4 + row],
-                               backgroundColor: viewModel.highlightColumn[groupIndex * 4 + row]
-                               ? .accentColor
-                               : .accentColor.opacity(0.4))
+                    let index = groupIndex * 4 + row
+                    
+                    ColumnView(column: viewModel.roundKeys[index],
+                               opacity: viewModel.showRoundKeyColumn[index],
+                               highlightColumn: viewModel.highlightColumn[index])
                 }
             }
         }
@@ -107,10 +124,9 @@ struct KeyExpansionAnimationView: View {
     // MARK: - Toolbar Item
     private func keyExpRoundsButton() -> some ToolbarContent {
         ToolbarItem {
-            Button("Zeige Schlüsselverlauf") {
-                viewModel.showKeyExpRounds.toggle()
-            }
-            .buttonStyle(BorderedButtonStyle())
+            CustomButtonView(title: buttonTitle,
+                             buttonStyle: .secondary,
+                             action: viewModel.toggleKeyExpRounds)
             .opacity(viewModel.animationControl.isDone ? 1 : 0)
         }
     }

@@ -11,11 +11,11 @@ struct CellView: View {
     // MARK: - Properties
     let value: Byte
     let boxSize: CGFloat
-    let backgroundColor: Color
-    var foregroundColor: Color = .primary
+    var backgroundColor: Color
+    var foregroundStyle: Color = .primary
     
     var valueFormat: ValueFormat = .twoDigit
-
+    
     // MARK: -
     var body: some View {
         Text(
@@ -30,10 +30,13 @@ struct CellView: View {
                 }
             }(), value)
         )
-            .fontDesign(.monospaced)
-            .frame(width: boxSize, height: boxSize)
-            .background(RoundedRectangle(cornerRadius: 3).fill(backgroundColor))
-            .foregroundColor(foregroundColor)
+        .fontDesign(.monospaced)
+        .frame(width: boxSize, height: boxSize)
+        .background(
+            RoundedRectangle(cornerRadius: 3)
+                .fill(backgroundColor)
+        )
+        .foregroundStyle(foregroundStyle)
     }
 }
 

@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct RoundKeyHistory: View {    
+struct RoundKeyHistory: View {
+    let navigationTitle: String
     let keyExpRounds: [KeyExpansionRound]
-    
+
     let header: [(String, CGFloat)] = [
         ("i", 25),
         ("Temp", 130),
@@ -38,7 +39,7 @@ struct RoundKeyHistory: View {
     
     var body: some View {
         GenericDataView(
-            navigationTitle: "Rundenschlüssel-Verlauf",
+            navigationTitle: navigationTitle,
             data: keyExpansionData,
             header: header
         )

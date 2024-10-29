@@ -59,7 +59,9 @@ struct GenericDataView: View {
     @ViewBuilder
     private func rowForData(_ rowData: [Any]) -> some View {
         HStack(spacing: 0) {
-            ForEach(0..<min(rowData.count, header.count), id: \.self) { index in
+            ForEach(0..<min(rowData.count, header.count),
+                    id: \.self) { index in
+                
                 if index != 0 { Divider() }
                 Spacer()
                 dataCell(data: rowData[index], width: header[index].1)
@@ -75,7 +77,6 @@ struct GenericDataView: View {
         if let text = data as? String {
             Text(text)
                 .fontDesign(.monospaced)
-            
                 .frame(width: width)
         } else if let number = data as? Int {
             Text("\(number)")
@@ -86,14 +87,11 @@ struct GenericDataView: View {
         } else if let byte2DArray = data as? [[Byte]] {
             VStack(spacing: 10) {
                 ForEach(Array(byte2DArray.enumerated()), id: \.offset) { index, array in
-                    
-                    
                     arrayCell(data: array, width: width)
                 }
             }
         } else {
             Text("N/A")
-            
                 .frame(width: width)
         }
     }
@@ -106,9 +104,7 @@ struct GenericDataView: View {
                 placeholderCell
             } else {
                 ForEach(0..<min(4, data.count), id: \.self) { index in
-                    CellView(value: data[index],
-                             boxSize: 30,
-                             backgroundColor: .lightGray)
+                    CellView(value: data[index], boxSize: 30, backgroundColor: .lightGray)
                 }
             }
         }
@@ -121,10 +117,8 @@ struct GenericDataView: View {
         ForEach(0..<4, id: \.self) { _ in
             RoundedRectangle(cornerRadius: 5)
                 .frame(width: 30, height: 30)
-                .foregroundColor(.clear)
+                .foregroundStyle(.clear)
                 .overlay(Rectangle().stroke(Color.clear))
         }
     }
-    
-    
 }

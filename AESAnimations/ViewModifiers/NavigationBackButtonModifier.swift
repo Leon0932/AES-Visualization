@@ -15,15 +15,17 @@ struct NavigationBackButtonModifier: ViewModifier {
         content
             .navigationBarBackButtonHidden(true)
             .toolbar {
-                if isDone {
-                    ToolbarItem(placement: .navigation) {
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "chevron.backward")
-                        }
-                    }
-                }
+                if isDone { toolbarItem }
             }
+    }
+    
+    var toolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .navigation) {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.backward")
+            }
+        }
     }
 }

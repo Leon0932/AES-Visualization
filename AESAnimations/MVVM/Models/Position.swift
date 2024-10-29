@@ -7,7 +7,6 @@
 
 import Foundation
 
-// Eine allgemeine Struktur für Positionen, die in mehreren Klassen verwendet werden kann
 struct Position {
     var x: CGFloat
     var y: CGFloat
@@ -20,9 +19,5 @@ extension Position {
     
     static func default1DPositions(count: Int) -> [Position] {
         return Array(repeating: Position(x: 0, y: 0), count: count)
-    }
-    
-    static func updatePosition(positions: inout [[Position]], row: Int, col: Int, by position: Position) {
-        positions[row][col] = position
     }
 }

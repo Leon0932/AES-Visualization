@@ -31,11 +31,10 @@ struct KeyView: View {
     
     // MARK: - Animation Button
     private var animateButton: some View {
-        NavigationLink("Schlüssel-Animation ansehen") {
+        CustomNavigationButton(title: "Schlüssel-Animation ansehen",
+                               buttonStyle: SecondaryButtonStyle(font: .headline)) {
             KeyExpansionAnimationView(viewModel: viewModel.keyExpansionViewModel)
         }
-        .buttonStyle(BorderedButtonStyle())
-        .fontWeight(.semibold)
         .opacity(viewModel.showButtons)
     }
     

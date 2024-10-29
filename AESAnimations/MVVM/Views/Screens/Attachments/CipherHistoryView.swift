@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CipherHistoryView: View {
+    let navigationTitle: String
     let cipherRounds: [CipherRound]
     let isDecryption: Bool
     
@@ -56,7 +57,7 @@ struct CipherHistoryView: View {
     
     var body: some View {
         GenericDataView(
-            navigationTitle: isDecryption ? "Entschlüsselungs-Verlauf" : "Verschlüsselungs-Verlauf",
+            navigationTitle: navigationTitle,
             data: cipherRowData,
             header: header
         )

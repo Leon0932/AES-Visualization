@@ -21,24 +21,23 @@ struct SubBytesAnimationView: View {
             }
         }
         .toolbar(content: sBoxAnimationButton)
-        .platformSpecificNavigation(isPresented: $viewModel.showSBoxAnimation) {
+        .specificNavigation(isPresented: $viewModel.showSBoxAnimation) {
             SBoxAnimationView(viewModel: viewModel.sBoxAnimationViewModel)
         }
     }
     
     // MARK: - State View
     private var currentStateView: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        let searchPosition = viewModel.searchStatePosition
+        
+        return VStack(alignment: .leading, spacing: 10) {
             Text(viewModel.animationControl.isDone ? "Neuer State" : "Aktueller State")
                 .font(.headline)
             
             stateGridView
             
             Text("Search State")
-                .offset(
-                    x: viewModel.searchStatePosition.x,
-                    y: viewModel.searchStatePosition.y
-                )
+                .offset(x: searchPosition.x, y: searchPosition.y)
                 .opacity(viewModel.searchState)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -49,12 +48,11 @@ struct SubBytesAnimationView: View {
             ForEach(0..<viewModel.state.count, id: \.self) { row in
                 HStack(spacing: 10) {
                     ForEach(0..<viewModel.state[row].count, id: \.self) { col in
+                        let position = viewModel.positions[row][col]
+                        
                         cellStack(row: row, col: col)
                             .frame(width: 40, height: 40)
-                            .offset(
-                                x: viewModel.positions[row][col].x,
-                                y: viewModel.positions[row][col].y
-                            )
+                            .offset(x: position.x, y: position.y)
                     }
                 }
             }
@@ -62,20 +60,22 @@ struct SubBytesAnimationView: View {
     }
     
     private func cellStack(row: Int, col: Int) -> some View {
-        ZStack {
-            if viewModel.splitByte[row][col] {
-                splitView(value: viewModel.state[row][col])
+        let splitByte = viewModel.splitByte[row][col]
+        let value = viewModel.state[row][col]
+        
+        return ZStack {
+            if splitByte {
+                splitView(value: value)
                     .transition(.scale)
-                    .animation(.spring(duration: 0.5), value: viewModel.splitByte[row][col])
+                    .animation(.spring(duration: 0.5), value: splitByte)
             }
             
             CellView(
-                value: viewModel.state[row][col],
+                value: value,
                 boxSize: 40,
-                backgroundColor: viewModel.backgroundColor(row: row, col: col),
-                foregroundColor: viewModel.foregroundColor(row: row, col: col)
+                backgroundColor: viewModel.backgroundColor(row: row, col: col)
             )
-            .opacity(viewModel.splitByte[row][col] ? 0 : 1)
+            .opacity(splitByte ? 0 : 1)
         }
     }
     
@@ -84,8 +84,7 @@ struct SubBytesAnimationView: View {
             CellView(
                 value: (value & 0xF0) >> 4,
                 boxSize: 40,
-                backgroundColor: .accentColor,
-                foregroundColor: .white,
+                backgroundColor: .activeByteColor(value),
                 valueFormat: .oneDigit
             )
             
@@ -94,8 +93,7 @@ struct SubBytesAnimationView: View {
             CellView(
                 value: value & 0x0F,
                 boxSize: 40,
-                backgroundColor: .accentColor,
-                foregroundColor: .white,
+                backgroundColor: .activeByteColor(value),
                 valueFormat: .oneDigit
             )
         }
@@ -104,8 +102,9 @@ struct SubBytesAnimationView: View {
     // MARK: - S-Box View
     private var sBoxView: some View {
         SBoxView(
-            searchResult: $viewModel.searchResult,
             isInverseMode: viewModel.operationDetails.isInverseMode,
+            sBoxIndex: viewModel.currentByte,
+            searchResult: viewModel.searchResult,
             searchX: viewModel.searchX,
             searchY: viewModel.searchY
         )
@@ -114,10 +113,9 @@ struct SubBytesAnimationView: View {
     // MARK: - Toolbar Item
     private func sBoxAnimationButton() -> some ToolbarContent {
         ToolbarItem {
-            Button("Zeige \(viewModel.operationDetails.isInverseMode ? "inverse" : "") S-Box Berechnung") {
-                viewModel.showSBoxAnimation.toggle()
-            }
-            .buttonStyle(BorderedButtonStyle())
+            CustomButtonView(title: viewModel.operationDetails.isInverseMode ? OperationNames.invSBox.description : OperationNames.sBox.description,
+                             buttonStyle: .secondary,
+                             action: viewModel.toggleSBoxAnimation)
             .opacity(viewModel.animationControl.isDone ? 1 : 0)
         }
     }

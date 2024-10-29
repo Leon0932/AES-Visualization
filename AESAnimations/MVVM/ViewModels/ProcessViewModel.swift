@@ -55,43 +55,48 @@ class ProcessViewModel: AnimationViewModel {
         var result = currentState
         let shiftRowsHistory = aesState.shiftRows(state: &result, isInverse: operationDetails.isInverseMode)
         
-        return ShiftRowsViewModel(state: currentState,
-                                  result: result,
-                                  operationDetails: OperationDetails(operationName: .shiftRows,
-                                                                     isInverseMode: operationDetails.isInverseMode,
-                                                                     currentRound: currentRoundNumber),
-                                  shiftRowRounds: shiftRowsHistory)
+        return ShiftRowsViewModel(
+            state: currentState,
+            result: result,
+            operationDetails: getOperationDetails(for: .subBytes),
+            shiftRowRounds: shiftRowsHistory)
     }
     var subBytesViewModel: SubBytesViewModel {
         var result = currentState
         aesState.subBytes(state: &result, isInverse: operationDetails.isInverseMode)
         
-        return SubBytesViewModel(state: currentState,
-                                 result: result,
-                                 operationDetails: OperationDetails(operationName: .subBytes,
-                                                                    isInverseMode: operationDetails.isInverseMode,
-                                                                    currentRound: currentRoundNumber))
+        return SubBytesViewModel(
+            state: currentState,
+            result: result,
+            operationDetails: getOperationDetails(for: .subBytes)
+        )
     }
     var mixColumnsViewModel: MixColumnsViewModel {
         var result = currentState
         aesState.mixColumns(state: &result, isInverse: operationDetails.isInverseMode)
         
-        return MixColumnsViewModel(state: currentState,
-                                   result: result,
-                                   operationDetails: OperationDetails(operationName: .mixColumns,
-                                                                      isInverseMode: operationDetails.isInverseMode,
-                                                                      currentRound: currentRoundNumber))
+        return MixColumnsViewModel(
+            state: currentState,
+            result: result,
+            operationDetails: getOperationDetails(for: .mixColumns)
+        )
     }
     var addRoundKeyViewModel: AddRoundKeyViewModel {
         var result = currentState
         aesState.addRoundKey(state: &result, key: currentRoundKey)
         
-        return AddRoundKeyViewModel(state: currentState,
-                                    key: currentRoundKey,
-                                    result: result,
-                                    operationDetails: OperationDetails(operationName: .addRoundKey,
-                                                                       isInverseMode: operationDetails.isInverseMode,
-                                                                       currentRound: currentRoundNumber))
+        return AddRoundKeyViewModel(
+            state: currentState,
+            key: currentRoundKey,
+            result: result,
+            operationDetails: getOperationDetails(for: .addRoundKey)
+        )
+    }
+    
+    private func getOperationDetails(for operation: OperationNames) -> OperationDetails {
+        OperationDetails(operationName: operation,
+                         isInverseMode: operationDetails.isInverseMode,
+                         currentRound: currentRoundNumber)
     }
     
     // Computed Properties
@@ -99,6 +104,7 @@ class ProcessViewModel: AnimationViewModel {
     var key: [[Byte]] { aesCipher.getKey.convertToState() }
     var result: [[Byte]] { aesCipher.getResult }
     var cipherHistory: [CipherRound] { aesCipher.getCipherHistory }
+    var sheetTitle: String { operationDetails.isInverseMode ? "Entschlüsselungs-Verlauf" : "Verschlüsselungs-Verlauf" }
     
     // MARK: - Initializer
     init(operationDetails: OperationDetails, aesState: AESState, aesCipher: AESCipher) {
@@ -246,14 +252,15 @@ class ProcessViewModel: AnimationViewModel {
         reverseAnimationSteps.append(contentsOf: [moveToMainSteps.1, updateRoundNumber.1])
         
         createPhase(phase: 3, round: aesCipher.getNrOfRounds, phaseAnimations: phaseThree)
-        addShowHideRoundKeySteps(hide: 0.0, show: 1.0)
+        
         
         let moveToEnd = moveBall(for: 20, delay: 200_000_000)
         let resetSavedPosition = AnimationStep { self.savedPositionMoved = 0 }
-
+        
         animationSteps.append(contentsOf: [moveToEnd.0, resetSavedPosition])
         reverseAnimationSteps.append(contentsOf: [moveToEnd.1, resetSavedPosition])
-
+        addShowHideRoundKeySteps(hide: 0.0, show: 1.0)
+        
         startAnimations()
     }
     
@@ -375,7 +382,6 @@ class ProcessViewModel: AnimationViewModel {
         }, delay: 300_000_000)
         reverseSteps.append(moveUp)
         
-        
         for process in phaseTwo  {
             let highlightOp = highlightOperation(phase: 2,
                                                  index: process.index,
@@ -386,12 +392,13 @@ class ProcessViewModel: AnimationViewModel {
             reverseSteps += highlightOp.1
             
         }
+        
         let moveDown = AnimationStep(animation: {
             withAnimation(.linear) {
                 let number = Int(self.ballPosition)
                 let secondNumber = (number / 10) % 10
                 if secondNumber % 2 != 0 { return }
-          
+                
                 self.ballPosition += 10
             }
         }, delay: 300_000_000)
@@ -518,7 +525,6 @@ class ProcessViewModel: AnimationViewModel {
                 
             }
         }, delay: 250_000_000)
-        
         let moveBallFirstRev = AnimationStep(animation: {
             if self.ballPosition - 30 == self.savedPositionMoved { return }
             withAnimation(.linear) {
@@ -535,27 +541,21 @@ class ProcessViewModel: AnimationViewModel {
             }
             
         }, delay: 60_000_000)
-        
         let moveBallSecondRev = AnimationStep(animation: { withAnimation(.linear) { self.ballPosition -= 30 } }, delay: 60_000_000)
         
-        let normalSteps = [highlightOperation, moveBallFirst, moveBallSecond,
-                           AnimationStep {
+        let updateValues = AnimationStep {
             withAnimation {
                 self.highlightOperation[phase]?[index] = false
                 guard let keyPath, let round else { return }
                 
                 self.currentState = self.cipherHistory[round][keyPath: keyPath]
-                if keyPath == \.afterAddRound {
+                if keyPath == \.afterAddRound && round < self.aesCipher.getNrOfRounds {
                     self.currentRoundKey = self.cipherHistory[round + 1][keyPath: \.roundKey]
-                    if self.currentRoundKeyNumber < self.aesCipher.getNrOfRounds {
-                        self.currentRoundKeyNumber += 1
-                    }
+                    self.currentRoundKeyNumber += 1
                 }
             }
         }
-        ]
-        
-        let reverseSteps = [AnimationStep {
+        let updateValuesRev = AnimationStep {
             withAnimation {
                 self.highlightOperation[phase]?[index] = false
                 guard let reverseKeyPath, let round else { return }
@@ -566,7 +566,10 @@ class ProcessViewModel: AnimationViewModel {
                     self.currentRoundKeyNumber -= 1
                 }
             }
-        }, moveBallSecondRev, moveBallFirstRev, highlightOperation]
+        }
+        
+        let normalSteps = [highlightOperation, moveBallFirst, moveBallSecond, updateValues]
+        let reverseSteps = [updateValuesRev, moveBallSecondRev, moveBallFirstRev, highlightOperation]
         
         return (normalSteps, reverseSteps)
     }
@@ -612,6 +615,21 @@ class ProcessViewModel: AnimationViewModel {
             currentRoundKeyNumber = showResult == 1.0 ? aesCipher.getNrOfRounds : 0
             savedPositionMoved = 0
         }
+    }
+    
+    // MARK: - Toggle Functions
+    func toggleCipherHistory() {
+        showCipherHistory.toggle()
+    }
+    
+    func toggleFullKey() {
+        showFullKey.toggle()
+    }
+    
+    func createCipherHistory() -> some View {
+        CipherHistoryView(navigationTitle: sheetTitle,
+                          cipherRounds: cipherHistory,
+                          isDecryption: operationDetails.isInverseMode)
     }
 }
 

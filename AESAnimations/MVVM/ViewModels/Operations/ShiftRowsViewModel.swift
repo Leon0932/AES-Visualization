@@ -265,4 +265,9 @@ class ShiftRowsViewModel: AnimationViewModel {
             positionCell = Position.default2DPositions(rows: 4, cols: 4)
         }
     }
+    
+    // MARK: - Toggle Functions
+    func toggleShiftRounds() {
+        showShiftRounds.toggle()
+    }
 }

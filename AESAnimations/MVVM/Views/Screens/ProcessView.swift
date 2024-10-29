@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProcessView: View {
     @StateObject var viewModel: ProcessViewModel
-    @AppStorage("selectedPrimaryColor") private var selectedPrimaryColor: PrimaryColor = .blue
+    @EnvironmentObject var settingsVM: SettingsViewModel
     
     // MARK: -
     var body: some View {
@@ -17,7 +17,7 @@ struct ProcessView: View {
             HStack {
                 buildStateColumn(leftColumn: true)
                 Spacer()
-                buildCenterColumn()
+                buildCenterColumn
                     .padding(.bottom, 65)
                 Spacer()
                 buildStateColumn(leftColumn: false)
@@ -25,65 +25,53 @@ struct ProcessView: View {
             .padding()
         }
         .toolbar(content: cipherHistoryButton)
-        .navigationDestination(isPresented: $viewModel.showAnimationView) { destinationView }
+        .navigationDestination(isPresented: $viewModel.showAnimationView,
+                               destination: destinationView)
         .onDisappear { viewModel.animationControl.changePause(to: true) }
-        .platformSpecificNavigation(isPresented: $viewModel.showCipherHistory) {
-            CipherHistoryView(cipherRounds: viewModel.cipherHistory,
-                              isDecryption: viewModel.operationDetails.isInverseMode)
-        }
+        .specificNavigation(isPresented: $viewModel.showCipherHistory,
+                            destination: viewModel.createCipherHistory)
         .sheet(isPresented: $viewModel.showFullKey, content: sheetView)
-    }
-    
-    // MARK: - Toolbar
-    private func cipherHistoryButton() -> some ToolbarContent {
-        ToolbarItem {
-            Button("Zeige Gesamten Verlauf") { viewModel.showCipherHistory.toggle() }
-                .buttonStyle(BorderedButtonStyle())
-                .opacity(viewModel.animationControl.isDone ? 1 : 0)
-        }
     }
     
     // MARK: - State Columns
     private func buildStateColumn(leftColumn: Bool) -> some View {
         VStack(spacing: 25) {
+            StateView(
+                title: leftColumn ? "Start-State" : (viewModel.animationControl.isDone ? "Ergebnis" : "Aktueller State"),
+                state: leftColumn ? viewModel.state : viewModel.currentState,
+                alignment: .leading
+            )
+            
             if leftColumn {
-                StateView(
-                    title: "Start-State",
-                    state: viewModel.state,
-                    backgroundColor: .reducedAccentColor,
-                    alignment: .leading
-                )
-                keyView()
+                if viewModel.aesCipher.getNk > 4 {
+                    keyButton
+                } else {
+                    keyView(title: keyTitle)
+                }
             } else {
-                StateView(
-                    title: viewModel.animationControl.isDone ? "Ergebnis" : "Aktueller State",
-                    state: viewModel.currentState,
-                    backgroundColor: .reducedAccentColor,
-                    alignment: .leading
-                )
                 StateView(
                     title: "Rundenschlüssel \(viewModel.currentRoundKeyNumber)",
                     state: viewModel.currentRoundKey,
-                    backgroundColor: .reducedAccentColor,
                     alignment: .leading
                 )
                 .opacity(viewModel.showRoundKeyColumn)
-                
             }
         }
     }
     
-    private func keyView() -> some View {
+    private func keyView(title: String? = nil) -> some View {
+        StateView(title: title, state: viewModel.key, alignment: .leading)
+    }
+    
+    private var keyButton: some View {
         HStack {
-            Text("Schlüssel (\(viewModel.aesCipher.getNk * 32)-Bit)")
+            Text(keyTitle)
             
             Spacer()
             
-            Button("Full Key") { viewModel.showFullKey.toggle() }
-                .foregroundColor(.accentColor)
-            #if os(macOS)
-                .buttonStyle(.plain)
-            #endif
+            CustomButtonView(icon: "arrow.up.left.and.arrow.down.right",
+                             buttonStyle: StandardButtonStyle(font: .title2),
+                             action: viewModel.toggleFullKey)
         }
         .font(.system(size: 17))
         .fontWeight(.semibold)
@@ -91,7 +79,7 @@ struct ProcessView: View {
     }
     
     // MARK: - Center Column with Animation and Rounds
-    private func buildCenterColumn() -> some View {
+    private var buildCenterColumn: some View {
         ZStack(alignment: .top) {
             VStack(alignment: .center, spacing: 25) {
                 roundView(phase: 0)
@@ -101,8 +89,9 @@ struct ProcessView: View {
                     .frame(maxWidth: .infinity)
                 
                 roundView(phase: 2, data: viewModel.phaseTwo)
-                    .background(HorizontalLine(mainRounds: viewModel.aesCipher.getNrOfRounds,
-                                               currentRound: $viewModel.currentRoundNumber)
+                    .background(
+                        HorizontalLine(mainRounds: viewModel.aesCipher.getNrOfRounds,
+                                       currentRound: $viewModel.currentRoundNumber)
                     )
                 
                 roundView(phase: 3, data: viewModel.phaseThree)
@@ -116,7 +105,7 @@ struct ProcessView: View {
             Circle()
                 .frame(width: 20, height: 20)
                 .offset(x: viewModel.ballPositionX, y: viewModel.ballPosition)
-                .foregroundColor(.accentColor)
+                .foregroundStyle(Color.accentColor)
             
         }
     }
@@ -129,7 +118,9 @@ struct ProcessView: View {
                              currentPosition: 0,
                              text: "KeyExpansion",
                              keyPath: \.roundKey,
-                             color: (viewModel.highlightOperation[phase]?[0] == true) ? .blue : .blue.opacity(0.5))
+                             color: (viewModel.highlightOperation[phase]?[0] == true)
+                             ? .blue
+                             : .blue.opacity(0.5))
         } else {
             VStack(alignment: .leading, spacing: 10) {
                 ForEach(Array(data.enumerated()), id: \.0) { i, element in
@@ -147,7 +138,11 @@ struct ProcessView: View {
     
     // MARK: - Sub Round Step View
     @ViewBuilder
-    private func subRoundStepView(phase: Int, currentPosition: Int, text: String, keyPath: KeyPath<CipherRound, [[Byte]]>, color: Color) -> some View {
+    private func subRoundStepView(phase: Int,
+                                  currentPosition: Int,
+                                  text: String,
+                                  keyPath: KeyPath<CipherRound, [[Byte]]>,
+                                  color: Color) -> some View {
         if viewModel.highlightOperation[phase]?[currentPosition] == true {
             Button {
                 viewModel.selectedKeyPath = keyPath
@@ -157,6 +152,8 @@ struct ProcessView: View {
             }
             #if os(macOS)
             .buttonStyle(.plain)
+            #else
+            .hoverEffect(.lift)
             #endif
         } else {
             operationRectangleView(text: text, color: color)
@@ -169,48 +166,43 @@ struct ProcessView: View {
             .frame(width: 200, height: 40)
             .overlay(
                 Text(text)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
             )
             .padding(.vertical, 5)
     }
     
     // MARK: - Sheet View
     private func sheetView() -> some View {
-        VStack(alignment: .center, spacing: 25) {
-            StateView(
-                title: "Schlüssel (\(viewModel.aesCipher.getNk * 32)-Bit)",
-                state: viewModel.key,
-                backgroundColor: .reducedAccentColor,
-                alignment: .leading
-            )
-            
-            CustomButton<Never>(title: "Schließen", useMaxWidth: false) {
-                viewModel.showFullKey.toggle()
-            }
+        SheetContainerView(navigationTitle: keyTitle) {
+            keyView()
         }
-        .padding(20)
-        .accentColor(selectedPrimaryColor.color)
     }
     
     // MARK: - Helper functions
     @ViewBuilder
-    var destinationView: some View {
+    private func destinationView() -> some View {
         switch viewModel.selectedKeyPath {
-        case \.roundKey:
-            KeyView(viewModel: viewModel.keyViewModel)
-        case \.afterAddRound:
-            AddRoundKeyAnimationView(viewModel: viewModel.addRoundKeyViewModel)
-        case \.afterSubBytes:
-            SubBytesAnimationView(viewModel: viewModel.subBytesViewModel)
-        case \.afterShiftRows:
-            ShiftRowsAnimationView(viewModel: viewModel.shiftRowsViewModel)
-        case \.afterMixColumns:
-            MixColumnAnimationView(viewModel: viewModel.mixColumnsViewModel)
+        case \.roundKey:        KeyView(viewModel: viewModel.keyViewModel)
+        case \.afterAddRound:   AddRoundKeyAnimationView(viewModel: viewModel.addRoundKeyViewModel)
+        case \.afterSubBytes:   SubBytesAnimationView(viewModel: viewModel.subBytesViewModel)
+        case \.afterShiftRows:  ShiftRowsAnimationView(viewModel: viewModel.shiftRowsViewModel)
+        case \.afterMixColumns: MixColumnAnimationView(viewModel: viewModel.mixColumnsViewModel)
             
         default:
-            Text("Hi")
+            Text("Die Operation existiert nicht")
         }
     }
+    
+    private func cipherHistoryButton() -> some ToolbarContent {
+        ToolbarItem {
+            CustomButtonView(title: viewModel.sheetTitle,
+                             buttonStyle: .secondary,
+                             action: viewModel.toggleCipherHistory)
+            .opacity(viewModel.animationControl.isDone ? 1 : 0)
+        }
+    }
+    
+    private var keyTitle: String { "Schlüssel (\(viewModel.aesCipher.getNk * 32)-Bit)" }
 }
 
 // MARK: - Draw Lines
@@ -281,7 +273,8 @@ extension ProcessView {
                                  backgroundColor: .lightGray,
                                  valueFormat: .number)
                     }
-                    .position(x: geometry.size.width / 2 - 200, y: geometry.size.height / 2)
+                    .position(x: geometry.size.width / 2 - 200,
+                              y: geometry.size.height / 2)
                 }
             }
         }

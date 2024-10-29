@@ -8,13 +8,11 @@
 import SwiftUI
 
 extension View {
-    func boxSize() -> CGFloat {
+    func boxSizeForiPad() -> CGFloat {
         #if os(iOS)
         return isPad13Size() ? 40 : 35
-        #elseif os(macOS)
-        return 37
         #else
-        return 35
+        return 37
         #endif
     }
     
@@ -40,19 +38,27 @@ extension View {
             .automatic
             #endif
         }()) {
-            Button(action: action) {
-                Image(systemName: "xmark")
-                    .foregroundColor(.accentColor)
-            }
+            CustomButtonView(icon: "xmark",
+                             buttonStyle: .standard,
+                             action: action)
         }
     }
     
-    func platformSpecificNavigation<Destination: View>(isPresented: Binding<Bool>,
-                                                       destination: @escaping () -> Destination) -> some View {
+    // MARK: - View Modifiers 
+    func specificNavigation<Destination: View>(isPresented: Binding<Bool>,
+                                               destination: @escaping () -> Destination) -> some View {
         self.modifier(PlatformSpecificNavigationModifier(isPresented: isPresented, destination: destination))
     }
     
     func customNavigationBackButton(isDone: Bool = true) -> some View {
-           self.modifier(NavigationBackButtonModifier(isDone: isDone))
-       }
+        self.modifier(NavigationBackButtonModifier(isDone: isDone))
+    }
+    
+    func pressEffect(isPressed: Bool) -> some View {
+        self.modifier(PressEffectModifier(isPressed: isPressed))
+    }
+    
+    func highlightEffect(isHovered: Binding<Bool>) -> some View {
+        self.modifier(HighlightEffectModifier(isHovered: isHovered))
+    }
 }
