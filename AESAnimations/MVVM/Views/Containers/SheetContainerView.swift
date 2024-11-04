@@ -27,7 +27,7 @@ struct SheetContainerView<Content: View>: View {
     var body: some View {
         NavigationStack {
             Group {
-#if os(macOS)
+                #if os(macOS)
                 VStack(spacing: 20) {
                     navigationTitleMac
                     content
@@ -35,15 +35,15 @@ struct SheetContainerView<Content: View>: View {
                 }
                 .padding()
                 .frame(maxHeight: .infinity, alignment: .top)
-#else
+                #else
                 content
-#endif
+                #endif
             }
-#if os(iOS)
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(navigationTitle)
             .toolbar { closeButton { dismiss() } }
-#endif
+            #endif
             .accentColor(settingsVM.primaryColor.color)
         }
     }
