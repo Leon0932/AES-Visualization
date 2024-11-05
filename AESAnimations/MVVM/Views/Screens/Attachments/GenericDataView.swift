@@ -15,6 +15,7 @@ struct GenericDataView: View {
     let data: [[Any]]
     let header: [(String, CGFloat)]
     
+    @State private var showByteColors: Bool = true
     // MARK: -
     var body: some View {
         NavigationStack {
@@ -27,6 +28,7 @@ struct GenericDataView: View {
                 
             }
             .navigationTitle(navigationTitle)
+            .toolbar(content: switchButton)
             .listStyle(.plain)
             #if os(iOS)
             .toolbar { closeButton { dismiss() } }
@@ -104,7 +106,11 @@ struct GenericDataView: View {
                 placeholderCell
             } else {
                 ForEach(0..<min(4, data.count), id: \.self) { index in
-                    CellView(value: data[index], boxSize: 30, backgroundColor: .lightGray)
+                    let data = data[index]
+                    
+                    CellView(value: data,
+                             boxSize: 30,
+                             backgroundColor: showByteColors ? .reducedByteColor(data) : .lightGray)
                 }
             }
         }
@@ -119,6 +125,12 @@ struct GenericDataView: View {
                 .frame(width: 30, height: 30)
                 .foregroundStyle(.clear)
                 .overlay(Rectangle().stroke(Color.clear))
+        }
+    }
+    
+    private func switchButton() -> some ToolbarContent {
+        ToolbarItem(placement: .automatic) {
+            Toggle("Zeige Bunte Farben", isOn: $showByteColors)
         }
     }
 }

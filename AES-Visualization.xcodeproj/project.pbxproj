@@ -226,7 +226,6 @@
 				C31E69C52C88988E00230D22 /* RoundKeyHistory.swift */,
 				C3CD1D452CA9E27F006C9804 /* ShiftRowHistory.swift */,
 				C3AEE3D62CAB19F4002F60CE /* CipherHistoryView.swift */,
-				C30E9AF92CBE43E100DF5AE5 /* SBoxAnimationView.swift */,
 			);
 			path = Attachments;
 			sourceTree = "<group>";
@@ -399,6 +398,7 @@
 		C38734E22C6928EC00E835DB /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C30E9AF92CBE43E100DF5AE5 /* SBoxAnimationView.swift */,
 				C31E69C42C88988100230D22 /* Attachments */,
 				C38734F92C6EA63F00E835DB /* Operations */,
 				C37BA0802C397D5800C87BB7 /* MainView.swift */,
