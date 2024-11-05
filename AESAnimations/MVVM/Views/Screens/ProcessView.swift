@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ProcessView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     @StateObject var viewModel: ProcessViewModel
     @EnvironmentObject var settingsVM: SettingsViewModel
     
@@ -161,14 +163,20 @@ struct ProcessView: View {
     }
     
     private func operationRectangleView(text: String, color: Color) -> some View {
-        RoundedRectangle(cornerRadius: 10)
-            .fill(color)
-            .frame(width: 200, height: 40)
-            .overlay(
-                Text(text)
-                    .foregroundStyle(.white)
-            )
-            .padding(.vertical, 5)
+        ZStack {
+            Rectangle()
+                .fill(colorScheme == .dark ? .black : .white)
+                .frame(width: 2, height: 40)
+            
+            RoundedRectangle(cornerRadius: 10)
+                .fill(color)
+                .frame(width: 200, height: 40)
+                .overlay(
+                    Text(text)
+                        .foregroundStyle(.white)
+                )
+                .padding(.vertical, 5)
+        }
     }
     
     // MARK: - Sheet View
