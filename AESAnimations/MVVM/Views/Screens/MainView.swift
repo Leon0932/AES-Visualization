@@ -9,27 +9,41 @@ import SwiftUI
 import TipKit
 
 struct MainView: View {
-    @Environment(\.openWindow) var openWindow
-    
     @StateObject var viewModel = MainViewModel()
     // MARK: -
     var body: some View {
         NavigationStack {
-            VStack(spacing: estimateSpacing) {
-                modePicker
-                matrixViews
-                actionButtons
+            ZStack(alignment: estimateAlignment) {
+                hsAalenLogo
+                mainContent
             }
-            .padding()
-            .frame(maxHeight: .infinity, alignment: .top)
             .navigationTitle("Visualisierung von AES")
             .toolbar(content: toolbarItem)
+            .onChange(of: viewModel.selectedEncryptionMode) {
+                viewModel.handlePickerChange(newValue: $1)
+            }
             .sheet(isPresented: $viewModel.showAuthor) { AuthorView() }
             .sheet(isPresented: $viewModel.showSettings) { SettingsView() }
         }
-        .onChange(of: viewModel.selectedEncryptionMode) {
-            viewModel.handlePickerChange(newValue: $1)
+    }
+    
+    // MARK: - Main Content
+    private var hsAalenLogo: some View {
+        Image("hs-aalen-logo")
+            .frame(maxWidth: .infinity)
+            .opacity(0.6)
+            .scaledToFit()
+            .padding(.top, estimatePadding)
+    }
+    
+    private var mainContent: some View {
+        VStack(spacing: estimateSpacing) {
+            modePicker
+            matrixViews
+            actionButtons
         }
+        .padding()
+        .frame(maxHeight: .infinity, alignment: .top)
     }
     
     // MARK: - Encryption Mode Selection
@@ -91,6 +105,22 @@ struct MainView: View {
         105
         #else
         isPad13Size() ? 120 : 45
+        #endif
+    }
+    
+    var estimateAlignment: Alignment {
+        #if os(macOS)
+        .top
+        #else
+        isPad13Size() ? .top : .center
+        #endif
+    }
+    
+    var estimatePadding: CGFloat {
+        #if os(macOS)
+        35
+        #else
+        isPad13Size() ? 35 : 0
         #endif
     }
 }
