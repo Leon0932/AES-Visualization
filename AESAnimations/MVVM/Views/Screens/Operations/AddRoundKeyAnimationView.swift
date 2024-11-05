@@ -51,7 +51,7 @@ struct AddRoundKeyAnimationView: View {
     // MARK: - State and Key View
     private var stateAndKeyView: some View {
         HStack {
-            StateView(title: "State",
+            StateView(title: "Zustand",
                       state: viewModel.state,
                       position: .twoD(viewModel.positionState))
             

@@ -14,6 +14,8 @@ struct EditableMatrixView: View {
     let icon: String
     @Binding var matrix: Matrix
     
+    var boxSize: CGFloat = 80
+    
     // MARK: -
     var body: some View {
         VStack(spacing: 16) {
@@ -27,16 +29,24 @@ struct EditableMatrixView: View {
     
     // MARK: - Header View
     private var headerView: some View {
-        HStack(spacing: 24) {
+        HStack {
             Label(title: { Text(title) },
                   icon: { Image(systemName: icon) })
             .font(.title)
+            
+            Spacer()
             
             CustomButtonView(icon: "dice",
                              buttonStyle: SecondaryButtonStyle(font: .title)) {
                 matrix.generateAndFillRandomBytes()
             }
+            
+            CustomButtonView(icon: "xmark",
+                             buttonStyle: SecondaryButtonStyle(font: .largeTitle)) {
+                matrix.clearData()
+            }
         }
+        .frame(maxWidth: boxSize * CGFloat(matrix.columns))
     }
     
     // MARK: - Matrix View
@@ -56,7 +66,7 @@ struct EditableMatrixView: View {
         ZStack(alignment: .center) {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(borderColor(for: row, column: column), lineWidth: 2)
-                .frame(width: 80, height: 80)
+                .frame(width: boxSize, height: boxSize)
             
             cellEditorView(row: row, column: column)
                 .fontDesign(.monospaced)

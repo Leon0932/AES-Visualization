@@ -46,6 +46,10 @@ struct Matrix {
         }
     }
     
+    mutating func clearData() {
+        data = Array(repeating: Array(repeating: "", count: columns), count: rows)
+    }
+    
     private func generateRandomBytes(count: Int) -> [Byte]? {
         var bytes = [Byte](repeating: 0, count: count)
         let status = SecRandomCopyBytes(kSecRandomDefault, count, &bytes)

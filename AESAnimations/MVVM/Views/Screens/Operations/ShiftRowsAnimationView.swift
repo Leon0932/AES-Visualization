@@ -16,7 +16,7 @@ struct ShiftRowsAnimationView: View {
     var body: some View {
         AnimationContainerView(viewModel: viewModel) {
             VStack(alignment: .leading, spacing: 10) {
-                Text("State")
+                Text("Zustand")
                     .font(.title)
                 
                 VStack(spacing: 10) {

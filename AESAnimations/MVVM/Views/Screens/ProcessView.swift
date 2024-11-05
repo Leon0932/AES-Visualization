@@ -37,7 +37,7 @@ struct ProcessView: View {
     private func buildStateColumn(leftColumn: Bool) -> some View {
         VStack(spacing: 25) {
             StateView(
-                title: leftColumn ? "Start-State" : (viewModel.animationControl.isDone ? "Ergebnis" : "Aktueller State"),
+                title: leftColumn ? "Start-Zustand" : (viewModel.animationControl.isDone ? "Ergebnis" : "Aktueller Zustand"),
                 state: leftColumn ? viewModel.state : viewModel.currentState,
                 alignment: .leading
             )
