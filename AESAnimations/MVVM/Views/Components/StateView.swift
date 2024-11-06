@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StateView: View {
     // MARK: - Properties
-    var title: String?
+    var title: LocalizedStringKey?
     var state: [[Byte]]
     var position: PositionType = .oneD(Array(repeating: Position(x: 0.0, y: 0.0), count: 8))
     var opacity: OpacityType = .oneD(Array(repeating: 1.0, count: 8))
@@ -32,7 +32,7 @@ struct StateView: View {
     }
     
     // MARK: - Title View
-    func titleView(for title: String) -> some View {
+    func titleView(for title: LocalizedStringKey) -> some View {
         Text(title)
             .font(.system(size: 17))
             .fontWeight(.semibold)

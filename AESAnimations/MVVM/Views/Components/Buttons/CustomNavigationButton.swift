@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomNavigationButton<Content: View, Style: ButtonStyle>: View {
     // MARK: - Properties
-    var title: String? = nil
+    var title: LocalizedStringKey? = nil
     var icon: String? = nil
     let buttonStyle: Style
     let destination: () -> Content

@@ -10,6 +10,9 @@ import SwiftUI
 class SettingsViewModel: ObservableObject {
     @AppStorage("colorScheme") var colorScheme: AppScheme = .system
     @AppStorage("primaryColor") var primaryColor: PrimaryColor = .blue
+    @AppStorage("language") var appLanguage: String = Locale.current.language.languageCode?.identifier ?? "en"
+    
+    @Published var showAlert = false
     
     func updateScheme() {
         #if os(iOS)
@@ -23,5 +26,9 @@ class SettingsViewModel: ObservableObject {
             NSApp.appearance = NSAppearance(named: colorScheme == .dark ? .darkAqua : .aqua)
         }
         #endif
+    }
+    
+    func changeLanguage() {
+        appLanguage = (appLanguage == "en") ? "de" : "en"
     }
 }

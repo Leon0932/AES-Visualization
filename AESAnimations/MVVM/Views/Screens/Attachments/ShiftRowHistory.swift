@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShiftRowHistory: View {
-    let navigationTitle: String
+    let navigationTitle: LocalizedStringKey
     let shiftRowRounds: [ShiftRowRound]
     
     let header: [(String, CGFloat)] = [

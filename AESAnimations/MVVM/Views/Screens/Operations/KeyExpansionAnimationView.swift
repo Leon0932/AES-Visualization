@@ -11,7 +11,7 @@ struct KeyExpansionAnimationView: View {
     @StateObject var viewModel: KeyExpansionViewModel 
     let columns = Array(repeating: GridItem(.flexible(minimum: 230)), count: 4)
     
-    var buttonTitle: String { "Rundenschlüssel-Verlauf" }
+    var buttonTitle: LocalizedStringKey { "Rundenschlüssel-Verlauf" }
     
     // MARK: -
     var body: some View {

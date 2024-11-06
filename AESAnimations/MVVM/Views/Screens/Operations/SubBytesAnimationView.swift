@@ -31,7 +31,7 @@ struct SubBytesAnimationView: View {
         let searchPosition = viewModel.searchStatePosition
         
         return VStack(alignment: .leading, spacing: 10) {
-            Text(viewModel.animationControl.isDone ? "Neuer State" : "Aktueller State")
+            Text(viewModel.animationControl.isDone ? "Neuer Zustand" : "Aktueller Zustand")
                 .font(.headline)
             
             stateGridView
@@ -113,7 +113,10 @@ struct SubBytesAnimationView: View {
     // MARK: - Toolbar Item
     private func sBoxAnimationButton() -> some ToolbarContent {
         ToolbarItem {
-            CustomButtonView(title: viewModel.operationDetails.isInverseMode ? OperationNames.invSBox.description : OperationNames.sBox.description,
+            let sBox = LocalizedStringKey(OperationNames.sBox.description)
+            let invSBox = LocalizedStringKey(OperationNames.invSBox.description)
+            
+            CustomButtonView(title: viewModel.operationDetails.isInverseMode ? invSBox : sBox,
                              buttonStyle: .secondary,
                              action: viewModel.toggleSBoxAnimation)
             .opacity(viewModel.animationControl.isDone ? 1 : 0)

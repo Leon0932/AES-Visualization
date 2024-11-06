@@ -1,0 +1,509 @@
+{
+  "sourceLanguage" : "de",
+  "strings" : {
+    "" : {
+      "shouldTranslate" : false
+    },
+    "%@%@ (Runde %lld)" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@ (Runde %3$lld)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@%2$@ (Round %3$lld)"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "shouldTranslate" : false
+    },
+    "2x" : {
+      "shouldTranslate" : false
+    },
+    "AddRoundKey" : {
+      "shouldTranslate" : false
+    },
+    "Affine Transformation (b' = inv)" : {
+      "shouldTranslate" : false
+    },
+    "Aktuelle Runde:" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Round:"
+          }
+        }
+      }
+    },
+    "Aktueller Zustand" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current State"
+          }
+        }
+      }
+    },
+    "Aktuelles Byte" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Byte"
+          }
+        }
+      }
+    },
+    "Alter State" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Old State"
+          }
+        }
+      }
+    },
+    "Die App wurde von **Leon Chamoun** im Rahmen einer Bachelorarbeit entwickelt, die von **Prof. Dr. Christoph Karg** betreut wurde." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The app was developed by **Leon Chamoun** as part of a bachelor thesis supervised by **Prof. Dr. Christoph Karg**."
+          }
+        }
+      }
+    },
+    "Die Operation existiert nicht" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The operation does not exist"
+          }
+        }
+      }
+    },
+    "Einstellungen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "Entschlüsseln" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decrypt"
+          }
+        }
+      }
+    },
+    "Entschlüsselungs-Verlauf" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decryption History"
+          }
+        }
+      }
+    },
+    "Entschlüsselungsprozess" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encryption History"
+          }
+        }
+      }
+    },
+    "Ergebnis" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Result"
+          }
+        }
+      }
+    },
+    "Für die Änderung der Sprache wird ein neuer Start der App erforderlich sein." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You will need to restart the app to change the language."
+          }
+        }
+      }
+    },
+    "Generierung der Rundenschlüssel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generation of Round keys"
+          }
+        }
+      }
+    },
+    "Gültiges Hex-Byte erforderlich (00-FF)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valid hex byte required (00-FF)"
+          }
+        }
+      }
+    },
+    "Hauptrunden:" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Main rounds:"
+          }
+        }
+      }
+    },
+    "Inverse S-Box Erstellung" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inverse S-Box creation"
+          }
+        }
+      }
+    },
+    "Key" : {
+      "shouldTranslate" : false
+    },
+    "KeyExpansion" : {
+      "shouldTranslate" : false
+    },
+    "Linksverschiebung um %lld-Shifts" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Left shift by %lld shifts"
+          }
+        }
+      }
+    },
+    "MixColumns" : {
+      "shouldTranslate" : false
+    },
+    "Multiplikates Inverses" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Multiplicative inverse"
+          }
+        }
+      }
+    },
+    "N/A" : {
+      "shouldTranslate" : false
+    },
+    "Neuer State" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New State"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
+    "Neuer Zustand" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New State"
+          }
+        }
+      }
+    },
+    "Neustart" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restart"
+          }
+        }
+      }
+    },
+    "Position der S-Box" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position of the S-Box"
+          }
+        }
+      }
+    },
+    "Rundenschlüssel %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round key %lld"
+          }
+        }
+      }
+    },
+    "Rundenschlüssel %lld:" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round key %lld:"
+          }
+        }
+      }
+    },
+    "Rundenschlüssel-Verlauf" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round key History"
+          }
+        }
+      }
+    },
+    "S-Box Erstellung" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S-Box creation"
+          }
+        }
+      }
+    },
+    "Schlüssel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key"
+          }
+        }
+      }
+    },
+    "Schlüssel (%lld-Bit)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key (%lld-Bit)"
+          }
+        }
+      }
+    },
+    "Schlüssel-Animation ansehen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View Key animation"
+          }
+        }
+      }
+    },
+    "Search State" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Search State"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
+    "ShiftRows" : {
+      "shouldTranslate" : false
+    },
+    "ShiftRows-Verlauf" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ShiftRows history"
+          }
+        }
+      }
+    },
+    "Start-Zustand" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start State"
+          }
+        }
+      }
+    },
+    "SubBytes" : {
+      "shouldTranslate" : false
+    },
+    "Umgekehrt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reversed"
+          }
+        }
+      }
+    },
+    "Urheber der App" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creator of the app"
+          }
+        }
+      }
+    },
+    "Verschlüsseln" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encrypt"
+          }
+        }
+      }
+    },
+    "Verschlüsselungs-Verlauf" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encryption History"
+          }
+        }
+      }
+    },
+    "Verschlüsselungsprozess" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encryption process"
+          }
+        }
+      }
+    },
+    "Visualisierung von AES" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visualization of AES"
+          }
+        }
+      }
+    },
+    "Wähle Akzentfarbe (%@)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Accent Color (%@)"
+          }
+        }
+      }
+    },
+    "Wähle App-Sprache (%@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select App Language(%@)"
+          }
+        }
+      }
+    },
+    "Wähle Erscheinungsbild (%@)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Appearance (%@)"
+          }
+        }
+      }
+    },
+    "Wert der S-Box" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Value of the S-Box"
+          }
+        }
+      }
+    },
+    "Wiederholen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repeat"
+          }
+        }
+      }
+    },
+    "Zeige Bunte Farben" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show mixed Colors"
+          }
+        }
+      }
+    },
+    "Zustand" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "State"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

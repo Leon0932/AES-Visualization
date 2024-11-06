@@ -10,7 +10,7 @@ import SwiftUI
 struct ShiftRowsAnimationView: View {
     @StateObject var viewModel: ShiftRowsViewModel
     
-    var buttonTitle: String { "ShiftRows-Verlauf" }
+    var buttonTitle: LocalizedStringKey { "ShiftRows-Verlauf" }
     
     // MARK: -
     var body: some View {

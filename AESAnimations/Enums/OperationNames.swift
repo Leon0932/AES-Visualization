@@ -6,30 +6,31 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum OperationNames: CustomStringConvertible {
     case shiftRows, subBytes, mixColumns, addRoundKey, keyExpansion, encryptionProcess, decryptionProcess, invSBox, sBox
     
     var description: String {
-        switch self {
-        case .shiftRows:
-            return "ShiftRows"
-        case .subBytes:
-            return "SubBytes"
-        case .mixColumns:
-            return "MixColumns"
-        case .addRoundKey:
-            return "AddRoundKey"
-        case .keyExpansion:
-            return "KeyExpansion"
-        case .encryptionProcess:
-            return "Verschlüsselungsprozess"
-        case .decryptionProcess:
-            return "Entschlüsselungsprozess"
-        case .invSBox:
-            return "Inverse S-Box Erstellung"
-        case .sBox:
-            return "S-Box Erstellung"
+            switch self {
+            case .shiftRows:
+                return NSLocalizedString("ShiftRows", comment: "")
+            case .subBytes:
+                return NSLocalizedString("SubBytes", comment: "")
+            case .mixColumns:
+                return NSLocalizedString("MixColumns", comment: "")
+            case .addRoundKey:
+                return NSLocalizedString("AddRoundKey", comment: "")
+            case .keyExpansion:
+                return NSLocalizedString("KeyExpansion", comment: "")
+            case .encryptionProcess:
+                return NSLocalizedString("Verschlüsselungsprozess", comment: "")
+            case .decryptionProcess:
+                return NSLocalizedString("Entschlüsselungsprozess", comment: "")
+            case .invSBox:
+                return NSLocalizedString("Inverse S-Box Erstellung", comment: "")
+            case .sBox:
+                return NSLocalizedString("S-Box Erstellung", comment: "")
+            }
         }
-    }
 }

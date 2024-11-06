@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CustomLabelView: View {
-    let title: String?
+    let title: LocalizedStringKey?
     let icon: String?
     
     var body: some View {

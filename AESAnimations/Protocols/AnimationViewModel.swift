@@ -38,11 +38,13 @@ extension AnimationViewModel {
     /// General implementation for calculating the title
     /// -1: Only the description is shown (useful for KeyExpansion, Encryption and Decryption)
     var navigationTitle: String {
-        let description = operationDetails.operationName.description
-        if operationDetails.currentRound == -1 { return description }
-        
+        let operationName = operationDetails.operationName.description
+        if operationDetails.currentRound == -1 {
+            return operationName
+        }
+
         let inversePrefix = operationDetails.isInverseMode ? "Inverse " : ""
-        return "\(inversePrefix)\(description) (Runde \(operationDetails.currentRound))"
+        return "\(inversePrefix)\(operationName) (Runde \(operationDetails.currentRound))"
     }
     
     private var reverseAnimationSteps: [AnimationStep] {

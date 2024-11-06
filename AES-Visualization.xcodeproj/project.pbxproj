@@ -24,6 +24,7 @@
 		C31E69C62C88988E00230D22 /* RoundKeyHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C52C88988E00230D22 /* RoundKeyHistory.swift */; };
 		C31E69C82C88BF7400230D22 /* AnimationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C72C88BF7400230D22 /* AnimationStep.swift */; };
 		C31E69CA2C88BF9A00230D22 /* KeyExpansionRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C92C88BF9A00230D22 /* KeyExpansionRound.swift */; };
+		C329B5222CDAD63300AD7E2F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */; };
 		C33194E02CB1AF010036F830 /* ProcessPhaseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */; };
 		C33940182C56D746008802BC /* EncryptionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33940172C56D746008802BC /* EncryptionMode.swift */; };
 		C339401A2C56D76A008802BC /* EditableMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33940192C56D76A008802BC /* EditableMatrixView.swift */; };
@@ -71,6 +72,7 @@
 		C38B28B32CB4092900FCE203 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C38B28B22CB4092900FCE203 /* README.md */; };
 		C38B28D32CB44FFA00FCE203 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38B28D22CB44FFA00FCE203 /* AuthorView.swift */; };
 		C38ED05F2CD191720023C4F9 /* AnimationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38ED05E2CD191720023C4F9 /* AnimationData.swift */; };
+		C3A0F4B02CDBF98400C0C9DE /* SettingsConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A0F4AF2CDBF98400C0C9DE /* SettingsConfigurations.swift */; };
 		C3AEE3D72CAB19F4002F60CE /* CipherHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AEE3D62CAB19F4002F60CE /* CipherHistoryView.swift */; };
 		C3AEE3DB2CAB4653002F60CE /* ProcessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AEE3DA2CAB4653002F60CE /* ProcessViewModel.swift */; };
 		C3BDC13F2CB2BDCE00847363 /* PositionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDC13E2CB2BDCE00847363 /* PositionType.swift */; };
@@ -119,6 +121,7 @@
 		C31E69C52C88988E00230D22 /* RoundKeyHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundKeyHistory.swift; sourceTree = "<group>"; };
 		C31E69C72C88BF7400230D22 /* AnimationStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationStep.swift; sourceTree = "<group>"; };
 		C31E69C92C88BF9A00230D22 /* KeyExpansionRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExpansionRound.swift; sourceTree = "<group>"; };
+		C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C33151192CA03AA40047B513 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessPhaseAnimation.swift; sourceTree = "<group>"; };
 		C33940172C56D746008802BC /* EncryptionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionMode.swift; sourceTree = "<group>"; };
@@ -169,6 +172,7 @@
 		C38B28B22CB4092900FCE203 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C38B28D22CB44FFA00FCE203 /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
 		C38ED05E2CD191720023C4F9 /* AnimationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationData.swift; sourceTree = "<group>"; };
+		C3A0F4AF2CDBF98400C0C9DE /* SettingsConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsConfigurations.swift; sourceTree = "<group>"; };
 		C3AEE3D62CAB19F4002F60CE /* CipherHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CipherHistoryView.swift; sourceTree = "<group>"; };
 		C3AEE3DA2CAB4653002F60CE /* ProcessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessViewModel.swift; sourceTree = "<group>"; };
 		C3BDC13E2CB2BDCE00847363 /* PositionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionType.swift; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 				C3BDC13E2CB2BDCE00847363 /* PositionType.swift */,
 				C3BDC1402CB2BDE800847363 /* OpacityType.swift */,
 				C38AD2B52CB747E900001702 /* ValueFormat.swift */,
+				C3A0F4AF2CDBF98400C0C9DE /* SettingsConfigurations.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 				C37BA0822C397D5900C87BB7 /* Assets.xcassets */,
 				C37BA0842C397D5900C87BB7 /* AESAnimations.entitlements */,
 				C37BA0852C397D5900C87BB7 /* Preview Content */,
+				C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */,
 			);
 			path = AESAnimations;
 			sourceTree = "<group>";
@@ -537,11 +543,12 @@
 			};
 			buildConfigurationList = C37BA0762C397D5700C87BB7 /* Build configuration list for PBXProject "AES-Visualization" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = de;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = C37BA0722C397D5700C87BB7;
 			packageReferences = (
@@ -571,6 +578,7 @@
 			files = (
 				C37BA0872C397D5900C87BB7 /* Preview Assets.xcassets in Resources */,
 				C37BA0832C397D5900C87BB7 /* Assets.xcassets in Resources */,
+				C329B5222CDAD63300AD7E2F /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +631,7 @@
 				C3E1F2C02C7B6ECE0030B994 /* KeyExpansionAnimationView.swift in Sources */,
 				C38734F62C6EA47F00E835DB /* SubBytesViewModel.swift in Sources */,
 				C3AEE3D72CAB19F4002F60CE /* CipherHistoryView.swift in Sources */,
+				C3A0F4B02CDBF98400C0C9DE /* SettingsConfigurations.swift in Sources */,
 				C37BA07F2C397D5800C87BB7 /* AESAnimationsApp.swift in Sources */,
 				C30E9AFC2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift in Sources */,
 				C33940212C56D839008802BC /* AESKeySchedule.swift in Sources */,
@@ -785,6 +794,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -840,6 +850,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};

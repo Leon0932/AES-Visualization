@@ -24,7 +24,9 @@ struct AESAnimationsApp: App {
                 #if os(macOS)
                 .frame(width: 1300, height: 800)
                 #endif
+                .environment(\.locale, .init(identifier: settingsViewModel.appLanguage))
                 .onChange(of: settingsViewModel.colorScheme) { settingsViewModel.updateScheme() }
+                .onAppear(perform: settingsViewModel.updateScheme) // After restarting and opening the app the colorScheme doesn't get updated
         }
     }
 }

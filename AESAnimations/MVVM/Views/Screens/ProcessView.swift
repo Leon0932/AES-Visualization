@@ -61,7 +61,7 @@ struct ProcessView: View {
         }
     }
     
-    private func keyView(title: String? = nil) -> some View {
+    private func keyView(title: LocalizedStringKey? = nil) -> some View {
         StateView(title: title, state: viewModel.key, alignment: .leading)
     }
     
@@ -210,7 +210,7 @@ struct ProcessView: View {
         }
     }
     
-    private var keyTitle: String { "Schlüssel (\(viewModel.aesCipher.getNk * 32)-Bit)" }
+    private var keyTitle: LocalizedStringKey { "Schlüssel (\(viewModel.aesCipher.getNk * 32)-Bit)" }
 }
 
 // MARK: - Draw Lines

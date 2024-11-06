@@ -102,7 +102,7 @@ class ProcessViewModel: AnimationViewModel {
     var key: [[Byte]] { aesCipher.getKey.convertToState() }
     var result: [[Byte]] { aesCipher.getResult }
     var cipherHistory: [CipherRound] { aesCipher.getCipherHistory }
-    var sheetTitle: String { operationDetails.isInverseMode ? "Entschlüsselungs-Verlauf" : "Verschlüsselungs-Verlauf" }
+    var sheetTitle: LocalizedStringKey { operationDetails.isInverseMode ? "Entschlüsselungs-Verlauf" : "Verschlüsselungs-Verlauf" }
     
     // MARK: - Initializer
     init(operationDetails: OperationDetails, aesState: AESState, aesCipher: AESCipher) {

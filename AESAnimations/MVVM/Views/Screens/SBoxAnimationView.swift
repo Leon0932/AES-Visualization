@@ -55,7 +55,7 @@ struct SBoxAnimationView: View {
         }
     }
     
-    private func byteCell(title: String, value: Byte, opacity: Double) -> some View {
+    private func byteCell(title: LocalizedStringKey, value: Byte, opacity: Double) -> some View {
         VStack(alignment: .center, spacing: 10) {
             Text(title)
             CellView(value: value, boxSize: 35, backgroundColor: .lightGray)

@@ -10,7 +10,7 @@ import Security
 
 struct EditableMatrixView: View {
     // MARK: - Properties
-    let title: String
+    let title: LocalizedStringKey
     let icon: String
     @Binding var matrix: Matrix
     

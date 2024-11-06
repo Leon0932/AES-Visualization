@@ -11,6 +11,8 @@ struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: SettingsViewModel
     
+    @State private var newLanguage = ""
+    
     // MARK: -
     var body: some View {
         SheetContainerView(navigationTitle: "Einstellungen") {
@@ -21,23 +23,61 @@ struct SettingsView: View {
             }
             #else
             List {
+                languageSection
                 colorSchemeSection
                 primaryColorSection
             }
             #endif
         }
+        .alert(isPresented: $viewModel.showAlert, content: alert)
+    }
+    
+    // MARK: - Language Selection
+    private var languageSection: some View {
+        Section(header: Text(getTitle(configuration: .language))) {
+            languageSelections
+        }
+    }
+    
+    private var languageSelections: some View {
+        HStack(spacing: 16) {
+            configurableButton(color: .clear,
+                               isSelected: viewModel.appLanguage == "de",
+                               imageName: "Flag_of_Germany") {
+                newLanguage = "de"
+                viewModel.showAlert = true
+            }
+            
+            configurableButton(color: .clear,
+                               isSelected: viewModel.appLanguage == "en",
+                               imageName: "Flag_of_USA") {
+                newLanguage = "en"
+                viewModel.showAlert = true
+            }
+        }
+    }
+    
+    private var languageSectionMac: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(getTitle(configuration: .language))
+                .font(.headline)
+            
+            languageSelections
+            
+            Divider()
+        }
     }
     
     // MARK: - Color Scheme Selection
     private var colorSchemeSection: some View {
-        Section(header: Text(getTitle(isColor: false))) {
+        Section(header: Text(getTitle(configuration: .appearance))) {
             colorSchemeSelections
         }
     }
     
     private var colorSchemeSectionMac: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(getTitle(isColor: false))
+            Text(getTitle(configuration: .appearance))
                 .font(.headline)
             
             colorSchemeSelections
@@ -70,14 +110,14 @@ struct SettingsView: View {
     
     // MARK: - Primary Color Selection
     private var primaryColorSection: some View {
-        Section(header: Text(getTitle(isColor: true))) {
+        Section(header: Text(getTitle(configuration: .color))) {
             primaryColorSelections
         }
     }
     
     private var primaryColorSectionMac: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(getTitle(isColor: true))
+            Text(getTitle(configuration: .color))
                 .font(.headline)
             
             primaryColorSelections
@@ -102,23 +142,24 @@ struct SettingsView: View {
     private func configurableButton(color: Color,
                                     isSelected: Bool,
                                     isSystem: Bool = false,
+                                    imageName: String? = nil,
                                     action: @escaping () -> Void) -> some View {
         if !isSelected {
             return Button(action: action) {
-                buttonContent(color: color, isSelected: isSelected, isSystem: isSystem)
+                buttonContent(color: color, isSelected: isSelected, isSystem: isSystem, imageName: imageName)
             }
             .buttonStyle(.plain)
             #if os(iOS)
             .hoverEffect(.lift)
             #endif
         } else {
-            return buttonContent(color: color, isSelected: isSelected, isSystem: isSystem)
+            return buttonContent(color: color, isSelected: isSelected, isSystem: isSystem, imageName: imageName)
         }
     }
     
     private func buttonContent(color: Color,
                                isSelected: Bool,
-                               isSystem: Bool) -> some View {
+                               isSystem: Bool, imageName: String? = nil) -> some View {
         let frame = 50.0
         let degrees = 90.0
         let selectedFrame = isSelected ? 55.0 : 52.0
@@ -137,10 +178,21 @@ struct SettingsView: View {
                     .frame(width: frame, height: frame)
                     .rotationEffect(.degrees(degrees))
             } else {
-                Circle()
-                    .fill(color)
-                    .frame(width: 50, height: 50)
-                    .scaleEffect(isSelected ? 0.95 : 1.0)
+                if let imageName {
+                    Image(imageName)
+                        .resizable() // Macht das Bild skalierbar
+                        .scaledToFill() // Füllt das Bild innerhalb des Rahmens aus
+                        .frame(width: 50, height: 50) // Setzt die Größe des Bildes auf 50x50
+                        .clipShape(Circle()) // Schneidet das Bild in eine Kreisform
+                        .scaleEffect(isSelected ? 0.95 : 1.0) // Verkleinerung bei Auswahl
+                } else {
+                    Circle()
+                        .fill(color)
+                        .frame(width: 50, height: 50)
+                        .scaleEffect(isSelected ? 0.95 : 1.0)
+                }
+                
+                
             }
             
             
@@ -151,7 +203,26 @@ struct SettingsView: View {
         }
     }
     
-    private func getTitle(isColor: Bool) -> String {
-        "Wähle \(!isColor ? "Erscheinungsbild (\(viewModel.colorScheme.rawValue))" : "Akzentfarbe (\(viewModel.primaryColor.rawValue.capitalized))")"
+    private func getTitle(configuration: SettingsConfigurations) -> LocalizedStringKey {
+        switch configuration {
+        case .color:
+            return LocalizedStringKey("Wähle Akzentfarbe (\(viewModel.primaryColor.rawValue.capitalized))")
+        case .appearance:
+            return LocalizedStringKey("Wähle Erscheinungsbild (\(viewModel.colorScheme.rawValue))")
+        case .language:
+            return LocalizedStringKey("Wähle App-Sprache (\(viewModel.appLanguage.uppercased()))")
+        }
+    }
+    
+    private func alert() -> Alert {
+        Alert(title: Text("Neustart"),
+              message: Text("Für die Änderung der Sprache wird ein neuer Start der App erforderlich sein."),
+              primaryButton: .destructive(Text("Neustart"), action: closeApp),
+              secondaryButton: .cancel())
+    }
+    
+    private func closeApp() {
+        viewModel.appLanguage = newLanguage
+        exit(0)
     }
 }

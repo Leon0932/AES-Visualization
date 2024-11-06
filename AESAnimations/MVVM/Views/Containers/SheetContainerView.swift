@@ -12,11 +12,11 @@ struct SheetContainerView<Content: View>: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var settingsVM: SettingsViewModel
     
-    let navigationTitle: String
+    let navigationTitle: LocalizedStringKey
     let content: Content
     
     // MARK: - Initializer
-    init(navigationTitle: String,
+    init(navigationTitle: LocalizedStringKey,
          @ViewBuilder content: () -> Content) {
         
         self.navigationTitle = navigationTitle

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomButtonView<Style: ButtonStyle>: View {
     // MARK: - Properties
-    var title: String? = nil
+    var title: LocalizedStringKey? = nil
     var icon: String? = nil
     let buttonStyle: Style
     let action: () -> Void
