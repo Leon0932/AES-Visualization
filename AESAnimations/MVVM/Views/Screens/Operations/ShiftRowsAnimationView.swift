@@ -29,9 +29,9 @@ struct ShiftRowsAnimationView: View {
                 }
             }
             .toolbar(content: keyExpRoundsButton)
-            .specificNavigation(isPresented: $viewModel.showShiftRounds) {
-                ShiftRowHistory(navigationTitle: buttonTitle, shiftRowRounds: viewModel.shiftRowRounds)
-            }
+        }
+        .specificNavigation(isPresented: $viewModel.showShiftRounds) {
+            ShiftRowHistory(navigationTitle: buttonTitle, shiftRowRounds: viewModel.shiftRowRounds)
         }
     }
     
