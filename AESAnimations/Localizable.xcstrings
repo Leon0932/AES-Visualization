@@ -5,6 +5,7 @@
       "shouldTranslate" : false
     },
     "%@%@ (Runde %lld)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -151,6 +152,9 @@
           }
         }
       }
+    },
+    "Generation of Round keys" : {
+
     },
     "Generierung der Rundenschlüssel" : {
       "localizations" : {
@@ -413,24 +417,13 @@
       }
     },
     "Verschlüsselungsprozess" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Encryption process"
-          }
-        }
-      }
+      "shouldTranslate" : false
     },
     "Visualisierung von AES" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Visualization of AES"
-          }
-        }
-      }
+      "shouldTranslate" : false
+    },
+    "Visualization of AES" : {
+      "shouldTranslate" : false
     },
     "Wähle Akzentfarbe (%@)" : {
       "extractionState" : "manual",
@@ -448,7 +441,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select App Language(%@)"
+            "value" : "Select App Language (%@)"
           }
         }
       }

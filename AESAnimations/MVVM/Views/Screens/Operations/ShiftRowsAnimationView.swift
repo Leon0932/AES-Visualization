@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct ShiftRowsAnimationView: View {
+    @Environment(\.locale) var locale
     @StateObject var viewModel: ShiftRowsViewModel
     
-    var buttonTitle: LocalizedStringKey { "ShiftRows-Verlauf" }
+    var buttonTitle: String {
+        locale == Locale(identifier: "de") ? "ShiftRows-Verlauf" : "ShiftRows History"
+    }
     
     // MARK: -
     var body: some View {
@@ -27,8 +30,7 @@ struct ShiftRowsAnimationView: View {
             }
             .toolbar(content: keyExpRoundsButton)
             .specificNavigation(isPresented: $viewModel.showShiftRounds) {
-                ShiftRowHistory(navigationTitle: buttonTitle,
-                                shiftRowRounds: viewModel.shiftRowRounds)
+                ShiftRowHistory(navigationTitle: buttonTitle, shiftRowRounds: viewModel.shiftRowRounds)
             }
         }
     }
@@ -67,7 +69,7 @@ struct ShiftRowsAnimationView: View {
     // MARK: - Toolbar Item
     private func keyExpRoundsButton() -> some ToolbarContent {
         ToolbarItem {
-            CustomButtonView(title: buttonTitle,
+            CustomButtonView(title: LocalizedStringKey(buttonTitle),
                              buttonStyle: .secondary,
                              action: viewModel.toggleShiftRounds)
             .opacity(viewModel.animationControl.isDone ? 1 : 0)

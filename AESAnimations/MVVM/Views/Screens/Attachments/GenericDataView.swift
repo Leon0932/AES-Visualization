@@ -11,7 +11,7 @@ struct GenericDataView: View {
     @Environment(\.dismiss) var dismiss
     
     // MARK: - Properties
-    var navigationTitle: LocalizedStringKey
+    var navigationTitle: String
     let data: [[Any]]
     let header: [(String, CGFloat)]
     

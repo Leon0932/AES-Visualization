@@ -10,7 +10,7 @@ import SwiftUI
 class SettingsViewModel: ObservableObject {
     @AppStorage("colorScheme") var colorScheme: AppScheme = .system
     @AppStorage("primaryColor") var primaryColor: PrimaryColor = .blue
-    @AppStorage("language") var appLanguage: String = Locale.current.language.languageCode?.identifier ?? "en"
+    @AppStorage("appLanguage") var appLanguage: String = Locale.current.language.languageCode?.identifier ?? "en"
     
     @Published var showAlert = false
     

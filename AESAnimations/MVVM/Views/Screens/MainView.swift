@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-import TipKit
 
 struct MainView: View {
+    @Environment(\.locale) var locale
     @StateObject var viewModel = MainViewModel()
+    
     // MARK: -
     var body: some View {
         NavigationStack {
@@ -17,7 +18,7 @@ struct MainView: View {
                 hsAalenLogo
                 mainContent
             }
-            .navigationTitle("Visualisierung von AES")
+            .navigationTitle(locale == Locale(identifier: "de") ? "Visualisierung von AES" : "Visualization of AES")
             .toolbar(content: toolbarItem)
             .onChange(of: viewModel.selectedEncryptionMode) {
                 viewModel.handlePickerChange(newValue: $1)

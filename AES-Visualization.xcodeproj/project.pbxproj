@@ -404,9 +404,9 @@
 		C38734E22C6928EC00E835DB /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				C30E9AF92CBE43E100DF5AE5 /* SBoxAnimationView.swift */,
 				C31E69C42C88988100230D22 /* Attachments */,
 				C38734F92C6EA63F00E835DB /* Operations */,
+				C30E9AF92CBE43E100DF5AE5 /* SBoxAnimationView.swift */,
 				C37BA0802C397D5800C87BB7 /* MainView.swift */,
 				C3C476DC2C595E45009D718D /* KeyView.swift */,
 				C3C476D62C593C11009D718D /* ProcessView.swift */,
@@ -530,7 +530,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					C33151182CA03AA40047B513 = {
 						CreatedOnToolsVersion = 16.0;
@@ -547,8 +547,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				de,
+				Base,
 			);
 			mainGroup = C37BA0722C397D5700C87BB7;
 			packageReferences = (
@@ -704,10 +704,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.leonchamoun.AES-ArchitectureTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AES-Visualization.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AES-Visualization";
 				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -727,10 +728,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.leonchamoun.AES-ArchitectureTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AES-Visualization.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AES-Visualization";
 				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -741,6 +743,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -804,6 +807,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

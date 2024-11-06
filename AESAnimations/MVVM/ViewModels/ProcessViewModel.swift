@@ -102,7 +102,6 @@ class ProcessViewModel: AnimationViewModel {
     var key: [[Byte]] { aesCipher.getKey.convertToState() }
     var result: [[Byte]] { aesCipher.getResult }
     var cipherHistory: [CipherRound] { aesCipher.getCipherHistory }
-    var sheetTitle: LocalizedStringKey { operationDetails.isInverseMode ? "Entschlüsselungs-Verlauf" : "Verschlüsselungs-Verlauf" }
     
     // MARK: - Initializer
     init(operationDetails: OperationDetails, aesState: AESState, aesCipher: AESCipher) {
@@ -622,12 +621,6 @@ class ProcessViewModel: AnimationViewModel {
     
     func toggleFullKey() {
         showFullKey.toggle()
-    }
-    
-    func createCipherHistory() -> some View {
-        CipherHistoryView(navigationTitle: sheetTitle,
-                          cipherRounds: cipherHistory,
-                          isDecryption: operationDetails.isInverseMode)
     }
 }
 

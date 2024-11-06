@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct KeyView: View {
+    @Environment(\.locale) var locale
     @StateObject var viewModel: KeyViewModel
     
     // MARK: -
@@ -21,7 +22,9 @@ struct KeyView: View {
                 }
             }
             .padding()
-            .navigationTitle("Generierung der Rundenschlüssel")
+            .navigationTitle(locale == Locale(identifier: "de")
+                             ? "Generierung der Rundenschlüssel"
+                             : "Generation of Round keys")
             .task { viewModel.animateKeysFunction() }
             #if os(macOS)
             .customNavigationBackButton()

@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct KeyExpansionAnimationView: View {
-    @StateObject var viewModel: KeyExpansionViewModel 
+    @Environment(\.locale) var locale
+    @StateObject var viewModel: KeyExpansionViewModel
     let columns = Array(repeating: GridItem(.flexible(minimum: 230)), count: 4)
     
-    var buttonTitle: LocalizedStringKey { "Rundenschlüssel-Verlauf" }
+    var buttonTitle: String {
+        locale == Locale(identifier: "de") ? "Rundenschlüssel-Verlauf" : "Round Key History"
+    }
     
     // MARK: -
     var body: some View {
@@ -124,7 +127,7 @@ struct KeyExpansionAnimationView: View {
     // MARK: - Toolbar Item
     private func keyExpRoundsButton() -> some ToolbarContent {
         ToolbarItem {
-            CustomButtonView(title: buttonTitle,
+            CustomButtonView(title: LocalizedStringKey(buttonTitle),
                              buttonStyle: .secondary,
                              action: viewModel.toggleKeyExpRounds)
             .opacity(viewModel.animationControl.isDone ? 1 : 0)

@@ -18,6 +18,7 @@ struct SettingsView: View {
         SheetContainerView(navigationTitle: "Einstellungen") {
             #if os(macOS)
             VStack(spacing: 20) {
+                languageSectionMac
                 colorSchemeSectionMac
                 primaryColorSectionMac
             }
@@ -55,8 +56,9 @@ struct SettingsView: View {
                 viewModel.showAlert = true
             }
         }
+        .padding()
     }
-    
+
     private var languageSectionMac: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(getTitle(configuration: .language))

@@ -10,6 +10,7 @@ import SwiftUI
 struct SheetContainerView<Content: View>: View {
     // MARK: - Properties
     @Environment(\.dismiss) var dismiss
+    @Environment(\.locale) var locale
     @EnvironmentObject var settingsVM: SettingsViewModel
     
     let navigationTitle: LocalizedStringKey
@@ -44,6 +45,7 @@ struct SheetContainerView<Content: View>: View {
             .navigationTitle(navigationTitle)
             .toolbar { closeButton { dismiss() } }
             #endif
+            .environment(\.locale, .init(identifier: settingsVM.appLanguage))
             .accentColor(settingsVM.primaryColor.color)
         }
     }

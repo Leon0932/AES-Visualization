@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProcessView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.locale) var locale
     
     @StateObject var viewModel: ProcessViewModel
     @EnvironmentObject var settingsVM: SettingsViewModel
@@ -31,7 +32,7 @@ struct ProcessView: View {
                                destination: destinationView)
         .onDisappear { viewModel.animationControl.changePause(to: true) }
         .specificNavigation(isPresented: $viewModel.showCipherHistory,
-                            destination: viewModel.createCipherHistory)
+                            destination: createCipherHistory)
         .sheet(isPresented: $viewModel.showFullKey, content: sheetView)
     }
     
@@ -152,11 +153,11 @@ struct ProcessView: View {
             } label: {
                 operationRectangleView(text: text, color: color)
             }
-            #if os(macOS)
+#if os(macOS)
             .buttonStyle(.plain)
-            #else
+#else
             .hoverEffect(.lift)
-            #endif
+#endif
         } else {
             operationRectangleView(text: text, color: color)
         }
@@ -203,7 +204,7 @@ struct ProcessView: View {
     
     private func cipherHistoryButton() -> some ToolbarContent {
         ToolbarItem {
-            CustomButtonView(title: viewModel.sheetTitle,
+            CustomButtonView(title: LocalizedStringKey(sheetTitle),
                              buttonStyle: .secondary,
                              action: viewModel.toggleCipherHistory)
             .opacity(viewModel.animationControl.isDone ? 1 : 0)
@@ -211,6 +212,20 @@ struct ProcessView: View {
     }
     
     private var keyTitle: LocalizedStringKey { "Schlüssel (\(viewModel.aesCipher.getNk * 32)-Bit)" }
+    
+    var sheetTitle: String {
+        if viewModel.operationDetails.isInverseMode {
+            locale == Locale(identifier: "de") ? "Entschlüsselungs-Verlauf" : "Decryption History"
+        } else {
+            locale == Locale(identifier: "de") ? "Verschlüsselungs-Verlauf" : "Encryption History"
+        }
+    }
+    
+    func createCipherHistory() -> some View {
+        CipherHistoryView(navigationTitle: sheetTitle,
+                          cipherRounds: viewModel.cipherHistory,
+                          isDecryption: viewModel.operationDetails.isInverseMode)
+    }
 }
 
 // MARK: - Draw Lines

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CipherHistoryView: View {
-    let navigationTitle: LocalizedStringKey
+    let navigationTitle: String
     let cipherRounds: [CipherRound]
     let isDecryption: Bool
     

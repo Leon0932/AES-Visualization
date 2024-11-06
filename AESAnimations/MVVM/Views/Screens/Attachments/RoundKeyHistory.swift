@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RoundKeyHistory: View {
-    let navigationTitle: LocalizedStringKey
+    let navigationTitle: String
     let keyExpRounds: [KeyExpansionRound]
 
     let header: [(String, CGFloat)] = [
