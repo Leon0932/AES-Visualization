@@ -356,6 +356,9 @@
         }
       }
     },
+    "Spalte" : {
+
+    },
     "Start-Zustand" : {
       "localizations" : {
         "en" : {
@@ -489,6 +492,9 @@
           }
         }
       }
+    },
+    "Zeile" : {
+
     },
     "Zustand" : {
       "localizations" : {

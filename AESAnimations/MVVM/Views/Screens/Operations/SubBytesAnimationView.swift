@@ -80,22 +80,33 @@ struct SubBytesAnimationView: View {
     }
     
     private func splitView(value: Byte) -> some View {
-        HStack {
-            CellView(
-                value: (value & 0xF0) >> 4,
-                boxSize: 40,
-                backgroundColor: .activeByteColor(value),
-                valueFormat: .oneDigit
-            )
+        VStack(spacing: 5) {
+            HStack(spacing: 8) {
+                CellView(
+                    value: (value & 0xF0) >> 4,
+                    boxSize: 35,
+                    backgroundColor: .activeByteColor(value),
+                    valueFormat: .oneDigit
+                )
+                
+                Text("Zeile")
+                    .foregroundStyle(Color.primary)
+            }
+            .frame(width: 100, alignment: .leading)
             
-            Image(systemName: "arrow.right")
+            HStack(spacing: 8) {
+                CellView(
+                    value: value & 0x0F,
+                    boxSize: 35,
+                    backgroundColor: .activeByteColor(value),
+                    valueFormat: .oneDigit
+                )
+                
+                Text("Spalte")
+                    .foregroundStyle(Color.primary)
+            }
+            .frame(width: 100, alignment: .leading)
             
-            CellView(
-                value: value & 0x0F,
-                boxSize: 40,
-                backgroundColor: .activeByteColor(value),
-                valueFormat: .oneDigit
-            )
         }
     }
     

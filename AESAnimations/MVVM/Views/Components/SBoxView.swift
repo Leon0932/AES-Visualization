@@ -52,7 +52,7 @@ struct SBoxView: View {
                 CellView(
                     value: Byte(col),
                     boxSize: boxSizeForiPad(),
-                    backgroundColor: Byte(col) == searchY ? .reducedByteColor(byteColor) : .ultraLightGray,
+                    backgroundColor: Byte(col) == searchY ? .reducedAccentColor : .ultraLightGray,
                     valueFormat: .oneDigit
                 )
                 .opacity(checkOpacity() ? 1.0 : 0.0)
@@ -66,7 +66,7 @@ struct SBoxView: View {
             CellView(
                 value: Byte(row),
                 boxSize: boxSizeForiPad(),
-                backgroundColor: Byte(row) == searchX ? .reducedByteColor(byteColor) : .ultraLightGray,
+                backgroundColor: Byte(row) == searchX ? .reducedAccentColor : .ultraLightGray,
                 valueFormat: .oneDigit
             )
             .opacity(checkOpacity() ? 1.0 : 0.0)
@@ -107,11 +107,11 @@ struct SBoxView: View {
         }
         
         if let searchX = searchX, searchX == row {
-            return .reducedByteColor(byteColor)
+            return .reducedAccentColor
         }
         
         if let searchY = searchY, searchY == col {
-            return .reducedByteColor(byteColor)
+            return .reducedAccentColor
         }
         
         return .lightGray
