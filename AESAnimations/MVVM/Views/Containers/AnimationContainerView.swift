@@ -15,6 +15,8 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
     var showRepeatButtons: Bool
     let content: Content
     
+    let showReverseAnimationButton = UserDefaults.standard.bool(forKey: "includeReverseAnimation")
+    
     // MARK: - Initializer
     init(viewModel: ViewModel,
          showRepeatButtons: Bool = true,
@@ -43,7 +45,8 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
                                               startAnimations: viewModel.startAnimations,
                                               completeAnimations: viewModel.completeAnimations,
                                               resetAnimation: viewModel.resetAnimations,
-                                              showRepeatButtons: showRepeatButtons)
+                                              showRepeatButtons: showRepeatButtons,
+                                              showReverseAnimationButton: showReverseAnimationButton)
                         .padding(.bottom, 10)
                         .padding(.leading, checkAlignment() ? 10 : 0)
                     }

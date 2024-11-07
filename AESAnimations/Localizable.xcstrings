@@ -4,23 +4,6 @@
     "" : {
       "shouldTranslate" : false
     },
-    "%@%@ (Runde %lld)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@%2$@ (Runde %3$lld)"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@%2$@ (Round %3$lld)"
-          }
-        }
-      }
-    },
     "%lld" : {
       "shouldTranslate" : false
     },
@@ -154,7 +137,7 @@
       }
     },
     "Generation of Round keys" : {
-
+      "shouldTranslate" : false
     },
     "Generierung der Rundenschlüssel" : {
       "localizations" : {
@@ -363,6 +346,16 @@
         }
       }
     },
+    "Sonstige Einstellungen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Further settings"
+          }
+        }
+      }
+    },
     "Start-Zustand" : {
       "localizations" : {
         "en" : {
@@ -382,6 +375,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reversed"
+          }
+        }
+      }
+    },
+    "Umgekehrte Animations-Option einblenden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show reverse animation option"
           }
         }
       }

@@ -11,6 +11,7 @@ class SettingsViewModel: ObservableObject {
     @AppStorage("colorScheme") var colorScheme: AppScheme = .system
     @AppStorage("primaryColor") var primaryColor: PrimaryColor = .blue
     @AppStorage("appLanguage") var appLanguage: String = Locale.current.language.languageCode?.identifier ?? "en"
+    @AppStorage("includeReverseAnimation") var includeReverseAnimation: Bool = true
     
     @Published var showAlert = false
     

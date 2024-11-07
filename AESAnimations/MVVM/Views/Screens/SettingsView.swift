@@ -21,12 +21,14 @@ struct SettingsView: View {
                 languageSectionMac
                 colorSchemeSectionMac
                 primaryColorSectionMac
+                furtherSettingsSectionMac
             }
             #else
             List {
                 languageSection
                 colorSchemeSection
                 primaryColorSection
+                furtherSettingsSection
             }
             #endif
         }
@@ -56,7 +58,7 @@ struct SettingsView: View {
                 viewModel.showAlert = true
             }
         }
-        .padding()
+        .padding(.all, 5)
     }
 
     private var languageSectionMac: some View {
@@ -107,7 +109,7 @@ struct SettingsView: View {
                 action: { viewModel.colorScheme = .dark }
             )
         }
-        .padding()
+        .padding(.all, 5)
     }
     
     // MARK: - Primary Color Selection
@@ -123,6 +125,8 @@ struct SettingsView: View {
                 .font(.headline)
             
             primaryColorSelections
+            
+            Divider()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -137,7 +141,31 @@ struct SettingsView: View {
                 )
             }
         }
-        .padding()
+        .padding(.all, 5)
+    }
+    
+    // MARK: - Extra Settings
+    private var furtherSettingsSection: some View {
+        Section(header: Text("Sonstige Einstellungen")) {
+            furtherSettingsSelections
+        }
+    }
+    
+    private var furtherSettingsSectionMac: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Sonstige Einstellungen")
+                .font(.headline)
+            
+            furtherSettingsSelections
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private var furtherSettingsSelections: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Toggle("Umgekehrte Animations-Option einblenden", isOn: $viewModel.includeReverseAnimation)
+        }
+        .padding(.all, 5)
     }
     
     // MARK: - Helper Functions
@@ -161,7 +189,8 @@ struct SettingsView: View {
     
     private func buttonContent(color: Color,
                                isSelected: Bool,
-                               isSystem: Bool, imageName: String? = nil) -> some View {
+                               isSystem: Bool,
+                               imageName: String? = nil) -> some View {
         let frame = 50.0
         let degrees = 90.0
         let selectedFrame = isSelected ? 55.0 : 52.0
@@ -182,21 +211,18 @@ struct SettingsView: View {
             } else {
                 if let imageName {
                     Image(imageName)
-                        .resizable() // Macht das Bild skalierbar
-                        .scaledToFill() // Füllt das Bild innerhalb des Rahmens aus
-                        .frame(width: 50, height: 50) // Setzt die Größe des Bildes auf 50x50
-                        .clipShape(Circle()) // Schneidet das Bild in eine Kreisform
-                        .scaleEffect(isSelected ? 0.95 : 1.0) // Verkleinerung bei Auswahl
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        .scaleEffect(isSelected ? 0.95 : 1.0)
                 } else {
                     Circle()
                         .fill(color)
                         .frame(width: 50, height: 50)
                         .scaleEffect(isSelected ? 0.95 : 1.0)
                 }
-                
-                
             }
-            
             
             Circle()
                 .stroke(isSelected ? viewModel.primaryColor.color : Color.gray.opacity(0.3),

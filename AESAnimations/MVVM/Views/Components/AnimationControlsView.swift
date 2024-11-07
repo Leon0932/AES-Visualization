@@ -16,6 +16,7 @@ struct AnimationControlsView: View {
     var resetAnimation: () -> Void
     
     var showRepeatButtons: Bool = true
+    var showReverseAnimationButton: Bool = true
     
     // MARK: -
     var body: some View {
@@ -40,10 +41,12 @@ struct AnimationControlsView: View {
                              buttonStyle: secondaryButton,
                              action: repeatAnimation)
             
-            CustomButtonView(title: "Umgekehrt",
-                             icon: "arrowshape.turn.up.backward",
-                             buttonStyle: secondaryButton,
-                             action: startReverseAnimation)
+            if showReverseAnimationButton {
+                CustomButtonView(title: "Umgekehrt",
+                                 icon: "arrowshape.turn.up.backward",
+                                 buttonStyle: secondaryButton,
+                                 action: startReverseAnimation)
+            }
             
         }
         .padding(10)

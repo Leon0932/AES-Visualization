@@ -56,7 +56,7 @@ class ProcessViewModel: AnimationViewModel {
         return ShiftRowsViewModel(
             state: currentState,
             result: result,
-            operationDetails: getOperationDetails(for: .subBytes),
+            operationDetails: getOperationDetails(for: .shiftRows),
             shiftRowRounds: shiftRowsHistory)
     }
     var subBytesViewModel: SubBytesViewModel {
