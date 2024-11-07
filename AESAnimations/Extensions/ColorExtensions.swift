@@ -11,6 +11,9 @@ extension Color {
     static let ultraLightGray = Color.gray.opacity(0.1)
     static let lightGray = Color.gray.opacity(0.2)
     
+    static let lightModeMac = Color(red: 0.92, green: 0.92, blue: 0.92)
+    static let darkModeMac = Color(red: 0.15, green: 0.15, blue: 0.15)
+    
     static let byteColors: [Byte: Color] = [
         0x00: Color(red: 0.32, green: 0.32, blue: 0.32),
         0x01: Color(red: 0.004, green: 0.498, blue: 0.498),

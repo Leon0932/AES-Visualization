@@ -153,11 +153,11 @@ struct ProcessView: View {
             } label: {
                 operationRectangleView(text: text, color: color)
             }
-#if os(macOS)
+            #if os(macOS)
             .buttonStyle(.plain)
-#else
+            #else
             .hoverEffect(.lift)
-#endif
+            #endif
         } else {
             operationRectangleView(text: text, color: color)
         }
@@ -166,7 +166,7 @@ struct ProcessView: View {
     private func operationRectangleView(text: String, color: Color) -> some View {
         ZStack {
             Rectangle()
-                .fill(colorScheme == .dark ? .black : .white)
+                .fill(getColorForRectangle())
                 .frame(width: 2, height: 40)
             
             RoundedRectangle(cornerRadius: 10)
@@ -178,6 +178,14 @@ struct ProcessView: View {
                 )
                 .padding(.vertical, 5)
         }
+    }
+    
+    private func getColorForRectangle() -> Color {
+        #if os(macOS)
+        colorScheme == .dark ? Color.darkModeMac : Color.lightModeMac
+        #else
+        colorScheme == .dark ? .black : .white
+        #endif
     }
     
     // MARK: - Sheet View
