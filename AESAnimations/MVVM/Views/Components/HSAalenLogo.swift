@@ -11,7 +11,7 @@ struct HSAalenLogo: View {
     @Environment(\.locale) var locale
     
     var body: some View {
-        Image(locale == Locale(identifier: "en") ? "hs-aalen-logo-en" : "hs-aalen-logo-de")
+        Image(locale == Locale(identifier: "de") ? "hs-aalen-logo-de" : "hs-aalen-logo-en")
             .frame(maxWidth: .infinity)
             .scaledToFit()
     }

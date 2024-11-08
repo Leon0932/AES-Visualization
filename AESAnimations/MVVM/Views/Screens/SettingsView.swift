@@ -243,10 +243,24 @@ struct SettingsView: View {
     }
     
     private func alert() -> Alert {
-        Alert(title: Text("Neustart"),
-              message: Text("Für die Änderung der Sprache wird ein neuer Start der App erforderlich sein."),
-              primaryButton: .destructive(Text("Neustart"), action: closeApp),
-              secondaryButton: .cancel())
+        Alert(title: Text(alertTitle),
+              message: Text(alertMessage),
+              primaryButton: .destructive(Text(alertTitle), action: closeApp),
+              secondaryButton: .cancel(Text(cancelTitle)))
+    }
+    
+    var alertTitle: String {
+        viewModel.appLanguage == "de" ? "Neustart" : "Restart"
+    }
+    
+    var alertMessage: String {
+        viewModel.appLanguage == "de"
+        ? "Für die Änderung der Sprache wird ein neuer Start der App erforderlich sein."
+        : "You will need to restart the app to change the language."
+    }
+    
+    var cancelTitle: String {
+        viewModel.appLanguage == "de" ? "Abbrechen" : "Cancel"
     }
     
     private func closeApp() {
