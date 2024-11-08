@@ -18,9 +18,7 @@ struct AuthorView: View {
     var body: some View {
         SheetContainerView(navigationTitle: "Urheber der App") {
             VStack(alignment: .center, spacing: 25) {
-                Image("hs-aalen-logo")
-                    .frame(maxWidth: .infinity)
-                    .scaledToFit()
+                HSAalenLogo()
                 
                 Text(message)
                     .multilineTextAlignment(.center)

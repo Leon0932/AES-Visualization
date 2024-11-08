@@ -30,10 +30,8 @@ struct MainView: View {
     
     // MARK: - Main Content
     private var hsAalenLogo: some View {
-        Image("hs-aalen-logo")
-            .frame(maxWidth: .infinity)
+        HSAalenLogo()
             .opacity(0.6)
-            .scaledToFit()
             .padding(.top, estimatePadding)
     }
     

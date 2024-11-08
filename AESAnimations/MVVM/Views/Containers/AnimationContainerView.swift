@@ -12,17 +12,18 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
     @Environment(\.dismiss) var dismiss
     
     @ObservedObject var viewModel: ViewModel
+    var showReverseAnimationButton: Bool
     var showRepeatButtons: Bool
     let content: Content
     
-    let showReverseAnimationButton = UserDefaults.standard.bool(forKey: "includeReverseAnimation")
-    
     // MARK: - Initializer
     init(viewModel: ViewModel,
+         showReverseAnimationButton: Bool? = nil,
          showRepeatButtons: Bool = true,
          @ViewBuilder content: () -> Content) {
         
         self.viewModel = viewModel
+        self.showReverseAnimationButton = showReverseAnimationButton ?? UserDefaults.standard.bool(forKey: "includeReverseAnimation")
         self.showRepeatButtons = showRepeatButtons
         self.content = content()
     }

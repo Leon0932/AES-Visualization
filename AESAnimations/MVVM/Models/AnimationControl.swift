@@ -13,6 +13,8 @@ struct AnimationControl {
     var isForward: Bool = false
     var isBackward: Bool = false
     var isDouble: Bool = false
+    var plusTriggered: Bool = false
+    var minusTriggered: Bool = false
     
     // Continue / Pause animation
     mutating func changePause(to value: Bool) { isPaused = value }

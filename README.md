@@ -44,3 +44,7 @@ To execute the Unit Tests, follow these steps:
 2. Press `Command + U` to run all Unit Tests.
 3. Review the results in the Test navigator.
 
+
+Disbaled in den Buttons 
+Code Clenan 
+Code kommentieren 

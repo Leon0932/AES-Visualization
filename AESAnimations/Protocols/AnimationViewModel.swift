@@ -16,7 +16,7 @@ protocol AnimationViewModel: ObservableObject {
     /// Animation Controllers
     var animationControl: AnimationControl { get set }
     var animationData: AnimationData { get set }
-
+    
     @MainActor
     func createAnimationSteps(with geometry: GeometryProxy)
     func resetAnimationState(state newState: [[Byte]], showResult: Double)
@@ -44,7 +44,7 @@ extension AnimationViewModel {
         if operationDetails.currentRound == -1 {
             return operationName
         }
-
+        
         let inversePrefix = operationDetails.isInverseMode ? "Inverse " : ""
         return "\(inversePrefix)\(operationName) (\(languageCode == "de" ? "Runde" : "Round") \(operationDetails.currentRound))"
     }
@@ -66,16 +66,17 @@ extension AnimationViewModel {
             animationControl.isDone = false
         }
         
+  
         while index < animationSteps.count && index >= 0 {
             guard !Task.isCancelled else { return }
-            
+
             // Calculating Delay
             let stepDelay = animationSteps[index].delay
             let revStepDelay = reverseAnimationSteps[index].delay
             let delay = !animationControl.isBackward ? stepDelay : revStepDelay
             let shortDelay = delay > 0 ? delay - 50_000_000 : 0
             let extraShortDelay = shortDelay / 2
-
+            
             if !animationControl.isBackward {
                 await animationSteps[index].animation()
                 await sleep(for: animationControl.isForward
@@ -89,7 +90,37 @@ extension AnimationViewModel {
             }
             
             // Check if animation was paused
-            while animationControl.isPaused { await sleep(for: 100_000_000) }
+            while animationControl.isPaused && (index < animationSteps.count && index >= 0) {
+                if animationControl.plusTriggered {
+                    animationControl.isBackward = false
+                    animationControl.isForward = false
+                    
+                    await animationSteps[index].animation()
+                    
+                    while index + 1 < animationSteps.count && animationSteps[index].delay == 0 {
+                        index += 1
+                        await animationSteps[index].animation()
+                    }
+                    
+                    index += 1
+                    animationControl.plusTriggered = false
+                } else if animationControl.minusTriggered {
+                    animationControl.isBackward = true
+                    animationControl.isForward = false
+                    
+                    await reverseAnimationSteps[index].animation()
+                    
+                    while index < animationSteps.count && index - 1 >= 0 && reverseAnimationSteps[index].delay == 0 {
+                        index -= 1
+                        await reverseAnimationSteps[index].animation()
+                    }
+                    
+                    index -= 1
+                    animationControl.minusTriggered = false
+                } else {
+                    await sleep(for: 100_000_000)
+                }
+            }
         }
         
         // Set the animation to 'done'

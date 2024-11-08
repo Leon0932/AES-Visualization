@@ -88,18 +88,27 @@ struct AnimationControlsView: View {
     // MARK: - Control buttons components
     private var pausePlayControl: some View {
         controlButton(icon: animationControl.isPaused ? "play.fill" : "pause.fill") {
-            animationControl.isPaused ? animationControl.changePause(to: false) : animationControl.changePause(to: true)
+            withAnimation {
+                animationControl.isPaused ? animationControl.changePause(to: false) : animationControl.changePause(to: true)
+            }
         }
     }
     
     private func controlStack(isForward: Bool) -> some View {
         HStack(spacing: 10) {
             if isForward {
-                controlButton(icon: animationControl.isForward ? "forward.fill" : "forward") {
-                    withAnimation {
-                        animationControl.advanceAnimations()
+                if animationControl.isPaused {
+                    controlButton(icon: "plus") {
+                        animationControl.plusTriggered = true
+                    }
+                } else {
+                    controlButton(icon: animationControl.isForward ? "forward.fill" : "forward") {
+                        withAnimation {
+                            animationControl.advanceAnimations()
+                        }
                     }
                 }
+                
                    
                 Text("2x")
                     .foregroundStyle(Color.accentColor)
@@ -110,12 +119,18 @@ struct AnimationControlsView: View {
                     .foregroundStyle(Color.accentColor)
                     .opacity(animationControl.isBackward && animationControl.isDouble ? 1 : 0)
                 
-                
-                controlButton(icon: animationControl.isBackward ? "backward.fill" : "backward") {
-                    withAnimation {
-                        animationControl.reverseAnimation()
+                if animationControl.isPaused {
+                    controlButton(icon: "minus") {
+                        animationControl.minusTriggered = true
+                    }
+                } else {
+                    controlButton(icon: animationControl.isBackward ? "backward.fill" : "backward") {
+                        withAnimation {
+                            animationControl.reverseAnimation()
+                        }
                     }
                 }
+               
             }
         }
     }

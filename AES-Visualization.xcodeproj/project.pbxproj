@@ -25,6 +25,7 @@
 		C31E69C82C88BF7400230D22 /* AnimationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C72C88BF7400230D22 /* AnimationStep.swift */; };
 		C31E69CA2C88BF9A00230D22 /* KeyExpansionRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C92C88BF9A00230D22 /* KeyExpansionRound.swift */; };
 		C329B5222CDAD63300AD7E2F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */; };
+		C329DF762CDE529400959851 /* HSAalenLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329DF752CDE529400959851 /* HSAalenLogo.swift */; };
 		C33194E02CB1AF010036F830 /* ProcessPhaseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */; };
 		C33940182C56D746008802BC /* EncryptionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33940172C56D746008802BC /* EncryptionMode.swift */; };
 		C339401A2C56D76A008802BC /* EditableMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33940192C56D76A008802BC /* EditableMatrixView.swift */; };
@@ -122,6 +123,7 @@
 		C31E69C72C88BF7400230D22 /* AnimationStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationStep.swift; sourceTree = "<group>"; };
 		C31E69C92C88BF9A00230D22 /* KeyExpansionRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExpansionRound.swift; sourceTree = "<group>"; };
 		C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		C329DF752CDE529400959851 /* HSAalenLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAalenLogo.swift; sourceTree = "<group>"; };
 		C33151192CA03AA40047B513 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessPhaseAnimation.swift; sourceTree = "<group>"; };
 		C33940172C56D746008802BC /* EncryptionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionMode.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				C31E69BC2C8721B900230D22 /* ColumnView.swift */,
 				C31E69C02C872C3300230D22 /* AnimationControlsView.swift */,
 				C33A3C292CCB8EA7004CF720 /* CustomLabelView.swift */,
+				C329DF752CDE529400959851 /* HSAalenLogo.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				C34310112C9373DA0004F4C7 /* AnimationViewModel.swift in Sources */,
 				C310C9152C714DED00E91AB7 /* MixColumnViewModel.swift in Sources */,
 				C35F80262CAAA40F00C54393 /* CipherRound.swift in Sources */,
+				C329DF762CDE529400959851 /* HSAalenLogo.swift in Sources */,
 				C31E69C12C872C3300230D22 /* AnimationControlsView.swift in Sources */,
 				C36566362C61F6BD007A4A1E /* SettingsView.swift in Sources */,
 				C37BA08E2C39882F00C87BB7 /* SubBytesAnimationView.swift in Sources */,
