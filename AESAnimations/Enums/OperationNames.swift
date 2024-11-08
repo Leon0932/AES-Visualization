@@ -30,9 +30,9 @@ enum OperationNames: CustomStringConvertible {
         case .decryptionProcess:
             return languageCode == "de" ? "Entschlüsselungsprozess" : "Decryption Process"
         case .invSBox:
-            return languageCode == "de" ? "Inverse S-Box Erstellung" : "Inverse S-Box creation"
+            return languageCode == "de" ? "Inverse S-Box Erstellung" : "Inverse S-Box Creation"
         case .sBox:
-            return languageCode == "de" ? "S-Box Erstellung" : "S-Box creation"
+            return languageCode == "de" ? "S-Box Erstellung" : "S-Box Creation"
         }
     }
 }

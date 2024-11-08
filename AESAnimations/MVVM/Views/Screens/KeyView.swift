@@ -24,7 +24,7 @@ struct KeyView: View {
             .padding()
             .navigationTitle(locale == Locale(identifier: "de")
                              ? "Generierung der Rundenschlüssel"
-                             : "Generation of Round keys")
+                             : "Generation of Round Keys")
             .task { viewModel.animateKeysFunction() }
             #if os(macOS)
             .customNavigationBackButton()

@@ -129,15 +129,15 @@
     "Für die Änderung der Sprache wird ein neuer Start der App erforderlich sein." : {
       "shouldTranslate" : false
     },
-    "Generation of Round keys" : {
-      "shouldTranslate" : false
+    "Generation of Round Keys" : {
+
     },
     "Generierung der Rundenschlüssel" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Generation of Round keys"
+            "value" : "Generation of Round Keys"
           }
         }
       }
@@ -167,7 +167,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inverse S-Box creation"
+            "value" : "Inverse S-Box Creation"
           }
         }
       }
@@ -183,7 +183,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Left shift by %lld shifts"
+            "value" : "Left Shift by %lld"
           }
         }
       }
@@ -196,7 +196,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Multiplicative inverse"
+            "value" : "Multiplicative Inverse"
           }
         }
       }
@@ -238,12 +238,22 @@
         }
       }
     },
+    "Position: %lf, %lf" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Position: %1$lf, %2$lf"
+          }
+        }
+      }
+    },
     "Rundenschlüssel %lld" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Round key %lld"
+            "value" : "Round Key %lld"
           }
         }
       }
@@ -253,7 +263,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Round key %lld:"
+            "value" : "Round Key %lld:"
           }
         }
       }
@@ -263,7 +273,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Round key History"
+            "value" : "Round Key History"
           }
         }
       }
@@ -273,7 +283,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "S-Box creation"
+            "value" : "S-Box Creation"
           }
         }
       }
@@ -303,7 +313,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "View Key animation"
+            "value" : "Show Key Animation"
           }
         }
       }
@@ -327,7 +337,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ShiftRows history"
+            "value" : "ShiftRows History"
           }
         }
       }
@@ -337,7 +347,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Further settings"
+            "value" : "Further Settings"
           }
         }
       }
@@ -380,7 +390,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show reverse animation option"
+            "value" : "Show Reverse Animation Option"
           }
         }
       }
@@ -390,7 +400,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Creator of the app"
+            "value" : "Creator of the App"
           }
         }
       }
@@ -481,7 +491,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show mixed Colors"
+            "value" : "Show Mixed Colors"
           }
         }
       }

@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct AnimationControl {
-    var isDone: Bool = false
-    var isPaused: Bool = false
-    var isForward: Bool = false
-    var isBackward: Bool = false
-    var isDouble: Bool = false
-    var plusTriggered: Bool = false
-    var minusTriggered: Bool = false
+    var isDone = false
+    var isPaused = false
+    var isForward = false
+    var isBackward = false
+    var isDouble = false
+    
+    var plusTriggered = false
+    var minusTriggered = false
     
     // Continue / Pause animation
     mutating func changePause(to value: Bool) { isPaused = value }

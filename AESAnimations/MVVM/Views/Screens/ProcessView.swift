@@ -250,7 +250,7 @@ extension ProcessView {
                     path.addLine(to: CGPoint(x: midX, y: geometry.size.height))
                 }
                 .stroke(Color.primary.opacity(0.6), lineWidth: 2)
-                .onAppear { horizontalLineHeight = geometry.size.height; print(horizontalLineHeight) }
+                .onAppear { horizontalLineHeight = geometry.size.height }
                 .zIndex(0)
             }
             

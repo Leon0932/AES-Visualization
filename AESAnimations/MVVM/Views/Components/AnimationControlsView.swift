@@ -89,7 +89,13 @@ struct AnimationControlsView: View {
     private var pausePlayControl: some View {
         controlButton(icon: animationControl.isPaused ? "play.fill" : "pause.fill") {
             withAnimation {
-                animationControl.isPaused ? animationControl.changePause(to: false) : animationControl.changePause(to: true)
+                if animationControl.isPaused {
+                    animationControl.changePause(to: false)
+                    
+                } else {
+                    animationControl.changePause(to: true)
+                    animationControl.isDouble = false
+                }
             }
         }
     }
