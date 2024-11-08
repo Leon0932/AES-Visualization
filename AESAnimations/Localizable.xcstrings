@@ -130,7 +130,7 @@
       "shouldTranslate" : false
     },
     "Generation of Round Keys" : {
-
+      "shouldTranslate" : false
     },
     "Generierung der Rundenschlüssel" : {
       "localizations" : {
@@ -238,16 +238,6 @@
         }
       }
     },
-    "Position: %lf, %lf" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Position: %1$lf, %2$lf"
-          }
-        }
-      }
-    },
     "Rundenschlüssel %lld" : {
       "localizations" : {
         "en" : {
@@ -318,17 +308,6 @@
         }
       }
     },
-    "Search State" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Search State"
-          }
-        }
-      },
-      "shouldTranslate" : false
-    },
     "ShiftRows" : {
       "shouldTranslate" : false
     },
@@ -374,6 +353,16 @@
     },
     "SubBytes" : {
       "shouldTranslate" : false
+    },
+    "Suche Byte" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Byte"
+          }
+        }
+      }
     },
     "Umgekehrt" : {
       "localizations" : {

@@ -17,7 +17,7 @@ struct SubBytesAnimationView: View {
             HStack {
                 currentStateView
                 sBoxView
-                    .padding(.top, 50)
+                    .padding(.top, 85)
             }
         }
         .toolbar(content: sBoxAnimationButton)
@@ -36,7 +36,7 @@ struct SubBytesAnimationView: View {
             
             stateGridView
             
-            Text("Search State")
+            Text("Suche Byte")
                 .offset(x: searchPosition.x, y: searchPosition.y)
                 .opacity(viewModel.searchState)
         }
