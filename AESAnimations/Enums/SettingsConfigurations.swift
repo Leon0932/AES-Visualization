@@ -8,5 +8,5 @@
 import Foundation
 
 enum SettingsConfigurations {
-    case language, appearance, color
+    case language, appearance, color, others
 }
