@@ -47,13 +47,94 @@ struct AnimationControlsView: View {
                                  buttonStyle: secondaryButton,
                                  action: startReverseAnimation)
             }
-            
         }
         .padding(10)
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.ultraLightGray)
         )
+    }
+    
+    // MARK: - Control buttons
+    private var controlButtons: some View {
+        HStack(spacing: 35) {
+            controlButton(icon: "arrow.uturn.left.circle.fill", action: resetAnimation)
+            controlStack(isForward: false)
+            pausePlayControl
+            controlStack(isForward: true)
+            controlButton(icon: "checkmark.circle.fill", action: completeAnimations)
+        }
+        .font(.title2)
+        .padding(15)
+        .background(
+            RoundedRectangle(cornerRadius: 10).fill(Color.ultraLightGray)
+        )
+    }
+    
+    // MARK: - Control buttons components
+    private var pausePlayControl: some View {
+        controlButton(icon: animationControl.isPaused ? "play.fill" : "pause.fill", action: pauseAnimation)
+    }
+    
+    private func controlStack(isForward: Bool) -> some View {
+        HStack(spacing: 10) {
+            if isForward {
+                forwardButton()
+                doubleTextView(showText: animationControl.isForward && animationControl.isDouble)
+            } else {
+                doubleTextView(showText: animationControl.isBackward && animationControl.isDouble)
+                backwardButton()
+            }
+        }
+    }
+    
+    private func forwardButton() -> some View {
+        if animationControl.isPaused {
+            controlButton(icon: "plus") { animationControl.plusTriggered = true }
+        } else {
+            controlButton(icon: animationControl.isForward ? "forward.fill" : "forward") {
+                handleAnimationControl(isForward: true)
+            }
+        }
+    }
+    
+    private func backwardButton() -> some View {
+        if animationControl.isPaused {
+            controlButton(icon: "minus") { animationControl.minusTriggered = true }
+        } else {
+            controlButton(icon: animationControl.isBackward ? "backward.fill" : "backward") {
+                handleAnimationControl(isForward: false)
+            }
+        }
+    }
+    
+    private func handleAnimationControl(isForward: Bool) {
+        withAnimation {
+            isForward ? animationControl.advanceAnimations() : animationControl.reverseAnimation()
+        }
+    }
+    
+    // MARK: - Helper Functions
+    private func controlButton(icon: String, action: @escaping () -> Void) -> some View {
+        CustomButtonView(icon: icon,
+                         buttonStyle: StandardButtonStyle(font: .title2),
+                         action: action)
+    }
+    
+    private func doubleTextView(showText: Bool) -> some View {
+        Text("2x")
+            .foregroundStyle(Color.accentColor)
+            .opacity(showText ? 1 : 0)
+    }
+    
+    private func pauseAnimation() {
+        withAnimation {
+            animationControl.changePause(to: !animationControl.isPaused)
+            if animationControl.isPaused {
+                animationControl.changePause(to: true)
+                animationControl.isDouble = false
+            }
+        }
     }
     
     private func repeatAnimation() {
@@ -69,83 +150,6 @@ struct AnimationControlsView: View {
             animationControl.isBackward = true
             startAnimations()
         }
-    }
-    
-    // MARK: - Control buttons
-    private var controlButtons: some View {
-        HStack(spacing: 35) {
-            controlButton(icon: "arrow.uturn.left.circle.fill", action: resetAnimation)
-            controlStack(isForward: false)
-            pausePlayControl
-            controlStack(isForward: true)
-            controlButton(icon: "checkmark.circle.fill", action: completeAnimations)
-        }
-        .font(.title2)
-        .padding(15)
-        .background(RoundedRectangle(cornerRadius: 10).fill(Color.ultraLightGray))
-    }
-    
-    // MARK: - Control buttons components
-    private var pausePlayControl: some View {
-        controlButton(icon: animationControl.isPaused ? "play.fill" : "pause.fill") {
-            withAnimation {
-                if animationControl.isPaused {
-                    animationControl.changePause(to: false)
-                    
-                } else {
-                    animationControl.changePause(to: true)
-                    animationControl.isDouble = false
-                }
-            }
-        }
-    }
-    
-    private func controlStack(isForward: Bool) -> some View {
-        HStack(spacing: 10) {
-            if isForward {
-                if animationControl.isPaused {
-                    controlButton(icon: "plus") {
-                        animationControl.plusTriggered = true
-                    }
-                } else {
-                    controlButton(icon: animationControl.isForward ? "forward.fill" : "forward") {
-                        withAnimation {
-                            animationControl.advanceAnimations()
-                        }
-                    }
-                }
-                
-                   
-                Text("2x")
-                    .foregroundStyle(Color.accentColor)
-                    .opacity(animationControl.isForward && animationControl.isDouble ? 1 : 0)
-                
-            } else {
-                Text("2x")
-                    .foregroundStyle(Color.accentColor)
-                    .opacity(animationControl.isBackward && animationControl.isDouble ? 1 : 0)
-                
-                if animationControl.isPaused {
-                    controlButton(icon: "minus") {
-                        animationControl.minusTriggered = true
-                    }
-                } else {
-                    controlButton(icon: animationControl.isBackward ? "backward.fill" : "backward") {
-                        withAnimation {
-                            animationControl.reverseAnimation()
-                        }
-                    }
-                }
-               
-            }
-        }
-    }
-    
-    // MARK: - Helper Functions
-    private func controlButton(icon: String, action: @escaping () -> Void) -> some View {
-        CustomButtonView(icon: icon,
-                         buttonStyle: StandardButtonStyle(font: .title2),
-                         action: action)
     }
 }
 
