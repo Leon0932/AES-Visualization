@@ -580,7 +580,11 @@ class ProcessViewModel: AnimationViewModel {
     ///   and the second array handles the reverse animation.
     func updateRoundNumber() -> (AnimationStep, AnimationStep) {
         return (AnimationStep { withAnimation { self.currentRoundNumber += 1 } },
-                AnimationStep { withAnimation { self.currentRoundNumber -= 1 } }
+                AnimationStep {
+            withAnimation {
+                if self.currentRoundNumber > 0 { self.currentRoundNumber -= 1 }
+            }
+        }
         )
     }
     
