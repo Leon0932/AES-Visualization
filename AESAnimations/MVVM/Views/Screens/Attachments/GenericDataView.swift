@@ -110,7 +110,7 @@ struct GenericDataView: View {
                     
                     CellView(value: data,
                              boxSize: 30,
-                             backgroundColor: showByteColors ? .reducedByteColor(data) : .lightGray)
+                             backgroundColor: showByteColors ? .reducedByteColor(data) : .reducedAccentColor)
                 }
             }
         }
