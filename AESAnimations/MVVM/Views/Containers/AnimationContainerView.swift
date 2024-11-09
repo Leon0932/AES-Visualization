@@ -23,7 +23,7 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
          @ViewBuilder content: () -> Content) {
         
         self.viewModel = viewModel
-        self.showReverseAnimationButton = showReverseAnimationButton ?? UserDefaults.standard.bool(forKey: "includeReverseAnimation")
+        self.showReverseAnimationButton = showReverseAnimationButton ?? UserDefaults.standard.bool(forKey: StorageKeys.includeReverseAnimation.key)
         self.showRepeatButtons = showRepeatButtons
         self.content = content()
     }

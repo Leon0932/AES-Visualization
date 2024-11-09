@@ -8,10 +8,10 @@
 import SwiftUI
 
 class SettingsViewModel: ObservableObject {
-    @AppStorage("colorScheme") var colorScheme: AppScheme = .system
-    @AppStorage("primaryColor") var primaryColor: PrimaryColor = .blue
-    @AppStorage("appLanguage") var appLanguage: String = Locale.current.language.languageCode?.identifier ?? "en"
-    @AppStorage("includeReverseAnimation") var includeReverseAnimation: Bool = true
+    @AppStorage(StorageKeys.colorScheme.key) var colorScheme: AppScheme = .system
+    @AppStorage(StorageKeys.primaryColor.key) var primaryColor: PrimaryColor = .blue
+    @AppStorage(StorageKeys.appLanguage.key) var appLanguage: String = Locale.current.language.languageCode?.identifier ?? "en"
+    @AppStorage(StorageKeys.includeReverseAnimation.key) var includeReverseAnimation: Bool = true
     
     @Published var showAlert = false
     

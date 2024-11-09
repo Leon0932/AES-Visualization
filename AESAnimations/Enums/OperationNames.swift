@@ -12,7 +12,7 @@ enum OperationNames: CustomStringConvertible {
     case shiftRows, subBytes, mixColumns, addRoundKey, keyExpansion, encryptionProcess, decryptionProcess, invSBox, sBox
     
     var description: String {
-        let languageCode = UserDefaults.standard.string(forKey: "appLanguage") ?? "en"
+        let languageCode = UserDefaults.standard.string(forKey: StorageKeys.appLanguage.key) ?? "en"
 
         switch self {
         case .shiftRows:
