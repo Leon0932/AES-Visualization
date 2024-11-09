@@ -61,15 +61,11 @@ extension AnimationViewModel {
     func processAnimations() async {
         var index = animationControl.isBackward ? reverseAnimationSteps.count - 1 : 0
         
-        withAnimation {
-            animationControl.changePause(to: false)
-            animationControl.isDone = false
-        }
+        handleAnimationState(isDone: false)
         
-  
         while index < animationSteps.count && index >= 0 {
             guard !Task.isCancelled else { return }
-
+            
             // Calculating Delay
             let stepDelay = animationSteps[index].delay
             let revStepDelay = reverseAnimationSteps[index].delay
@@ -123,10 +119,13 @@ extension AnimationViewModel {
             }
         }
         
-        // Set the animation to 'done'
+        handleAnimationState(isDone: true)
+    }
+    
+    private func handleAnimationState(isDone: Bool) {
         withAnimation {
-            animationControl.isDone = true
-            animationControl.resetAnimationFlags()
+            animationControl.isDone = isDone
+            isDone ? animationControl.resetAnimationFlags() : animationControl.changePause(to: false)
         }
     }
     
@@ -143,7 +142,7 @@ extension AnimationViewModel {
         animationData.animationTask?.cancel()
         Task { await sleep(for: normal) }
         self.resetAnimationState(state: state, showResult: showResult)
-
+        
         withAnimation {
             self.animationControl.resetAnimationFlags()
             self.animationControl.isDone = true
