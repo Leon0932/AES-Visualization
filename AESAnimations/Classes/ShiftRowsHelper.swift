@@ -7,7 +7,11 @@
 
 import Foundation
 
+
+/// Helper class for `ShiftRowsViewModel` and
+/// `KeyExpansionViewModel (RotWordAnimation)`
 class ShiftRowsHelper {
+    // MARK: - Properties
     let boxSize: CGFloat
     let spacing: CGFloat
     
@@ -15,6 +19,16 @@ class ShiftRowsHelper {
     let middleOffset: CGFloat
     let returnOffset: CGFloat
     
+    
+    /// Calculates values for the ShiftRows animation:
+    ///
+    /// - `boxSizeWithSpacing`: Determines the amount to shift boxes to the left or upward.
+    /// - `middleOffset`: Moves the box to the center position.
+    /// - `returnOffset`: Sets the new offset for the shifted box.
+    ///
+    /// - Parameters:
+    ///   - boxSize: The size of each box (`CellView`).
+    ///   - spacing: The spacing between each box.
     init(boxSize: CGFloat, spacing: CGFloat) {
         
         self.boxSize = boxSize
