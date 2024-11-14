@@ -11,14 +11,11 @@ struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: SettingsViewModel
     
-    @State private var newLanguage = ""
-    
     // MARK: - Body Content
     var body: some View {
         SheetContainerView(navigationTitle: "Einstellungen") {
             platformSpecificContent
         }
-        .alert(isPresented: $viewModel.showAlert, content: alert)
     }
     
     private var platformSpecificContent: some View {
@@ -48,15 +45,14 @@ struct SettingsView: View {
             configurableButton(color: .clear,
                                isSelected: viewModel.appLanguage == "de",
                                imageName: "Flag_of_Germany") {
-                newLanguage = "de"
-                viewModel.showAlert = true
+                viewModel.appLanguage = "de"
             }
             
             configurableButton(color: .clear,
                                isSelected: viewModel.appLanguage == "en",
                                imageName: "Flag_of_USA") {
-                newLanguage = "en"
-                viewModel.showAlert = true
+
+                viewModel.appLanguage = "en"
             }
         }
     }
@@ -194,33 +190,6 @@ struct SettingsView: View {
                 .stroke(overlayColor, lineWidth: 4)
                 .frame(width: overlayFrameSize, height: overlayFrameSize)
         }
-    }
-    
-    // MARK: - Alert Function
-    private func alert() -> Alert {
-        Alert(title: Text(alertTitle),
-              message: Text(alertMessage),
-              primaryButton: .destructive(Text(alertTitle), action: closeApp),
-              secondaryButton: .cancel(Text(cancelTitle)))
-    }
-    
-    private var alertTitle: String {
-        viewModel.appLanguage == "de" ? "Neustart" : "Restart"
-    }
-    
-    private var alertMessage: String {
-        viewModel.appLanguage == "de"
-        ? "Für die Änderung der Sprache wird ein neuer Start der App erforderlich sein."
-        : "You will need to restart the app to change the language."
-    }
-    
-    private var cancelTitle: String {
-        viewModel.appLanguage == "de" ? "Abbrechen" : "Cancel"
-    }
-    
-    private func closeApp() {
-        viewModel.appLanguage = newLanguage
-        exit(0)
     }
     
     // MARK: - Title Helper Function

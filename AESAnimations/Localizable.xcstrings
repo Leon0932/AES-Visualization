@@ -126,9 +126,6 @@
         }
       }
     },
-    "Für die Änderung der Sprache wird ein neuer Start der App erforderlich sein." : {
-      "shouldTranslate" : false
-    },
     "Generation of Round Keys" : {
       "shouldTranslate" : false
     },
@@ -224,9 +221,6 @@
           }
         }
       }
-    },
-    "Neustart" : {
-      "shouldTranslate" : false
     },
     "Position der S-Box" : {
       "localizations" : {
