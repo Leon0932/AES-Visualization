@@ -11,7 +11,7 @@ class SettingsViewModel: ObservableObject {
     @AppStorage(StorageKeys.colorScheme.key) var colorScheme: AppScheme = .system
     @AppStorage(StorageKeys.primaryColor.key) var primaryColor: PrimaryColor = .blue
     @AppStorage(StorageKeys.appLanguage.key) var appLanguage: String = Locale.current.language.languageCode?.identifier ?? "en"
-    @AppStorage(StorageKeys.includeReverseAnimation.key) var includeReverseAnimation: Bool = true
+    @AppStorage(StorageKeys.includeReverseAnimation.key) var includeReverseAnimation: Bool = false
     
     @Published var showAlert = false
     
