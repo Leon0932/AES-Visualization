@@ -73,7 +73,7 @@ class AddRoundKeyViewModel: AnimationViewModel {
             }
         }
         
-        startAnimations()
+        handleAnimationStart()
     }
     
     /// Animates the process of adding a round key in the AES encryption round.

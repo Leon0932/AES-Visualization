@@ -18,17 +18,35 @@ struct AnimationControlsView: View {
     var showRepeatButtons: Bool = true
     var showReverseAnimationButton: Bool = true
     
+    @AppStorage(StorageKeys.startAnimationOnAppear.key) var startAnimationOnApp: Bool = false
+    @State private var showStartButton = true
+    
     // MARK: -
     var body: some View {
         ZStack {
             if animationControl.isDone {
                 if showRepeatButtons { controlButtonsDone }
+            } else if showStartButton && !startAnimationOnApp {
+                startButton
             } else {
                 controlButtons
             }
         }
         .transition(.opacity)
         .animation(.easeInOut(duration: 0.5), value: animationControl.isDone)
+    }
+    
+    // MARK: - Start Button
+    private var startButton: some View {
+        CustomButtonView(title: "Animation starten",
+                         icon: "play.circle",
+                         buttonStyle: .primary) {
+            withAnimation {
+                showStartButton = false
+                startAnimations()
+            }
+         
+        }
     }
     
     // MARK: - Buttons for finished animations

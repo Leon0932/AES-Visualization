@@ -31,6 +31,10 @@ extension AnimationViewModel {
     /// 0.5 seconds
     var short: UInt64 { return 500_000_000 }
     
+    var animationOnAppearKey: Bool {
+        UserDefaults.standard.bool(forKey: StorageKeys.startAnimationOnAppear.key)
+    }
+    
     /// Pauses the animation for the specified duration.
     /// - Parameter nanoseconds: The amount of time to pause the animation, in nanoseconds.
     func sleep(for nanoseconds: UInt64) async {
@@ -144,14 +148,21 @@ extension AnimationViewModel {
     }
     
     @MainActor
+    func handleAnimationStart() {
+        if animationOnAppearKey {
+            startAnimations()
+        }
+    }
+    
+    @MainActor
     func startAnimations() {
         animationData.animationTask = Task {
-            animationControl.changePause(to: false)
             await sleep(for: short)
             await processAnimations()
         }
     }
     
+    // MARK: - Helper Functions
     private func cancelAndResetAnimation(state: [[Byte]], showResult: Double) {
         animationData.animationTask?.cancel()
         Task { await sleep(for: normal) }

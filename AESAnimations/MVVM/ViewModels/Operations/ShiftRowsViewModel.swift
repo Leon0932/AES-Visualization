@@ -63,7 +63,7 @@ class ShiftRowsViewModel: AnimationViewModel {
         animationData.animationSteps.append(contentsOf: animations.0)
         animationData.reverseAnimationSteps.append(contentsOf: animations.1)
         
-        startAnimations()
+        handleAnimationStart()
     }
     
     // MARK: - Animation Steps Creation Helper Functions

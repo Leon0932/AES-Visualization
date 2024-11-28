@@ -66,6 +66,16 @@
         }
       }
     },
+    "Animation starten" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Animation"
+          }
+        }
+      }
+    },
     "Die App wurde von **Leon Chamoun** im Rahmen einer Bachelorarbeit entwickelt, die von **Prof. Dr. Christoph Karg** betreut wurde." : {
       "localizations" : {
         "en" : {
@@ -164,7 +174,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Main rounds:"
+            "value" : "Main Rounds:"
           }
         }
       }
@@ -184,16 +194,6 @@
     },
     "KeyExpansion" : {
       "shouldTranslate" : false
-    },
-    "Linksverschiebung um %lld-Shifts" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Left Shift by %lld"
-          }
-        }
-      }
     },
     "MixColumns" : {
       "shouldTranslate" : false

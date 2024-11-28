@@ -99,7 +99,7 @@ class SubBytesViewModel: AnimationViewModel {
             }
         }
         
-        startAnimations()
+        handleAnimationStart()
     }
     
     /// Processes a specific grid cell in the state by animating its movement and updating its state.

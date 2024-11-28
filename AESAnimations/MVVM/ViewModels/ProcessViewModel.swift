@@ -258,7 +258,7 @@ class ProcessViewModel: AnimationViewModel {
         animationData.reverseAnimationSteps.append(contentsOf: [moveToEnd.1, resetSavedPosition])
         addShowHideRoundKeySteps(hide: 0.0, show: 1.0)
         
-        startAnimations()
+        handleAnimationStart()
     }
     
     // MARK: - Animation Phase Creation Functions

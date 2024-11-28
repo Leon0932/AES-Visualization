@@ -124,7 +124,8 @@ class KeyExpansionViewModel: AnimationViewModel {
                     animationData.reverseAnimationSteps.append(contentsOf: roundKeyAnimation.1)
                 }
             }
-            startAnimations()
+            
+            handleAnimationStart()
         }
     }
     
