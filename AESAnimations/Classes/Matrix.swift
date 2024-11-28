@@ -26,7 +26,7 @@ struct Matrix {
     init(rows: Int, columns: Int) {
         self.rows = rows
         self.columns = columns
-        self.data = Array(repeating: Array(repeating: "FF", count: columns), count: rows)
+        self.data = Array(repeating: Array(repeating: "00", count: columns), count: rows)
         self.invalidInputFlags = Array(repeating: Array(repeating: false, count: columns), count: rows)
     }
     
@@ -99,5 +99,10 @@ struct Matrix {
     /// Clears all data in the matrix by setting each cell to an empty string.
     mutating func clearData() {
         data = Array(repeating: Array(repeating: "", count: columns), count: rows)
+    }
+    
+    /// Fills all data in the matrix by setting each cell to a string "00".
+    mutating func fillData()  {
+        data = Array(repeating: Array(repeating: "00", count: columns), count: rows)
     }
 }

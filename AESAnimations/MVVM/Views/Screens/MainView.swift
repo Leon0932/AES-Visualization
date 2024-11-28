@@ -70,12 +70,12 @@ struct MainView: View {
         
         return VStack(alignment: .center, spacing: 25) {
             HStack(spacing: 32) {
-                CustomNavigationButton(title: "Entschlüsseln", icon: "lock.open", buttonStyle: primaryStyle) {
-                    ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: true))
-                }
-                
                 CustomNavigationButton(title: "Verschlüsseln", icon: "lock",  buttonStyle: primaryStyle) {
                     ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: false))
+                }
+                
+                CustomNavigationButton(title: "Entschlüsseln", icon: "lock.open", buttonStyle: primaryStyle) {
+                    ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: true))
                 }
             }
             

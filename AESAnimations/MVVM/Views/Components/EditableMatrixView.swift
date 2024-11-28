@@ -30,9 +30,17 @@ struct EditableMatrixView: View {
     // MARK: - Header View
     private var headerView: some View {
         HStack {
-            Label(title: { Text(title) },
-                  icon: { Image(systemName: icon) })
-            .font(.title)
+            HStack(spacing: 4) {
+                Label(title: { Text(title) },
+                      icon: { Image(systemName: icon) })
+                .font(.title)
+                
+                CustomButtonView(icon: "arrow.uturn.left",
+                                 buttonStyle: StandardButtonStyle(font: .title2)) {
+                    matrix.fillData()
+                }
+            }
+            
             
             Spacer()
             
@@ -41,8 +49,8 @@ struct EditableMatrixView: View {
                 matrix.generateAndFillRandomBytes()
             }
             
-            CustomButtonView(icon: "xmark",
-                             buttonStyle: SecondaryButtonStyle(font: .largeTitle)) {
+            CustomButtonView(icon: "trash",
+                             buttonStyle: SecondaryButtonStyle(font: .title)) {
                 matrix.clearData()
             }
         }
