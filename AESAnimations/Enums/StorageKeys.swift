@@ -12,6 +12,7 @@ enum StorageKeys: String {
     case colorScheme
     case primaryColor
     case includeReverseAnimation
+    case startAnimationOnAppear
     
     var key: String { rawValue }
 }

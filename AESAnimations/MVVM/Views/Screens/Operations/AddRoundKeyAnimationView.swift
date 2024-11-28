@@ -66,7 +66,7 @@ struct AddRoundKeyAnimationView: View {
     
     // MARK: - Result View
     private var newStateView: some View {
-        StateView(title: "Neuer State",
+        StateView(title: "Neuer Zustand",
                   state: viewModel.result,
                   opacity: .twoD(viewModel.showNewState))
     }

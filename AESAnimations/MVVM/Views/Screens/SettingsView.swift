@@ -91,8 +91,10 @@ struct SettingsView: View {
     }
     
     private func furtherSettingsSelections() -> some View {
-        selectionView {
+        VStack(alignment: .leading,
+               spacing: 10) {
             Toggle("Umgekehrte Animations-Option einblenden", isOn: $viewModel.includeReverseAnimation)
+            Toggle("Animation bei Anzeige der View automatisch abspielen", isOn: $viewModel.startAnimationOnAppear)
         }
     }
     

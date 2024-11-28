@@ -59,12 +59,12 @@ struct MixColumnAnimationView: View {
     // MARK: - Result View
     private var stateComparisonView: some View {
         HStack {
-            StateView(title: "Alter State",
+            StateView(title: "Alter Zustand",
                       state: viewModel.state,
                       position: .oneD(viewModel.columnPositions)
             )
             Spacer()
-            StateView(title: "Neuer State",
+            StateView(title: "Neuer Zustand",
                       state: viewModel.result,
                       opacity: .oneD(viewModel.showNewState))
         }
