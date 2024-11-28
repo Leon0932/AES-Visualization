@@ -87,20 +87,23 @@ struct ProcessView: View {
             VStack(alignment: .center, spacing: 25) {
                 roundView(phase: 0)
                     .frame(maxWidth: .infinity)
+
                 
                 roundView(phase: 1, data: viewModel.phaseOne)
                     .frame(maxWidth: .infinity)
+    
                 
                 roundView(phase: 2, data: viewModel.phaseTwo)
                     .background(
                         HorizontalLine(mainRounds: viewModel.aesCipher.getNrOfRounds,
                                        currentRound: $viewModel.currentRoundNumber)
                     )
+        
                 
                 roundView(phase: 3, data: viewModel.phaseThree)
                     .frame(maxWidth: .infinity)
+              
             }
-            .zIndex(1)
             .padding(.vertical, 10)
             .background(VerticalLine(horizontalLineHeight: $viewModel.horizontalLineHeight))
             .frame(maxWidth: 450, alignment: .center)
@@ -109,6 +112,7 @@ struct ProcessView: View {
                 .frame(width: 20, height: 20)
                 .offset(x: viewModel.ballPositionX, y: viewModel.ballPosition)
                 .foregroundStyle(Color.accentColor)
+                .zIndex(checkHighlight ? -1 : 0)
             
         }
     }
@@ -234,6 +238,11 @@ struct ProcessView: View {
                           cipherRounds: viewModel.cipherHistory,
                           isDecryption: viewModel.operationDetails.isInverseMode)
     }
+    
+    
+    private var checkHighlight: Bool {
+        viewModel.highlightOperation.values.contains { $0.contains(true) }
+    }
 }
 
 // MARK: - Draw Lines
@@ -244,16 +253,13 @@ extension ProcessView {
         var body: some View {
             GeometryReader { geometry in
                 Path { path in
-                    
                     let midX = geometry.size.width / 2
                     path.move(to: CGPoint(x: midX, y: 0))
                     path.addLine(to: CGPoint(x: midX, y: geometry.size.height))
                 }
                 .stroke(Color.primary.opacity(0.6), lineWidth: 2)
                 .onAppear { horizontalLineHeight = geometry.size.height }
-                .zIndex(0)
             }
-            
         }
     }
     
@@ -280,7 +286,6 @@ extension ProcessView {
                         path.addLine(to: CGPoint(x: midX + 10, y: -20))
                     }
                     .stroke(Color.primary.opacity(0.6), lineWidth: 2)
-                    .zIndex(0)
                     
                     // Hauptrunden
                     VStack(alignment: .center, spacing: 8) {
