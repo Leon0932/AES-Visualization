@@ -36,7 +36,7 @@ struct EditableMatrixView: View {
                 .font(.title)
                 
                 CustomButtonView(icon: "arrow.uturn.left",
-                                 buttonStyle: StandardButtonStyle(font: .title2)) {
+                                 buttonStyle: StandardButtonStyle(font: .title2, isDisabled: matrix.checkNullBytes)) {
                     matrix.fillData()
                 }
             }

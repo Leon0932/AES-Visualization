@@ -96,6 +96,10 @@ struct Matrix {
         invalidInputFlags.flatMap { $0 }.contains(true)
     }
     
+    var checkNullBytes: Bool {
+        data.flatMap { $0 }.contains { $0 == "00" }
+    }
+    
     /// Clears all data in the matrix by setting each cell to an empty string.
     mutating func clearData() {
         data = Array(repeating: Array(repeating: "", count: columns), count: rows)

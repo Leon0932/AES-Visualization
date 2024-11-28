@@ -15,6 +15,7 @@ struct StandardButtonStyle: ButtonStyle {
     
     var font: Font = .headline
     var padding: CGFloat = 5
+    var isDisabled: Bool = false
     
     /// Creates a view that represents the body of a button.
     ///
@@ -29,7 +30,8 @@ struct StandardButtonStyle: ButtonStyle {
             .background(fillColor)
             .highlightEffect(isHovered: $isHovered)
             .font(font)
-            .foregroundStyle(Color.accentColor)
+            .foregroundStyle(isDisabled ? Color.lightGray : Color.accentColor)
+            .disabled(isDisabled)
             .pressEffect(isPressed: configuration.isPressed)
            
     }
