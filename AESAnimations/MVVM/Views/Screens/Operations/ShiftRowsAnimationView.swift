@@ -11,10 +11,6 @@ struct ShiftRowsAnimationView: View {
     @Environment(\.locale) var locale
     @StateObject var viewModel: ShiftRowsViewModel
     
-    var buttonTitle: String {
-        locale == Locale(identifier: "de") ? "ShiftRows-Verlauf" : "ShiftRows History"
-    }
-    
     // MARK: -
     var body: some View {
         AnimationContainerView(viewModel: viewModel) {
@@ -37,11 +33,14 @@ struct ShiftRowsAnimationView: View {
     
     // MARK: - Row View
     private func rowView(for row: Int) -> some View {
-        HStack(spacing: 12) {
+        let shiftAmount = shiftAmount(for: row)
+
+        return HStack(spacing: 20) {
             cellRow(for: row)
-            
-            Label("Linksverschiebung um \(shiftAmount(for: row))-Shifts", systemImage: "arrow.left")
+
+            Label(shiftTitle(by: shiftAmount), systemImage: "arrow.left")
                 .font(.title)
+                .frame(width: 400, alignment: .leading)
                 .opacity(viewModel.isShiftTextVisible[row] ? 1 : 0)
                 .animation(.easeIn(duration: 0.5), value: viewModel.isShiftTextVisible[row])
         }
@@ -73,6 +72,23 @@ struct ShiftRowsAnimationView: View {
                              buttonStyle: .secondary,
                              action: viewModel.toggleShiftRounds)
             .opacity(viewModel.animationControl.isDone ? 1 : 0)
+        }
+    }
+    
+    // MARK: - Helper Functions for Translation
+    private var buttonTitle: String {
+        locale == Locale(identifier: "de") ? "ShiftRows-Verlauf" : "ShiftRows History"
+    }
+    
+    private func shiftTitle(by amount: Int) -> String {
+        if locale == Locale(identifier: "de") {
+            return amount == 0
+                ? "Keine Linksverschiebung"
+                : "Linksverschiebung um \(amount) " + (amount == 1 ? "Shift" : "Shifts")
+        } else {
+            return amount == 0
+                ? "No Left Shift"
+                : "Left Shift by \(amount) " + (amount == 1 ? "Shift" : "Shifts")
         }
     }
 }
