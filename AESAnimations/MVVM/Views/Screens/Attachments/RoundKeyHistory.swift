@@ -11,15 +11,15 @@ struct RoundKeyHistory: View {
     let navigationTitle: String
     let keyExpRounds: [KeyExpansionRound]
 
-    let header: [(String, CGFloat)] = [
-        ("i", 25),
-        ("Temp", 130),
-        ("After RotWord", 130),
-        ("After SubWord", 130),
+    let header: [(LocalizedStringKey, CGFloat)] = [
+        ("Index", 25),
+        ("Start", 130),
+        ("Nach RotWord", 130),
+        ("Nach SubWord", 130),
         ("rCon[i / nK]", 130),
-        ("After ⊕ with rCon", 130),
+        ("Nach ⊕ mit rCon", 130),
         ("w[i - nK]", 130),
-        ("w[i] = temp ⊕ w[i - nK]", 130)
+        ("w[i] = Start ⊕ w[i - nK]", 130)
     ]
     
     var keyExpansionData: [[Any]] {

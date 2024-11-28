@@ -13,7 +13,7 @@ struct GenericDataView: View {
     // MARK: - Properties
     var navigationTitle: String
     let data: [[Any]]
-    let header: [(String, CGFloat)]
+    let header: [(LocalizedStringKey, CGFloat)]
     
     @State private var showByteColors: Bool = true
     // MARK: -

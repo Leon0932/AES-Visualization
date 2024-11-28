@@ -64,6 +64,9 @@ class AESState {
     /// - Returns: An array of `ShiftRowRound` representing the details of each shift operation performed on the state rows.
     func shiftRows(state: inout [[Byte]], isInverse: Bool) -> [ShiftRowRound] {
         var results: [ShiftRowRound] = []
+        results.append(ShiftRowRound(index: 0,
+                                     temp: state[0],
+                                     shifts: [[], [], []]))
         
         for i in 1..<4 {
             var round: ShiftRowRound = ShiftRowRound(index: i, temp: state[i], shifts: [])

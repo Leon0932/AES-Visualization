@@ -12,24 +12,23 @@ struct CipherHistoryView: View {
     let cipherRounds: [CipherRound]
     let isDecryption: Bool
     
-    var header: [(String, CGFloat)] {
+    var header: [(LocalizedStringKey, CGFloat)] {
         isDecryption ?
         [
-            ("Round Number", 100),
-            ("Start of Round / After InvSubBytes", 170),
-            ("Round Key Value", 170),
-            ("After AddRoundKey", 170),
-            ("After InvMixColumns", 170),
-            ("After InvShiftRows", 170),
-            
-        ] :
+            ("Rundennummer", 100),
+            ("Start der Runde / Nach InvSubBytes", 170),
+            ("Rundenschlüsselwert", 170),
+            ("Nach AddRoundKey", 170),
+            ("Nach InvMixColumns", 170),
+            ("Nach InvShiftRows", 170),
+        ]:
         [
-            ("Round Number", 100),
-            ("Start of Round / After AddRoundKey", 170),
-            ("After SubBytes", 170),
-            ("After ShiftRows", 170),
-            ("After MixColumns", 170),
-            ("Round Key Value", 170),
+            ("Rundennummer", 100),
+            ("Start der Runde / Nach AddRoundKey", 170),
+            ("Nach SubBytes", 170),
+            ("Nach ShiftRows", 170),
+            ("Nach MixColumns", 170),
+            ("Rundenschlüsselwert", 170),
         ]
     }
     var cipherRowData: [[Any]] {
@@ -42,7 +41,7 @@ struct CipherHistoryView: View {
                 round.afterAddRound,
                 round.afterMixColumns,
                 round.afterShiftRows,
-         
+                
             ] :
             [
                 round.index,

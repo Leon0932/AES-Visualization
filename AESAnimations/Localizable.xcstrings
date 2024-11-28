@@ -179,6 +179,17 @@
         }
       }
     },
+    "Index" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Index"
+          }
+        }
+      }
+    },
     "Inverse S-Box Erstellung" : {
       "localizations" : {
         "en" : {
@@ -194,6 +205,16 @@
     },
     "KeyExpansion" : {
       "shouldTranslate" : false
+    },
+    "Letzte Verschiebung" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Shift"
+          }
+        }
+      }
     },
     "MixColumns" : {
       "shouldTranslate" : false
@@ -211,6 +232,118 @@
     "N/A" : {
       "shouldTranslate" : false
     },
+    "Nach ⊕ mit rCon" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After ⊕ with rCon"
+          }
+        }
+      }
+    },
+    "Nach AddRoundKey" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After AddRoundKey"
+          }
+        }
+      }
+    },
+    "Nach erster Verschiebung" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After First Shift"
+          }
+        }
+      }
+    },
+    "Nach InvMixColumns" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After InvMixColumns"
+          }
+        }
+      }
+    },
+    "Nach InvShiftRows" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After InvShiftRows"
+          }
+        }
+      }
+    },
+    "Nach MixColumns" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After MixColumns"
+          }
+        }
+      }
+    },
+    "Nach RotWord" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After RotWord"
+          }
+        }
+      }
+    },
+    "Nach ShiftRows" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After ShiftRows"
+          }
+        }
+      }
+    },
+    "Nach SubBytes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After SubBytes"
+          }
+        }
+      }
+    },
+    "Nach SubWord" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After SubWord"
+          }
+        }
+      }
+    },
+    "Nach zweiter Verschiebung" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After Second Shift"
+          }
+        }
+      }
+    },
     "Neuer Zustand" : {
       "localizations" : {
         "en" : {
@@ -227,6 +360,19 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Position of the S-Box"
+          }
+        }
+      }
+    },
+    "rCon[i / nK]" : {
+      "shouldTranslate" : false
+    },
+    "Rundennummer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round Number"
           }
         }
       }
@@ -257,6 +403,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Round Key History"
+          }
+        }
+      }
+    },
+    "Rundenschlüsselwert" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round Key Value"
           }
         }
       }
@@ -330,6 +486,37 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Col"
+          }
+        }
+      }
+    },
+    "Start" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
+    },
+    "Start der Runde / Nach AddRoundKey" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start of Round / After AddRoundKey"
+          }
+        }
+      }
+    },
+    "Start der Runde / Nach InvSubBytes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start of Round / After InvSubBytes"
           }
         }
       }
@@ -415,6 +602,19 @@
     },
     "Visualization of AES" : {
       "shouldTranslate" : false
+    },
+    "w[i - nK]" : {
+      "shouldTranslate" : false
+    },
+    "w[i] = Start ⊕ w[i - nK]" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "w[i] = Start ⊕ w[i - nK]"
+          }
+        }
+      }
     },
     "Wähle Akzentfarbe (%@)" : {
       "extractionState" : "manual",

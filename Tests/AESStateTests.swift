@@ -49,6 +49,9 @@ final class AESStateTests: XCTestCase {
         ]
         
         let historyExceptedOutputOne: [ShiftRowRound] = [
+            ShiftRowRound(index: 0,
+                          temp:  [0x63, 0x53, 0xe0, 0x8c],
+                          shifts: [[], [], []]),
             ShiftRowRound(index: 1,
                           temp: [0x09, 0x60, 0xe1, 0x04],
                           shifts: [[0x60, 0xe1, 0x04, 0x09], [], []]),
@@ -60,6 +63,9 @@ final class AESStateTests: XCTestCase {
                           shifts: [[0xca, 0xd0, 0xe7, 0xba], [0xd0, 0xe7, 0xba, 0xca], [0xe7, 0xba, 0xca, 0xd0]]),
         ]
         let historyExceptedOutputTwo: [ShiftRowRound] = [
+            ShiftRowRound(index: 0,
+                          temp:  [0x49, 0x45, 0x7f, 0x77],
+                          shifts: [[], [], []]),
             ShiftRowRound(index: 1,
                           temp: [0xde, 0xdb, 0x39, 0x02],
                           shifts: [[0xdb, 0x39, 0x02, 0xde], [], []]),
@@ -71,6 +77,9 @@ final class AESStateTests: XCTestCase {
                           shifts: [[0xf1, 0x1a, 0x3b, 0x89], [0x1a, 0x3b, 0x89, 0xf1], [0x3b, 0x89, 0xf1, 0x1a]]),
         ]
         let historyExceptedOutputOneRev: [ShiftRowRound] = [
+            ShiftRowRound(index: 0,
+                          temp:  [0x63, 0x53, 0xe0, 0x8c],
+                          shifts: [[], [], []]),
             ShiftRowRound(index: 1,
                           temp: [0x60, 0xe1, 0x04, 0x09],
                           shifts: [[0xe1, 0x04, 0x09, 0x60], [0x04, 0x09, 0x60, 0xe1], [0x09, 0x60, 0xe1, 0x04]]),
@@ -82,6 +91,9 @@ final class AESStateTests: XCTestCase {
                           shifts: [[0xba, 0xca, 0xd0, 0xe7], [], []]),
         ]
         let historyExceptedOutputTwoRev: [ShiftRowRound] = [
+            ShiftRowRound(index: 0,
+                          temp:  [0x49, 0x45, 0x7f, 0x77],
+                          shifts: [[], [], []]),
             ShiftRowRound(index: 1,
                           temp: [0xdb, 0x39, 0x02, 0xde],
                           shifts: [[0x39, 0x02, 0xde, 0xdb], [0x02, 0xde, 0xdb, 0x39], [0xde, 0xdb, 0x39, 0x02]]),
