@@ -46,11 +46,11 @@ class KeyViewModel: ObservableObject {
         
         animationTask = Task {
             for index in animateKeys.indices {
-                try? await Task.sleep(nanoseconds: 500_000_000)
+                try? await Task.sleep(nanoseconds: 250_000_000)
                 withAnimation { self.animateKeys[index] = true }
             }
             
-            try? await Task.sleep(nanoseconds: 500_000_000)
+            try? await Task.sleep(nanoseconds: 250_000_000)
             withAnimation { self.showButtons = 1.0 }
         }
     }
