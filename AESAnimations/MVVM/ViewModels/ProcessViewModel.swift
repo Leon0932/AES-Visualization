@@ -12,6 +12,7 @@ class ProcessViewModel: AnimationViewModel {
     let operationDetails: OperationDetails
     let aesState: AESState
     let aesCipher: AESCipher
+    let showCipherButton: Bool
     
     var copyOfMatrix: [[Byte]] = []
     
@@ -104,10 +105,14 @@ class ProcessViewModel: AnimationViewModel {
     var cipherHistory: [CipherRound] { aesCipher.getCipherHistory }
     
     // MARK: - Initializer
-    init(operationDetails: OperationDetails, aesState: AESState, aesCipher: AESCipher) {
+    init(operationDetails: OperationDetails,
+         aesState: AESState,
+         aesCipher: AESCipher,
+         showCipherButton: Bool) {
         self.operationDetails = operationDetails
         self.aesState = aesState
         self.aesCipher = aesCipher
+        self.showCipherButton = showCipherButton
         
         currentState = cipherHistory[0].startOfRound
         currentRoundKey = cipherHistory[0].roundKey
@@ -616,6 +621,19 @@ class ProcessViewModel: AnimationViewModel {
             currentRoundKeyNumber = showResult == 1.0 ? aesCipher.getNrOfRounds : 0
             savedPositionMoved = 0
         }
+    }
+    
+    // MARK: - Helper Functions
+    func createProcessViewModel() -> ProcessViewModel {
+        let isInverseMode = operationDetails.isInverseMode
+        let operationDetails = OperationDetails(operationName: isInverseMode ? .encryptionProcess : .decryptionProcess,
+                                                isInverseMode: isInverseMode ? false : true,
+                                                currentRound: -1)
+        
+        aesCipher.set(input: result.convertTo1DArray(), key: key.convertTo1DArray())
+        isInverseMode ? aesCipher.encryptState() : aesCipher.decryptState()
+        
+        return ProcessViewModel(operationDetails: operationDetails, aesState: aesState, aesCipher: aesCipher, showCipherButton: false)
     }
     
     // MARK: - Toggle Functions

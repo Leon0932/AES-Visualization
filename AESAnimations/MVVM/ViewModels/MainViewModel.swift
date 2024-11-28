@@ -37,7 +37,10 @@ class MainViewModel: ObservableObject {
                                                 isInverseMode: isDecryption ? true : false,
                                                 currentRound: -1)
         
-        return ProcessViewModel(operationDetails: operationDetails, aesState: state, aesCipher: cipher)
+        return ProcessViewModel(operationDetails: operationDetails,
+                                aesState: state,
+                                aesCipher: cipher,
+                                showCipherButton: true)
     }
     
     func toggleAuthor() {

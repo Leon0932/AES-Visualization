@@ -23,7 +23,10 @@ struct StateView: View {
     // MARK: -
     var body: some View {
         VStack(alignment: alignment, spacing: spacing) {
-            if let title = title { titleView(for: title) }
+            if let title = title {
+                StateTitle(title: title)
+                    .opacity(opacity(forRow: 0, col: 0))
+            }
             
             ForEach(0..<state.count,
                     id: \.self,
@@ -80,3 +83,13 @@ struct StateView: View {
     }
 }
 
+struct StateTitle: View {
+    let title: LocalizedStringKey
+    
+    var body: some View {
+        Text(title)
+            .font(.system(size: 17))
+            .fontWeight(.semibold)
+            .frame(maxHeight: 15)
+    }
+}

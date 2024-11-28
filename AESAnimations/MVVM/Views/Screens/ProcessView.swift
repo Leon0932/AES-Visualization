@@ -39,12 +39,30 @@ struct ProcessView: View {
     // MARK: - State Columns
     private func buildStateColumn(leftColumn: Bool) -> some View {
         VStack(spacing: 25) {
-            StateView(
-                title: leftColumn ? "Start-Zustand" : (viewModel.animationControl.isDone ? "Ergebnis" : "Aktueller Zustand"),
-                state: leftColumn ? viewModel.state : viewModel.currentState,
-                alignment: .leading
-            )
             
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    StateTitle(title: leftColumn
+                               ? "Start-Zustand"
+                               : (viewModel.animationControl.isDone ? "Ergebnis" : "Aktueller Zustand"))
+                    
+                    Spacer()
+                    
+                    if !leftColumn && viewModel.animationControl.isDone && viewModel.showCipherButton {
+                        CustomNavigationButton(title: viewModel.operationDetails.isInverseMode
+                                               ? "Verschlüsseln"
+                                               : "Entschlüsseln",
+                                               buttonStyle: .standard) {
+                            ProcessView(viewModel: viewModel.createProcessViewModel())
+                        }
+                        
+                    }
+                }
+                .frame(width: 230)
+                
+                StateView(state: leftColumn ? viewModel.state : viewModel.currentState)
+            }
+
             if leftColumn {
                 if viewModel.aesCipher.getNk > 4 {
                     keyButton

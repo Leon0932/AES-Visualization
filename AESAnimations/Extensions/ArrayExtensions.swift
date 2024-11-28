@@ -37,13 +37,27 @@ extension Array where Element == [Byte] {
         
         return result
     }
-
+    
+    func convertTo1DArray() -> [Byte] {
+        guard !self.isEmpty else { return [] }
+        
+        var result = [Byte]()
+        
+        let columnCount = self[0].count
+        for col in 0..<columnCount {
+            for row in 0..<self.count {
+                result.append(self[row][col])
+            }
+        }
+        
+        return result
+    }
 }
 
 extension Array where Element == Byte {
     func convertToState() -> [[Byte]] {
         let count = self.count / 4
-
+        
         var result = [[Byte]](repeating: [Byte](repeating: 0, count: count), count: 4)
         
         for (index, value) in self.enumerated() {
