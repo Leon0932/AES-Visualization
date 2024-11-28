@@ -96,8 +96,9 @@ struct Matrix {
         invalidInputFlags.flatMap { $0 }.contains(true)
     }
     
+    /// Checks  if every cell contains 00 input.
     var checkNullBytes: Bool {
-        data.flatMap { $0 }.contains { $0 == "00" }
+        data.flatMap { $0 }.allSatisfy { $0 == "00" }
     }
     
     /// Clears all data in the matrix by setting each cell to an empty string.
