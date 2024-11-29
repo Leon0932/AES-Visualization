@@ -70,6 +70,44 @@ extension Array where Element == Byte {
     }
 }
 
+extension Array where Element == [String] {
+    /// Converts the matrix data to an array of bytes.
+    ///
+    /// - Returns: An array of bytes, with each cell's hex value converted to a byte.
+    func toByteArray() -> [Byte] {
+        guard !self.isEmpty else { return [] }
+        
+        var result: [Byte] = []
+        
+        for column in 0..<self.count {
+            for row in 0..<self[column].count {
+                let hexString = self[row][column]
+                if let byte = Byte(hexString, radix: 16) {
+                    result.append(byte)
+                }
+            }
+        }
+        
+        return result
+    }
+    
+    func hexStringTo2DByteArray() -> [[Byte]] {
+        var byteArray: [[Byte]] = []
+
+        for row in self {
+            var byteRow: [Byte] = []
+            for hexString in row {
+                if let byte = Byte(hexString, radix: 16) {
+                    byteRow.append(byte)
+                }
+            }
+            byteArray.append(byteRow)
+        }
+
+        return byteArray
+    }
+}
+
 extension Array where Element == Int {
     func shiftRow(by shift: Int) -> [Int] {
         var result = self

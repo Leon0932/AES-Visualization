@@ -94,6 +94,46 @@ final class ExtensionTests: XCTestCase {
         XCTAssertEqual(key.convertTo1DArray(), expectedKey)
     }
     
+    func testToByteArray() throws {
+        let data = [
+            ["00", "01", "02", "03"],
+            ["04", "05", "06", "07"],
+            ["08", "09", "10", "11"],
+            ["12", "13", "14", "15"]
+        ]
+        
+        let expectedOutput: [Byte] = [
+            0x00, 0x04, 0x08, 0x12,
+            0x01, 0x05, 0x09, 0x13,
+            0x02, 0x06, 0x10, 0x14,
+            0x03, 0x07, 0x11, 0x15
+        ]
+        
+        let output = data.toByteArray()
+        
+        XCTAssertEqual(output, expectedOutput)
+    }
+    
+    func testHexStringTo2DByteArray() throws {
+        let data = [
+            ["00", "01", "02", "03"],
+            ["04", "05", "06", "07"],
+            ["08", "09", "10", "11"],
+            ["12", "13", "14", "15"]
+        ]
+        
+        let expectedOutput: [[Byte]] = [
+            [0x00, 0x01, 0x02, 0x03],
+            [0x04, 0x05, 0x06, 0x07],
+            [0x08, 0x09, 0x10, 0x11],
+            [0x12, 0x13, 0x14, 0x15],
+        ]
+        
+        let output = data.hexStringTo2DByteArray()
+        
+        XCTAssertEqual(output, expectedOutput)
+    }
+    
     func testToBinary() throws {
         let expectedResults: [String] = [
             "00000000", "00000001", "00000010", "00000011", "00000100", "00000101", "00000110", "00000111",

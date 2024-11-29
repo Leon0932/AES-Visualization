@@ -21,26 +21,6 @@ final class MatrixTests: XCTestCase {
         super.tearDown()
     }
     
-    
-    func testToByteArray() throws {
-        matrix.data = [
-            ["00", "01", "02", "03"],
-            ["04", "05", "06", "07"],
-            ["08", "09", "10", "11"],
-            ["12", "13", "14", "15"]
-        ]
-        
-        let expectedOutout: [Byte] = [
-            0x00, 0x04, 0x08, 0x12,
-            0x01, 0x05, 0x09, 0x13,
-            0x02, 0x06, 0x10, 0x14,
-            0x03, 0x07, 0x11, 0x15
-            ]
-        let output = matrix.toByteArray()
-        
-        XCTAssertEqual(output, expectedOutout)
-    }
-    
     func testInvalidFields() throws {
         matrix.data = [
             ["00", "01", "02", "03"],
@@ -61,21 +41,21 @@ final class MatrixTests: XCTestCase {
     
     func testValidFields() throws {
         matrix.data = [
-                ["00", "01", "02", "03"],
-                ["04", "05", "06", "07"],
-                ["08", "09", "10", "11"],
-                ["12", "13", "14", "15"]
-            ]
-            
-            for row in 0..<4 {
-                for col in 0..<4 {
-                    matrix.validateHexInput(row: row, column: col, value: matrix.data[row][col])
-                }
+            ["00", "01", "02", "03"],
+            ["04", "05", "06", "07"],
+            ["08", "09", "10", "11"],
+            ["12", "13", "14", "15"]
+        ]
+        
+        for row in 0..<4 {
+            for col in 0..<4 {
+                matrix.validateHexInput(row: row, column: col, value: matrix.data[row][col])
             }
-            
-            XCTAssertFalse(matrix.containsInvalidInput, "Matrix should not contain any invalid input")
-            XCTAssertTrue(matrix.areAllFieldsValid, "All fields should be valid")
         }
+        
+        XCTAssertFalse(matrix.containsInvalidInput, "Matrix should not contain any invalid input")
+        XCTAssertTrue(matrix.areAllFieldsValid, "All fields should be valid")
+    }
     
     func testInvalidHexCharacters() throws {
         let invalidCharacters = ["GG", "ZZ", "!!", "0g"]

@@ -12,7 +12,7 @@ class AESCipher {
     let keySchedule: AESKeySchedule
     let state: AESState
     
-    private var input: [Byte] = []
+    private var input: [[Byte]] = []
     private var key: [Byte] = []
     private var result: [[Byte]] = []
     private var cipherHistory: [CipherRound] = []
@@ -70,7 +70,7 @@ class AESCipher {
     /// represented as an array of `Byte` values.
     ///
     /// - Returns: An array of `Byte` values representing the input.
-    var getInput: [Byte] { input }
+    var getInput: [[Byte]] { input }
 
     /// Retrieves the key used for the cipher operation.
     ///
@@ -87,7 +87,7 @@ class AESCipher {
     /// - Parameters:
     ///   - input: An array of `Byte` values representing the new input for the cipher.
     ///   - key: An array of `Byte` values representing the new key for the cipher.
-    func set(input: [Byte], key: [Byte]) {
+    func set(input: [[Byte]], key: [Byte]) {
         self.input = input
         self.key = key
     }
@@ -102,7 +102,7 @@ class AESCipher {
         
         keySchedule.keyExpansion(key: key)
         
-        result = input.convertToState()
+        result = input
     }
     
     // MARK: - Main Operations

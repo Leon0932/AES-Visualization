@@ -18,7 +18,7 @@ struct Matrix {
     
     
     /// Initializes the matrix with the specified number of rows and columns.
-    /// Each cell is initialized with a default value ("FF") and marked as valid.
+    /// Each cell is initialized with a default value ("00") and marked as valid.
     ///
     /// - Parameters:
     ///   - rows: The number of rows in the matrix.
@@ -66,24 +66,6 @@ struct Matrix {
         var bytes = [Byte](repeating: 0, count: count)
         let status = SecRandomCopyBytes(kSecRandomDefault, count, &bytes)
         return status == errSecSuccess ? bytes : nil
-    }
-    
-    /// Converts the matrix data to an array of bytes.
-    ///
-    /// - Returns: An array of bytes, with each cell's hex value converted to a byte.
-    func toByteArray() -> [Byte] {
-        var byteArray: [Byte] = []
-
-        for column in 0..<columns {
-            for row in 0..<rows {
-                let hexString = data[row][column]
-                if let byte = Byte(hexString, radix: 16) {
-                    byteArray.append(byte)
-                }
-            }
-        }
-        
-        return byteArray
     }
     
     /// Indicates whether all fields contain valid and non-empty values.

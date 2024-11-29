@@ -99,7 +99,7 @@ class ProcessViewModel: AnimationViewModel {
     }
     
     // Computed Properties
-    var state: [[Byte]] { aesCipher.getInput.convertToState() }
+    var state: [[Byte]] { aesCipher.getInput }
     var key: [[Byte]] { aesCipher.getKey.convertToState() }
     var result: [[Byte]] { aesCipher.getResult }
     var cipherHistory: [CipherRound] { aesCipher.getCipherHistory }
@@ -629,11 +629,17 @@ class ProcessViewModel: AnimationViewModel {
         let operationDetails = OperationDetails(operationName: isInverseMode ? .encryptionProcess : .decryptionProcess,
                                                 isInverseMode: isInverseMode ? false : true,
                                                 currentRound: -1)
+        let newKeySchedule = AESKeySchedule()
+        let newAesState = AESState()
+        let newAESCipher = AESCipher(keySchedule: newKeySchedule, state: newAesState)
         
-        aesCipher.set(input: result.convertTo1DArray(), key: key.convertTo1DArray())
-        isInverseMode ? aesCipher.encryptState() : aesCipher.decryptState()
+        newAESCipher.set(input: result, key: key.convertTo1DArray())
+        isInverseMode ? newAESCipher.encryptState() : newAESCipher.decryptState()
         
-        return ProcessViewModel(operationDetails: operationDetails, aesState: aesState, aesCipher: aesCipher, showCipherButton: false)
+        return ProcessViewModel(operationDetails: operationDetails,
+                                aesState: newAesState,
+                                aesCipher: newAESCipher,
+                                showCipherButton: false)
     }
     
     // MARK: - Toggle Functions
