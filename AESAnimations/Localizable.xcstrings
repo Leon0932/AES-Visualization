@@ -81,7 +81,17 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The app was developed by **Leon Chamoun** as part of a bachelor thesis supervised by **Prof. Dr. Christoph Karg**."
+            "value" : "The App Was Developed by **Leon Chamoun** as Part of a Bachelor Thesis Supervised by **Prof. Dr. Christoph Karg**."
+          }
+        }
+      }
+    },
+    "Die Implementierung des AES basiert auf der Spezifikation des" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Implementation of AES Is Based on the Specification of"
           }
         }
       }
@@ -145,6 +155,9 @@
           }
         }
       }
+    },
+    "FIPS PUB 197 (Version 2023)" : {
+      "shouldTranslate" : false
     },
     "Generation of Round Keys" : {
       "shouldTranslate" : false
@@ -540,6 +553,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search Byte"
+          }
+        }
+      }
+    },
+    "The URL is not valid" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The URL is not valid"
           }
         }
       }

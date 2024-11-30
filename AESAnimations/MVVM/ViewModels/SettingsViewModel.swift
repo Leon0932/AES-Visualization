@@ -14,7 +14,7 @@ class SettingsViewModel: ObservableObject {
     @AppStorage(StorageKeys.includeReverseAnimation.key) var includeReverseAnimation: Bool = false
     @AppStorage(StorageKeys.startAnimationOnAppear.key) var startAnimationOnAppear: Bool = false
     
-    @Published var showAlert = false
+    @Published var showAuthorView = false
     
     func updateScheme() {
         #if os(iOS)

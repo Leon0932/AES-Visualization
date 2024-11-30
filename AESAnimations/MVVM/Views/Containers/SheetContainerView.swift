@@ -14,13 +14,16 @@ struct SheetContainerView<Content: View>: View {
     @EnvironmentObject var settingsVM: SettingsViewModel
     
     let navigationTitle: LocalizedStringKey
+    let toolbarContent: (() -> AnyView)?
     let content: Content
     
     // MARK: - Initializer
     init(navigationTitle: LocalizedStringKey,
+         toolbarContent: (() -> AnyView)? = nil,
          @ViewBuilder content: () -> Content) {
         
         self.navigationTitle = navigationTitle
+        self.toolbarContent = toolbarContent
         self.content = content()
     }
     
@@ -44,6 +47,12 @@ struct SheetContainerView<Content: View>: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(navigationTitle)
             .toolbar { closeButton { dismiss() } }
+            .toolbar {
+                if let toolbarContent {
+                    ToolbarItem(placement: .topBarTrailing,
+                                content: toolbarContent)
+                }
+            }
             #endif
             .environment(\.locale, .init(identifier: settingsVM.appLanguage))
             .accentColor(settingsVM.primaryColor.color)
@@ -61,6 +70,12 @@ struct SheetContainerView<Content: View>: View {
             Text(navigationTitle)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .font(.headline)
+            
+            if let toolbarContent {
+                toolbarContent()
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+           
         }
     }
 }

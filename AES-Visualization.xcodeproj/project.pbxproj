@@ -24,6 +24,7 @@
 		C31E69C62C88988E00230D22 /* RoundKeyHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C52C88988E00230D22 /* RoundKeyHistory.swift */; };
 		C31E69C82C88BF7400230D22 /* AnimationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C72C88BF7400230D22 /* AnimationStep.swift */; };
 		C31E69CA2C88BF9A00230D22 /* KeyExpansionRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C92C88BF9A00230D22 /* KeyExpansionRound.swift */; };
+		C32554B42CFB38EA00CDFC8B /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32554B32CFB38EA00CDFC8B /* SafariWebView.swift */; };
 		C329B5222CDAD63300AD7E2F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */; };
 		C329DF762CDE529400959851 /* HSAalenLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329DF752CDE529400959851 /* HSAalenLogo.swift */; };
 		C33194E02CB1AF010036F830 /* ProcessPhaseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */; };
@@ -123,6 +124,7 @@
 		C31E69C52C88988E00230D22 /* RoundKeyHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundKeyHistory.swift; sourceTree = "<group>"; };
 		C31E69C72C88BF7400230D22 /* AnimationStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationStep.swift; sourceTree = "<group>"; };
 		C31E69C92C88BF9A00230D22 /* KeyExpansionRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExpansionRound.swift; sourceTree = "<group>"; };
+		C32554B32CFB38EA00CDFC8B /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C329DF752CDE529400959851 /* HSAalenLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAalenLogo.swift; sourceTree = "<group>"; };
 		C33151192CA03AA40047B513 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -393,6 +395,7 @@
 				C31E69C02C872C3300230D22 /* AnimationControlsView.swift */,
 				C33A3C292CCB8EA7004CF720 /* CustomLabelView.swift */,
 				C329DF752CDE529400959851 /* HSAalenLogo.swift */,
+				C32554B32CFB38EA00CDFC8B /* SafariWebView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				C3C476D92C595876009D718D /* AESKeySize.swift in Sources */,
 				C31E69C82C88BF7400230D22 /* AnimationStep.swift in Sources */,
 				C3E1F2C02C7B6ECE0030B994 /* KeyExpansionAnimationView.swift in Sources */,
+				C32554B42CFB38EA00CDFC8B /* SafariWebView.swift in Sources */,
 				C38734F62C6EA47F00E835DB /* SubBytesViewModel.swift in Sources */,
 				C3AEE3D72CAB19F4002F60CE /* CipherHistoryView.swift in Sources */,
 				C3A0F4B02CDBF98400C0C9DE /* SettingsConfigurations.swift in Sources */,

@@ -79,7 +79,7 @@ struct MainView: View {
                 }
             }
             
-            CustomButtonView(title: "Urheber der App", buttonStyle: .standard, action: viewModel.toggleAuthor)
+            // CustomButtonView(title: "Urheber der App", buttonStyle: .standard, action: viewModel.toggleAuthor)
         }
     }
     

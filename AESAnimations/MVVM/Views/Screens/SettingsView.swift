@@ -13,21 +13,25 @@ struct SettingsView: View {
     
     // MARK: - Body Content
     var body: some View {
-        SheetContainerView(navigationTitle: "Einstellungen") {
+        SheetContainerView(
+            navigationTitle: "Einstellungen",
+            toolbarContent: { toolbarButton }
+        ) {
             platformSpecificContent
+                .sheet(isPresented: $viewModel.showAuthorView, content: AuthorView.init)
         }
     }
     
     private var platformSpecificContent: some View {
-        #if os(macOS)
+#if os(macOS)
         VStack(spacing: 20) {
             settingsSections
         }
-        #else
+#else
         List {
             settingsSections
         }
-        #endif
+#endif
     }
     
     private var settingsSections: some View {
@@ -51,7 +55,6 @@ struct SettingsView: View {
             configurableButton(color: .clear,
                                isSelected: viewModel.appLanguage == "en",
                                imageName: "Flag_of_USA") {
-
                 viewModel.appLanguage = "en"
             }
         }
@@ -98,15 +101,23 @@ struct SettingsView: View {
         }
     }
     
+    private var toolbarButton: AnyView {
+        AnyView(
+            CustomButtonView(icon: "info.circle", buttonStyle: .standard) {
+                viewModel.showAuthorView = true
+            }
+        )
+    }
+    
     // MARK: - Helper Functions
     private func sectionView(title: LocalizedStringKey,
-                                   showDivider: Bool = true,
-                                   @ViewBuilder selectionsView: () -> some View) -> some View {
-        #if os(iOS)
+                             showDivider: Bool = true,
+                             @ViewBuilder selectionsView: () -> some View) -> some View {
+#if os(iOS)
         Section(header: Text(title)) {
             selectionsView()
         }
-        #else
+#else
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
                 .font(.headline)
@@ -116,7 +127,7 @@ struct SettingsView: View {
             if showDivider { Divider() }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        #endif
+#endif
     }
     
     private func selectionView(@ViewBuilder content: () -> some View) -> some View {
@@ -141,9 +152,9 @@ struct SettingsView: View {
                                   imageName: imageName)
                 }
                 .buttonStyle(.plain)
-                #if os(iOS)
+#if os(iOS)
                 .hoverEffect(.lift)
-                #endif
+#endif
             } else {
                 buttonContent(color: color,
                               isSelected: isSelected,
