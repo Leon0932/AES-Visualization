@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AnimationControl {
+    var animationHasStarted = false
     var isDone = false
     var isPaused = false
     var isForward = false

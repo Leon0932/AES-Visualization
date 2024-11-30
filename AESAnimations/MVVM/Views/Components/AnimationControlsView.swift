@@ -19,14 +19,13 @@ struct AnimationControlsView: View {
     var showReverseAnimationButton: Bool = true
     
     @AppStorage(StorageKeys.startAnimationOnAppear.key) var startAnimationOnApp: Bool = false
-    @State private var showStartButton = true
     
     // MARK: -
     var body: some View {
         ZStack {
             if animationControl.isDone {
                 if showRepeatButtons { controlButtonsDone }
-            } else if showStartButton && !startAnimationOnApp {
+            } else if !animationControl.animationHasStarted && !startAnimationOnApp {
                 startButton
             } else {
                 controlButtons
@@ -42,10 +41,8 @@ struct AnimationControlsView: View {
                          icon: "play.circle",
                          buttonStyle: .primary) {
             withAnimation {
-                showStartButton = false
                 startAnimations()
             }
-         
         }
     }
     

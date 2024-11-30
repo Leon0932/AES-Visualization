@@ -125,7 +125,7 @@ class ShiftRowsViewModel: AnimationViewModel {
                 // Small delay, as the animation in the view
                 // is otherwise buggy
                 await self.sleep(for: self.normal)
-                self.state[index] = self.shiftRowRounds[index - 1].shifts[currentRepetition]
+                self.state[index] = self.shiftRowRounds[index].shifts[currentRepetition]
                 self.positionCell[index] = Position.default1DPositions(count: 4)
                 
             }
@@ -136,7 +136,7 @@ class ShiftRowsViewModel: AnimationViewModel {
                 if self.positionCell[index][0].x == self.shiftRowsHelper.boxSizeWithSpacing {
                     await self.sleep(for: self.normal)
                     
-                    let shiftRounds = self.shiftRowRounds[index - 1]
+                    let shiftRounds = self.shiftRowRounds[index]
       
                     if currentRepetition == 0 {
                         self.state[index] = shiftRounds.temp

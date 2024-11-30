@@ -143,13 +143,14 @@ extension AnimationViewModel {
     private func handleAnimationState(isDone: Bool) {
         withAnimation {
             animationControl.isDone = isDone
+            animationControl.animationHasStarted = true
             isDone ? animationControl.resetAnimationFlags() : animationControl.changePause(to: false)
         }
     }
     
     @MainActor
     func handleAnimationStart() {
-        if animationOnAppearKey {
+        if animationOnAppearKey || animationControl.animationHasStarted {
             startAnimations()
         }
     }
