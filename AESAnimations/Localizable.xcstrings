@@ -156,8 +156,8 @@
         }
       }
     },
-    "FIPS PUB 197 (Version 2023)" : {
-      "shouldTranslate" : false
+    "FIPS 197 (Version 2023)" : {
+
     },
     "Generation of Round Keys" : {
       "shouldTranslate" : false
