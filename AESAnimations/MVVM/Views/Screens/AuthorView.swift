@@ -19,7 +19,7 @@ struct AuthorView: View {
     }
     
     var buttonTitle: LocalizedStringKey {
-        "FIPS PUB 197 (Version 2023)"
+        "FIPS 197 (Version 2023)"
     }
     
     var destination: String {
