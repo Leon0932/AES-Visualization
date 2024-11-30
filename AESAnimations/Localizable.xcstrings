@@ -157,7 +157,14 @@
       }
     },
     "Erlebe AES-Verschlüsselung wie nie zuvor – interaktive Visualisierung der Algorithmen, klar verständlich und perfekt für Studium oder Entwicklung!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Experience AES Encryption like never before - interactive Visualization of the Algorithms, clearly explained and perfect for Study or Development!"
+          }
+        }
+      }
     },
     "FIPS 197 (Version 2023)" : {
       "shouldTranslate" : false
