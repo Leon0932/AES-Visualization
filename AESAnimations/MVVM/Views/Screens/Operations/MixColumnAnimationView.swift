@@ -29,6 +29,7 @@ struct MixColumnAnimationView: View {
     private var matrixView: some View {
         StateView(state: viewModel.transformationMatrix,
                   backgroundColor: .ultraLightGray)
+        .opacity(viewModel.showMatrix)
     }
     
     private var operationSymbols: some View {

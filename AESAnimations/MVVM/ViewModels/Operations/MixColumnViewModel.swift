@@ -22,6 +22,7 @@ class MixColumnsViewModel: AnimationViewModel {
     @Published var isShowingEquality: Double = 0
     @Published var isShowingResult: Double = 0
     
+    @Published var showMatrix: Double = 0.0
     @Published var showNewState: [Double] = Array(repeating: 0.0, count: 4)
     @Published var resultOfMixColumn: [Byte] = Array(repeating: 0x00, count: 4)
      
@@ -79,22 +80,26 @@ class MixColumnsViewModel: AnimationViewModel {
         let normalSteps: [AnimationStep] = [
             AnimationStep { for i in 0..<4 { self.resultOfMixColumn[i] = self.result[i][index] } },
             AnimationStep(animation: { await self.changePosition(col: index, y: -305) }, delay: short),
-            AnimationStep(animation: { withAnimation { self.isShowingMultiplication = 1 } }, delay: short),
             AnimationStep(animation: { withAnimation { self.columnPositions[index].x = widthColumn } }, delay: short),
+            AnimationStep(animation: { withAnimation { self.showMatrix = 1 } }, delay: short),
+            AnimationStep(animation: { withAnimation { self.isShowingMultiplication = 1 } }, delay: short),
             AnimationStep(animation: { withAnimation { self.isShowingEquality = 1 } }, delay: short),
             AnimationStep(animation: { withAnimation { self.isShowingResult = 1 } }, delay: short),
             AnimationStep(animation: { withAnimation { self.showNewState[index] = 1 } }, delay: short),
             AnimationStep(animation: { self.resetVisibility() }, delay: short),
+            AnimationStep(animation: { withAnimation { self.showMatrix = 0 } }, delay: short),
             AnimationStep(animation: { await self.changePosition(col: index, x: 0) }, delay: short),
             AnimationStep(animation: { withAnimation { self.columnPositions[index].y = 0 } }, delay: normal),
         ]
         
         let reverseSteps: [AnimationStep] = [
             AnimationStep(animation: { withAnimation { self.columnPositions[index].y = 0 } }, delay: short),
-            AnimationStep(animation: { withAnimation { self.isShowingMultiplication = 0 } }, delay: short),
             AnimationStep(animation: { await self.changePosition(col: index, x: 0) }, delay: short),
+            AnimationStep(animation: { withAnimation { self.showMatrix = 0 } }, delay: short),
+            AnimationStep(animation: { withAnimation { self.isShowingMultiplication = 0 } }, delay: short),
             AnimationStep(animation: { withAnimation { self.isShowingEquality = 0 } }, delay: short),
             AnimationStep(animation: { withAnimation { self.isShowingResult = 0 } }, delay: short),
+            AnimationStep(animation: { withAnimation { self.showMatrix = 1 } }, delay: short),
             AnimationStep(animation: { withAnimation { self.isShowingMultiplication = 1 } }, delay: short),
             AnimationStep(animation: {
                 withAnimation {
@@ -164,6 +169,7 @@ class MixColumnsViewModel: AnimationViewModel {
     func resetAnimationState(state newState: [[Byte]], showResult: Double) {
         resetVisibility()
         withAnimation {
+            showMatrix = 0
             columnPositions = Position.default1DPositions(count: 4)
             showNewState = Array(repeating: showResult, count: 4)
             resultOfMixColumn = Array(repeating: 0x00, count: 4)
