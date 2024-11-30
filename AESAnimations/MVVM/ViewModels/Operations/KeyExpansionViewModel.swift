@@ -151,7 +151,10 @@ class KeyExpansionViewModel: AnimationViewModel {
         
         var normalSteps = [
             AnimationStep { await self.assignValues(index: index) },
-            AnimationStep(animation: { self.startRCONAnimation = true }, delay: normal),
+            AnimationStep(animation: {
+                await self.checkDoubleAnimation()
+                self.startRCONAnimation = true
+            }, delay: normal),
         ]
         + highlightColumnTwo(index: index, value: 1.0)
         
