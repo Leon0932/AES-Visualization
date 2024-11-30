@@ -11,30 +11,31 @@ struct MainView: View {
     @Environment(\.locale) var locale
     @StateObject var viewModel = MainViewModel()
     
-    // MARK: -
+    // MARK: - Body
     var body: some View {
+        if viewModel.showMainView {
+            mainView
+        } else {
+            WelcomeView(showMainView: $viewModel.showMainView,
+                        showSafariView: $viewModel.showSafariView)
+        }
+    }
+    
+    // MARK: - Main View
+    var mainView: some View {
         NavigationStack {
-            ZStack(alignment: estimateAlignment) {
-                hsAalenLogo
-                mainContent
-            }
-            .navigationTitle(locale == Locale(identifier: "de") ? "Visualisierung von AES" : "Visualization of AES")
-            .toolbar(content: toolbarItem)
-            .onChange(of: viewModel.selectedEncryptionMode) {
-                viewModel.handlePickerChange(newValue: $1)
-            }
-            .sheet(isPresented: $viewModel.showAuthor) { AuthorView() }
-            .sheet(isPresented: $viewModel.showSettings) { SettingsView() }
+            mainContent
+                .navigationTitle(locale == Locale(identifier: "de") ? "Visualisierung von AES" : "Visualization of AES")
+                .toolbar(content: toolbarItem)
+                .onChange(of: viewModel.selectedEncryptionMode) {
+                    viewModel.handlePickerChange(newValue: $1)
+                }
+                .sheet(isPresented: $viewModel.showAuthor, content: AuthorView.init)
+                .sheet(isPresented: $viewModel.showSettings, content: SettingsView.init)
         }
     }
     
     // MARK: - Main Content
-    private var hsAalenLogo: some View {
-        HSAalenLogo()
-            .opacity(0.6)
-            .padding(.top, estimatePadding)
-    }
-    
     private var mainContent: some View {
         VStack(spacing: estimateSpacing) {
             modePicker
@@ -68,18 +69,14 @@ struct MainView: View {
         let isDisabled = !viewModel.stateMatrix.areAllFieldsValid || !viewModel.keyMatrix.areAllFieldsValid
         let primaryStyle = PrimaryButtonStyle(useMaxWidth: true, isDisabled: isDisabled)
         
-        return VStack(alignment: .center, spacing: 25) {
-            HStack(spacing: 32) {
-                CustomNavigationButton(title: "Verschlüsseln", icon: "lock",  buttonStyle: primaryStyle) {
-                    ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: false))
-                }
-                
-                CustomNavigationButton(title: "Entschlüsseln", icon: "lock.open", buttonStyle: primaryStyle) {
-                    ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: true))
-                }
+        return HStack(spacing: 32) {
+            CustomNavigationButton(title: "Verschlüsseln", icon: "lock",  buttonStyle: primaryStyle) {
+                ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: false))
             }
             
-            // CustomButtonView(title: "Urheber der App", buttonStyle: .standard, action: viewModel.toggleAuthor)
+            CustomNavigationButton(title: "Entschlüsseln", icon: "lock.open", buttonStyle: primaryStyle) {
+                ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: true))
+            }
         }
     }
     
@@ -104,22 +101,6 @@ struct MainView: View {
         105
         #else
         isPad13Size() ? 140 : 45
-        #endif
-    }
-    
-    var estimateAlignment: Alignment {
-        #if os(macOS)
-        .top
-        #else
-        isPad13Size() ? .top : .center
-        #endif
-    }
-    
-    var estimatePadding: CGFloat {
-        #if os(macOS)
-        35
-        #else
-        isPad13Size() ? 35 : 0
         #endif
     }
 }
