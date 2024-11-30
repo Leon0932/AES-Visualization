@@ -156,8 +156,11 @@
         }
       }
     },
-    "FIPS 197 (Version 2023)" : {
+    "Erlebe AES-Verschlüsselung wie nie zuvor – interaktive Visualisierung der Algorithmen, klar verständlich und perfekt für Studium oder Entwicklung!" : {
 
+    },
+    "FIPS 197 (Version 2023)" : {
+      "shouldTranslate" : false
     },
     "Generation of Round Keys" : {
       "shouldTranslate" : false
@@ -544,6 +547,16 @@
         }
       }
     },
+    "Starten" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
+    },
     "SubBytes" : {
       "shouldTranslate" : false
     },
@@ -687,6 +700,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Repeat"
+          }
+        }
+      }
+    },
+    "Willkommen zu **AES-Visualization**" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to **AES-Visualization**"
           }
         }
       }

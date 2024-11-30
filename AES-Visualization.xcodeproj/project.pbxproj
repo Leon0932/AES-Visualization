@@ -25,6 +25,8 @@
 		C31E69C82C88BF7400230D22 /* AnimationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C72C88BF7400230D22 /* AnimationStep.swift */; };
 		C31E69CA2C88BF9A00230D22 /* KeyExpansionRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C92C88BF9A00230D22 /* KeyExpansionRound.swift */; };
 		C32554B42CFB38EA00CDFC8B /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32554B32CFB38EA00CDFC8B /* SafariWebView.swift */; };
+		C32554B62CFB546F00CDFC8B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32554B52CFB546F00CDFC8B /* WelcomeView.swift */; };
+		C32554B82CFB7C5100CDFC8B /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32554B72CFB7C5100CDFC8B /* MessageView.swift */; };
 		C329B5222CDAD63300AD7E2F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */; };
 		C329DF762CDE529400959851 /* HSAalenLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329DF752CDE529400959851 /* HSAalenLogo.swift */; };
 		C33194E02CB1AF010036F830 /* ProcessPhaseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */; };
@@ -125,6 +127,8 @@
 		C31E69C72C88BF7400230D22 /* AnimationStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationStep.swift; sourceTree = "<group>"; };
 		C31E69C92C88BF9A00230D22 /* KeyExpansionRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExpansionRound.swift; sourceTree = "<group>"; };
 		C32554B32CFB38EA00CDFC8B /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
+		C32554B52CFB546F00CDFC8B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		C32554B72CFB7C5100CDFC8B /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C329DF752CDE529400959851 /* HSAalenLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAalenLogo.swift; sourceTree = "<group>"; };
 		C33151192CA03AA40047B513 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -396,6 +400,7 @@
 				C33A3C292CCB8EA7004CF720 /* CustomLabelView.swift */,
 				C329DF752CDE529400959851 /* HSAalenLogo.swift */,
 				C32554B32CFB38EA00CDFC8B /* SafariWebView.swift */,
+				C32554B72CFB7C5100CDFC8B /* MessageView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -421,6 +426,7 @@
 				C3C476D62C593C11009D718D /* ProcessView.swift */,
 				C36566352C61F6BD007A4A1E /* SettingsView.swift */,
 				C38B28D22CB44FFA00FCE203 /* AuthorView.swift */,
+				C32554B52CFB546F00CDFC8B /* WelcomeView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -644,6 +650,7 @@
 				C38734F62C6EA47F00E835DB /* SubBytesViewModel.swift in Sources */,
 				C3AEE3D72CAB19F4002F60CE /* CipherHistoryView.swift in Sources */,
 				C3A0F4B02CDBF98400C0C9DE /* SettingsConfigurations.swift in Sources */,
+				C32554B82CFB7C5100CDFC8B /* MessageView.swift in Sources */,
 				C37BA07F2C397D5800C87BB7 /* AESAnimationsApp.swift in Sources */,
 				C30E9AFC2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift in Sources */,
 				C33940212C56D839008802BC /* AESKeySchedule.swift in Sources */,
@@ -660,6 +667,7 @@
 				C34310152C948AB10004F4C7 /* AnimationControl.swift in Sources */,
 				C3CFC3702CD13E61006AD1BA /* SheetContainerView.swift in Sources */,
 				C3BDC1432CB32F5700847363 /* NavigationBackButtonModifier.swift in Sources */,
+				C32554B62CFB546F00CDFC8B /* WelcomeView.swift in Sources */,
 				C3BDC1412CB2BDE800847363 /* OpacityType.swift in Sources */,
 				C33A3C162CCA497D004CF720 /* SecondaryButtonStyle.swift in Sources */,
 				C30E9B002CBECEAB00DF5AE5 /* StringExtension.swift in Sources */,

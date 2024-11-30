@@ -23,15 +23,15 @@ struct SettingsView: View {
     }
     
     private var platformSpecificContent: some View {
-#if os(macOS)
+        #if os(macOS)
         VStack(spacing: 20) {
             settingsSections
         }
-#else
+        #else
         List {
             settingsSections
         }
-#endif
+        #endif
     }
     
     private var settingsSections: some View {
@@ -113,11 +113,11 @@ struct SettingsView: View {
     private func sectionView(title: LocalizedStringKey,
                              showDivider: Bool = true,
                              @ViewBuilder selectionsView: () -> some View) -> some View {
-#if os(iOS)
+        #if os(iOS)
         Section(header: Text(title)) {
             selectionsView()
         }
-#else
+        #else
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
                 .font(.headline)
@@ -127,7 +127,7 @@ struct SettingsView: View {
             if showDivider { Divider() }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-#endif
+        #endif
     }
     
     private func selectionView(@ViewBuilder content: () -> some View) -> some View {
@@ -152,9 +152,9 @@ struct SettingsView: View {
                                   imageName: imageName)
                 }
                 .buttonStyle(.plain)
-#if os(iOS)
+                #if os(iOS)
                 .hoverEffect(.lift)
-#endif
+                #endif
             } else {
                 buttonContent(color: color,
                               isSelected: isSelected,

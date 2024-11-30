@@ -9,6 +9,9 @@ import SwiftUI
 
 class MainViewModel: ObservableObject {
     // MARK: - Properties
+    @AppStorage("showMainView") var showMainView: Bool = false
+    @Published var showSafariView: Bool = false
+    
     @Published var selectedEncryptionMode: EncryptionMode = .aes128
     
     @Published var stateMatrix = Matrix(rows: 4, columns: 4)
