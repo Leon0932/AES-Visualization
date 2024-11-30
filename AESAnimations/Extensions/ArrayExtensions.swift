@@ -78,9 +78,9 @@ extension Array where Element == [String] {
         guard !self.isEmpty else { return [] }
         
         var result: [Byte] = []
-        
-        for column in 0..<self.count {
-            for row in 0..<self[column].count {
+
+        for column in 0..<self[0].count {
+            for row in 0..<self.count {
                 let hexString = self[row][column]
                 if let byte = Byte(hexString, radix: 16) {
                     result.append(byte)
