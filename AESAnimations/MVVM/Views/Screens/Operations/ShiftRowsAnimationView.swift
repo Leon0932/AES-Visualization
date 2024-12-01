@@ -40,7 +40,7 @@ struct ShiftRowsAnimationView: View {
 
             Label(shiftTitle(by: shiftAmount), systemImage: "arrow.left")
                 .font(.title)
-                .frame(width: 400, alignment: .leading)
+                .frame(width: 500, alignment: .leading)
                 .opacity(viewModel.isShiftTextVisible[row] ? 1 : 0)
                 .animation(.easeIn(duration: 0.5), value: viewModel.isShiftTextVisible[row])
         }

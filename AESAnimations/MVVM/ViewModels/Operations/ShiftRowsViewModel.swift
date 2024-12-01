@@ -143,14 +143,14 @@ class ShiftRowsViewModel: AnimationViewModel {
                     } else {
                         self.state[index] = shiftRounds.shifts[currentRepetition - 1]
                     }
-                    
+       
                     self.positionCell[index] = Position.default1DPositions(count: 4)
-                    
+
                     return
                 }
                 self.positionCell[index] = Position.default1DPositions(count: 4)
             },
-            AnimationStep(animation: {
+            AnimationStep {
                 withAnimation {
                     if self.positionCell[index][0].x == self.shiftRowsHelper.boxSizeWithSpacing  {
                         self.positionCell[index][3].y = 0
@@ -167,7 +167,7 @@ class ShiftRowsViewModel: AnimationViewModel {
                     self.positionCell[index][0].x = 0
                     self.positionCell[index][0].y = 0
                 }
-            }, delay: normal),
+            },
             AnimationStep(animation: {
                 withAnimation {
                     if self.positionCell[index][1].x == -self.shiftRowsHelper.boxSizeWithSpacing {
