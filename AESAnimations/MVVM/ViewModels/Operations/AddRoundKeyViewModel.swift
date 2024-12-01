@@ -91,7 +91,11 @@ class AddRoundKeyViewModel: AnimationViewModel {
     private func animateRoundKeyAddition(row: Int, col: Int, width: CGFloat) -> ([AnimationStep], [AnimationStep]) {
         let normalSteps = [
             AnimationStep { self.resultOfAdd = self.result[row][col] },
-            AnimationStep(animation: { await self.updatePosition(row: row, col: col, width: width, isX: false) }, delay: normal),
+            AnimationStep(animation: {
+                if self.positionState[row][col].y == 0 || self.positionKey[row][col].y == 0 {
+                    await self.updatePosition(row: row, col: col, width: width, isX: false)
+                }
+            }, delay: normal),
             AnimationStep(animation: { await self.updatePosition(row: row, col: col, width: width, isX: true) }, delay: short),
             AnimationStep(animation: { self.changeVisibility(value: 1.0) }, delay: normal),
             AnimationStep(animation: { withAnimation { self.showNewState[row][col] = 1.0 } }, delay: short),
