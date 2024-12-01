@@ -57,6 +57,7 @@ class KeyExpansionViewModel: AnimationViewModel {
     let spacing: CGFloat = 10
     let nK: Int
     let arraySize: Int
+    @Published var showBlockForm = false
     
     // Task und Steps Handler
     @Published var animationControl = AnimationControl()

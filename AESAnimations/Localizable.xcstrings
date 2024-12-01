@@ -480,6 +480,16 @@
         }
       }
     },
+    "Schlüsselblock %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key Block %lld"
+          }
+        }
+      }
+    },
     "ShiftRows" : {
       "shouldTranslate" : false
     },
@@ -717,6 +727,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Welcome to **AES-Visualization**"
+          }
+        }
+      }
+    },
+    "Zeige Blockform" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Block Form"
           }
         }
       }

@@ -10,7 +10,23 @@ import SwiftUI
 struct KeyExpansionAnimationView: View {
     @Environment(\.locale) var locale
     @StateObject var viewModel: KeyExpansionViewModel
-    let columns = Array(repeating: GridItem(.flexible(minimum: 230)), count: 4)
+    
+    var columns: [GridItem] {
+        // Block Size: 50
+        // Spacing: 10
+        if viewModel.showBlockForm {
+            switch viewModel.keySize {
+            case .key128:
+                return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 4), spacing: 15), count: 4)
+            case .key192:
+                return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 6), spacing: 15), count: 3)
+            case .key256:
+                return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 8), spacing: 15), count: 2)
+            }
+        } else {
+            return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 4)), count: 4)
+        }
+    }
     
     var buttonTitle: String {
         locale == Locale(identifier: "de") ? "Rundenschlüssel-Verlauf" : "Round Key History"
@@ -99,40 +115,75 @@ struct KeyExpansionAnimationView: View {
     private var roundKeyGrid: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 15) {
-                ForEach(0..<viewModel.roundKeys.count / 4,
+                ForEach(0..<roundKeyGroupCount,
                         id: \.self,
                         content: roundKeySection(for:))
             }
         }
     }
     
+    private var roundKeyGroupCount: Int {
+        viewModel.showBlockForm
+        ? Int(ceil(Double(viewModel.roundKeys.count) / Double(viewModel.keySize.rawValue)))
+        : viewModel.roundKeys.count / 4
+    }
+    
     private func roundKeySection(for groupIndex: Int) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Rundenschlüssel \(groupIndex + 1)")
+            Text(roundKeyTitle(for: groupIndex))
                 .font(.headline)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .opacity(viewModel.showRoundKeyColumn[groupIndex * 4])
+                .opacity(viewModel.showRoundKeyColumn[groupIndex * groupSize])
             
             HStack(spacing: 10) {
-                ForEach(0..<4, id: \.self) { row in
-                    let index = groupIndex * 4 + row
+                ForEach(0..<groupSize, id: \.self) { row in
+                    let index = groupIndex * groupSize + row
                     
-                    ColumnView(column: viewModel.roundKeys[index],
-                               opacity: viewModel.showRoundKeyColumn[index],
-                               highlightColumn: viewModel.highlightColumn[index])
+                    if index < viewModel.roundKeys.count {
+                        ColumnView(column: viewModel.roundKeys[index],
+                                   opacity: viewModel.showRoundKeyColumn[index],
+                                   highlightColumn: viewModel.highlightColumn[index])
+                    }
                 }
             }
         }
     }
     
+    private var groupSize: Int {
+        viewModel.showBlockForm ? viewModel.keySize.rawValue : 4
+    }
+    
+    private func roundKeyTitle(for groupIndex: Int) -> LocalizedStringKey {
+        viewModel.showBlockForm
+        ? "Schlüsselblock \(groupIndex + 1)"
+        : "Rundenschlüssel \(groupIndex + 1)"
+    }
+    
     // MARK: - Toolbar Item
     private func keyExpRoundsButton() -> some ToolbarContent {
         ToolbarItem {
-            CustomButtonView(title: LocalizedStringKey(buttonTitle),
-                             buttonStyle: .secondary,
-                             action: viewModel.toggleKeyExpRounds)
-            .opacity(viewModel.animationControl.isDone ? 1 : 0)
+            HStack {
+                if viewModel.keySize.rawValue > 4 {
+                    Toggle(isOn: $viewModel.showBlockForm, label: { Text("Zeige Blockform") })
+                        .padding(.trailing, padding)
+                }
+                
+                if viewModel.animationControl.isDone {
+                    CustomButtonView(title: LocalizedStringKey(buttonTitle),
+                                     buttonStyle: .secondary,
+                                     action: viewModel.toggleKeyExpRounds)
+                    
+                }
+            }
         }
+    }
+    
+    private var padding: CGFloat {
+        #if os(macOS)
+        4
+        #else
+        16
+        #endif
     }
 }
 
