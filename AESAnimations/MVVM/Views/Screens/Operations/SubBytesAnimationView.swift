@@ -10,6 +10,7 @@ import SwiftUI
 struct SubBytesAnimationView: View {
     @StateObject var viewModel: SubBytesViewModel
     var showRepeatButtons: Bool = true
+    var showSBoxButton: Bool = true
     
     // MARK: -
     var body: some View {
@@ -20,7 +21,11 @@ struct SubBytesAnimationView: View {
                     .padding(.top, 85)
             }
         }
-        .toolbar(content: sBoxAnimationButton)
+        .toolbar {
+            if showSBoxButton {
+                sBoxAnimationButton()
+            }
+        }
         .specificNavigation(isPresented: $viewModel.showSBoxAnimation) {
             SBoxAnimationView(viewModel: viewModel.sBoxAnimationViewModel)
         }
