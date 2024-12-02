@@ -14,17 +14,20 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
     @ObservedObject var viewModel: ViewModel
     var showReverseAnimationButton: Bool
     var showRepeatButtons: Bool
+    var showPlusMinusButtons: Bool
     let content: Content
     
     // MARK: - Initializer
     init(viewModel: ViewModel,
          showReverseAnimationButton: Bool? = nil,
          showRepeatButtons: Bool = true,
+         showPlusMinusButtons: Bool = true,
          @ViewBuilder content: () -> Content) {
         
         self.viewModel = viewModel
         self.showReverseAnimationButton = showReverseAnimationButton ?? UserDefaults.standard.bool(forKey: StorageKeys.includeReverseAnimation.key)
         self.showRepeatButtons = showRepeatButtons
+        self.showPlusMinusButtons = showPlusMinusButtons
         self.content = content()
     }
     
@@ -47,7 +50,8 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: Vie
                                               completeAnimations: viewModel.completeAnimations,
                                               resetAnimation: viewModel.resetAnimations,
                                               showRepeatButtons: showRepeatButtons,
-                                              showReverseAnimationButton: showReverseAnimationButton)
+                                              showReverseAnimationButton: showReverseAnimationButton,
+                                              showPlusMinusButtons: showPlusMinusButtons)
                         .padding(.bottom, 10)
                         .padding(.leading, checkAlignment() ? 10 : 0)
                     }

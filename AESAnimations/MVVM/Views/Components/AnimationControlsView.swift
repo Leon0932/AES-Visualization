@@ -17,6 +17,7 @@ struct AnimationControlsView: View {
     
     var showRepeatButtons: Bool = true
     var showReverseAnimationButton: Bool = true
+    var showPlusMinusButtons: Bool = true
     
     @AppStorage(StorageKeys.startAnimationOnAppear.key) var startAnimationOnApp: Bool = false
     
@@ -104,7 +105,7 @@ struct AnimationControlsView: View {
     }
     
     private func forwardButton() -> some View {
-        if animationControl.isPaused {
+        if animationControl.isPaused && showPlusMinusButtons {
             controlButton(icon: "plus") { animationControl.plusTriggered = true }
         } else {
             controlButton(icon: animationControl.isForward ? "forward.fill" : "forward") {
@@ -114,7 +115,7 @@ struct AnimationControlsView: View {
     }
     
     private func backwardButton() -> some View {
-        if animationControl.isPaused {
+        if animationControl.isPaused && showPlusMinusButtons {
             controlButton(icon: "minus") { animationControl.minusTriggered = true }
         } else {
             controlButton(icon: animationControl.isBackward ? "backward.fill" : "backward") {
@@ -139,16 +140,12 @@ struct AnimationControlsView: View {
     private func doubleTextView(showText: Bool) -> some View {
         Text("2x")
             .foregroundStyle(Color.accentColor)
-            .opacity(showText ? 1 : 0)
+            .opacity(showText && (!animationControl.isPaused) ? 1 : (!showPlusMinusButtons && showText ? 1 : 0))
     }
     
     private func pauseAnimation() {
         withAnimation {
             animationControl.changePause(to: !animationControl.isPaused)
-            if animationControl.isPaused {
-                animationControl.changePause(to: true)
-                animationControl.isDouble = false
-            }
         }
     }
     

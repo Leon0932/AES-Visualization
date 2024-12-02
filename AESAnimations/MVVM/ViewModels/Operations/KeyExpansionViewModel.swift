@@ -34,6 +34,7 @@ class KeyExpansionViewModel: AnimationViewModel {
     @Published var showSecondXOR = 0.0
     @Published var showEqual = 0.0
     @Published var showResult = 0.0
+    var performedRotWordAnimation: Bool = false
     
     // Round Keys Attachment
     @Published var showKeyExpRounds = false
@@ -159,7 +160,8 @@ class KeyExpansionViewModel: AnimationViewModel {
         ]
         + highlightColumnTwo(index: index, value: 1.0)
         
-        let lastSteps = highlightLeftSide(index: index)
+        let lastSteps =
+        highlightLeftSide(index: index)
         + highlightRCON
         + highlightRightSide(index: index, isReverse: false)
         +  [
@@ -200,16 +202,14 @@ class KeyExpansionViewModel: AnimationViewModel {
             AnimationStep(animation: { withAnimation { self.showResult = 0.0 } }, delay: short)
         ]
         + highlightLeftSide(index: index)
+        + highlightRCON
+        + highlightRightSide(index: index, isReverse: true)
         + [
             AnimationStep(animation: {
                 withAnimation {
                     self.highlightColumn[index - 1] = true
                     self.showColumnTwo = 1.0
                 } }, delay: short),
-        ]
-        + highlightRCON
-        + highlightRightSide(index: index, isReverse: true)
-        + [
             AnimationStep {
                 await self.assignValuesForRotSub(index: index)
                 self.startRCONAnimation = true
@@ -219,7 +219,7 @@ class KeyExpansionViewModel: AnimationViewModel {
         let rotWordAnimation = performRotWordAnimation(index: index)
         let subBytesAnimation = performSubBytesAnimation(index: index)
         
-        normalSteps.append(contentsOf:  rotWordAnimation.0 + subBytesAnimation.0 + lastSteps)
+        normalSteps.append(contentsOf: rotWordAnimation.0 + subBytesAnimation.0 + lastSteps)
         reverseStartSteps.append(contentsOf: rotWordAnimation.1 + subBytesAnimation.1 + lastReverseSteps)
         
         return (normalSteps, reverseStartSteps)
@@ -312,51 +312,83 @@ class KeyExpansionViewModel: AnimationViewModel {
     ///   and the second array handles the reverse animation.
     func performRotWordAnimation(index: Int) -> ([AnimationStep], [AnimationStep]) {
         let shiftRowsHelper = ShiftRowsHelper(boxSize: boxSize, spacing: spacing)
+        let showTextStep = AnimationStep(animation: { self.changeAnimationText(value: ("RotWord", true)) }, delay: normal)
+        let invisbleTextStep = AnimationStep(animation: { self.changeAnimationText(value: ("", false)) }, delay: normal)
         
-        var normalSteps = [
+        let normalSteps = [
+            showTextStep,
             AnimationStep(animation: {
                 // Cell will be animated to left middle under
                 withAnimation {
+                    if self.positionKey[3].x == -shiftRowsHelper.middleOffset {
+                        return
+                    }
+
                     self.positionKey[0].x = -shiftRowsHelper.middleOffset
                     self.positionKey[0].y = 100
                 }
             }, delay: normal),
             AnimationStep(animation: {
-                // Three other cells will be rotated left
+                // Three other cells will be rotated up
+                if self.positionKey[0].y == shiftRowsHelper.boxSizeWithSpacing  { return }
+                if self.positionKey[3].x == -shiftRowsHelper.middleOffset {
+                    return
+                }
+
                 withAnimation {
                     for i in 1...3 { self.positionKey[i].y = -shiftRowsHelper.boxSizeWithSpacing }
                 }
             }, delay: normal),
             AnimationStep {
                 // Cell will be set to the end
+                if self.positionKey[0].y == shiftRowsHelper.returnOffset { return }
+                if self.positionKey[0].y == shiftRowsHelper.boxSizeWithSpacing  {
+                    withAnimation { for i in 0...2 { self.positionKey[i].y = 0 } }
+                    await self.sleep(for: self.short)
+                }
+                
+                if self.positionKey[3].x == -shiftRowsHelper.middleOffset {
+                    withAnimation {
+                        self.positionKey[3].y = 0
+                        self.positionKey[3].x = 0
+                    }
+                    return
+                }
+                
                 withAnimation {
                     self.positionKey[0].y = shiftRowsHelper.returnOffset
                     self.positionKey[0].x = 0
                 }
             },
-            AnimationStep(animation: {
+            AnimationStep {
+                //  if self.performedRotWordAnimation { return }
                 // Perform Rot Word
                 await self.sleep(for: self.normal)
                 self.columnTwo = self.keyExpRounds[index - self.nK].afterRotWord
                 self.positionKey = Position.default1DPositions(count: 4)
-            }, delay: short),
+                self.performedRotWordAnimation = true
+            },
+            invisbleTextStep
         ]
         
-        var reverseSteps = [
-            AnimationStep(animation: {
+        let reverseSteps = [
+            invisbleTextStep,
+            AnimationStep {
                 // Reverse Rot Word Animation
                 await self.sleep(for: self.normal)
-                // self.columnTwo = self.aesKey.rotWord(self.columnTwo, isInverse: true)
                 self.columnTwo = self.keyExpRounds[index - self.nK].temp
                 self.positionKey = Position.default1DPositions(count: 4)
-            }, delay: normal),
-            AnimationStep(animation: {
+                self.performedRotWordAnimation = false
+            },
+            AnimationStep {
                 withAnimation {
                     // If the first cell is still in the air,
                     // only the cell should be reset,
                     // meaning it should return to its original position.
                     if self.positionKey[0].x == -shiftRowsHelper.middleOffset {
-                        for i in 1...3 { self.positionKey[i].y = 0 }
+                        if self.positionKey[1].y == -shiftRowsHelper.boxSizeWithSpacing {
+                            for i in 1...3 { self.positionKey[i].y = 0 }
+                        }
                         
                         self.positionKey[0].x = 0
                         self.positionKey[0].y = 0
@@ -364,10 +396,12 @@ class KeyExpansionViewModel: AnimationViewModel {
                     }
                     
                     // Otherwise, continue executing the RotWord reverse animation.
-                    self.positionKey[3].x = 0
-                    self.positionKey[3].y = -shiftRowsHelper.returnOffset
+                    if self.positionKey[3].x == -shiftRowsHelper.middleOffset && self.positionKey[3].y == 100 {
+                        self.positionKey[3].x = 0
+                        self.positionKey[3].y = -shiftRowsHelper.returnOffset
+                    }
                 }
-            }, delay: normal),
+            },
             AnimationStep(animation: {
                 withAnimation {
                     // If the second cell is moved upwards, then reset the cells
@@ -375,7 +409,9 @@ class KeyExpansionViewModel: AnimationViewModel {
                         for i in 1...3 { self.positionKey[i].y = 0 }
                     } else {
                         // Move the cells updown
-                        for i in 0...2 { self.positionKey[i].y = shiftRowsHelper.boxSizeWithSpacing }
+                        if self.positionKey[3].x == -shiftRowsHelper.middleOffset && self.positionKey[3].y == -100 {
+                            for i in 0...2 { self.positionKey[i].y = shiftRowsHelper.boxSizeWithSpacing }
+                        }
                     }
                 }
             }, delay: normal),
@@ -383,21 +419,16 @@ class KeyExpansionViewModel: AnimationViewModel {
                 withAnimation {
                     // If the first cell is not in the position after RotWord,
                     // the RotWord animation should be started in reverse.
-                    if self.positionKey[0].y != shiftRowsHelper.returnOffset || self.positionKey[0].x != 0 {
+                    if self.positionKey[0].y == 100 {
+                        return
+                    } else {
                         self.positionKey[3].y = -100
                         self.positionKey[3].x = -shiftRowsHelper.middleOffset
-                    } else {
-                        // Reset
-                        self.positionKey[0].y = 0
-                        self.positionKey[0].x = 0
                     }
                 }
             }, delay: normal),
+            showTextStep
         ]
-        
-        addAnimationOperationText(operation: "RotWord",
-                                  normalSteps: &normalSteps,
-                                  reverseSteps: &reverseSteps)
         
         return (normalSteps, reverseSteps)
     }
@@ -412,9 +443,12 @@ class KeyExpansionViewModel: AnimationViewModel {
     /// - Returns: A tuple containing two arrays of `AnimationStep` objects. The first array handles the forward animation,
     ///   and the second array handles the reverse animation.
     func performSubBytesAnimation(index: Int) -> ([AnimationStep], [AnimationStep]) {
-        var normalSteps = [
+        let showTextStep = AnimationStep(animation: { self.changeAnimationText(value: ("SubWord", true)) }, delay: normal)
+        let invisbleTextStep = AnimationStep(animation: { self.changeAnimationText(value: ("", false)) }, delay: normal)
+        
+        let normalSteps = [
+            showTextStep,
             AnimationStep {
-                self.subBytesViewModel.animationControl = self.animationControl
                 self.substitudedByte = self.columnTwo.map { [$0] }
                 self.resultSubBytes = self.keyExpRounds[index - self.nK].afterSubWord.map { [$0] }
                 self.subBytesViewModel = SubBytesViewModel(state: self.substitudedByte,
@@ -424,9 +458,11 @@ class KeyExpansionViewModel: AnimationViewModel {
             },
             AnimationStep { withAnimation { self.showSubBytes = true } },
             AnimationStep { await self.checkIfSubBytesIsDone() },
+            invisbleTextStep
         ]
         
-        var reverseSteps = [
+        let reverseSteps = [
+            invisbleTextStep,
             AnimationStep { await self.checkIfSubBytesIsDone() },
             AnimationStep(animation: {
                 withAnimation {
@@ -438,16 +474,12 @@ class KeyExpansionViewModel: AnimationViewModel {
             AnimationStep(animation: {
                 self.subBytesViewModel = SubBytesViewModel(state: self.substitudedByte,
                                                            result: self.resultSubBytes,
-                                                           operationDetails: self.operationDetailsSubBytes,
-                                                           animationControl: self.animationControl)
+                                                           operationDetails: self.operationDetailsSubBytes)
                 self.subBytesViewModel.completeAnimations()
                 
             }, delay: normal),
+            showTextStep
         ]
-        
-        addAnimationOperationText(operation: "SubBytes",
-                                  normalSteps: &normalSteps,
-                                  reverseSteps: &reverseSteps)
         
         return (normalSteps, reverseSteps)
         
@@ -523,29 +555,6 @@ class KeyExpansionViewModel: AnimationViewModel {
         steps.insert(showResultStep, at: isReverse ? 1 : 0)
         
         return steps
-    }
-    
-    /// Adds animation steps to show and hide the operation text during an animation sequence.
-    ///
-    /// This function inserts steps to display the provided `operation` text at the start of the animation
-    /// and hide it afterward. It also adds the corresponding reverse steps to undo the text display.
-    /// The `normalSteps` sequence will show the text, while the `reverseSteps` will hide it in reverse order.
-    ///
-    /// - Parameters:
-    ///   - operation: The text representing the operation to display during the animation.
-    ///   - normalSteps: An array of `AnimationStep` objects that will display and then hide the text in a normal sequence.
-    ///   - reverseSteps: An array of `AnimationStep` objects that will perform the reverse sequence, hiding and then showing the text.
-    private func addAnimationOperationText(operation: String,
-                                           normalSteps: inout [AnimationStep],
-                                           reverseSteps: inout [AnimationStep]) {
-        let showTextStep = AnimationStep(animation: { self.changeAnimationText(value: (operation, true)) }, delay: normal)
-        let invisbleTextStep = AnimationStep(animation: { self.changeAnimationText(value: ("", false)) }, delay: normal)
-        
-        normalSteps.insert(showTextStep, at: 0)
-        normalSteps.append(invisbleTextStep)
-        
-        reverseSteps.insert(invisbleTextStep, at: 0)
-        reverseSteps.append(showTextStep)
     }
     
     // MARK: - Modifier Helper Functions
