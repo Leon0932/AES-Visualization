@@ -57,7 +57,7 @@ struct AddRoundKeyAnimationView: View {
             
             Spacer()
             
-            StateView(title: "Key",
+            StateView(title: "Schlüssel",
                       state: viewModel.key,
                       position: .twoD(viewModel.positionKey))
         }

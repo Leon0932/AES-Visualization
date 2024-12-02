@@ -223,9 +223,6 @@
         }
       }
     },
-    "Key" : {
-      "shouldTranslate" : false
-    },
     "KeyExpansion" : {
       "shouldTranslate" : false
     },
