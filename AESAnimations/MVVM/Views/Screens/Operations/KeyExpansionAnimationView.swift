@@ -38,8 +38,8 @@ struct KeyExpansionAnimationView: View {
             SubBytesAnimationView(viewModel: viewModel.subBytesViewModel,
                                   showRepeatButtons: false,
                                   showSBoxButton: false)
-        } else {
-            AnimationContainerView(viewModel: viewModel) {
+        } else { 
+            AnimationContainerView(viewModel: viewModel, showPlusMinusButtons: false) {
                 VStack(alignment: .leading, spacing: 50) {
                     if !viewModel.animationControl.isDone {
                         keyAnimationSection
