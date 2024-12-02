@@ -20,6 +20,9 @@ struct KeyView: View {
                     keyHeader
                     keysList
                 }
+                #if os(macOS)
+                .frame(maxWidth: .infinity, alignment: .center)
+                #endif
             }
             .padding()
             .navigationTitle(locale == Locale(identifier: "de")
