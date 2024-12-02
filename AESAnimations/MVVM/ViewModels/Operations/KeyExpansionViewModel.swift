@@ -320,33 +320,45 @@ class KeyExpansionViewModel: AnimationViewModel {
             AnimationStep(animation: {
                 // Cell will be animated to left middle under
                 withAnimation {
+                    // If cell from reverse is in the air
+                    // cancel this step
                     if self.positionKey[3].x == -shiftRowsHelper.middleOffset {
                         return
                     }
 
+                    // Normal Step
                     self.positionKey[0].x = -shiftRowsHelper.middleOffset
                     self.positionKey[0].y = 100
                 }
             }, delay: normal),
             AnimationStep(animation: {
-                // Three other cells will be rotated up
-                if self.positionKey[0].y == shiftRowsHelper.boxSizeWithSpacing  { return }
+                // If cell from reverse is moved (with the others two)
+                // cancel this step
+                if self.positionKey[0].y == shiftRowsHelper.boxSizeWithSpacing { return }
+                
+                // If cell from reverse is in the air
+                // cancel this step
                 if self.positionKey[3].x == -shiftRowsHelper.middleOffset {
                     return
                 }
 
+                // Normal Step
                 withAnimation {
                     for i in 1...3 { self.positionKey[i].y = -shiftRowsHelper.boxSizeWithSpacing }
                 }
             }, delay: normal),
             AnimationStep {
-                // Cell will be set to the end
+                // If the cell animation is already completed
+                // cancel this step
                 if self.positionKey[0].y == shiftRowsHelper.returnOffset { return }
+                
+                // Reset the others cells (from reverse Animation)
                 if self.positionKey[0].y == shiftRowsHelper.boxSizeWithSpacing  {
                     withAnimation { for i in 0...2 { self.positionKey[i].y = 0 } }
                     await self.sleep(for: self.short)
                 }
                 
+                // Check if the cell (from reverse Animation) is in the air
                 if self.positionKey[3].x == -shiftRowsHelper.middleOffset {
                     withAnimation {
                         self.positionKey[3].y = 0
@@ -355,13 +367,13 @@ class KeyExpansionViewModel: AnimationViewModel {
                     return
                 }
                 
+                // Normal Step
                 withAnimation {
                     self.positionKey[0].y = shiftRowsHelper.returnOffset
                     self.positionKey[0].x = 0
                 }
             },
             AnimationStep {
-                //  if self.performedRotWordAnimation { return }
                 // Perform Rot Word
                 await self.sleep(for: self.normal)
                 self.columnTwo = self.keyExpRounds[index - self.nK].afterRotWord
@@ -409,6 +421,7 @@ class KeyExpansionViewModel: AnimationViewModel {
                         for i in 1...3 { self.positionKey[i].y = 0 }
                     } else {
                         // Move the cells updown
+                        // Normal Step
                         if self.positionKey[3].x == -shiftRowsHelper.middleOffset && self.positionKey[3].y == -100 {
                             for i in 0...2 { self.positionKey[i].y = shiftRowsHelper.boxSizeWithSpacing }
                         }

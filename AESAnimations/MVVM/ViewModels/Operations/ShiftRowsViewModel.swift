@@ -198,7 +198,7 @@ class ShiftRowsViewModel: AnimationViewModel {
             }, delay: normal),
             AnimationStep(animation: {
                 withAnimation {
-                    if self.positionCell[index][0].x == self.shiftRowsHelper.middleOffset || self.positionCell[index][0].y == -100 {
+                    if self.positionCell[index][0].x == self.shiftRowsHelper.middleOffset && self.positionCell[index][0].y == -100 {
                         self.positionCell[index][0].x = 0
                         self.positionCell[index][0].y = 0
                     } else {
