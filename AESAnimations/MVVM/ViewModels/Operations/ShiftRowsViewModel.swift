@@ -110,15 +110,29 @@ class ShiftRowsViewModel: AnimationViewModel {
             }, delay: normal),
             AnimationStep(animation: {
                 withAnimation {
-                    for i in 1...3 {
-                        self.positionCell[index][i].x = -self.shiftRowsHelper.boxSizeWithSpacing
+                    // If the cell of reverse Animation is still in the air
+                    // Move the cells positions
+                    if self.positionCell[index][0].x == self.shiftRowsHelper.boxSizeWithSpacing {
+                        for i in 0...2 {
+                            self.positionCell[index][i].x = 0
+                        }
+                    } else {
+                        for i in 1...3 {
+                            self.positionCell[index][i].x = -self.shiftRowsHelper.boxSizeWithSpacing
+                        }
                     }
                 }
             }, delay: normal),
             AnimationStep {
                 withAnimation {
-                    self.positionCell[index][0].y = 0
-                    self.positionCell[index][0].x = self.shiftRowsHelper.returnOffset
+                    // Reset cell in the air
+                    if self.positionCell[index][3].x == -self.shiftRowsHelper.middleOffset {
+                        self.positionCell[index][3].y = 0
+                        self.positionCell[index][3].x = 0
+                    } else {
+                        self.positionCell[index][0].y = 0
+                        self.positionCell[index][0].x = self.shiftRowsHelper.returnOffset
+                    }
                 }
             },
             AnimationStep {
@@ -184,13 +198,12 @@ class ShiftRowsViewModel: AnimationViewModel {
             }, delay: normal),
             AnimationStep(animation: {
                 withAnimation {
-                    if self.positionCell[index][0].x != self.shiftRowsHelper.middleOffset || self.positionCell[index][0].y != -100 {
-                        self.positionCell[index][3].x = -self.shiftRowsHelper.middleOffset
-                        self.positionCell[index][3].y = -100
-                    } else {
+                    if self.positionCell[index][0].x == self.shiftRowsHelper.middleOffset || self.positionCell[index][0].y == -100 {
                         self.positionCell[index][0].x = 0
                         self.positionCell[index][0].y = 0
-                        
+                    } else {
+                        self.positionCell[index][3].x = -self.shiftRowsHelper.middleOffset
+                        self.positionCell[index][3].y = -100
                     }
                 }
             }, delay: normal)
@@ -224,15 +237,24 @@ class ShiftRowsViewModel: AnimationViewModel {
         for (i, config) in configs.enumerated() {
             
             if i > 0 {
-                normalSteps.append(AnimationStep { self.isShiftTextVisible[configs[i - 1].index] = false })
-                reverseSteps.append(AnimationStep { self.isShiftTextVisible[configs[i - 1].index] = true })
+                normalSteps.append(
+                    AnimationStep(animation: { self.isShiftTextVisible[configs[i - 1].index] = false },
+                                  delay: short)
+                )
+                reverseSteps.append(
+                    AnimationStep(animation: { self.isShiftTextVisible[configs[i - 1].index] = true },
+                                  delay: short)
+                )
             }
             
             normalSteps.append(
                 AnimationStep(animation: { self.isShiftTextVisible[config.index] = true},
                               delay: short)
             )
-            reverseSteps.append(AnimationStep { self.isShiftTextVisible[config.index] = false })
+            reverseSteps.append(
+                AnimationStep(animation: { self.isShiftTextVisible[config.index] = false },
+                              delay: short)
+            )
             
             let animations = performShiftRows(at: config.index, repetitions: config.repetitions)
             
@@ -240,8 +262,14 @@ class ShiftRowsViewModel: AnimationViewModel {
             reverseSteps.append(contentsOf: animations.1)
         }
         
-        normalSteps.append(AnimationStep { self.isShiftTextVisible[configs.last!.index] = false })
-        reverseSteps.append(AnimationStep { self.isShiftTextVisible[configs.last!.index] = true })
+        normalSteps.append(
+            AnimationStep(animation: { self.isShiftTextVisible[configs.last!.index] = false },
+                          delay: short)
+        )
+        reverseSteps.append(
+            AnimationStep(animation: { self.isShiftTextVisible[configs.last!.index] = true },
+                          delay: short)
+        )
         
         return (normalSteps, reverseSteps)
     }
