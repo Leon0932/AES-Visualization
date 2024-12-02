@@ -343,10 +343,11 @@ class SubBytesViewModel: AnimationViewModel {
     func resetAnimationState(state newState: [[Byte]], showResult: Double) {
         setSearchState(for: (nil, nil, nil), showText: 0)
         currentByte = 0x00
-        positions = Position.default2DPositions(rows: 4, cols: 4)
         splitByte = Array.create2DArray(repeating: false, rows: 4, cols: 4)
         currentStateSubBytes = Array.create2DArray(repeating: showResult == 1.0 ? true : false, rows: 4, cols: 4)
         state = newState
+        
+        withAnimation { positions = Position.default2DPositions(rows: 4, cols: 4) }
     }
     
     // MARK: - UI Helper Functions

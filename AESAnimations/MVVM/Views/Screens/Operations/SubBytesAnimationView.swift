@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SubBytesAnimationView: View {
     @StateObject var viewModel: SubBytesViewModel
+    @Namespace var animationNamespace
     var showRepeatButtons: Bool = true
     var showSBoxButton: Bool = true
     
@@ -58,6 +59,7 @@ struct SubBytesAnimationView: View {
                         cellStack(row: row, col: col)
                             .frame(width: 40, height: 40)
                             .offset(x: position.x, y: position.y)
+                            .matchedGeometryEffect(id: "\(row)-\(col)", in: animationNamespace)
                     }
                 }
             }
