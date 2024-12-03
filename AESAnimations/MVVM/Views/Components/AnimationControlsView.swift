@@ -96,9 +96,9 @@ struct AnimationControlsView: View {
         HStack(spacing: 10) {
             if isForward {
                 forwardButton()
-                doubleTextView(showText: animationControl.isForward && animationControl.isDouble)
+                doubleTextView(showText: animationControl.isForward && animationControl.speed != .normal)
             } else {
-                doubleTextView(showText: animationControl.isBackward && animationControl.isDouble)
+                doubleTextView(showText: animationControl.isBackward && animationControl.speed != .normal)
                 backwardButton()
             }
         }
@@ -138,9 +138,18 @@ struct AnimationControlsView: View {
     }
     
     private func doubleTextView(showText: Bool) -> some View {
-        Text("2x")
+        Text(getSpeedText(for: animationControl.speed))
             .foregroundStyle(Color.accentColor)
-            .opacity(showText && (!animationControl.isPaused) ? 1 : (!showPlusMinusButtons && showText ? 1 : 0))
+            .opacity(determineOpacity(showText: showText))
+    }
+    
+    private func getSpeedText(for speed: AnimationControl.Speed) -> String {
+        if speed == .isTriple {
+            return "3x"
+        }
+        
+        return "2x"
+
     }
     
     private func pauseAnimation() {
@@ -162,6 +171,16 @@ struct AnimationControlsView: View {
             animationControl.isBackward = true
             startAnimations()
         }
+    }
+    
+    private func determineOpacity(showText: Bool) -> Double {
+        if showText && !animationControl.isPaused {
+            return 1
+        }
+        if !showPlusMinusButtons && showText {
+            return 1
+        }
+        return 0
     }
 }
 

@@ -70,30 +70,20 @@ extension AnimationViewModel {
         /// For reverse animations, triggered after clicking the `Reversed` button
         /// in the view
         var index = animationControl.isBackward ? reverseAnimationSteps.count - 1 : 0
-        
         handleAnimationState(isDone: false)
         
         /// Loop through the `animationSteps` / `reverseAnimationSteps`
         while index < animationSteps.count && index >= 0 {
             guard !Task.isCancelled else { return }
             
-            /// Calculating Delay
-            let stepDelay = animationSteps[index].delay
-            let revStepDelay = reverseAnimationSteps[index].delay
-            let delay = !animationControl.isBackward ? stepDelay : revStepDelay
-            let shortDelay = delay > 0 ? delay - 50_000_000 : 0
-            let extraShortDelay = shortDelay / 2
-            
             /// Executes the animation based on the current `animationControl` state.
             if !animationControl.isBackward {
                 await animationSteps[index].animation()
-                await sleep(for: animationControl.isForward
-                            ? (animationControl.isDouble ? extraShortDelay : shortDelay)
-                            : stepDelay)
+                await sleep(for: calculateDelay(index: index))
                 index += 1
             } else {
                 await reverseAnimationSteps[index].animation()
-                await sleep(for: animationControl.isDouble ? extraShortDelay : revStepDelay)
+                await sleep(for: calculateDelay(index: index))
                 index -= 1
             }
             
@@ -103,6 +93,7 @@ extension AnimationViewModel {
                 if animationControl.plusTriggered {
                     /// Reset `animationControl` flags
                     animationControl.isBackward = false
+                    animationControl.speed = .normal
                     animationControl.isForward = false
                     
                     await animationSteps[index].animation()
@@ -119,6 +110,7 @@ extension AnimationViewModel {
                     /// Some animations require the `isBackward` flag to indicate that the animation
                     /// runs in reverse.
                     animationControl.isBackward = true
+                    animationControl.speed = .normal
                     animationControl.isForward = false
                     
                     await reverseAnimationSteps[index].animation()
@@ -138,6 +130,28 @@ extension AnimationViewModel {
         }
         
         handleAnimationState(isDone: true)
+    }
+
+    private func calculateDelay(index: Int) -> UInt64 {
+        let stepDelay = animationSteps[index].delay
+        let revStepDelay = reverseAnimationSteps[index].delay
+        let baseDelay = !animationControl.isBackward ? stepDelay : revStepDelay
+        
+        // Calculating Short-Delays
+        let shortDelay = baseDelay > 0 ? baseDelay - 50_000_000 : 0
+        let doubleShortDelay = shortDelay / 2
+        let tripleShortDelay = shortDelay / 3
+
+        switch animationControl.speed {
+        case .isDouble:
+            return doubleShortDelay
+        case .isTriple:
+            return tripleShortDelay
+        default:
+            return animationControl.isForward || animationControl.isBackward
+            ? shortDelay
+            : baseDelay
+        }
     }
     
     private func handleAnimationState(isDone: Bool) {
@@ -185,8 +199,8 @@ extension AnimationViewModel {
     /// and then executes the animation to ensure smoothness.
     ///
     /// - Parameter nanoseconds: The amount of time to wait before running the animation, in nanoseconds.
-    func checkDoubleAnimation(for nanoseconds: UInt64 = 200_000_000) async {
-        if animationControl.isDouble {
+    func checkDoubleAnimation(for nanoseconds: UInt64 = 250_000_000) async {
+        if animationControl.speed != .normal {
             await sleep(for: nanoseconds)
         }
     }

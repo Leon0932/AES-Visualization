@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct AnimationControl {
+    enum Speed {
+        case normal
+        case isDouble
+        case isTriple
+    }
+    
     var animationHasStarted = false
     var isDone = false
     var isPaused = false
     var isForward = false
     var isBackward = false
-    var isDouble = false
+    var speed: Speed = .normal
     
     var plusTriggered = false
     var minusTriggered = false
@@ -46,7 +52,7 @@ struct AnimationControl {
         isPaused = true
         isForward = false
         isBackward = false
-        isDouble = false
+        speed = .normal
     }
     
     private mutating func handleAnimation(isActive: inout Bool, opposite: inout Bool) {
@@ -55,13 +61,18 @@ struct AnimationControl {
         opposite = false
         
         if isActive {
-            isDouble.toggle()
-            if !isDouble {
+            switch speed {
+            case .normal:
+                speed = .isDouble
+            case .isDouble:
+                speed = .isTriple
+            case .isTriple:
+                speed = .normal
                 isActive = false
             }
         } else {
             isActive = true
-            isDouble = false
+            speed = .normal
         }
     }
     
