@@ -176,7 +176,7 @@ class KeyExpansionViewModel: AnimationViewModel {
         
         var reverseStartSteps = [
             AnimationStep(animation: {
-                await self.checkDoubleAnimation(for: self.normal)
+                await self.checkDoubleAnimation()
                 self.startRCONAnimation = false
             }, delay: normal),
             AnimationStep(animation: {
