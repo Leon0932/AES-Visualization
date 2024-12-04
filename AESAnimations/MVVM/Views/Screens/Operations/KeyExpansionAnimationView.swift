@@ -43,6 +43,7 @@ struct KeyExpansionAnimationView: View {
                 VStack(alignment: .leading, spacing: 50) {
                     if !viewModel.animationControl.isDone {
                         keyAnimationSection
+                            .padding(.top, 25)
                     }
                     roundKeyGrid
                 }
@@ -100,12 +101,19 @@ struct KeyExpansionAnimationView: View {
     
     // MARK: - RCON View
     private var rconAnimationSection: some View {
-        HStack(spacing: 10) {
-            ForEach(1..<viewModel.rConstants.count, id: \.self) { row in
-                ColumnView(
-                    column: viewModel.rConstants[row],
-                    backgroundColor: viewModel.highlightRCon[row] ? .yellow : .yellow.opacity(0.3)
-                )
+        ZStack(alignment: .top) {
+            Text("RCON")
+                .font(.headline)
+                .offset(y: -25)
+            
+            
+            HStack(spacing: 10) {
+                ForEach(1..<viewModel.rConstants.count, id: \.self) { row in
+                    ColumnView(
+                        column: viewModel.rConstants[row],
+                        backgroundColor: viewModel.highlightRCon[row] ? .yellow : .yellow.opacity(0.3)
+                    )
+                }
             }
         }
         .opacity(viewModel.showRCONs)
