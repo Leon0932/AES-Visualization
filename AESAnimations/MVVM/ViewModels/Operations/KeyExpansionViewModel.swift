@@ -408,7 +408,7 @@ class KeyExpansionViewModel: AnimationViewModel {
                     }
                     
                     // Otherwise, continue executing the RotWord reverse animation.
-                    if self.positionKey[3].x == -shiftRowsHelper.middleOffset && self.positionKey[3].y == 100 {
+                    if self.positionKey[3].x == -shiftRowsHelper.middleOffset {
                         self.positionKey[3].x = 0
                         self.positionKey[3].y = -shiftRowsHelper.returnOffset
                     }
