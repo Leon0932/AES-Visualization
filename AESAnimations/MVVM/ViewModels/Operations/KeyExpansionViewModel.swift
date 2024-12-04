@@ -481,7 +481,7 @@ class KeyExpansionViewModel: AnimationViewModel {
                 withAnimation {
                     self.showSubBytes = true
                     self.subBytesViewModel.animationControl = self.animationControl
-                    self.subBytesViewModel.animationControl.isBackward = true
+                    self.subBytesViewModel.animationControl.direction = .backward
                 }
             }, delay: short),
             AnimationStep(animation: {

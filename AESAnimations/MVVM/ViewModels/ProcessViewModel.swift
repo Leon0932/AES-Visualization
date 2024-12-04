@@ -433,7 +433,7 @@ class ProcessViewModel: AnimationViewModel {
             withAnimation(.linear) {
                 if self.ballPositionX > 0 { return }
                 self.ballPositionX += 125
-                self.ballIsUp = self.animationControl.isBackward ? true : false
+                self.ballIsUp = self.animationControl.direction == .backward ? true : false
             }
         }, delay: short)
         

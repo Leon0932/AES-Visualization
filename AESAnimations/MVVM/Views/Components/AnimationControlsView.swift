@@ -96,9 +96,9 @@ struct AnimationControlsView: View {
         HStack(spacing: 10) {
             if isForward {
                 forwardButton()
-                doubleTextView(showText: animationControl.isForward && animationControl.speed != .normal)
+                doubleTextView(showText: animationControl.direction == .forward && animationControl.speed != .normal)
             } else {
-                doubleTextView(showText: animationControl.isBackward && animationControl.speed != .normal)
+                doubleTextView(showText: animationControl.direction == .backward && animationControl.speed != .normal)
                 backwardButton()
             }
         }
@@ -108,8 +108,8 @@ struct AnimationControlsView: View {
         if animationControl.isPaused && showPlusMinusButtons {
             controlButton(icon: "plus") { animationControl.plusTriggered = true }
         } else {
-            controlButton(icon: animationControl.isForward ? "forward.fill" : "forward") {
-                handleAnimationControl(isForward: true)
+            controlButton(icon: animationControl.direction == .forward ? "forward.fill" : "forward") {
+                withAnimation { animationControl.handleAnimation(direction: .forward) }
             }
         }
     }
@@ -118,18 +118,12 @@ struct AnimationControlsView: View {
         if animationControl.isPaused && showPlusMinusButtons {
             controlButton(icon: "minus") { animationControl.minusTriggered = true }
         } else {
-            controlButton(icon: animationControl.isBackward ? "backward.fill" : "backward") {
-                handleAnimationControl(isForward: false)
+            controlButton(icon: animationControl.direction == .backward ? "backward.fill" : "backward") {
+                withAnimation { animationControl.handleAnimation(direction: .backward) }
             }
         }
     }
-    
-    private func handleAnimationControl(isForward: Bool) {
-        withAnimation {
-            isForward ? animationControl.advanceAnimations() : animationControl.reverseAnimation()
-        }
-    }
-    
+
     // MARK: - Helper Functions
     private func controlButton(icon: String, action: @escaping () -> Void) -> some View {
         CustomButtonView(icon: icon,
@@ -168,7 +162,7 @@ struct AnimationControlsView: View {
     private func startReverseAnimation() {
         withAnimation {
             completeAnimations()
-            animationControl.isBackward = true
+            animationControl.direction = .backward
             startAnimations()
         }
     }

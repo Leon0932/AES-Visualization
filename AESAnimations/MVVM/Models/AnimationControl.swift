@@ -8,72 +8,45 @@
 import SwiftUI
 
 struct AnimationControl {
-    enum Speed {
-        case normal
-        case isDouble
-        case isTriple
-    }
-    
     var animationHasStarted = false
     var isDone = false
     var isPaused = false
-    var isForward = false
-    var isBackward = false
+
     var speed: Speed = .normal
+    var direction: Direction = .normal
     
     var plusTriggered = false
     var minusTriggered = false
     
     // Continue / Pause animation
     mutating func changePause(to value: Bool) { isPaused = value }
-    
-    // Reverse the animation
-    mutating func advanceAnimations() {
-        var isForwardCopy = isForward
-        var isBackwardCopy = isBackward
+     
+    mutating func handleAnimation(direction: Direction) {
+        isPaused = false
         
-        handleAnimation(isActive: &isForwardCopy, opposite: &isBackwardCopy)
-        
-        isForward = isForwardCopy
-        isBackward = isBackwardCopy
+        if self.direction != direction {
+            self.direction = direction
+            speed = .normal
+        } else {
+            updateSpeed()
+        }
     }
     
-    mutating func reverseAnimation() {
-        var isForwardCopy = isForward
-        var isBackwardCopy = isBackward
-        
-        handleAnimation(isActive: &isBackwardCopy, opposite: &isForwardCopy)
-        
-        isForward = isForwardCopy
-        isBackward = isBackwardCopy
+    mutating func updateSpeed() {
+        switch speed {
+        case .normal:
+            speed = .isDouble
+        case .isDouble:
+            speed = .isTriple
+        case .isTriple:
+            speed = .normal
+            direction = .normal
+        }
     }
     
     mutating func resetAnimationFlags() {
         isPaused = true
-        isForward = false
-        isBackward = false
+        direction = .normal
         speed = .normal
     }
-    
-    private mutating func handleAnimation(isActive: inout Bool, opposite: inout Bool) {
-        
-        isPaused = false
-        opposite = false
-        
-        if isActive {
-            switch speed {
-            case .normal:
-                speed = .isDouble
-            case .isDouble:
-                speed = .isTriple
-            case .isTriple:
-                speed = .normal
-                isActive = false
-            }
-        } else {
-            isActive = true
-            speed = .normal
-        }
-    }
-    
 }

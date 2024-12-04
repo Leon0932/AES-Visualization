@@ -69,7 +69,7 @@ extension AnimationViewModel {
     func processAnimations() async {
         /// For reverse animations, triggered after clicking the `Reversed` button
         /// in the view
-        var index = animationControl.isBackward ? reverseAnimationSteps.count - 1 : 0
+        var index = animationControl.direction == .backward ? reverseAnimationSteps.count - 1 : 0
         handleAnimationState(isDone: false)
         
         /// Loop through the `animationSteps` / `reverseAnimationSteps`
@@ -77,7 +77,7 @@ extension AnimationViewModel {
             guard !Task.isCancelled else { return }
             
             /// Executes the animation based on the current `animationControl` state.
-            if !animationControl.isBackward {
+            if animationControl.direction == .normal || animationControl.direction == .forward {
                 await animationSteps[index].animation()
                 await sleep(for: calculateDelay(index: index))
                 index += 1
@@ -92,9 +92,9 @@ extension AnimationViewModel {
                 /// Execution Steps for plus and minus button
                 if animationControl.plusTriggered {
                     /// Reset `animationControl` flags
-                    animationControl.isBackward = false
+                    animationControl.direction = .normal
                     animationControl.speed = .normal
-                    animationControl.isForward = false
+        
                     
                     await animationSteps[index].animation()
                     
@@ -109,9 +109,8 @@ extension AnimationViewModel {
                 } else if animationControl.minusTriggered {
                     /// Some animations require the `isBackward` flag to indicate that the animation
                     /// runs in reverse.
-                    animationControl.isBackward = true
+                    animationControl.direction = .backward
                     animationControl.speed = .normal
-                    animationControl.isForward = false
                     
                     await reverseAnimationSteps[index].animation()
                     
@@ -135,7 +134,9 @@ extension AnimationViewModel {
     private func calculateDelay(index: Int) -> UInt64 {
         let stepDelay = animationSteps[index].delay
         let revStepDelay = reverseAnimationSteps[index].delay
-        let baseDelay = !animationControl.isBackward ? stepDelay : revStepDelay
+        let baseDelay = animationControl.direction == .forward || animationControl.direction == .normal
+        ? stepDelay
+        : revStepDelay
         
         // Calculating Short-Delays
         let shortDelay = baseDelay > 0 ? baseDelay - 50_000_000 : 0
@@ -148,7 +149,7 @@ extension AnimationViewModel {
         case .isTriple:
             return tripleShortDelay
         default:
-            return animationControl.isForward || animationControl.isBackward
+            return animationControl.direction == .forward || animationControl.direction == .backward
             ? shortDelay
             : baseDelay
         }

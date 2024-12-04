@@ -7,12 +7,17 @@
 
 import SwiftUI
 
-struct Speed: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
 
-#Preview {
-    Speed()
+extension AnimationControl {
+    enum Speed {
+        case normal
+        case isDouble
+        case isTriple
+    }
+    
+    enum Direction {
+        case forward
+        case backward
+        case normal
+    }
 }

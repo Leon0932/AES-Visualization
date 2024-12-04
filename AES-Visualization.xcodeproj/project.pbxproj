@@ -51,6 +51,7 @@
 		C34310112C9373DA0004F4C7 /* AnimationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34310102C9373DA0004F4C7 /* AnimationViewModel.swift */; };
 		C34310132C948AA10004F4C7 /* OperationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34310122C948AA10004F4C7 /* OperationDetails.swift */; };
 		C34310152C948AB10004F4C7 /* AnimationControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34310142C948AB10004F4C7 /* AnimationControl.swift */; };
+		C346320B2D011CC600149FE3 /* AnimationControlEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C346320A2D011CC600149FE3 /* AnimationControlEnums.swift */; };
 		C34A85F82CDFBF7000CF3BAE /* StorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34A85F72CDFBF7000CF3BAE /* StorageKeys.swift */; };
 		C351F31F2C8C605D000890AF /* AppScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C351F31E2C8C605D000890AF /* AppScheme.swift */; };
 		C35F80262CAAA40F00C54393 /* CipherRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35F80252CAAA40F00C54393 /* CipherRound.swift */; };
@@ -154,6 +155,7 @@
 		C34310102C9373DA0004F4C7 /* AnimationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewModel.swift; sourceTree = "<group>"; };
 		C34310122C948AA10004F4C7 /* OperationDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDetails.swift; sourceTree = "<group>"; };
 		C34310142C948AB10004F4C7 /* AnimationControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationControl.swift; sourceTree = "<group>"; };
+		C346320A2D011CC600149FE3 /* AnimationControlEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationControlEnums.swift; sourceTree = "<group>"; };
 		C34A85F72CDFBF7000CF3BAE /* StorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageKeys.swift; sourceTree = "<group>"; };
 		C351F31E2C8C605D000890AF /* AppScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScheme.swift; sourceTree = "<group>"; };
 		C35F80252CAAA40F00C54393 /* CipherRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CipherRound.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				C38AD2B52CB747E900001702 /* ValueFormat.swift */,
 				C3A0F4AF2CDBF98400C0C9DE /* SettingsConfigurations.swift */,
 				C34A85F72CDFBF7000CF3BAE /* StorageKeys.swift */,
+				C346320A2D011CC600149FE3 /* AnimationControlEnums.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				C31E69BD2C8721B900230D22 /* ColumnView.swift in Sources */,
 				C3E1F2C22C7B6EE80030B994 /* KeyExpansionViewModel.swift in Sources */,
 				C33A3C2C2CCBE676004CF720 /* HighlightEffectModifier.swift in Sources */,
+				C346320B2D011CC600149FE3 /* AnimationControlEnums.swift in Sources */,
 				C38734FE2C6EAADF00E835DB /* ShiftRowsViewModel.swift in Sources */,
 				C33A3C222CCB8310004CF720 /* PressEffectModifier.swift in Sources */,
 				C38AD2B62CB747E900001702 /* ValueFormat.swift in Sources */,
