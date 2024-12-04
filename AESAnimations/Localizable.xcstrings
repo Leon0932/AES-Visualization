@@ -387,6 +387,16 @@
     "rCon[i / nK]" : {
       "shouldTranslate" : false
     },
+    "Rundenkonstante (RCON)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Round Constant (RCON)"
+          }
+        }
+      }
+    },
     "Rundennummer" : {
       "localizations" : {
         "en" : {
