@@ -102,7 +102,7 @@ struct KeyExpansionAnimationView: View {
     // MARK: - RCON View
     private var rconAnimationSection: some View {
         ZStack(alignment: .top) {
-            Text("RCON")
+            Text("Rundenkonstante (RCON)")
                 .font(.headline)
                 .offset(y: -25)
             
