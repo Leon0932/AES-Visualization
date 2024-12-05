@@ -373,7 +373,7 @@ class ProcessViewModel: AnimationViewModel {
         }
         
         let moveUp = AnimationStep(animation: {
-            await self.checkDoubleAnimation(for: 0)
+            await self.checkAnimationSpeed(for: 0)
             withAnimation(.linear) {
                 let number = Int(self.ballPosition)
                 let secondNumber = (number / 10) % 10
@@ -429,7 +429,7 @@ class ProcessViewModel: AnimationViewModel {
     ///   and the second array handles the reverse animation.
     func moveBallToLoop() -> ([AnimationStep], [AnimationStep]) {
         let moveRight = AnimationStep(animation: {
-            await self.checkDoubleAnimation(for: 150_000_000)
+            await self.checkAnimationSpeed(for: 150_000_000)
             withAnimation(.linear) {
                 if self.ballPositionX > 0 { return }
                 self.ballPositionX += 125
@@ -438,7 +438,7 @@ class ProcessViewModel: AnimationViewModel {
         }, delay: short)
         
         let moveUp = AnimationStep(animation: {
-            await self.checkDoubleAnimation(for: 150_000_000)
+            await self.checkAnimationSpeed(for: 150_000_000)
             if self.ballIsUp { return }
             withAnimation(.linear) {
                 self.ballPosition -= self.mainRoundDistance
@@ -447,7 +447,7 @@ class ProcessViewModel: AnimationViewModel {
         }, delay: short)
         
         let moveDown = AnimationStep(animation: {
-            await self.checkDoubleAnimation(for: 150_000_000)
+            await self.checkAnimationSpeed(for: 150_000_000)
             withAnimation(.linear) {
                 if !self.ballIsUp { return }
                 self.ballPosition += self.mainRoundDistance
@@ -456,7 +456,7 @@ class ProcessViewModel: AnimationViewModel {
         }, delay: short)
         
         let moveLeft = AnimationStep(animation: {
-            await self.checkDoubleAnimation(for: 150_000_000)
+            await self.checkAnimationSpeed(for: 150_000_000)
             withAnimation(.linear) {
                 if self.ballPositionX <= 0 { return }
                 self.ballPositionX -= 125
@@ -485,12 +485,12 @@ class ProcessViewModel: AnimationViewModel {
                   delay: UInt64,
                   doubleDelay: UInt64 = 0) -> (AnimationStep, AnimationStep) {
         let normalStep = AnimationStep(animation: {
-            await self.checkDoubleAnimation(for: doubleDelay)
+            await self.checkAnimationSpeed(for: doubleDelay)
             withAnimation(.linear) { self.ballPosition += positions }
         }, delay: delay)
         
         let reverseStep = AnimationStep(animation: {
-            await self.checkDoubleAnimation(for: doubleDelay)
+            await self.checkAnimationSpeed(for: doubleDelay)
             withAnimation(.linear) { self.ballPosition -= positions }
         }, delay: delay)
         

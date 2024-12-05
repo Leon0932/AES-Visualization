@@ -151,7 +151,7 @@ class AddRoundKeyViewModel: AnimationViewModel {
             }
         }
         
-        await checkDoubleAnimation()
+        await checkAnimationSpeed()
     }
     
     /// Resets the position of an element in the state / key during an animation
@@ -176,7 +176,7 @@ class AddRoundKeyViewModel: AnimationViewModel {
             }
         }
         
-        await checkDoubleAnimation()
+        await checkAnimationSpeed()
     }
     
     /// Changes the visibility of certain elements in the view during the animation.

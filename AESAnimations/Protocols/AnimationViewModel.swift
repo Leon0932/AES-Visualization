@@ -196,11 +196,11 @@ extension AnimationViewModel {
     /// Completes the animation and displays the final result.
     func completeAnimations() { cancelAndResetAnimation(state: result, showResult: 1.0) }
     
-    /// Checks if the `isDouble` flag in `animationControl` is set, waits for the specified duration,
+    /// Checks if the `.normal` flag in `animationControl` is not set, waits for the specified duration,
     /// and then executes the animation to ensure smoothness.
     ///
     /// - Parameter nanoseconds: The amount of time to wait before running the animation, in nanoseconds.
-    func checkDoubleAnimation(for nanoseconds: UInt64 = 400_000_000) async {
+    func checkAnimationSpeed(for nanoseconds: UInt64 = 400_000_000) async {
         if animationControl.speed != .normal {
             await sleep(for: nanoseconds)
         }

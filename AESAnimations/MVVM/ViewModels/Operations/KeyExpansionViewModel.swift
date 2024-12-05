@@ -154,7 +154,7 @@ class KeyExpansionViewModel: AnimationViewModel {
         var normalSteps = [
             AnimationStep { await self.assignValues(index: index) },
             AnimationStep(animation: {
-                await self.checkDoubleAnimation()
+                await self.checkAnimationSpeed()
                 self.startRCONAnimation = true
             }, delay: normal),
         ]
@@ -176,7 +176,7 @@ class KeyExpansionViewModel: AnimationViewModel {
         
         var reverseStartSteps = [
             AnimationStep(animation: {
-                await self.checkDoubleAnimation()
+                await self.checkAnimationSpeed()
                 self.startRCONAnimation = false
             }, delay: normal),
             AnimationStep(animation: {
@@ -599,7 +599,7 @@ class KeyExpansionViewModel: AnimationViewModel {
     /// - Parameter index: The current index used to retrieve values from the key array.
     @MainActor
     private func assignValues(index: Int) async {
-        await checkDoubleAnimation()
+        await checkAnimationSpeed()
         columnOne = roundKeys[index - nK]
         columnTwo = roundKeys[index - 1]
         columnResult = roundKeys[index]
@@ -615,7 +615,7 @@ class KeyExpansionViewModel: AnimationViewModel {
     @MainActor
     private func assignValuesForRotSub(index: Int) async {
         // For `isDouble` and clean animations
-        await checkDoubleAnimation()
+        await checkAnimationSpeed()
         
         columnOne = roundKeys[index - nK]
         columnTwo = keyExpRounds[index - nK].afterSubWord

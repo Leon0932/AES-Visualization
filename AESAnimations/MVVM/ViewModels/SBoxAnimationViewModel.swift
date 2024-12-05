@@ -80,7 +80,7 @@ class SBoxAnimationViewModel: AnimationViewModel {
     func kickOfAnimation(index: Int) -> ([AnimationStep], [AnimationStep]) {
         let normalSteps = [
             AnimationStep(animation: {
-                await self.checkDoubleAnimation()
+                await self.checkAnimationSpeed()
                 withAnimation { self.currentByte = Byte(index) }
             },
                           delay: short),
@@ -89,7 +89,7 @@ class SBoxAnimationViewModel: AnimationViewModel {
                           delay: short),
             
             AnimationStep(animation: {
-                await self.checkDoubleAnimation()
+                await self.checkAnimationSpeed()
                 withAnimation { self.currentMultInv = self.sBoxHistory[index].multInv }
             },
                           delay: short),
@@ -135,7 +135,7 @@ class SBoxAnimationViewModel: AnimationViewModel {
         for i in 0..<values.count {
             normalSteps.append(contentsOf: [
                 AnimationStep(animation: {
-                    await self.checkDoubleAnimation()
+                    await self.checkAnimationSpeed()
                     withAnimation { self.values[i] = valuesOfRound[i] }
                 },
                               delay: normal),
@@ -176,7 +176,7 @@ class SBoxAnimationViewModel: AnimationViewModel {
     func endAnimation(index: Int) -> ([AnimationStep], [AnimationStep]) {
         let normalSteps = [
             AnimationStep(animation: {
-                await self.checkDoubleAnimation()
+                await self.checkAnimationSpeed()
                 withAnimation {
                     self.resultSBox = self.sBoxHistory[index].result
                     self.indexOfSBox = Byte(index)
@@ -236,7 +236,7 @@ class SBoxAnimationViewModel: AnimationViewModel {
                           delay: short),
             
             AnimationStep(animation: {
-                await self.checkDoubleAnimation()
+                await self.checkAnimationSpeed()
                 withAnimation { self.changeValues(value: 1.0) } },
                           delay: normal)
         ]

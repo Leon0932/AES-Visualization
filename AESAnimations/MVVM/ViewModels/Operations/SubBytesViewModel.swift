@@ -316,7 +316,7 @@ class SubBytesViewModel: AnimationViewModel {
     ///   - y: An optional `CGFloat` representing the new y-coordinate of the cell. If nil, the y position remains unchanged.
     @MainActor
     private func changePosition(row: Int, col: Int, x: CGFloat? = nil, y: CGFloat? = nil) async {
-        await checkDoubleAnimation(for: self.short)
+        await checkAnimationSpeed(for: self.short)
         if Task.isCancelled { return }
         
         withAnimation {

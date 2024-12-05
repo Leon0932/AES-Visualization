@@ -151,7 +151,7 @@ class MixColumnsViewModel: AnimationViewModel {
             }
         }
         
-        await checkDoubleAnimation()
+        await checkAnimationSpeed()
     }
     
     // MARK: - Animation Control
