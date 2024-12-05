@@ -11,8 +11,8 @@ import SwiftUI
 extension AnimationControl {
     enum Speed {
         case normal
-        case isDouble
-        case isTriple
+        case double
+        case triple
     }
     
     enum Direction {

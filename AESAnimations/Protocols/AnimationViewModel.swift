@@ -144,9 +144,9 @@ extension AnimationViewModel {
         let tripleShortDelay = shortDelay / 3
 
         switch animationControl.speed {
-        case .isDouble:
+        case .double:
             return doubleShortDelay
-        case .isTriple:
+        case .triple:
             return tripleShortDelay
         default:
             return animationControl.direction == .forward || animationControl.direction == .backward

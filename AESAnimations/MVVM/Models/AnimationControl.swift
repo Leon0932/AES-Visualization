@@ -35,10 +35,10 @@ struct AnimationControl {
     mutating func updateSpeed() {
         switch speed {
         case .normal:
-            speed = .isDouble
-        case .isDouble:
-            speed = .isTriple
-        case .isTriple:
+            speed = .double
+        case .double:
+            speed = .triple
+        case .triple:
             speed = .normal
             direction = .normal
         }

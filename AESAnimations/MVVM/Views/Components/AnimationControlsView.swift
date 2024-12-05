@@ -138,7 +138,7 @@ struct AnimationControlsView: View {
     }
     
     private func getSpeedText(for speed: AnimationControl.Speed) -> String {
-        if speed == .isTriple {
+        if speed == .triple {
             return "3x"
         }
         
