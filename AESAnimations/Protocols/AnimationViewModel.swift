@@ -200,7 +200,7 @@ extension AnimationViewModel {
     /// and then executes the animation to ensure smoothness.
     ///
     /// - Parameter nanoseconds: The amount of time to wait before running the animation, in nanoseconds.
-    func checkDoubleAnimation(for nanoseconds: UInt64 = 250_000_000) async {
+    func checkDoubleAnimation(for nanoseconds: UInt64 = 400_000_000) async {
         if animationControl.speed != .normal {
             await sleep(for: nanoseconds)
         }
