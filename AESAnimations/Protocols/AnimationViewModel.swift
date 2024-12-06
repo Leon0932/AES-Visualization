@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Protocol defining requirements for a view model that manages animations.
 protocol AnimationViewModel: ObservableObject {
     /// View Variables
     var operationDetails: OperationDetails { get }
@@ -23,6 +24,7 @@ protocol AnimationViewModel: ObservableObject {
     
 }
 
+/// Implementation of animation control logic.
 extension AnimationViewModel {
     // Standard values for the animation duration
     /// 1 second
@@ -31,6 +33,7 @@ extension AnimationViewModel {
     /// 0.5 seconds
     var short: UInt64 { return 500_000_000 }
     
+    /// Flag to start the animation after appearing the view
     var animationOnAppearKey: Bool {
         UserDefaults.standard.bool(forKey: StorageKeys.startAnimationOnAppear.key)
     }
@@ -65,6 +68,16 @@ extension AnimationViewModel {
         animationData.animationSteps
     }
     
+    /// Processes the animation steps based on the current animation control state.
+    ///
+    /// This function handles the animation flow, determining the direction (`forward` or `backward`), applying delays between steps,
+    /// and respecting pause and control triggers (e.g., "plus" or "minus" actions).
+    ///
+    /// The function performs the following tasks:
+    /// - Executes animations sequentially in the specified direction.
+    /// - Handles delays between animations based on the index.
+    /// - Responds to user controls such as reversing direction or triggering specific steps.
+    /// - Pauses and resumes animation processing as needed.
     @MainActor
     func processAnimations() async {
         /// For reverse animations, triggered after clicking the `Reversed` button
@@ -130,7 +143,14 @@ extension AnimationViewModel {
         
         handleAnimationState(isDone: true)
     }
-
+    
+    /// Calculates the delay for the current animation step based on the animation control state.
+    ///
+    /// This function determines the delay for the specified animation step by checking its associated delay value
+    /// and adjusting it according to the current `speed` setting (`normal`, `double`, or `triple`) and the animation direction.
+    ///
+    /// - Parameter index: The index of the current animation step.
+    /// - Returns: The calculated delay in nanoseconds, considering the animation speed and direction.
     private func calculateDelay(index: Int) -> UInt64 {
         let stepDelay = animationSteps[index].delay
         let revStepDelay = reverseAnimationSteps[index].delay
@@ -155,6 +175,13 @@ extension AnimationViewModel {
         }
     }
     
+    /// Updates the animation state based on the provided flag.
+    ///
+    /// This function sets the animation state by modifying the `animationControl` properties.
+    /// If the `isDone` parameter is `true`, it marks the animation as complete and resets relevant flags.
+    /// Otherwise, it prepares the animation to start or resume by ensuring it is not paused.
+    ///
+    /// - Parameter isDone: A flag indicating whether the animation is complete (`true`) or ongoing (`false`).
     private func handleAnimationState(isDone: Bool) {
         withAnimation {
             animationControl.isDone = isDone
@@ -163,6 +190,7 @@ extension AnimationViewModel {
         }
     }
     
+    /// Checks the Flag
     @MainActor
     func handleAnimationStart() {
         if animationOnAppearKey || animationControl.animationHasStarted {
@@ -170,6 +198,11 @@ extension AnimationViewModel {
         }
     }
     
+    /// Initiates the animation process by preparing and starting the animation task.
+    ///
+    /// This function creates a new animation task that begins with a short delay and then proceeds
+    /// to execute the animation steps by calling `processAnimations()`.
+    ///
     @MainActor
     func startAnimations() {
         animationData.animationTask = Task {
@@ -179,6 +212,14 @@ extension AnimationViewModel {
     }
     
     // MARK: - Helper Functions
+    /// Cancels or completes an animation and resets its state.
+    ///
+    /// This function cancels any ongoing animation task, resets the animation state, and optionally displays the result.
+    /// It ensures the animation flags are reset and marks the animation as complete.
+    ///
+    /// - Parameters:
+    ///   - state: The state to reset the animation to.
+    ///   - showResult: A flag indicating whether to display the results after resetting.
     private func cancelAndResetAnimation(state: [[Byte]], showResult: Double) {
         animationData.animationTask?.cancel()
         Task { await sleep(for: normal) }
@@ -196,10 +237,12 @@ extension AnimationViewModel {
     /// Completes the animation and displays the final result.
     func completeAnimations() { cancelAndResetAnimation(state: result, showResult: 1.0) }
     
-    /// Checks if the `.normal` flag in `animationControl` is not set, waits for the specified duration,
-    /// and then executes the animation to ensure smoothness.
+    /// Ensures smooth animation execution by checking the animation speed and applying a delay if necessary.
     ///
-    /// - Parameter nanoseconds: The amount of time to wait before running the animation, in nanoseconds.
+    /// This function checks if the animation speed in `animationControl` is set to a value other than `.normal`.
+    /// If so, it waits for the specified duration before proceeding, allowing smoother transitions during animations.
+    ///
+    /// - Parameter nanoseconds: The duration to wait before executing the animation, in nanoseconds. Defaults to `400_000_000`.
     func checkAnimationSpeed(for nanoseconds: UInt64 = 400_000_000) async {
         if animationControl.speed != .normal {
             await sleep(for: nanoseconds)
