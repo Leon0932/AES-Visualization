@@ -190,7 +190,7 @@ extension AnimationViewModel {
         }
     }
     
-    /// Checks the Flag
+    /// Handles the start of the animation by checking the appropriate flags.
     @MainActor
     func handleAnimationStart() {
         if animationOnAppearKey || animationControl.animationHasStarted {
@@ -199,10 +199,6 @@ extension AnimationViewModel {
     }
     
     /// Initiates the animation process by preparing and starting the animation task.
-    ///
-    /// This function creates a new animation task that begins with a short delay and then proceeds
-    /// to execute the animation steps by calling `processAnimations()`.
-    ///
     @MainActor
     func startAnimations() {
         animationData.animationTask = Task {
