@@ -59,8 +59,8 @@ struct MainView: View {
     // MARK: - State and Key View
     private var matrixViews: some View {
         HStack(spacing: 40) {
-            EditableMatrixView(title: "Zustand", icon: "rectangle.split.3x3", matrix: $viewModel.stateMatrix)
-            EditableMatrixView(title: "Schlüssel", icon: "key", matrix: $viewModel.keyMatrix)
+            EditableMatrix(title: "Zustand", icon: "rectangle.split.3x3", matrix: $viewModel.stateMatrix)
+            EditableMatrix(title: "Schlüssel", icon: "key", matrix: $viewModel.keyMatrix)
         }
     }
     

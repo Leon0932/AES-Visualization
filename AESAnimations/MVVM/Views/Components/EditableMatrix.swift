@@ -1,5 +1,5 @@
 //
-//  EditableMatrixView.swift
+//  EditableMatrix.swift
 //  AESAnimations
 //
 //  Created by Leon Chamoun on 28.07.24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Security
 
-struct EditableMatrixView: View {
+struct EditableMatrix: View {
     // MARK: - Properties
     let title: LocalizedStringKey
     let icon: String

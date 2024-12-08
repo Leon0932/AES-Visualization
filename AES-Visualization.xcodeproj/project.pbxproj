@@ -30,7 +30,7 @@
 		C329B5222CDAD63300AD7E2F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */; };
 		C329DF762CDE529400959851 /* HSAalenLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329DF752CDE529400959851 /* HSAalenLogo.swift */; };
 		C33194E02CB1AF010036F830 /* ProcessPhaseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */; };
-		C339401A2C56D76A008802BC /* EditableMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33940192C56D76A008802BC /* EditableMatrixView.swift */; };
+		C339401A2C56D76A008802BC /* EditableMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33940192C56D76A008802BC /* EditableMatrix.swift */; };
 		C339401D2C56D7C6008802BC /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C339401C2C56D7C6008802BC /* DataTypes.swift */; };
 		C339401F2C56D7DB008802BC /* AESMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C339401E2C56D7DB008802BC /* AESMath.swift */; };
 		C33940212C56D839008802BC /* AESKeySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33940202C56D839008802BC /* AESKeySchedule.swift */; };
@@ -134,7 +134,7 @@
 		C329DF752CDE529400959851 /* HSAalenLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAalenLogo.swift; sourceTree = "<group>"; };
 		C33151192CA03AA40047B513 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessPhaseAnimation.swift; sourceTree = "<group>"; };
-		C33940192C56D76A008802BC /* EditableMatrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableMatrixView.swift; sourceTree = "<group>"; };
+		C33940192C56D76A008802BC /* EditableMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableMatrix.swift; sourceTree = "<group>"; };
 		C339401C2C56D7C6008802BC /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
 		C339401E2C56D7DB008802BC /* AESMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESMath.swift; sourceTree = "<group>"; };
 		C33940202C56D839008802BC /* AESKeySchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESKeySchedule.swift; sourceTree = "<group>"; };
@@ -391,7 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				C33A3C1C2CCB7FF1004CF720 /* Buttons */,
-				C33940192C56D76A008802BC /* EditableMatrixView.swift */,
+				C33940192C56D76A008802BC /* EditableMatrix.swift */,
 				C38734E32C692E7600E835DB /* SBoxView.swift */,
 				C38734E82C692FA100E835DB /* CellView.swift */,
 				C33E45072C7A9B2100F38593 /* OperationSymbolView.swift */,
@@ -663,7 +663,7 @@
 				C3C476D72C593C11009D718D /* ProcessView.swift in Sources */,
 				C33A3C302CCD93D4004CF720 /* SettingsViewModel.swift in Sources */,
 				C38734DA2C68DAD000E835DB /* PrimaryColor.swift in Sources */,
-				C339401A2C56D76A008802BC /* EditableMatrixView.swift in Sources */,
+				C339401A2C56D76A008802BC /* EditableMatrix.swift in Sources */,
 				C3E1F2BD2C7B347F0030B994 /* Position.swift in Sources */,
 				C310C9272C72548800E91AB7 /* AddRoundKeyAnimationView.swift in Sources */,
 				C38734E42C692E7600E835DB /* SBoxView.swift in Sources */,
