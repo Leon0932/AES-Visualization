@@ -32,7 +32,7 @@ class MainViewModel: ObservableObject {
         let keySched = AESKeySchedule()
         
         let cipher = AESCipher(keySchedule: keySched, state: state)
-        cipher.set(input: stateMatrix.data.hexStringTo2DByteArray(),
+        cipher.set(input: stateMatrix.data.to2DByteArray(),
                    key: keyMatrix.data.toByteArray())
 
         isDecryption ? cipher.decryptState() : cipher.encryptState()

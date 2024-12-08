@@ -129,7 +129,7 @@ final class ExtensionTests: XCTestCase {
             [0x12, 0x13, 0x14, 0x15],
         ]
         
-        let output = data.hexStringTo2DByteArray()
+        let output = data.to2DByteArray()
         
         XCTAssertEqual(output, expectedOutput)
     }

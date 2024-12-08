@@ -137,7 +137,7 @@ extension Array where Element == [String] {
     /// as a hexadecimal string and converting it to a byte. The conversion follows in row order
     ///
     /// - Returns: A 2D array of bytes derived from the hexadecimal string values in the matrix.
-    func hexStringTo2DByteArray() -> [[Byte]] {
+    func to2DByteArray() -> [[Byte]] {
         var byteArray: [[Byte]] = []
         
         for row in self {
