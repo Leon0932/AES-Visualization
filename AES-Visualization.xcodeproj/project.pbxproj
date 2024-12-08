@@ -85,7 +85,7 @@
 		C3BDC1412CB2BDE800847363 /* OpacityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDC1402CB2BDE800847363 /* OpacityType.swift */; };
 		C3BDC1432CB32F5700847363 /* NavigationBackButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDC1422CB32F5700847363 /* NavigationBackButtonModifier.swift */; };
 		C3C476D72C593C11009D718D /* ProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C476D62C593C11009D718D /* ProcessView.swift */; };
-		C3C476D92C595876009D718D /* AESKeySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C476D82C595876009D718D /* AESKeySize.swift */; };
+		C3C476D92C595876009D718D /* AESConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C476D82C595876009D718D /* AESConfiguration.swift */; };
 		C3C476DB2C5958FC009D718D /* AESConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C476DA2C5958FC009D718D /* AESConstants.swift */; };
 		C3C476DD2C595E45009D718D /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C476DC2C595E45009D718D /* KeyView.swift */; };
 		C3CD1D3F2CA9D732006C9804 /* ShiftRowRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CD1D3E2CA9D732006C9804 /* ShiftRowRound.swift */; };
@@ -191,7 +191,7 @@
 		C3BDC1402CB2BDE800847363 /* OpacityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityType.swift; sourceTree = "<group>"; };
 		C3BDC1422CB32F5700847363 /* NavigationBackButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackButtonModifier.swift; sourceTree = "<group>"; };
 		C3C476D62C593C11009D718D /* ProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessView.swift; sourceTree = "<group>"; };
-		C3C476D82C595876009D718D /* AESKeySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESKeySize.swift; sourceTree = "<group>"; };
+		C3C476D82C595876009D718D /* AESConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESConfiguration.swift; sourceTree = "<group>"; };
 		C3C476DA2C5958FC009D718D /* AESConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESConstants.swift; sourceTree = "<group>"; };
 		C3C476DC2C595E45009D718D /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		C3CD1D3E2CA9D732006C9804 /* ShiftRowRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftRowRound.swift; sourceTree = "<group>"; };
@@ -249,7 +249,7 @@
 		C33940162C56D735008802BC /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				C3C476D82C595876009D718D /* AESKeySize.swift */,
+				C3C476D82C595876009D718D /* AESConfiguration.swift */,
 				C3C476DA2C5958FC009D718D /* AESConstants.swift */,
 				C38734D92C68DAD000E835DB /* PrimaryColor.swift */,
 				C3E1F2C32C7B6FF80030B994 /* OperationNames.swift */,
@@ -647,7 +647,7 @@
 				C33A3C192CCA97CD004CF720 /* PrimaryButtonStyle.swift in Sources */,
 				C33A3C2A2CCB8EA7004CF720 /* CustomLabelView.swift in Sources */,
 				C34A85F82CDFBF7000CF3BAE /* StorageKeys.swift in Sources */,
-				C3C476D92C595876009D718D /* AESKeySize.swift in Sources */,
+				C3C476D92C595876009D718D /* AESConfiguration.swift in Sources */,
 				C31E69C82C88BF7400230D22 /* AnimationStep.swift in Sources */,
 				C3E1F2C02C7B6ECE0030B994 /* KeyExpansionAnimationView.swift in Sources */,
 				C32554B42CFB38EA00CDFC8B /* SafariWebView.swift in Sources */,

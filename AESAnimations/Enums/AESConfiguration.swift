@@ -1,5 +1,5 @@
 //
-//  AESKeySize.swift
+//  AESConfiguration.swift
 //  AESAnimations
 //
 //  Created by Leon Chamoun on 30.07.24.
