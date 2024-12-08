@@ -120,6 +120,15 @@ struct SBoxView: View {
     private func checkOpacity() -> Bool {
         opacityOfValues.contains { $0.contains { $0 == 1.0 } }
     }
+    
+    private func boxSizeForiPad() -> CGFloat {
+        #if os(iOS)
+        return isPad13Size() ? 40 : 35
+        #else
+        return 37
+        #endif
+    }
+    
 }
 
 

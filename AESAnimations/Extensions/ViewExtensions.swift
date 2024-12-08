@@ -8,14 +8,6 @@
 import SwiftUI
 
 extension View {
-    func boxSizeForiPad() -> CGFloat {
-        #if os(iOS)
-        return isPad13Size() ? 40 : 35
-        #else
-        return 37
-        #endif
-    }
-    
     #if os(iOS)
     func isPad13Size() -> Bool {
         let screenWidth = UIScreen.main.bounds.width
@@ -28,7 +20,6 @@ extension View {
         return false
     }
     #endif
-    
     
     func closeButton(action: @escaping () -> Void) -> some ToolbarContent {
         ToolbarItem(placement: {
