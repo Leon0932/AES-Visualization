@@ -8,12 +8,15 @@
 import SwiftUI
 
 extension Color {
+    // Gray colors
     static let ultraLightGray = Color.gray.opacity(0.1)
     static let lightGray = Color.gray.opacity(0.2)
     
+    // Light / Dark Mode Colors for Mac
     static let lightModeMac = Color(red: 0.92, green: 0.92, blue: 0.92)
     static let darkModeMac = Color(red: 0.15, green: 0.15, blue: 0.15)
     
+    // Color for every byte (00 - FF)
     static let byteColors: [Byte: Color] = [
         0x00: Color(red: 0.32, green: 0.32, blue: 0.32),
         0x01: Color(red: 0.004, green: 0.498, blue: 0.498),
@@ -273,6 +276,7 @@ extension Color {
         0xFF: Color(red: 0, green: 0, blue: 1.0)
     ]
     
+    // Colors with modified opacity
     static let reducedAccentColor = Color.accentColor.opacity(0.3)
     
     static func reducedByteColor(_ byte: Byte, to value: Double = 0.3) -> Color {
