@@ -9,7 +9,19 @@ import SwiftUI
 
 struct WarningView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .center, spacing: 50) {
+            
+            VStack(spacing: 8) {
+                Image(systemName: "exclamationmark.circle.fill")
+                Text("Warnung")
+            }
+            .font(.system(size: 75, weight: .bold))
+            .foregroundStyle(Color.red)
+            
+            
+            Text("Diese App ist NICHT für iPad Mini verfügbar.")
+                .font(.system(size: 40))
+        }
     }
 }
 
