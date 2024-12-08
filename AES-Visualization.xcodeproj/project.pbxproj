@@ -56,7 +56,6 @@
 		C351F31F2C8C605D000890AF /* AppScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C351F31E2C8C605D000890AF /* AppScheme.swift */; };
 		C35F80262CAAA40F00C54393 /* CipherRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35F80252CAAA40F00C54393 /* CipherRound.swift */; };
 		C36566362C61F6BD007A4A1E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36566352C61F6BD007A4A1E /* SettingsView.swift */; };
-		C3709D232CAEEBCB00BBFB80 /* RoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3709D222CAEEBCB00BBFB80 /* RoundType.swift */; };
 		C37BA07F2C397D5800C87BB7 /* AESAnimationsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BA07E2C397D5800C87BB7 /* AESAnimationsApp.swift */; };
 		C37BA0812C397D5800C87BB7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BA0802C397D5800C87BB7 /* MainView.swift */; };
 		C37BA0832C397D5900C87BB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C37BA0822C397D5900C87BB7 /* Assets.xcassets */; };
@@ -160,7 +159,6 @@
 		C351F31E2C8C605D000890AF /* AppScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScheme.swift; sourceTree = "<group>"; };
 		C35F80252CAAA40F00C54393 /* CipherRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CipherRound.swift; sourceTree = "<group>"; };
 		C36566352C61F6BD007A4A1E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		C3709D222CAEEBCB00BBFB80 /* RoundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundType.swift; sourceTree = "<group>"; };
 		C37BA07B2C397D5800C87BB7 /* AES-Visualization.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AES-Visualization.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C37BA07E2C397D5800C87BB7 /* AESAnimationsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESAnimationsApp.swift; sourceTree = "<group>"; };
 		C37BA0802C397D5800C87BB7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -255,7 +253,6 @@
 				C38734D92C68DAD000E835DB /* PrimaryColor.swift */,
 				C3E1F2C32C7B6FF80030B994 /* OperationNames.swift */,
 				C351F31E2C8C605D000890AF /* AppScheme.swift */,
-				C3709D222CAEEBCB00BBFB80 /* RoundType.swift */,
 				C3BDC13E2CB2BDCE00847363 /* PositionType.swift */,
 				C3BDC1402CB2BDE800847363 /* OpacityType.swift */,
 				C38AD2B52CB747E900001702 /* ValueFormat.swift */,
@@ -685,7 +682,6 @@
 				C33A3C2E2CCCE872004CF720 /* AppDelegate.swift in Sources */,
 				C310C9192C7152A200E91AB7 /* AnimationContainerView.swift in Sources */,
 				C33940252C56D875008802BC /* AESCipher.swift in Sources */,
-				C3709D232CAEEBCB00BBFB80 /* RoundType.swift in Sources */,
 				C38734F42C6E2BB500E835DB /* ArrayExtensions.swift in Sources */,
 				C33194E02CB1AF010036F830 /* ProcessPhaseAnimation.swift in Sources */,
 				C3CD1D3F2CA9D732006C9804 /* ShiftRowRound.swift in Sources */,
