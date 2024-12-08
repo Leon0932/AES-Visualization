@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Used for saved settings to eliminate the need for
+/// string-based case handling.
 enum StorageKeys: String {
     case appLanguage
     case colorScheme

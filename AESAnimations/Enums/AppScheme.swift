@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Appearance settings configurable through the app's settings.
 enum AppScheme: String {
     case dark = "Dark"
     case light = "Light"

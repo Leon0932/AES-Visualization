@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Constants for the AES architecture.
 enum AESConstants {
     static let generator: Byte = 3
     static let irreduciblePolynomial: Byte = 0x1b

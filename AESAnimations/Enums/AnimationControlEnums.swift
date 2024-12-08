@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-
+/// Controller for Animation Control, managing the speed and direction settings.
 extension AnimationControl {
     enum Speed {
         case normal

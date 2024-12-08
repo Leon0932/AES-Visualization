@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Determines whether to use one-dimensional or two-dimensional arrays of
+/// `Position` for Animation Views.
 enum PositionType {
     case oneD([Position])
     case twoD([[Position]])

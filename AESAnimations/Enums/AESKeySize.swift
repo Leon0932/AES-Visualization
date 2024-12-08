@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Represents the key size, number of rounds, and a descriptive label.
 enum AESKeySize: Int {
     case key128 = 4
     case key192 = 6
@@ -17,6 +18,14 @@ enum AESKeySize: Int {
         case .key128: return 10
         case .key192: return 12
         case .key256: return 14
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .key128: return "AES-128"
+        case .key192: return "AES-192"
+        case .key256: return "AES-256"
         }
     }
 }

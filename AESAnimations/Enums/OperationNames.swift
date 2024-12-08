@@ -8,6 +8,9 @@
 import Foundation
 import SwiftUI
 
+/// Navigation titles for the Animation Views.
+/// On macOS, language support is not integrated automatically, so titles may
+/// need to be manually set in both English and German.
 enum OperationNames: CustomStringConvertible {
     case shiftRows, subBytes, mixColumns, addRoundKey, keyExpansion, encryptionProcess, decryptionProcess, invSBox, sBox
     

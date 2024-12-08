@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Colors used throughout the app, configurable via the settings
 enum PrimaryColor: String, CaseIterable, Codable {
     case red, orange, green, blue, purple, cyanBlue, pink
 

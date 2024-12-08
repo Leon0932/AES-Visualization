@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Determines whether to display a single byte digit, two byte digits, or just a number.
 enum ValueFormat {
     case oneDigit
     case twoDigit
