@@ -20,23 +20,31 @@ struct AESAnimationsApp: App {
             content
         }
     }
-    
+
     var content: some View {
         Group {
+            #if os(iOS)
             if DeviceDetector.isiPadMini() {
                 WarningView()
             } else {
-                MainView()
-                    .environmentObject(settingsViewModel)
-                    .tint(settingsViewModel.primaryColor.color)
-                    .accentColor(settingsViewModel.primaryColor.color)
-                    #if os(macOS)
-                    .frame(width: 1300, height: 800)
-                    #endif
-                    .environment(\.locale, .init(identifier: settingsViewModel.appLanguage))
-                    .onChange(of: settingsViewModel.colorScheme) { settingsViewModel.updateScheme() }
-                    .onAppear(perform: settingsViewModel.updateScheme) // After restarting and opening the app the colorScheme doesn't get updated
+                mainContent
             }
+            #else
+            mainContent
+            #endif
         }
+    }
+
+    var mainContent: some View {
+        MainView()
+            .environmentObject(settingsViewModel)
+            .tint(settingsViewModel.primaryColor.color)
+            .accentColor(settingsViewModel.primaryColor.color)
+            #if os(macOS)
+            .frame(width: 1300, height: 800)
+            #endif
+            .environment(\.locale, .init(identifier: settingsViewModel.appLanguage))
+            .onChange(of: settingsViewModel.colorScheme) { settingsViewModel.updateScheme() }
+            .onAppear(perform: settingsViewModel.updateScheme) // Ensures color scheme is updated on app launch
     }
 }
