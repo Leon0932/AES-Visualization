@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the key size, number of rounds, and a descriptive label.
-enum AESKeySize: Int, CaseIterable, Identifiable {
+enum AESConfiguration: Int, CaseIterable, Identifiable {
     // Identifier for use in UI or other cases
     var id: String { self.label }
     

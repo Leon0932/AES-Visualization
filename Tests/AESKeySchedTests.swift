@@ -497,7 +497,7 @@ final class AESKeySchedTests: XCTestCase {
                        4,
                        "Wrong number of key size: Expected 4 but got \(keySched.getNk)")
         
-        let keySize = AESKeySize(rawValue: 4)!
+        let keySize = AESConfiguration(rawValue: 4)!
         XCTAssertEqual(keySched.getKeySize,
                        keySize,
                        "Wrong key size: Expected \(keySize) but got \(String(describing: keySched.getKeySize))")
@@ -1016,7 +1016,7 @@ final class AESKeySchedTests: XCTestCase {
                        6,
                        "Wrong number of key size: Expected 6 but got \(keySched.getNk)")
         
-        let keySize = AESKeySize(rawValue: 6)!
+        let keySize = AESConfiguration(rawValue: 6)!
         XCTAssertEqual(keySched.getKeySize,
                        keySize,
                        "Wrong key size: Expected \(keySize) but got \(String(describing: keySched.getKeySize))")
@@ -1599,7 +1599,7 @@ final class AESKeySchedTests: XCTestCase {
                        8,
                        "Wrong number of key size: Expected 8 but got \(keySched.getNk)")
         
-        let keySize = AESKeySize(rawValue: 8)!
+        let keySize = AESConfiguration(rawValue: 8)!
         XCTAssertEqual(keySched.getKeySize,
                        keySize,
                        "Wrong key size: Expected \(keySize) but got \(String(describing: keySched.getKeySize))")

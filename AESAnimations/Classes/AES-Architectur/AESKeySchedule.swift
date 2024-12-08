@@ -14,7 +14,7 @@ class AESKeySchedule {
     private var roundKeys: [[Byte]] = []
     private var keyExpRounds: [KeyExpansionRound] = []
     
-    private var keySize: AESKeySize? = nil
+    private var keySize: AESConfiguration? = nil
     private var nk: Int = 0
     private var nr: Int = 0
     private let nb: Int = 4
@@ -49,8 +49,8 @@ class AESKeySchedule {
     /// `AESKeySize` enum. If the key size is invalid, it returns `nil`.
     ///
     /// - Returns: An optional `AESKeySize` enum representing the key size, or `nil` if the key size is invalid.
-    var getKeySize: AESKeySize? {
-        if let keySize = AESKeySize(rawValue: nk) {
+    var getKeySize: AESConfiguration? {
+        if let keySize = AESConfiguration(rawValue: nk) {
             return keySize
         }
         
@@ -143,7 +143,7 @@ class AESKeySchedule {
         keySchedule = []
         keyExpRounds = []
         
-        keySize = AESKeySize(rawValue: key.count * 8 / 32)
+        keySize = AESConfiguration(rawValue: key.count * 8 / 32)
         
         guard let keySize else { return }
         

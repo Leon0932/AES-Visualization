@@ -50,7 +50,7 @@ class KeyExpansionViewModel: AnimationViewModel {
     @Published var rConstants: [[Byte]]
     @Published var highlightRCon: [Bool] = Array(repeating: false, count: 11)
     
-    @Published var keySize: AESKeySize
+    @Published var keySize: AESConfiguration
     @Published var animationText = ""
     
     // Neccssary for the View
@@ -79,7 +79,7 @@ class KeyExpansionViewModel: AnimationViewModel {
     init(roundKeys: [[Byte]],
          operationDetails: OperationDetails,
          keyExpRounds: [KeyExpansionRound],
-         keySize: AESKeySize) {
+         keySize: AESConfiguration) {
         // Calculating the size of the array, based on the Key Size
         arraySize = 4 * (keySize.rounds + 1)
         nK = keySize.rawValue
