@@ -8,25 +8,6 @@
 import SwiftUI
 
 extension View {
-    /// Determines if the current iPad is a 13-inch model.
-    ///
-    /// This function checks the screen size of the iPad to determine if it matches the dimensions of a 13-inch iPad Pro.
-    /// If the device is not an iPad or the screen size does not meet the 13-inch criteria, it returns `false`.
-    ///
-    /// - Returns: `true` if the device is an iPad and the screen size corresponds to a 13-inch iPad Pro, otherwise `false`.
-    #if os(iOS)
-    func isPad13Size() -> Bool {
-        let screenWidth = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height
-        let maxDimension = max(screenWidth, screenHeight)
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return maxDimension >= 1366 ? true : false
-        }
-        return false
-    }
-    #endif
-    
     /// Adds a "X" button to the toolbar.
     ///
     /// This function places a "X" button on the left side (`topBarLeading` is not avaible on macOS) of the toolbar area.

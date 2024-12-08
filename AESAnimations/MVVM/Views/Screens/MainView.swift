@@ -100,7 +100,7 @@ struct MainView: View {
         #if os(macOS)
         105
         #else
-        isPad13Size() ? 140 : 45
+        DeviceDetector.isPad13Size() ? 140 : 45
         #endif
     }
 }

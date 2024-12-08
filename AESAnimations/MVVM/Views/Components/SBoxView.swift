@@ -123,7 +123,7 @@ struct SBoxView: View {
     
     private func boxSizeForiPad() -> CGFloat {
         #if os(iOS)
-        return isPad13Size() ? 40 : 35
+        return DeviceDetector.isPad13Size() ? 40 : 35
         #else
         return 37
         #endif

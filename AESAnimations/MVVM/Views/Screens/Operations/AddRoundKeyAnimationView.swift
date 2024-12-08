@@ -20,7 +20,7 @@ struct AddRoundKeyAnimationView: View {
             }
         }
         #if os(iOS)
-        .onAppear { viewModel.isPad13Size = isPad13Size() }
+        .onAppear { viewModel.isPad13Size = DeviceDetector.isPad13Size() }
         #endif
     }
     
