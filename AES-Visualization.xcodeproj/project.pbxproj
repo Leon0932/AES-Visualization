@@ -30,7 +30,6 @@
 		C329B5222CDAD63300AD7E2F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */; };
 		C329DF762CDE529400959851 /* HSAalenLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329DF752CDE529400959851 /* HSAalenLogo.swift */; };
 		C33194E02CB1AF010036F830 /* ProcessPhaseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */; };
-		C33940182C56D746008802BC /* EncryptionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33940172C56D746008802BC /* EncryptionMode.swift */; };
 		C339401A2C56D76A008802BC /* EditableMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33940192C56D76A008802BC /* EditableMatrixView.swift */; };
 		C339401D2C56D7C6008802BC /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C339401C2C56D7C6008802BC /* DataTypes.swift */; };
 		C339401F2C56D7DB008802BC /* AESMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = C339401E2C56D7DB008802BC /* AESMath.swift */; };
@@ -133,7 +132,6 @@
 		C329DF752CDE529400959851 /* HSAalenLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAalenLogo.swift; sourceTree = "<group>"; };
 		C33151192CA03AA40047B513 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessPhaseAnimation.swift; sourceTree = "<group>"; };
-		C33940172C56D746008802BC /* EncryptionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionMode.swift; sourceTree = "<group>"; };
 		C33940192C56D76A008802BC /* EditableMatrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableMatrixView.swift; sourceTree = "<group>"; };
 		C339401C2C56D7C6008802BC /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
 		C339401E2C56D7DB008802BC /* AESMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESMath.swift; sourceTree = "<group>"; };
@@ -247,7 +245,6 @@
 		C33940162C56D735008802BC /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				C33940172C56D746008802BC /* EncryptionMode.swift */,
 				C3C476D82C595876009D718D /* AESKeySize.swift */,
 				C3C476DA2C5958FC009D718D /* AESConstants.swift */,
 				C38734D92C68DAD000E835DB /* PrimaryColor.swift */,
@@ -688,7 +685,6 @@
 				C34310132C948AA10004F4C7 /* OperationDetails.swift in Sources */,
 				C3C476DB2C5958FC009D718D /* AESConstants.swift in Sources */,
 				C38B28D32CB44FFA00FCE203 /* AuthorView.swift in Sources */,
-				C33940182C56D746008802BC /* EncryptionMode.swift in Sources */,
 				C3AEE3DB2CAB4653002F60CE /* ProcessViewModel.swift in Sources */,
 				C30E9AFE2CBECD1200DF5AE5 /* ByteExtension.swift in Sources */,
 				C38735002C6EABFA00E835DB /* KeyViewModel.swift in Sources */,

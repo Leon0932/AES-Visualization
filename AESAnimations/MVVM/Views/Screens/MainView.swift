@@ -50,7 +50,7 @@ struct MainView: View {
     private var modePicker: some View {
         VStack {
             Picker("", selection: $viewModel.selectedEncryptionMode) {
-                ForEach(EncryptionMode.allCases) { Text($0.rawValue).tag($0) }
+                ForEach(AESKeySize.allCases) { Text($0.label).tag($0) }
             }
             .pickerStyle(.segmented)
         }

@@ -12,7 +12,7 @@ class MainViewModel: ObservableObject {
     @AppStorage("showMainView") var showMainView: Bool = false
     @Published var showSafariView: Bool = false
     
-    @Published var selectedEncryptionMode: EncryptionMode = .aes128
+    @Published var selectedEncryptionMode: AESKeySize = .key128
     
     @Published var stateMatrix = Matrix(rows: 4, columns: 4)
     @Published var keyMatrix = Matrix(rows: 4, columns: 4)
@@ -21,9 +21,9 @@ class MainViewModel: ObservableObject {
     @Published var showAuthor = false
     
     // MARK: - View-Functions
-    func handlePickerChange(newValue: EncryptionMode) {
+    func handlePickerChange(newValue: AESKeySize) {
         withAnimation {
-            keyMatrix = Matrix(rows: 4, columns: newValue.keyMatrixColumns)
+            keyMatrix = Matrix(rows: 4, columns: newValue.rawValue)
         }
     }
     
