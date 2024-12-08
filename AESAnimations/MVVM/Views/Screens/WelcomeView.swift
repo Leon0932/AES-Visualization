@@ -39,7 +39,7 @@ struct WelcomeView: View {
         Spacer()
         
         HSAalenLogo()
-        MessageView(showSafariView: $showSafariView)
+        AuthorMessage(showSafariView: $showSafariView)
         
         Spacer()
         

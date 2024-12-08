@@ -17,7 +17,7 @@ struct AuthorView: View {
         SheetContainerView(navigationTitle: "Urheber der App") {
             VStack(alignment: .center, spacing: 25) {
                 HSAalenLogo(width: 400)
-                MessageView(showSafariView: $showSafariView)
+                AuthorMessage(showSafariView: $showSafariView)
             }
         }
     }

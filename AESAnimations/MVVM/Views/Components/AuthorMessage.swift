@@ -1,5 +1,5 @@
 //
-//  MessageView.swift
+//  AuthorMessage.swift
 //  AES-Visualization
 //
 //  Created by Leon Chamoun on 30.11.24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MessageView: View {
+struct AuthorMessage: View {
     // MARK: - Properties
     @Binding var showSafariView: Bool
     
