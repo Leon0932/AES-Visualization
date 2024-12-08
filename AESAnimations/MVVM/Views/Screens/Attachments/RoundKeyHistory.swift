@@ -12,7 +12,7 @@ struct RoundKeyHistory: View {
     let keyExpRounds: [KeyExpansionRound]
 
     let header: [(LocalizedStringKey, CGFloat)] = [
-        ("Index", 25),
+        ("#", 25),
         ("Start", 130),
         ("Nach RotWord", 130),
         ("Nach SubWord", 130),

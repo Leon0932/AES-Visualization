@@ -15,20 +15,20 @@ struct CipherHistoryView: View {
     var header: [(LocalizedStringKey, CGFloat)] {
         isDecryption ?
         [
-            ("Rundennummer", 100),
+            ("#", 25),
             ("Start der Runde / Nach InvSubBytes", 170),
-            ("Rundenschlüsselwert", 170),
+            ("Rundenschlüsselwert", 200),
             ("Nach AddRoundKey", 170),
             ("Nach InvMixColumns", 170),
             ("Nach InvShiftRows", 170),
         ]:
         [
-            ("Rundennummer", 100),
+            ("#", 25),
             ("Start der Runde / Nach AddRoundKey", 170),
             ("Nach SubBytes", 170),
             ("Nach ShiftRows", 170),
             ("Nach MixColumns", 170),
-            ("Rundenschlüsselwert", 170),
+            ("Rundenschlüsselwert", 200),
         ]
     }
     var cipherRowData: [[Any]] {

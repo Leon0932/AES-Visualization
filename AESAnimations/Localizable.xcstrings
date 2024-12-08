@@ -4,6 +4,9 @@
     "" : {
       "shouldTranslate" : false
     },
+    "#" : {
+      "shouldTranslate" : false
+    },
     "%lld" : {
       "shouldTranslate" : false
     },
@@ -398,6 +401,7 @@
       }
     },
     "Rundennummer" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

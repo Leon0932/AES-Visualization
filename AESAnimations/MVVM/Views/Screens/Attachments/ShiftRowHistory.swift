@@ -12,7 +12,7 @@ struct ShiftRowHistory: View {
     let shiftRowRounds: [ShiftRowRound]
     
     let header: [(LocalizedStringKey, CGFloat)] = [
-        ("Index", 100),
+        ("#", 100),
         ("Start", 150),
         ("Nach erster Verschiebung", 150),
         ("Nach zweiter Verschiebung", 150),
