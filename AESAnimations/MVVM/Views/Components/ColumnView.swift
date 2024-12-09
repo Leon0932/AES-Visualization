@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A helper view for Key Expansion, representing a single column with animation properties.
 struct ColumnView: View {
     // MARK: - Properties
     var column: [Byte]
@@ -19,7 +20,7 @@ struct ColumnView: View {
     var boxSize: CGFloat = 50
     var spacing: CGFloat = 10
     
-    // MARK: -
+    // MARK: - Body
     var body: some View {
         VStack(spacing: spacing) {
             ForEach(0..<4) { index in
@@ -36,6 +37,14 @@ struct ColumnView: View {
         .opacity(opacity)
     }
     
+    // MARK: - Helper Functions
+    
+    /// Helper function to determine the current color of a column.
+    ///
+    /// - Parameters:
+    ///   - value: The current byte value.
+    ///   - index: The current index.
+    /// - Returns: The determined color for the column.
     private func highlightColor(value: Byte, index: Int) -> Color {
         if let highlightColumn = highlightColumn {
             return highlightColumn ? .activeByteColor(value, to: 0.8) : .reducedByteColor(value)

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A helper view for displaying the app creator and the referenced implementation of AES.
 struct AuthorMessage: View {
     // MARK: - Properties
     @Binding var showSafariView: Bool

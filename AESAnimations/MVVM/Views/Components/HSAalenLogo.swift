@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct HSAalenLogo: View {
+    // MARK: - Properties
     @Environment(\.locale) var locale
     
     var width: CGFloat = 500
     var height: CGFloat = 150
     
+    // MARK: - Body
     var body: some View {
         Image(locale == Locale(identifier: "de") ? "hs-aalen-logo-de" : "hs-aalen-logo-en")
             .resizable()

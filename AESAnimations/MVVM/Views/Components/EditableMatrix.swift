@@ -8,6 +8,7 @@
 import SwiftUI
 import Security
 
+/// A matrix of input fields for byte values
 struct EditableMatrix: View {
     // MARK: - Properties
     let title: LocalizedStringKey
@@ -16,7 +17,7 @@ struct EditableMatrix: View {
     
     var boxSize: CGFloat = 80
     
-    // MARK: -
+    // MARK: - Body
     var body: some View {
         VStack(spacing: 16) {
             headerView
@@ -40,7 +41,6 @@ struct EditableMatrix: View {
                     matrix.fillData()
                 }
             }
-            
             
             Spacer()
             
@@ -83,8 +83,8 @@ struct EditableMatrix: View {
         }
     }
     
-    @ViewBuilder
     private func cellEditorView(row: Int, column: Int) -> some View {
+        // Validate Input
         let binding = Binding(
             get: { matrix.data[row][column] },
             set: { newValue in
@@ -95,7 +95,7 @@ struct EditableMatrix: View {
             }
         )
         
-        TextField("", text: binding)
+        return TextField("", text: binding)
             #if os(iOS)
             .padding(4)
             .keyboardType(.asciiCapable)

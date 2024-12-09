@@ -8,6 +8,9 @@
 import SwiftUI
 import SafariServices
 
+/// Code from the project work:
+/// `Development of a Modular iOS Learning App with Swift and SwiftUI`,
+/// authored by Leon Chamoun.
 #if os(iOS)
 // Source: https://sarunw.com/posts/sfsafariviewcontroller-in-swiftui
 /// A view that wraps the `SFSafariViewController` to display a web page within a SwiftUI view.

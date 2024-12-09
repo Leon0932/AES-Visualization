@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A navigation button that displays a text, an icon, or both
 struct CustomNavigationButton<Content: View, Style: ButtonStyle>: View {
     // MARK: - Properties
     var title: LocalizedStringKey? = nil
@@ -14,7 +15,7 @@ struct CustomNavigationButton<Content: View, Style: ButtonStyle>: View {
     let buttonStyle: Style
     let destination: () -> Content
     
-    // MARK: -
+    // MARK: - Body
     var body: some View {
         NavigationLink(destination: destination()) {
             CustomLabelView(title: title, icon: icon)

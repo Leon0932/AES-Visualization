@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A component for animating and displaying an operation.
 struct OperationSymbolView: View {
     // MARK: - Properties
     var text: String
@@ -16,7 +17,7 @@ struct OperationSymbolView: View {
     // MARK: -
     var body: some View {
         Text(text)
-            .font(.system(size: 34, weight: .bold))
+            .font(.system(size: 34, weight: .bold)) /// iOS and macOS don't share the same sizes in SwiftUI (`.title` for example)
             .padding(.leading, leadingPadding)
             .opacity(isVisible)
     }

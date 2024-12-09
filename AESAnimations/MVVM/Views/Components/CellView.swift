@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A view that displays a byte (or number) in a box format.
 struct CellView: View {
     // MARK: - Properties
     let value: Byte
@@ -16,7 +17,7 @@ struct CellView: View {
     
     var valueFormat: ValueFormat = .twoDigit
     
-    // MARK: -
+    // MARK: - Body
     var body: some View {
         Text(
             String(format: {

@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct CustomLabelView: View {
+    // MARK: - Properties
     let title: LocalizedStringKey?
     let icon: String?
     
+    // MARK: - Body
     var body: some View {
         HStack {
             if let icon {
