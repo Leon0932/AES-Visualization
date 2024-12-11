@@ -107,30 +107,7 @@ extension Array where Element == Byte {
     }
 }
 
-extension Array where Element == [String] {
-    /// Converts the matrix data into an array of bytes.
-    ///
-    /// This function flattens a 2D array, interpreting each cell's value as a hexadecimal string
-    /// and converting it to a byte. The conversion follows in column order.
-    ///
-    /// - Returns: An array of bytes, derived from the hexadecimal values in the matrix.
-    func toByteArray() -> [Byte] {
-        guard !self.isEmpty else { return [] }
-        
-        var result: [Byte] = []
-        
-        for column in 0..<self[0].count {
-            for row in 0..<self.count {
-                let hexString = self[row][column]
-                if let byte = Byte(hexString, radix: 16) {
-                    result.append(byte)
-                }
-            }
-        }
-        
-        return result
-    }
-    
+extension Array where Element == [String] {    
     /// Converts the matrix data into a 2D array of bytes.
     ///
     /// This function flattens a 2D array of hexadecimal string values, interpreting each cell's value

@@ -13,7 +13,7 @@ class AESCipher {
     let state: AESState
     
     private var input: [[Byte]] = []
-    private var key: [Byte] = []
+    private var key: [[Byte]] = []
     private var result: [[Byte]] = []
     private var cipherHistory: [CipherRound] = []
     
@@ -77,7 +77,7 @@ class AESCipher {
     /// This computed property returns the encryption or decryption key, represented as an array of `Byte` values.
     ///
     /// - Returns: An array of `Byte` values representing the key.
-    var getKey: [Byte] { key }
+    var getKey: [[Byte]] { key }
     
     // MARK: - Helper functions
     /// Sets the input and key for the cipher operation.
@@ -87,7 +87,7 @@ class AESCipher {
     /// - Parameters:
     ///   - input: An array of `Byte` values representing the new input for the cipher.
     ///   - key: An array of `Byte` values representing the new key for the cipher.
-    func set(input: [[Byte]], key: [Byte]) {
+    func set(input: [[Byte]], key: [[Byte]]) {
         self.input = input
         self.key = key
     }

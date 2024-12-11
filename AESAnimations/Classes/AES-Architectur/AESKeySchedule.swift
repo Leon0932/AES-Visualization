@@ -138,21 +138,25 @@ class AESKeySchedule {
     ///
     /// - Parameter key: A byte array representing the original encryption key. Its
     ///   size must be 16 bytes (128 bits), 24 bytes (192 bits), or 32 bytes (256 bits).
-    func keyExpansion(key: [Byte]) {
+    func keyExpansion(key: [[Byte]]) {
         roundKeys = []
         keySchedule = []
         keyExpRounds = []
         
-        keySize = AESConfiguration(rawValue: key.count * 8 / 32)
+        keySize = AESConfiguration(rawValue: key[0].count)
         
         guard let keySize else { return }
         
         nk = keySize.rawValue
         nr = keySize.rounds
         
-        for i in stride(from: 0, to: nk * 4, by: 4) {
-            let block = Array(key[i..<i+4])
-            keySchedule.append(block)
+        for i in 0..<nk {
+            var word: [Byte] = []
+            for j in 0..<4 {
+                word.append(key[j][i])
+            }
+            
+            keySchedule.append(word)
         }
         
         let range = nb * (nr + 1)
