@@ -54,7 +54,7 @@ struct KeyView: View {
             .fontWeight(.bold)
             
             HStack(spacing: 8) {
-                let key = viewModel.aesCipher.getKey.enumerated()
+                let key = viewModel.aesCipher.getKey.convertTo1DArray().enumerated()
                 
                 ForEach(Array(key), id: \.offset) { index, element in
                     Text(String(format: "%02X", element))
