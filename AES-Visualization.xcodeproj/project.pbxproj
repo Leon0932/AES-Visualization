@@ -391,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				C33A3C1C2CCB7FF1004CF720 /* Buttons */,
+				C33A3C292CCB8EA7004CF720 /* CustomLabelView.swift */,
 				C33940192C56D76A008802BC /* EditableMatrix.swift */,
 				C38734E32C692E7600E835DB /* SBoxView.swift */,
 				C38734E82C692FA100E835DB /* CellView.swift */,
@@ -398,7 +399,6 @@
 				C33E45092C7A9D0800F38593 /* StateView.swift */,
 				C31E69BC2C8721B900230D22 /* ColumnView.swift */,
 				C31E69C02C872C3300230D22 /* AnimationControlsView.swift */,
-				C33A3C292CCB8EA7004CF720 /* CustomLabelView.swift */,
 				C329DF752CDE529400959851 /* HSAalenLogo.swift */,
 				C32554B32CFB38EA00CDFC8B /* SafariWebView.swift */,
 				C32554B72CFB7C5100CDFC8B /* AuthorMessage.swift */,
