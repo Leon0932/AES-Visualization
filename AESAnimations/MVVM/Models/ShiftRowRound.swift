@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// A data structure for storing information about a single round
+/// in the ShiftRows step of the AES encryption or decryption process.
 struct ShiftRowRound: Identifiable, Equatable {
     let id: UUID = UUID()
     let index: Int

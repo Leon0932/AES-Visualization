@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// A data structure for storing information about a single round
+/// in the S-Box creation process of AES.
 struct SBoxRound: Identifiable, Equatable {
     let id: UUID = UUID()
     let index: Int

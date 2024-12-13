@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// A data structure for storing information about a single round
+/// in the AES Key Expansion process.
 struct KeyExpansionRound: Identifiable, Equatable {
     let id: UUID = UUID()
     let index: Int

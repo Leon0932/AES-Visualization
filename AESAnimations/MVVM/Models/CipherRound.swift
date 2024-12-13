@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// A data structure for storing information about a single cipher round
+/// in the AES encryption or decryption process.
 struct CipherRound: Identifiable, Equatable {
     let id: UUID = UUID()
     let index: Int

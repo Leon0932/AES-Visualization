@@ -7,7 +7,10 @@
 
 import SwiftUI
 
+/// A data structure for managing and controlling the current animation,
+/// including its progress and state.
 struct AnimationControl {
+    // MARK: - Properties
     var animationHasStarted = false
     var isDone = false
     var isPaused = false
@@ -18,9 +21,14 @@ struct AnimationControl {
     var plusTriggered = false
     var minusTriggered = false
     
-    // Continue / Pause animation
+    
+    // MARK: - Helper Functions
     mutating func changePause(to value: Bool) { isPaused = value }
-     
+    
+    
+    /// Utility functions to modify the animation's direction or adjust its speed
+    /// if the direction remains unchanged.
+    /// - Parameter direction: The current direction of the animation.
     mutating func handleAnimation(direction: Direction) {
         isPaused = false
         
