@@ -101,8 +101,7 @@ struct StateTitle: View {
     
     var body: some View {
         Text(title)
-            .font(.system(size: 17))
-            .fontWeight(.semibold)
+            .font(TextStyles.headline)
             .frame(maxHeight: 15)
     }
 }

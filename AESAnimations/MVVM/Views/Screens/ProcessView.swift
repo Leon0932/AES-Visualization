@@ -52,13 +52,13 @@ struct ProcessView: View {
                         CustomNavigationButton(title: viewModel.operationDetails.isInverseMode
                                                ? "Verschlüsseln"
                                                : "Entschlüsseln",
-                                               buttonStyle: .standard) {
+                                               buttonStyle: StandardButtonStyle(font: TextStyles.headline)) {
                             ProcessView(viewModel: viewModel.nextProcessViewModel)
                         }
                         
                     }
                 }
-                .frame(width: 230)
+                .frame(width: 230, height: 10)
                 
                 StateView(state: leftColumn ? viewModel.state : viewModel.currentState)
             }
@@ -94,8 +94,7 @@ struct ProcessView: View {
                              buttonStyle: StandardButtonStyle(font: .title2),
                              action: viewModel.toggleFullKey)
         }
-        .font(.system(size: 17))
-        .fontWeight(.semibold)
+        .font(TextStyles.headline)
         .frame(width: 230, height: 250, alignment: .topLeading)
     }
     

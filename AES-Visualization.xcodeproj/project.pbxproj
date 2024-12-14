@@ -81,6 +81,7 @@
 		C3A0F4B02CDBF98400C0C9DE /* SettingsConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A0F4AF2CDBF98400C0C9DE /* SettingsConfigurations.swift */; };
 		C3AEE3D72CAB19F4002F60CE /* CipherHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AEE3D62CAB19F4002F60CE /* CipherHistoryView.swift */; };
 		C3AEE3DB2CAB4653002F60CE /* ProcessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AEE3DA2CAB4653002F60CE /* ProcessViewModel.swift */; };
+		C3BB7C422D0DF167004CD800 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BB7C412D0DF167004CD800 /* TextStyles.swift */; };
 		C3BDC13F2CB2BDCE00847363 /* PositionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDC13E2CB2BDCE00847363 /* PositionType.swift */; };
 		C3BDC1412CB2BDE800847363 /* OpacityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDC1402CB2BDE800847363 /* OpacityType.swift */; };
 		C3BDC1432CB32F5700847363 /* NavigationBackButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDC1422CB32F5700847363 /* NavigationBackButtonModifier.swift */; };
@@ -187,6 +188,7 @@
 		C3A0F4AF2CDBF98400C0C9DE /* SettingsConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsConfigurations.swift; sourceTree = "<group>"; };
 		C3AEE3D62CAB19F4002F60CE /* CipherHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CipherHistoryView.swift; sourceTree = "<group>"; };
 		C3AEE3DA2CAB4653002F60CE /* ProcessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessViewModel.swift; sourceTree = "<group>"; };
+		C3BB7C412D0DF167004CD800 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 		C3BDC13E2CB2BDCE00847363 /* PositionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionType.swift; sourceTree = "<group>"; };
 		C3BDC1402CB2BDE800847363 /* OpacityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpacityType.swift; sourceTree = "<group>"; };
 		C3BDC1422CB32F5700847363 /* NavigationBackButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackButtonModifier.swift; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				C30E9B012CBF00D400DF5AE5 /* SBoxRound.swift */,
 				C38ED05E2CD191720023C4F9 /* AnimationData.swift */,
 				C362CBFF2D0625A9008A8954 /* DeviceDetector.swift */,
+				C3BB7C412D0DF167004CD800 /* TextStyles.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				C34310112C9373DA0004F4C7 /* AnimationViewModel.swift in Sources */,
 				C310C9152C714DED00E91AB7 /* MixColumnViewModel.swift in Sources */,
 				C35F80262CAAA40F00C54393 /* CipherRound.swift in Sources */,
+				C3BB7C422D0DF167004CD800 /* TextStyles.swift in Sources */,
 				C329DF762CDE529400959851 /* HSAalenLogo.swift in Sources */,
 				C31E69C12C872C3300230D22 /* AnimationControlsView.swift in Sources */,
 				C36566362C61F6BD007A4A1E /* SettingsView.swift in Sources */,
