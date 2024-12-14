@@ -13,7 +13,7 @@ final class SBoxAnimationViewModel: AnimationViewModel {
     var result: [[Byte]] = []
     var copyOfMatrix: [[Byte]] = []
     
-    var sBoxHistory: [SBoxRound] { AESMath.shared.getSBoxHistory }
+    var sBoxHistory: [SBoxRound] { AESMath.shared.sBoxHistory }
     
     @Published var opacityOfSBox: [[Double]] = Array.create2DArray(repeating: 0.0, rows: 16, cols: 16)
     

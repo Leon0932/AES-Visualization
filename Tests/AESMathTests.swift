@@ -220,7 +220,7 @@ final class AESMathTests: XCTestCase {
         ]
         
         for (index, expected) in expectedOutput.enumerated() {
-            let round = math.getSBoxHistory[index]
+            let round = math.sBoxHistory[index]
             XCTAssertEqual(expected.index,
                            round.index,
                            "Index \(index): Round does not match")

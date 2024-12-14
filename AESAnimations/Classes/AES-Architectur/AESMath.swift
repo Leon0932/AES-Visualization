@@ -16,7 +16,7 @@ final class AESMath {
     private var invTable: [Byte]
     private var sBox: [Byte]
     private var invSBox: [Byte]
-    private var sBoxHistory: [SBoxRound] = []
+    private(set) var sBoxHistory: [SBoxRound] = []
     
     // MARK: - Initializer
     private init() {
@@ -80,14 +80,6 @@ final class AESMath {
             invSBox[Int(y)] = Byte(i)
         }
     }
-    
-    // MARK: - Computed Properites
-    /// Returns the S-Box History
-    ///
-    /// This computed property provides the S-Box History based on `SBoxRound`
-    ///
-    /// - Returns: An array of `SBoxRound` objects representing the history of S-Box transformations.
-    var getSBoxHistory: [SBoxRound] { sBoxHistory }
     
     // MARK: - Helper functions
     /// Exponential function in GF(256)

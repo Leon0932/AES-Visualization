@@ -492,26 +492,26 @@ final class AESKeySchedTests: XCTestCase {
         ]
         
         keySched.keyExpansion(key: keyMatrix)
-        XCTAssertEqual(keySched.getNrOfRounds,
+        XCTAssertEqual(keySched.nr,
                        10,
-                       "Wrong number of rounds: Expected 10 but got \(keySched.getNrOfRounds)")
+                       "Wrong number of rounds: Expected 10 but got \(keySched.nr)")
         
-        XCTAssertEqual(keySched.getNk,
+        XCTAssertEqual(keySched.nk,
                        4,
-                       "Wrong number of key size: Expected 4 but got \(keySched.getNk)")
+                       "Wrong number of key size: Expected 4 but got \(keySched.nk)")
         
         let keySize = AESConfiguration(rawValue: 4)!
-        XCTAssertEqual(keySched.getKeySize,
+        XCTAssertEqual(keySched.keySize,
                        keySize,
-                       "Wrong key size: Expected \(keySize) but got \(String(describing: keySched.getKeySize))")
+                       "Wrong key size: Expected \(keySize) but got \(String(describing: keySched.keySize))")
 
-        let actualRoundKeys = keySched.getRoundKeys
+        let actualRoundKeys = keySched.roundKeys
         for (index, expectedKey) in expectedRoundKeys.enumerated() {
             let actualKey = actualRoundKeys[index]
             XCTAssertEqual(actualKey, expectedKey, "KeyExpansion failed: Round key at index \(index) does not match expected value.")
         }
         
-        let actualKeySchedule = keySched.getDetailedKeySchedule
+        let actualKeySchedule = keySched.keyExpRounds
         for (index, expectedRound) in expectedKeyExpHistory.enumerated() {
             let actualRound = actualKeySchedule[index]
             
@@ -1013,26 +1013,26 @@ final class AESKeySchedTests: XCTestCase {
         ]
         
         keySched.keyExpansion(key: keyMatrix)
-        XCTAssertEqual(keySched.getNrOfRounds,
+        XCTAssertEqual(keySched.nr,
                        12,
-                       "Wrong number of rounds: Expected 12 but got \(keySched.getNrOfRounds)")
+                       "Wrong number of rounds: Expected 12 but got \(keySched.nr)")
         
-        XCTAssertEqual(keySched.getNk,
+        XCTAssertEqual(keySched.nk,
                        6,
-                       "Wrong number of key size: Expected 6 but got \(keySched.getNk)")
+                       "Wrong number of key size: Expected 6 but got \(keySched.nk)")
         
         let keySize = AESConfiguration(rawValue: 6)!
-        XCTAssertEqual(keySched.getKeySize,
+        XCTAssertEqual(keySched.keySize,
                        keySize,
-                       "Wrong key size: Expected \(keySize) but got \(String(describing: keySched.getKeySize))")
+                       "Wrong key size: Expected \(keySize) but got \(String(describing: keySched.keySize))")
 
-        let actualRoundKeys = keySched.getRoundKeys
+        let actualRoundKeys = keySched.roundKeys
         for (index, expectedKey) in expectedRoundKeys.enumerated() {
             let actualKey = actualRoundKeys[index]
             XCTAssertEqual(actualKey, expectedKey, "KeyExpansion failed: Round key at index \(index) does not match expected value.")
         }
         
-        let actualKeySchedule = keySched.getDetailedKeySchedule
+        let actualKeySchedule = keySched.keyExpRounds
         for (index, expectedRound) in expectedKeyExpHistory.enumerated() {
             let actualRound = actualKeySchedule[index]
             
@@ -1597,26 +1597,26 @@ final class AESKeySchedTests: XCTestCase {
         
         
         keySched.keyExpansion(key: keyMatrix)
-        XCTAssertEqual(keySched.getNrOfRounds,
+        XCTAssertEqual(keySched.nr,
                        14,
-                       "Wrong number of rounds: Expected 14 but got \(keySched.getNrOfRounds)")
+                       "Wrong number of rounds: Expected 14 but got \(keySched.nr)")
         
-        XCTAssertEqual(keySched.getNk,
+        XCTAssertEqual(keySched.nk,
                        8,
-                       "Wrong number of key size: Expected 8 but got \(keySched.getNk)")
+                       "Wrong number of key size: Expected 8 but got \(keySched.nk)")
         
         let keySize = AESConfiguration(rawValue: 8)!
-        XCTAssertEqual(keySched.getKeySize,
+        XCTAssertEqual(keySched.keySize,
                        keySize,
-                       "Wrong key size: Expected \(keySize) but got \(String(describing: keySched.getKeySize))")
+                       "Wrong key size: Expected \(keySize) but got \(String(describing: keySched.keySize))")
 
-        let actualRoundKeys = keySched.getRoundKeys
+        let actualRoundKeys = keySched.roundKeys
         for (index, expectedKey) in expectedRoundKeys.enumerated() {
             let actualKey = actualRoundKeys[index]
             XCTAssertEqual(actualKey, expectedKey, "KeyExpansion failed: Round key at index \(index) does not match expected value.")
         }
         
-        let actualKeySchedule = keySched.getDetailedKeySchedule
+        let actualKeySchedule = keySched.keyExpRounds
         for (index, expectedRound) in expectedKeyExpHistory.enumerated() {
             let actualRound = actualKeySchedule[index]
             

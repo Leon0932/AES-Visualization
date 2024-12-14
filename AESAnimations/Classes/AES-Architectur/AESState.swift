@@ -9,7 +9,7 @@ import Foundation
 
 final class AESState {
     static let shared = AESState()
-    let math = AESMath.shared
+    private let math = AESMath.shared
     
     private init() {}
     

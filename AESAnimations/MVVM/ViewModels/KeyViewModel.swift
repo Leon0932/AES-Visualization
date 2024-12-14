@@ -19,16 +19,14 @@ final class KeyViewModel: ObservableObject {
     var aesCipher: AESCipher
     
     // MARK: - Computed Properties
-    var roundKeys: [[Byte]] { aesCipher.keySchedule.getRoundKeys }
+    var roundKeys: [[Byte]] { aesCipher.getRoundKeys }
     var keyExpansionViewModel: KeyExpansionViewModel {
-        let keySched = aesCipher.keySchedule
-        
-        return KeyExpansionViewModel(roundKeys: roundKeys.split2DArrayIntoChunks(chunkSize: 4),
-                                     operationDetails: OperationDetails(operationName: .keyExpansion,
-                                                                        isInverseMode: false,
-                                                                        currentRound: -1),
-                                     keyExpRounds: keySched.getDetailedKeySchedule,
-                                     keySize: keySched.getKeySize!)
+        KeyExpansionViewModel(roundKeys: roundKeys.split2DArrayIntoChunks(chunkSize: 4),
+                              operationDetails: OperationDetails(operationName: .keyExpansion,
+                                                                 isInverseMode: false,
+                                                                 currentRound: -1),
+                              keyExpRounds: aesCipher.getDetailedKeySchedule,
+                              keySize: aesCipher.getKeySize!)
     }
     
     // MARK: - Initializer

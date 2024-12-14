@@ -9,13 +9,13 @@ import Foundation
 
 final class AESCipher {
     // MARK: - Properties
-    let keySchedule = AESKeySchedule()
-    let state = AESState.shared
+    private let keySchedule = AESKeySchedule()
+    private let state = AESState.shared
     
-    private var input: [[Byte]] = []
-    private var key: [[Byte]] = []
-    private var result: [[Byte]] = []
-    private var cipherHistory: [CipherRound] = []
+    private(set) var input: [[Byte]] = []
+    private(set) var key: [[Byte]] = []
+    private(set) var result: [[Byte]] = []
+    private(set) var cipherHistory: [CipherRound] = []
     
     // MARK: - Initializer
     init(input: [[Byte]], key: [[Byte]]) {
@@ -23,61 +23,12 @@ final class AESCipher {
         self.key = key
     }
     
-    // MARK: - Computed Properties
-    /// Retrieves the number of rounds for the cipher based on the key size.
-    ///
-    /// This computed property returns the number of rounds used in the AES cipher,
-    /// which is determined by the key size (AES-128, AES-192, or AES-256).
-    ///
-    /// - Returns: An `Int` representing the number of rounds for the cipher.
-    var getNrOfRounds: Int { keySchedule.getNrOfRounds }
-
-    /// Retrieves the round keys used during the cipher operation.
-    ///
-    /// This computed property returns an array of round keys that are generated
-    /// during the key expansion process and used in each round of AES encryption or decryption.
-    ///
-    /// - Returns: A 2D array of `Byte` values representing the round keys.
-    var getRoundKeys: [[Byte]] { keySchedule.getRoundKeys }
-
-    /// Retrieves the size of the key used in the cipher operation.
-    ///
-    /// This computed property returns the size of the encryption key,
-    /// typically represented as the number of 32-bit words (e.g., 4 for AES-128, 6 for AES-192, 8 for AES-256).
-    ///
-    /// - Returns: An `Int` representing the size of the key in terms of 32-bit words.
-    var getNk: Int { keySchedule.getNk }
-
-    /// Retrieves the history of cipher rounds during the encryption or decryption process.
-    ///
-    /// This computed property returns the complete history of the cipher process,
-    /// with each round's transformation steps stored in a `CipherRound` object.
-    ///
-    /// - Returns: An array of `CipherRound` objects representing the history of the cipher rounds.
-    var getCipherHistory: [CipherRound] { cipherHistory }
-    
-    /// Retrieves the final result of the cipher operation.
-    ///
-    /// This computed property returns the computed result of the cipher process, stored as a 2D array of `Byte` values.
-    /// The result represents the current state of the encryption or decryption process.
-    ///
-    /// - Returns: A 2D array of `Byte` values representing the cipher result.
-    var getResult: [[Byte]] { result }
-    
-    /// Retrieves the input for the cipher operation.
-    ///
-    /// This computed property returns the input data used in the encryption or decryption process,
-    /// represented as an array of `Byte` values.
-    ///
-    /// - Returns: An array of `Byte` values representing the input.
-    var getInput: [[Byte]] { input }
-
-    /// Retrieves the key used for the cipher operation.
-    ///
-    /// This computed property returns the encryption or decryption key, represented as an array of `Byte` values.
-    ///
-    /// - Returns: An array of `Byte` values representing the key.
-    var getKey: [[Byte]] { key }
+    // MARK: - Computed Properties From `AESKeySchedule`
+    var getNrOfRounds: Int { keySchedule.nr }
+    var getRoundKeys: [[Byte]] { keySchedule.roundKeys }
+    var getNk: Int { keySchedule.nk }
+    var getDetailedKeySchedule: [KeyExpansionRound] { keySchedule.keyExpRounds }
+    var getKeySize: AESConfiguration? { keySchedule.keySize }
     
     // MARK: - Helper functions
     /// Expands the key and updates the result and cipher history.

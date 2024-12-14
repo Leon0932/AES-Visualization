@@ -9,14 +9,14 @@ import Foundation
 
 final class AESKeySchedule {
     // MARK: - Properties
-    let math = AESMath.shared
-    private var keySchedule: [[Byte]] = []
-    private var roundKeys: [[Byte]] = []
-    private var keyExpRounds: [KeyExpansionRound] = []
+    private let math = AESMath.shared
+    private(set) var keySchedule: [[Byte]] = []
+    private(set) var roundKeys: [[Byte]] = []
+    private(set) var keyExpRounds: [KeyExpansionRound] = []
     
-    private var keySize: AESConfiguration? = nil
-    private var nk: Int = 0
-    private var nr: Int = 0
+    private(set) var keySize: AESConfiguration? = nil
+    private(set) var nk: Int = 0
+    private(set) var nr: Int = 0
     private let nb: Int = 4
     private var rCon: [[Byte]]
     
@@ -24,57 +24,6 @@ final class AESKeySchedule {
     init() {
         rCon = AESConstants.rcon
     }
-    
-    // MARK: - Computed Properites
-    /// Returns the number of rounds in the encryption process.
-    ///
-    /// This computed property provides the total number of rounds used during
-    /// the encryption or decryption process, based on the key size.
-    ///
-    /// - Returns: An integer representing the number of rounds.
-    var getNrOfRounds: Int { return nr }
-    
-    /// Returns the size of the key in words.
-    ///
-    /// This computed property provides the number of words
-    /// in the key based on its size.
-    ///
-    /// - Returns: An integer representing the key size in words.
-    var getNk: Int { return nk }
-    
-    /// Returns the AES key size based on the current key value.
-    ///
-    /// This computed property checks if the key size corresponds to one of the
-    /// predefined AES key sizes (128, 192, or 256 bits) and returns the appropriate
-    /// `AESKeySize` enum. If the key size is invalid, it returns `nil`.
-    ///
-    /// - Returns: An optional `AESKeySize` enum representing the key size, or `nil` if the key size is invalid.
-    var getKeySize: AESConfiguration? {
-        if let keySize = AESConfiguration(rawValue: nk) {
-            return keySize
-        }
-        
-        return nil
-    }
-    
-    /// Returns the round keys generated during the key expansion process.
-    ///
-    /// This computed property provides the complete set of round keys that were derived
-    /// from the initial key through the key expansion process. Each round key
-    /// is represented as an array of bytes.
-    ///
-    /// - Returns: A 2D array of `Byte` objects, where each inner array represents
-    ///            a round key from the key expansion process.
-    var getRoundKeys: [[Byte]] { roundKeys }
-    
-    /// Returns the detailed history of the key expansion rounds.
-    ///
-    /// This computed property provides a list of all key expansion rounds that were generated
-    /// during the key scheduling process.
-    ///
-    /// - Returns: An array of `KeyExpansionRound` objects representing the detailed
-    ///            history of each round in the key expansion process.
-    var getDetailedKeySchedule: [KeyExpansionRound] { keyExpRounds }
     
     // MARK: - Helper functions
     /// Retrieves the round key for a specific round in the key expansion process.

@@ -99,10 +99,10 @@ final class ProcessViewModel: AnimationViewModel {
     }
     
     // Computed Properties
-    var state: [[Byte]] { aesCipher.getInput }
-    var key: [[Byte]] { aesCipher.getKey }
-    var result: [[Byte]] { aesCipher.getResult }
-    var cipherHistory: [CipherRound] { aesCipher.getCipherHistory }
+    var state: [[Byte]] { aesCipher.input }
+    var key: [[Byte]] { aesCipher.key }
+    var result: [[Byte]] { aesCipher.result }
+    var cipherHistory: [CipherRound] { aesCipher.cipherHistory }
     
     // MARK: - Initializer
     init(operationDetails: OperationDetails,
@@ -622,7 +622,7 @@ final class ProcessViewModel: AnimationViewModel {
     }
     
     // MARK: - Helper Functions
-    func createProcessViewModel() -> ProcessViewModel {
+    func createNextProcessViewModel() -> ProcessViewModel {
         let isInverseMode = operationDetails.isInverseMode
         let operationDetails = OperationDetails(operationName: isInverseMode ? .encryptionProcess : .decryptionProcess,
                                                 isInverseMode: isInverseMode ? false : true,
