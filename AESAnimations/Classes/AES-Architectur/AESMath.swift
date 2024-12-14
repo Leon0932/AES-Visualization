@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AESMath {
+final class AESMath {
     // MARK: - Properties
     static let shared = AESMath()
     

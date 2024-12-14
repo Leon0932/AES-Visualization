@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class ShiftRowsViewModel: AnimationViewModel {
+final class ShiftRowsViewModel: AnimationViewModel {
     // MARK: - Properties
     let operationDetails: OperationDetails
     

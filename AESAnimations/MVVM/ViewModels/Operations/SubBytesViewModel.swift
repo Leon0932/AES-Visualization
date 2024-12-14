@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class SubBytesViewModel: AnimationViewModel {
+final class SubBytesViewModel: AnimationViewModel {
     // MARK: - Properties
     let operationDetails: OperationDetails
     

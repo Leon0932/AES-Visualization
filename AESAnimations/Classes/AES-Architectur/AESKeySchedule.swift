@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AESKeySchedule {
+final class AESKeySchedule {
     // MARK: - Properties
     let math = AESMath.shared
     private var keySchedule: [[Byte]] = []

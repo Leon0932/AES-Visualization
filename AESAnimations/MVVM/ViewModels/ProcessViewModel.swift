@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class ProcessViewModel: AnimationViewModel {
+final class ProcessViewModel: AnimationViewModel {
     // MARK: - Properties
     let operationDetails: OperationDetails
     let aesState: AESState

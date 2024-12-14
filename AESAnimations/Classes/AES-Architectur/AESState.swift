@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AESState {
+final class AESState {
     let math = AESMath.shared
     
     /// Performs the AES SubBytes operation.

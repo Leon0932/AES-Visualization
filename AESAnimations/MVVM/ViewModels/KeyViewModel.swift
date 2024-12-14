@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class KeyViewModel: ObservableObject {
+final class KeyViewModel: ObservableObject {
     // MARK: - Properties
     @Published var animateKeys: [Bool] = []
     

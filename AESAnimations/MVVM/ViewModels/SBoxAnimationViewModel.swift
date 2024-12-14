@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class SBoxAnimationViewModel: AnimationViewModel {
+final class SBoxAnimationViewModel: AnimationViewModel {
     // MARK: - Properties
     var operationDetails: OperationDetails
     var result: [[Byte]] = []

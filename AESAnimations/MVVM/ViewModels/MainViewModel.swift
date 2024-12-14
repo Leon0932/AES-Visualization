@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class MainViewModel: ObservableObject {
+final class MainViewModel: ObservableObject {
     // MARK: - Properties
     @AppStorage("showMainView") var showMainView: Bool = false
     @Published var showSafariView: Bool = false

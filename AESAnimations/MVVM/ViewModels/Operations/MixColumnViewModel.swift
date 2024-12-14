@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class MixColumnsViewModel: AnimationViewModel {
+final class MixColumnsViewModel: AnimationViewModel {
     // MARK: - Properties
     let operationDetails: OperationDetails
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AESCipher {
+final class AESCipher {
     // MARK: - Properties
     let keySchedule: AESKeySchedule
     let state: AESState

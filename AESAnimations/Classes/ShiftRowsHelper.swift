@@ -10,7 +10,7 @@ import Foundation
 
 /// Helper class for `ShiftRowsViewModel` and
 /// `KeyExpansionViewModel (RotWordAnimation)`
-class ShiftRowsHelper {
+final class ShiftRowsHelper {
     // MARK: - Properties
     let boxSize: CGFloat
     let spacing: CGFloat

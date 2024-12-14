@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class AddRoundKeyViewModel: AnimationViewModel {
+final class AddRoundKeyViewModel: AnimationViewModel {
     // MARK: - Properties
     let operationDetails: OperationDetails
     

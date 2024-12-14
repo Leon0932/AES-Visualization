@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class KeyExpansionViewModel: AnimationViewModel {
+final class KeyExpansionViewModel: AnimationViewModel {
     // MARK: - Properties
     let operationDetails: OperationDetails
     
