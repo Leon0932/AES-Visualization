@@ -9,16 +9,12 @@ import XCTest
 @testable import AES_Visualization
 
 final class AESCipherTest: XCTestCase {
-    var cipher: AESCipher!
     
     override func setUpWithError() throws {
-        cipher = AESCipher(keySchedule: AESKeySchedule(),
-                           state: AESState())
         super.setUp()
     }
     
     override func tearDownWithError() throws {
-        cipher = nil
         super.tearDown()
     }
     
@@ -29,7 +25,7 @@ final class AESCipherTest: XCTestCase {
             [0xf6, 0x30, 0x98, 0x07],
             [0xa8, 0x8d, 0xa2, 0x34]
         ]
-        let key2: [[Byte]] = [
+        let key: [[Byte]] = [
             [0x2b, 0x28, 0xab, 0x09],
             [0x7e, 0xae, 0xf7, 0xcf],
             [0x15, 0xd2, 0x15, 0x4f],
@@ -459,7 +455,8 @@ final class AESCipherTest: XCTestCase {
             )
         ]
         
-        cipher.set(input: input, key: key2)
+        
+        let cipher = AESCipher(input: input, key: key)
         cipher.encryptState()
         
         XCTAssertEqual(cipher.getResult, expectedOutput)
@@ -497,7 +494,7 @@ final class AESCipherTest: XCTestCase {
             [0x22, 0x66, 0xaa, 0xee],
             [0x33, 0x77, 0xbb, 0xff]
         ]
-        let keyMatrix: [[Byte]] = [
+        let key: [[Byte]] = [
             [0x00, 0x04, 0x08, 0x0c, 0x10, 0x14],
             [0x01, 0x05, 0x09, 0x0d, 0x11, 0x15],
             [0x02, 0x06, 0x0a, 0x0e, 0x12, 0x16],
@@ -1008,7 +1005,7 @@ final class AESCipherTest: XCTestCase {
             )
         ]
         
-        cipher.set(input: input, key: keyMatrix)
+        let cipher = AESCipher(input: input, key: key)
         cipher.encryptState()
         
         XCTAssertEqual(cipher.getResult, expectedOutput)
@@ -1045,7 +1042,7 @@ final class AESCipherTest: XCTestCase {
             [0x22, 0x66, 0xaa, 0xee],
             [0x33, 0x77, 0xbb, 0xff]
         ]
-        let keyMatrix: [[Byte]] = [
+        let key: [[Byte]] = [
             [0x00, 0x04, 0x08, 0x0c, 0x10, 0x14, 0x18, 0x1c],
             [0x01, 0x05, 0x09, 0x0d, 0x11, 0x15, 0x19, 0x1d],
             [0x02, 0x06, 0x0a, 0x0e, 0x12, 0x16, 0x1a, 0x1e],
@@ -1633,7 +1630,7 @@ final class AESCipherTest: XCTestCase {
             ),
         ]
         
-        cipher.set(input: input, key: keyMatrix)
+        let cipher = AESCipher(input: input, key: key)
         cipher.encryptState()
         
         XCTAssertEqual(cipher.getResult, expectedOutput)
@@ -1671,7 +1668,7 @@ final class AESCipherTest: XCTestCase {
             [0xe0, 0x04, 0xb7, 0xc5],
             [0xd8, 0x30, 0x80, 0x5a]
         ]
-        let keyMatrix: [[Byte]] = [
+        let key: [[Byte]] = [
             [0x00, 0x04, 0x08, 0x0c],
             [0x01, 0x05, 0x09, 0x0d],
             [0x02, 0x06, 0x0a, 0x0e],
@@ -2105,7 +2102,7 @@ final class AESCipherTest: XCTestCase {
             ),
         ]
         
-        cipher.set(input: input, key: keyMatrix)
+        let cipher = AESCipher(input: input, key: key)
         cipher.decryptState()
         
         XCTAssertEqual(cipher.getResult, expectedOutput)
@@ -2142,7 +2139,7 @@ final class AESCipherTest: XCTestCase {
             [0x7c, 0xdf, 0x70, 0x71],
             [0xa4, 0xe0, 0xa0, 0x91]
         ]
-        let keyMatrix: [[Byte]] = [
+        let key: [[Byte]] = [
             [0x00, 0x04, 0x08, 0x0c, 0x10, 0x14],
             [0x01, 0x05, 0x09, 0x0d, 0x11, 0x15],
             [0x02, 0x06, 0x0a, 0x0e, 0x12, 0x16],
@@ -2661,7 +2658,7 @@ final class AESCipherTest: XCTestCase {
             )
         ]
         
-        cipher.set(input: input, key: keyMatrix)
+        let cipher = AESCipher(input: input, key: key)
         cipher.decryptState()
         
         XCTAssertEqual(cipher.getResult, expectedOutput)
@@ -2698,7 +2695,7 @@ final class AESCipherTest: XCTestCase {
             [0xb7, 0x45, 0x49, 0x60],
             [0xca, 0xbf, 0x90, 0x89]
         ]
-        let keyMatrix: [[Byte]] = [
+        let key: [[Byte]] = [
             [0x00, 0x04, 0x08, 0x0c, 0x10, 0x14, 0x18, 0x1c],
             [0x01, 0x05, 0x09, 0x0d, 0x11, 0x15, 0x19, 0x1d],
             [0x02, 0x06, 0x0a, 0x0e, 0x12, 0x16, 0x1a, 0x1e],
@@ -3295,7 +3292,7 @@ final class AESCipherTest: XCTestCase {
             )
         ]
         
-        cipher.set(input: input, key: keyMatrix)
+        let cipher = AESCipher(input: input, key: key)
         cipher.decryptState()
         
         XCTAssertEqual(cipher.getResult, expectedOutput)

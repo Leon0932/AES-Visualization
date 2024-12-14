@@ -28,11 +28,8 @@ final class MainViewModel: ObservableObject {
     }
     
     func createProcessViewModel(isDecryption: Bool) -> ProcessViewModel {
-        let state = AESState()
-        let keySched = AESKeySchedule()
-        
-        let cipher = AESCipher(keySchedule: keySched, state: state)
-        cipher.set(input: stateMatrix.data.to2DByteArray(), key: keyMatrix.data.to2DByteArray())
+        let cipher = AESCipher(input: stateMatrix.data.to2DByteArray(),
+                               key: keyMatrix.data.to2DByteArray())
 
         isDecryption ? cipher.decryptState() : cipher.encryptState()
         
@@ -41,7 +38,6 @@ final class MainViewModel: ObservableObject {
                                                 currentRound: -1)
         
         return ProcessViewModel(operationDetails: operationDetails,
-                                aesState: state,
                                 aesCipher: cipher,
                                 showCipherButton: true)
     }

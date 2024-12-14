@@ -10,7 +10,7 @@ import SwiftUI
 final class ProcessViewModel: AnimationViewModel {
     // MARK: - Properties
     let operationDetails: OperationDetails
-    let aesState: AESState
+    let aesState = AESState.shared
     let aesCipher: AESCipher
     let showCipherButton: Bool
     
@@ -106,11 +106,9 @@ final class ProcessViewModel: AnimationViewModel {
     
     // MARK: - Initializer
     init(operationDetails: OperationDetails,
-         aesState: AESState,
          aesCipher: AESCipher,
          showCipherButton: Bool) {
         self.operationDetails = operationDetails
-        self.aesState = aesState
         self.aesCipher = aesCipher
         self.showCipherButton = showCipherButton
         
@@ -629,15 +627,12 @@ final class ProcessViewModel: AnimationViewModel {
         let operationDetails = OperationDetails(operationName: isInverseMode ? .encryptionProcess : .decryptionProcess,
                                                 isInverseMode: isInverseMode ? false : true,
                                                 currentRound: -1)
-        let newKeySchedule = AESKeySchedule()
-        let newAesState = AESState()
-        let newAESCipher = AESCipher(keySchedule: newKeySchedule, state: newAesState)
+
+        let newAESCipher = AESCipher(input: result, key: key)
         
-        newAESCipher.set(input: result, key: key)
         isInverseMode ? newAESCipher.encryptState() : newAESCipher.decryptState()
         
         return ProcessViewModel(operationDetails: operationDetails,
-                                aesState: newAesState,
                                 aesCipher: newAESCipher,
                                 showCipherButton: false)
     }

@@ -12,7 +12,7 @@ final class AESStateTests: XCTestCase {
     var state: AESState!
     
     override func setUpWithError() throws {
-        state = AESState()
+        state = AESState.shared
         super.setUp()
     }
     

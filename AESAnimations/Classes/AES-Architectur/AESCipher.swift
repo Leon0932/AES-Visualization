@@ -9,8 +9,8 @@ import Foundation
 
 final class AESCipher {
     // MARK: - Properties
-    let keySchedule: AESKeySchedule
-    let state: AESState
+    let keySchedule = AESKeySchedule()
+    let state = AESState.shared
     
     private var input: [[Byte]] = []
     private var key: [[Byte]] = []
@@ -18,9 +18,9 @@ final class AESCipher {
     private var cipherHistory: [CipherRound] = []
     
     // MARK: - Initializer
-    init(keySchedule: AESKeySchedule, state: AESState) {
-        self.keySchedule = keySchedule
-        self.state = state
+    init(input: [[Byte]], key: [[Byte]]) {
+        self.input = input
+        self.key = key
     }
     
     // MARK: - Computed Properties
@@ -80,18 +80,6 @@ final class AESCipher {
     var getKey: [[Byte]] { key }
     
     // MARK: - Helper functions
-    /// Sets the input and key for the cipher operation.
-    ///
-    /// This function updates the current input and key values used for the encryption or decryption process.
-    ///
-    /// - Parameters:
-    ///   - input: An array of `Byte` values representing the new input for the cipher.
-    ///   - key: An array of `Byte` values representing the new key for the cipher.
-    func set(input: [[Byte]], key: [[Byte]]) {
-        self.input = input
-        self.key = key
-    }
-    
     /// Expands the key and updates the result and cipher history.
     ///
     /// This function clears the `result` and `cipherHistory`, performs key expansion using the provided key,
