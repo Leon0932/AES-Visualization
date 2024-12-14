@@ -53,7 +53,7 @@ struct ProcessView: View {
                                                ? "Verschlüsseln"
                                                : "Entschlüsseln",
                                                buttonStyle: .standard) {
-                            ProcessView(viewModel: viewModel.createNextProcessViewModel())
+                            ProcessView(viewModel: viewModel.nextProcessViewModel)
                         }
                         
                     }

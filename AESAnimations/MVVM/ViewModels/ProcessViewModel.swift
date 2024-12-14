@@ -48,7 +48,7 @@ final class ProcessViewModel: AnimationViewModel {
     @Published var savedPositionMoved: CGFloat = 0
     
     
-    // MARK: - Operation ViewModels
+    // MARK: - ViewModels Creators 
     var keyViewModel: KeyViewModel { KeyViewModel(aesCipher: aesCipher) }
     var shiftRowsViewModel: ShiftRowsViewModel {
         var result = currentState
@@ -91,6 +91,22 @@ final class ProcessViewModel: AnimationViewModel {
             operationDetails: getOperationDetails(for: .addRoundKey)
         )
     }
+    
+    var nextProcessViewModel: ProcessViewModel {
+        let isInverseMode = operationDetails.isInverseMode
+        let operationDetails = OperationDetails(operationName: isInverseMode ? .encryptionProcess : .decryptionProcess,
+                                                isInverseMode: isInverseMode ? false : true,
+                                                currentRound: -1)
+
+        let newAESCipher = AESCipher(input: result, key: key)
+        
+        isInverseMode ? newAESCipher.encryptState() : newAESCipher.decryptState()
+        
+        return ProcessViewModel(operationDetails: operationDetails,
+                                aesCipher: newAESCipher,
+                                showCipherButton: false)
+    }
+    
     
     private func getOperationDetails(for operation: OperationNames) -> OperationDetails {
         OperationDetails(operationName: operation,
@@ -619,22 +635,6 @@ final class ProcessViewModel: AnimationViewModel {
             currentRoundKeyNumber = showResult == 1.0 ? aesCipher.getNrOfRounds : 0
             savedPositionMoved = 0
         }
-    }
-    
-    // MARK: - Helper Functions
-    func createNextProcessViewModel() -> ProcessViewModel {
-        let isInverseMode = operationDetails.isInverseMode
-        let operationDetails = OperationDetails(operationName: isInverseMode ? .encryptionProcess : .decryptionProcess,
-                                                isInverseMode: isInverseMode ? false : true,
-                                                currentRound: -1)
-
-        let newAESCipher = AESCipher(input: result, key: key)
-        
-        isInverseMode ? newAESCipher.encryptState() : newAESCipher.decryptState()
-        
-        return ProcessViewModel(operationDetails: operationDetails,
-                                aesCipher: newAESCipher,
-                                showCipherButton: false)
     }
     
     // MARK: - Toggle Functions
