@@ -64,7 +64,7 @@ struct ProcessView: View {
             }
 
             if leftColumn {
-                if viewModel.aesCipher.getNk > 4 {
+                if viewModel.nk > 4 {
                     keyButton
                 } else {
                     keyView(title: keyTitle)
@@ -112,7 +112,7 @@ struct ProcessView: View {
                 
                 roundView(phase: 2, data: viewModel.phaseTwo)
                     .background(
-                        HorizontalLine(mainRounds: viewModel.aesCipher.getNrOfRounds,
+                        HorizontalLine(mainRounds: viewModel.rounds,
                                        currentRound: $viewModel.currentRoundNumber)
                     )
         
@@ -240,7 +240,7 @@ struct ProcessView: View {
         }
     }
     
-    private var keyTitle: LocalizedStringKey { "Schlüssel (\(viewModel.aesCipher.getNk * 32)-Bit)" }
+    private var keyTitle: LocalizedStringKey { "Schlüssel (\(viewModel.nk * 32)-Bit)" }
     
     var sheetTitle: String {
         if viewModel.operationDetails.isInverseMode {

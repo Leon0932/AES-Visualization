@@ -11,6 +11,7 @@ import Foundation
 enum AESConfiguration: Int, CaseIterable, Identifiable {
     // Identifier for use in UI or other cases
     var id: String { self.label }
+    var nb: Int { 4 }
     
     case key128 = 4
     case key192 = 6

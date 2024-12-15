@@ -26,7 +26,7 @@ final class KeyViewModel: ObservableObject {
                                                                  isInverseMode: false,
                                                                  currentRound: -1),
                               keyExpRounds: aesCipher.getDetailedKeySchedule,
-                              keySize: aesCipher.getKeySize!)
+                              keySize: aesCipher.getKeySize)
     }
     
     // MARK: - Initializer

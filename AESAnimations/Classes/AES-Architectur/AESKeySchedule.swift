@@ -14,10 +14,7 @@ final class AESKeySchedule {
     private(set) var roundKeys: [[Byte]] = []
     private(set) var keyExpRounds: [KeyExpansionRound] = []
     
-    private(set) var keySize: AESConfiguration? = nil
-    private(set) var nk: Int = 0
-    private(set) var nr: Int = 0
-    private let nb: Int = 4
+    private(set) var keySize: AESConfiguration = .key128
     private var rCon: [[Byte]]
     
     // MARK: - Initializer
@@ -86,12 +83,12 @@ final class AESKeySchedule {
         keySchedule = []
         keyExpRounds = []
         
-        keySize = AESConfiguration(rawValue: key[0].count)
+        guard let newKeySize = AESConfiguration(rawValue: key[0].count) else { return }
+        keySize = newKeySize
         
-        guard let keySize else { return }
-        
-        nk = keySize.rawValue
-        nr = keySize.rounds
+        let nk = keySize.rawValue
+        let nr = keySize.rounds
+        let nb = keySize.nb
         
         for i in 0..<nk {
             var word: [Byte] = []

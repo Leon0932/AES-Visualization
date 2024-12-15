@@ -497,13 +497,13 @@ final class AESKeySchedTests: XCTestCase {
         ]
         
         keySched.keyExpansion(key: keyMatrix)
-        XCTAssertEqual(keySched.nr,
+        XCTAssertEqual(keySched.keySize.rounds,
                        10,
-                       "Wrong number of rounds: Expected 10 but got \(keySched.nr)")
+                       "Wrong number of rounds: Expected 10 but got \(keySched.keySize.rounds)")
         
-        XCTAssertEqual(keySched.nk,
+        XCTAssertEqual(keySched.keySize.rawValue,
                        4,
-                       "Wrong number of key size: Expected 4 but got \(keySched.nk)")
+                       "Wrong number of key size: Expected 4 but got \(keySched.keySize.rawValue)")
         
         let keySize = AESConfiguration(rawValue: 4)!
         XCTAssertEqual(keySched.keySize,
@@ -1018,13 +1018,13 @@ final class AESKeySchedTests: XCTestCase {
         ]
         
         keySched.keyExpansion(key: keyMatrix)
-        XCTAssertEqual(keySched.nr,
+        XCTAssertEqual(keySched.keySize.rounds,
                        12,
-                       "Wrong number of rounds: Expected 12 but got \(keySched.nr)")
+                       "Wrong number of rounds: Expected 12 but got \(keySched.keySize.rounds)")
         
-        XCTAssertEqual(keySched.nk,
+        XCTAssertEqual(keySched.keySize.rawValue,
                        6,
-                       "Wrong number of key size: Expected 6 but got \(keySched.nk)")
+                       "Wrong number of key size: Expected 6 but got \(keySched.keySize.rawValue)")
         
         let keySize = AESConfiguration(rawValue: 6)!
         XCTAssertEqual(keySched.keySize,
@@ -1602,13 +1602,13 @@ final class AESKeySchedTests: XCTestCase {
         
         
         keySched.keyExpansion(key: keyMatrix)
-        XCTAssertEqual(keySched.nr,
+        XCTAssertEqual(keySched.keySize.rounds,
                        14,
-                       "Wrong number of rounds: Expected 14 but got \(keySched.nr)")
+                       "Wrong number of rounds: Expected 14 but got \(keySched.keySize.rounds)")
         
-        XCTAssertEqual(keySched.nk,
+        XCTAssertEqual(keySched.keySize.rawValue,
                        8,
-                       "Wrong number of key size: Expected 8 but got \(keySched.nk)")
+                       "Wrong number of key size: Expected 8 but got \(keySched.keySize.rawValue)")
         
         let keySize = AESConfiguration(rawValue: 8)!
         XCTAssertEqual(keySched.keySize,

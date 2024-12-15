@@ -24,11 +24,9 @@ final class AESCipher {
     }
     
     // MARK: - Computed Properties From `AESKeySchedule`
-    var getNrOfRounds: Int { keySchedule.nr }
     var getRoundKeys: [[Byte]] { keySchedule.roundKeys }
-    var getNk: Int { keySchedule.nk }
     var getDetailedKeySchedule: [KeyExpansionRound] { keySchedule.keyExpRounds }
-    var getKeySize: AESConfiguration? { keySchedule.keySize }
+    var getKeySize: AESConfiguration { keySchedule.keySize }
     
     // MARK: - Helper functions
     /// Expands the key and updates the result and cipher history.
@@ -54,7 +52,7 @@ final class AESCipher {
     /// The state of each round, including after each transformation step, is stored in `cipherHistory` as a series of `CipherRound` objects.
     func encryptState() {
         createKeyExpansion()
-        
+        print(getKeySize.rawValue)
         let startKey = getRoundKeys[0].convertToState()
         
         var startRound = CipherRound(index: 0, startOfRound: result, roundKey: startKey)
@@ -63,7 +61,9 @@ final class AESCipher {
         
         cipherHistory.append(startRound)
         
-        for round in 1..<getNrOfRounds {
+        let rounds = getKeySize.rounds
+        
+        for round in 1..<rounds {
             var cipherRound = CipherRound(index: round, startOfRound: result)
             
             state.subBytes(state: &result, isInverse: false)
@@ -89,7 +89,7 @@ final class AESCipher {
             cipherHistory.append(cipherRound)
         }
         
-        var cipherRound = CipherRound(index: getNrOfRounds, startOfRound: result)
+        var cipherRound = CipherRound(index: rounds, startOfRound: result)
         
         state.subBytes(state: &result, isInverse: false)
         cipherRound.afterSubBytes = result
@@ -97,13 +97,13 @@ final class AESCipher {
         _ = state.shiftRows(state: &result, isInverse: false)
         cipherRound.afterShiftRows = result
         
-        let lastKey = getRoundKeys[getNrOfRounds].convertToState()
+        let lastKey = getRoundKeys[rounds].convertToState()
         state.addRoundKey(state: &result, key: lastKey)
         cipherRound.afterAddRound = result
         cipherRound.roundKey = lastKey
         
         cipherHistory.append(cipherRound)
-        cipherHistory.append(CipherRound(index: getNrOfRounds + 1, startOfRound: result))
+        cipherHistory.append(CipherRound(index: rounds + 1, startOfRound: result))
         
     }
     
@@ -118,8 +118,9 @@ final class AESCipher {
     /// as a series of `CipherRound` objects.
     func decryptState() {
         createKeyExpansion()
+        let rounds = getKeySize.rounds
 
-        let lastKey = getRoundKeys[getNrOfRounds].convertToState()
+        let lastKey = getRoundKeys[rounds].convertToState()
         
         var startRound = CipherRound(index: 0, startOfRound: result, roundKey: lastKey)
         
@@ -136,7 +137,7 @@ final class AESCipher {
         
         var currentIndex = 1
         
-        for round in stride(from: getNrOfRounds - 1, to: 0, by: -1) {
+        for round in stride(from: rounds - 1, to: 0, by: -1) {
             let roundKey = getRoundKeys[round].convertToState()
             
             var cipherRound = CipherRound(index: currentIndex, startOfRound: result, roundKey: roundKey)
