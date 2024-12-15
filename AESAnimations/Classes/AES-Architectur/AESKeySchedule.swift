@@ -55,14 +55,9 @@ final class AESKeySchedule {
     /// with the first byte wrapping around to the end of the array.
     ///
     /// - Parameter w: An array of bytes representing the input word.
-    /// - Returns: An array of bytes where the first byte has been moved to the end.
-    func rotWord(_ w: [Byte]) -> [Byte] {
-        var result = w
-        
-        let first = result.removeFirst()
-        result.append(first)
-        
-        return result
+    func rotWord(_ w: inout [Byte]) {
+        let first = w.removeFirst()
+        w.append(first)
     }
     
     /// Applies the S-Box transformation to a word (array of bytes).
@@ -71,8 +66,7 @@ final class AESKeySchedule {
     /// of the input word.
     ///
     /// - Parameter w: An array of bytes representing the input word.
-    /// - Returns: An array of bytes where each byte has been substituted using the S-Box.
-    func subWord(_ w: [Byte]) -> [Byte] {  return w.map { math.sBox($0) } }
+    func subWord(_ w: inout [Byte]) {  w = w.map { math.sBox($0) } }
     
     /// Sets the encryption key and generates the round keys.
     ///
@@ -115,21 +109,21 @@ final class AESKeySchedule {
             var keyRound = KeyExpansionRound(index: index, temp: temp)
             
             if index % keySize.rawValue == 0 {
-                let tempRotWord = rotWord(temp)
-                let tempSubWord = subWord(tempRotWord)
+                rotWord(&temp)
+                keyRound.afterRotWord = temp
+                subWord(&temp)
+                keyRound.afterSubWord = temp
+                
                 let rConstant = rCon[index / keySize.rawValue]
                 for i in 0..<nb {
-                    temp[i] = tempSubWord[i] ^ rConstant[i]
+                    temp[i] ^= rConstant[i]
                 }
-                
-                
-                keyRound.afterRotWord = tempRotWord
-                keyRound.afterSubWord = tempSubWord
+
                 keyRound.rcon = rConstant
                 keyRound.afterXORWithRCON = temp
                 
             } else if keySize == .key256 && index % keySize.rawValue == 4 {
-                temp = subWord(temp)
+                subWord(&temp)
                 keyRound.afterSubWord = temp
             }
             

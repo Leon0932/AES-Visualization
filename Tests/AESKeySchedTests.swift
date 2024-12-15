@@ -22,48 +22,53 @@ final class AESKeySchedTests: XCTestCase {
     }
     
     func testRotWord() throws {
-        let testOne: [Byte] = [1, 2, 3, 4]
+        var testOne: [Byte] = [1, 2, 3, 4]
         let expectedOutputOne: [Byte] = [2, 3, 4, 1]
         
-        let testTwo: [Byte] = [0x00, 0x00, 0x00, 0xFF]
+        var testTwo: [Byte] = [0x00, 0x00, 0x00, 0xFF]
         let expectedOutputTwo: [Byte] = [0x00, 0x00, 0xFF, 0x00]
         
-        let testThree: [Byte] = [0x00, 0x00, 0x00, 0x00]
+        var testThree: [Byte] = [0x00, 0x00, 0x00, 0x00]
         let expectedOutputThree = testThree
         
+        keySched.rotWord(&testOne)
+        keySched.rotWord(&testTwo)
+        keySched.rotWord(&testThree)
         
-        XCTAssertEqual(keySched.rotWord(testOne),
+        XCTAssertEqual(testOne,
                        expectedOutputOne,
-                       "RotWord failed: Expected \(expectedOutputOne) but got \(keySched.rotWord(testOne)) for input \(testOne)")
-        XCTAssertEqual(keySched.rotWord(testTwo),
+                       "RotWord failed: Expected \(expectedOutputOne) but got \(testOne)")
+        XCTAssertEqual(testTwo,
                        expectedOutputTwo,
-                       "RotWord failed: Expected \(expectedOutputTwo) but got \(keySched.rotWord(testTwo)) for input \(testTwo)")
-        XCTAssertEqual(keySched.rotWord(testThree),
+                       "RotWord failed: Expected \(expectedOutputTwo) but got \(testTwo)")
+        XCTAssertEqual(testThree,
                        expectedOutputThree,
-                       "RotWord failed: Expected \(expectedOutputThree) but got \(keySched.rotWord(testThree)) for input \(testThree)")
+                       "RotWord failed: Expected \(expectedOutputThree) but got \(testThree)")
     }
     
     func testSubWords() throws {
-        let testOne: [Byte] = [0xCF, 0x4F, 0x3C, 0x09]
+        var testOne: [Byte] = [0xCF, 0x4F, 0x3C, 0x09]
         let expectedOutputOne: [Byte] = [0x8A, 0x84, 0xEB, 0x01]
         
-        let testTwo: [Byte] = [0x6C, 0x76, 0x05, 0x2A]
+        var testTwo: [Byte] = [0x6C, 0x76, 0x05, 0x2A]
         let expectedOutputTwo: [Byte] = [0x50, 0x38, 0x6B, 0xE5]
         
-        let testThree: [Byte] = [0x7A, 0x88, 0x3B, 0x6D]
+        var testThree: [Byte] = [0x7A, 0x88, 0x3B, 0x6D]
         let expectedOutputThree: [Byte] = [0xDA, 0xC4, 0xE2, 0x3C]
         
-        XCTAssertEqual(keySched.subWord(testOne),
+        keySched.subWord(&testOne)
+        keySched.subWord(&testTwo)
+        keySched.subWord(&testThree)
+        
+        XCTAssertEqual(testOne,
                        expectedOutputOne,
-                       "SubWord failed: Expected \(expectedOutputOne) but got \(keySched.subWord(testOne)) for input \(testOne)")
-
-        XCTAssertEqual(keySched.subWord(testTwo),
+                       "RotWord failed: Expected \(expectedOutputOne) but got \(testOne)")
+        XCTAssertEqual(testTwo,
                        expectedOutputTwo,
-                       "SubWord failed: Expected \(expectedOutputTwo) but got \(keySched.subWord(testTwo)) for input \(testTwo)")
-
-        XCTAssertEqual(keySched.subWord(testThree),
+                       "RotWord failed: Expected \(expectedOutputTwo) but got \(testTwo)")
+        XCTAssertEqual(testThree,
                        expectedOutputThree,
-                       "SubWord failed: Expected \(expectedOutputThree) but got \(keySched.subWord(testThree)) for input \(testThree)")
+                       "RotWord failed: Expected \(expectedOutputThree) but got \(testThree)")
 
     }
     
