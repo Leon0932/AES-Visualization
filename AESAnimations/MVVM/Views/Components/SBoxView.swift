@@ -118,7 +118,7 @@ struct SBoxView: View {
     /// - Parameter index: The current index.
     /// - Returns: The S-Box value as a byte.
     private func getSBoxValue(index: Int) -> Byte {
-        isInverseMode ? aesMath.invSBox(Byte(index)) : aesMath.sBox(Byte(index))
+        isInverseMode ? aesMath.invSBox[index] : aesMath.sBox[index]
     }
     
     /// Calculates the background color when searching for a byte.

@@ -14,8 +14,8 @@ final class AESMath {
     private var logTable: [Byte]
     private var expTable: [Byte]
     private var invTable: [Byte]
-    private var sBox: [Byte]
-    private var invSBox: [Byte]
+    private(set) var sBox: [Byte]
+    private(set) var invSBox: [Byte]
     private(set) var sBoxHistory: [SBoxRound] = []
     
     // MARK: - Initializer
@@ -81,41 +81,7 @@ final class AESMath {
         }
     }
     
-    // MARK: - Helper functions
-    /// Exponential function in GF(256)
-    ///
-    /// This function returns the exponential value of a byte `i` in the Galois Field GF(256)
-    /// using the `expTable`.
-    ///
-    /// - Parameter i: The input value as a byte
-    /// - Returns: The exponential value of the input in GF(256)
-    func exp(_ i: Byte) -> Byte { expTable[Int(i)] }
-    
-    /// Logarithm function in GF(256)
-    ///
-    /// This function returns the logarithm of a byte `b` in the Galois Field GF(256)
-    /// using the `logTable`.
-    ///
-    /// - Parameter b: The input value as a byte
-    /// - Returns: The logarithm of the input value in GF(256)
-    func log(_ b: Byte) -> Byte { logTable[Int(b)] }
-    
-    /// S-Box lookup in GF(256)
-    ///
-    /// This function returns the transformed byte from the `sBox` table.
-    ///
-    /// - Parameter b: The byte to be transformed
-    /// - Returns: The transformed byte from the S-Box
-    func sBox(_ b: Byte) -> Byte { sBox[Int(b)] }
-    
-    /// Inverse S-Box lookup in GF(256)
-    ///
-    /// This function returns the transformed byte from the `invSbox` table.
-    ///
-    /// - Parameter b: The byte to be transformed
-    /// - Returns: The transformed byte from the inverse S-Box
-    func invSBox(_ b: Byte) -> Byte { invSBox[Int(b)] }
-    
+    // MARK: - Main functions
     /// Addition of two bytes in GF(256)
     ///
     /// This function computes the addition of two bytes (`a` and `b`) in the Galois Field GF(256)
@@ -127,7 +93,6 @@ final class AESMath {
     /// - Returns: The result of the addition of the two bytes
     func add(a: Byte, b: Byte) -> Byte { a ^ b }
     
-    // MARK: - Main functions
     /// Doubling a byte in GF(256)
     ///
     /// This function doubles a byte `b` in the Galois Field GF(256).
@@ -187,12 +152,12 @@ final class AESMath {
         if a == 0 || b == 0 {
             return 0
         }
-        let i: Byte = log(a)
-        let j: Byte = log(b)
+        let i: Byte = logTable[Int(a)]
+        let j: Byte = logTable[Int(b)]
         let sum = Int(i) + Int(j)
         let l = sum % 255
         
-        return exp(Byte(l))
+        return expTable[Int(l)]
     }
     
     /// Inversion of a byte in GF(256)
@@ -208,10 +173,10 @@ final class AESMath {
             return 0
         }
         
-        let i: Byte = log(b)
+        let i: Byte = logTable[Int(b)]
         let l: Byte = 255 - i
         
-        return exp(l)
+        return expTable[Int(l)]
     }
     
     /// Determining the parity of a byte in GF(256)

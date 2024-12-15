@@ -26,7 +26,7 @@ final class AESState {
     func subBytes(state: inout [[Byte]], isInverse: Bool) {
         for row in 0..<state.count {
             for col in 0..<state[row].count {
-                state[row][col] = isInverse ? math.invSBox(state[row][col]) : math.sBox(state[row][col])
+                state[row][col] = isInverse ? math.invSBox[Int(state[row][col])] : math.sBox[Int(state[row][col])]
             }
         }
     }

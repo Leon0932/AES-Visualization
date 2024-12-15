@@ -141,11 +141,11 @@ final class AESMathTests: XCTestCase {
         
         for i in 0..<256 {
             XCTAssertEqual(sBox[i],
-                           math.sBox(Byte(i)),
-                           "S-Box failed: Expected \(sBox[i]) but got \(math.sBox(Byte(i))) for index \(String(describing: index))")
+                           math.sBox[i],
+                           "S-Box failed: Expected \(sBox[i]) but got \(math.sBox[i]) for index \(String(describing: index))")
             XCTAssertEqual(invSBox[i],
-                           math.invSBox(Byte(i)),
-                           "Inv S-Box failed: Expected \(invSBox[i]) but got \(math.invSBox(Byte(i))) for index \(String(describing: index))")
+                           math.invSBox[i],
+                           "Inv S-Box failed: Expected \(invSBox[i]) but got \(math.invSBox[i]) for index \(String(describing: index))")
         }
     }
     

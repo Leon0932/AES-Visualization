@@ -66,7 +66,7 @@ final class AESKeySchedule {
     /// of the input word.
     ///
     /// - Parameter w: An array of bytes representing the input word.
-    func subWord(_ w: inout [Byte]) {  w = w.map { math.sBox($0) } }
+    func subWord(_ w: inout [Byte]) {  w = w.map { math.sBox[Int($0)] } }
     
     /// Sets the encryption key and generates the round keys.
     ///
