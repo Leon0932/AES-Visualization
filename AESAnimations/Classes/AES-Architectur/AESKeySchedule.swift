@@ -15,12 +15,7 @@ final class AESKeySchedule {
     private(set) var keyExpRounds: [KeyExpansionRound] = []
     
     private(set) var keySize: AESConfiguration = .key128
-    private var rCon: [[Byte]]
-    
-    // MARK: - Initializer
-    init() {
-        rCon = AESConstants.rcon
-    }
+    private var rCon: [[Byte]] = AESConstants.rcon
     
     // MARK: - Helper functions
     /// Retrieves the round key for a specific round in the key expansion process.
