@@ -8,7 +8,8 @@
 import SwiftUI
 import Security
 
-/// A matrix of input fields for byte values
+/// A matrix of input fields for entering byte values.
+/// Includes functionality to generate byte values using the logic from `Matrix` and to remove data as needed.
 struct EditableMatrix: View {
     // MARK: - Properties
     let title: LocalizedStringKey

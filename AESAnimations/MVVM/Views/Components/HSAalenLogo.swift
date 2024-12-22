@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A helper view for displaying the logo of Aalen University.
 struct HSAalenLogo: View {
     // MARK: - Properties
     @Environment(\.locale) var locale
