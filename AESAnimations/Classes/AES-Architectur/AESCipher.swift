@@ -52,7 +52,6 @@ final class AESCipher {
     /// The state of each round, including after each transformation step, is stored in `cipherHistory` as a series of `CipherRound` objects.
     func encryptState() {
         createKeyExpansion()
-        print(getKeySize.rawValue)
         let startKey = getRoundKeys[0].convertToState()
         
         var startRound = CipherRound(index: 0, startOfRound: result, roundKey: startKey)
