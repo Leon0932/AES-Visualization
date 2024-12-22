@@ -16,6 +16,24 @@ final class SettingsViewModel: ObservableObject {
     
     @Published var showAuthorView = false
     
+    init() {
+        if UserDefaults.standard.object(forKey: StorageKeys.colorScheme.key) == nil {
+            UserDefaults.standard.set(colorScheme.rawValue, forKey: StorageKeys.colorScheme.key)
+        }
+        if UserDefaults.standard.object(forKey: StorageKeys.primaryColor.key) == nil {
+            UserDefaults.standard.set(primaryColor.rawValue, forKey: StorageKeys.primaryColor.key)
+        }
+        if UserDefaults.standard.object(forKey: StorageKeys.appLanguage.key) == nil {
+            UserDefaults.standard.set(appLanguage, forKey: StorageKeys.appLanguage.key)
+        }
+        if UserDefaults.standard.object(forKey: StorageKeys.includeReverseAnimation.key) == nil {
+            UserDefaults.standard.set(includeReverseAnimation, forKey: StorageKeys.includeReverseAnimation.key)
+        }
+        if UserDefaults.standard.object(forKey: StorageKeys.startAnimationOnAppear.key) == nil {
+            UserDefaults.standard.set(startAnimationOnAppear, forKey: StorageKeys.startAnimationOnAppear.key)
+        }
+    }
+    
     func updateScheme() {
         #if os(iOS)
         if let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow {
