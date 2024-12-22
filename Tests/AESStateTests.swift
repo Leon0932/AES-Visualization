@@ -114,16 +114,23 @@ final class AESStateTests: XCTestCase {
         XCTAssertEqual(testOne,
                        resultOne,
                        "ShiftRows failed: Expected result does not match for testOne")
-        XCTAssertEqual(historyOutputOne,
-                       historyExceptedOutputOne,
-                       "ShiftRows history mismatch for testOne")
+
+        for index in historyOutputOne.indices {
+            XCTAssertEqual(historyOutputOne[index].temp, historyExceptedOutputOne[index].temp)
+            XCTAssertEqual(historyOutputOne[index].shifts, historyExceptedOutputOne[index].shifts)
+            XCTAssertEqual(historyOutputOne[index].index, historyExceptedOutputOne[index].index)
+        }
         
         XCTAssertEqual(testTwo,
                        resultTwo,
                        "ShiftRows failed: Expected result does not match for testTwo")
-        XCTAssertEqual(historyOutputTwo,
-                       historyExceptedOutputTwo,
-                       "ShiftRows history mismatch for testTwo")
+
+        for index in historyOutputTwo.indices {
+            XCTAssertEqual(historyOutputTwo[index].temp, historyExceptedOutputTwo[index].temp)
+            XCTAssertEqual(historyOutputTwo[index].shifts, historyExceptedOutputTwo[index].shifts)
+            XCTAssertEqual(historyOutputTwo[index].index, historyExceptedOutputTwo[index].index)
+        }
+        
         
         let historyOutputOneRev = state.shiftRows(state: &testOne, isInverse: true)
         let historyOutputTwoRev = state.shiftRows(state: &testTwo, isInverse: true)
@@ -131,16 +138,23 @@ final class AESStateTests: XCTestCase {
         XCTAssertEqual(testOne,
                        copyOfTestOne,
                        "Inverse ShiftRows failed: testOne state should match original after inverse transformation")
-        XCTAssertEqual(historyOutputOneRev,
-                       historyExceptedOutputOneRev,
-                       "Inverse ShiftRows history mismatch for testOne")
+        
+        for index in historyOutputOneRev.indices {
+            XCTAssertEqual(historyOutputOneRev[index].temp, historyExceptedOutputOneRev[index].temp)
+            XCTAssertEqual(historyOutputOneRev[index].shifts, historyExceptedOutputOneRev[index].shifts)
+            XCTAssertEqual(historyOutputOneRev[index].index, historyExceptedOutputOneRev[index].index)
+        }
         
         XCTAssertEqual(testTwo,
                        copyOfTestTwo,
                        "Inverse ShiftRows failed: testTwo state should match original after inverse transformation")
-        XCTAssertEqual(historyOutputTwoRev,
-                       historyExceptedOutputTwoRev,
-                       "Inverse ShiftRows history mismatch for testTwo")
+
+        for index in historyOutputTwoRev.indices {
+            XCTAssertEqual(historyOutputTwoRev[index].temp, historyExceptedOutputTwoRev[index].temp)
+            XCTAssertEqual(historyOutputTwoRev[index].shifts, historyExceptedOutputTwoRev[index].shifts)
+            XCTAssertEqual(historyOutputTwoRev[index].index, historyExceptedOutputTwoRev[index].index)
+        }
+        
     }
     
     func testMixColumn() throws {
