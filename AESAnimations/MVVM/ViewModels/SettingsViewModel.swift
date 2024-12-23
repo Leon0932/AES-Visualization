@@ -7,7 +7,9 @@
 
 import SwiftUI
 
+/// ViewModel to store user-preferred settings
 final class SettingsViewModel: ObservableObject {
+    // MARK: - Properties
     @AppStorage(StorageKeys.colorScheme.key) var colorScheme: AppScheme = .system
     @AppStorage(StorageKeys.primaryColor.key) var primaryColor: PrimaryColor = .blue
     @AppStorage(StorageKeys.appLanguage.key) var appLanguage: String = Locale.current.language.languageCode?.identifier ?? "en"
@@ -16,6 +18,10 @@ final class SettingsViewModel: ObservableObject {
     
     @Published var showAuthorView = false
     
+    // MARK: - Initializer
+    /// Checks if the data is stored in `UserDefaults`
+    /// After installing the app, the data is not stored in `UserDefaults`.
+    /// It also checks if the data is `nil`, otherwise the app crashes.
     init() {
         if UserDefaults.standard.object(forKey: StorageKeys.colorScheme.key) == nil {
             UserDefaults.standard.set(colorScheme.rawValue, forKey: StorageKeys.colorScheme.key)
@@ -34,6 +40,7 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
+    /// Helper function to update the scheme based on the current setting 
     func updateScheme() {
         #if os(iOS)
         if let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow {
@@ -46,9 +53,5 @@ final class SettingsViewModel: ObservableObject {
             NSApp.appearance = NSAppearance(named: colorScheme == .dark ? .darkAqua : .aqua)
         }
         #endif
-    }
-    
-    func changeLanguage() {
-        appLanguage = (appLanguage == "en") ? "de" : "en"
     }
 }

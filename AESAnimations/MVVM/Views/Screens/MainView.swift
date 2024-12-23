@@ -30,7 +30,6 @@ struct MainView: View {
                 .onChange(of: viewModel.selectedEncryptionMode) {
                     viewModel.handlePickerChange(newValue: $1)
                 }
-                .sheet(isPresented: $viewModel.showAuthor, content: AuthorView.init)
                 .sheet(isPresented: $viewModel.showSettings, content: SettingsView.init)
         }
     }
