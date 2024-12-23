@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// ViewModel that displays the animation of the SubBytes based on the current state.
 final class SubBytesViewModel: AnimationViewModel {
     // MARK: - Properties
     let operationDetails: OperationDetails

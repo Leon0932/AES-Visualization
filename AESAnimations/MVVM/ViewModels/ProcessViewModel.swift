@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+/// This ViewModel demonstrates the AES process, either encryption or decryption,
+/// including an animation of the Rijndael algorithm. The animation illustrates how
+/// the state and the round key change based on the current round and operation.
+/// Additionally, navigation to the various operations is implemented, allowing you
+/// to observe the animation of these operations as they progress through the
+/// current state and round key.
 final class ProcessViewModel: AnimationViewModel {
     // MARK: - Properties
     let operationDetails: OperationDetails
@@ -48,7 +54,7 @@ final class ProcessViewModel: AnimationViewModel {
     @Published var savedPositionMoved: CGFloat = 0
     
     
-    // MARK: - ViewModels Creators 
+    // MARK: - ViewModels Creators
     var keyViewModel: KeyViewModel { KeyViewModel(aesCipher: aesCipher) }
     var shiftRowsViewModel: ShiftRowsViewModel {
         var result = currentState
@@ -107,7 +113,11 @@ final class ProcessViewModel: AnimationViewModel {
                                 showCipherButton: false)
     }
     
-    
+    /// Helper function to create OperationDetails for Operation ViewModels.
+    /// Constructs OperationDetails using the operation name and current context.
+    ///
+    /// - Parameter operation: operation name of type OperationNames.
+    /// - Returns: Initialized OperationDetails object with operation name, inverse mode status, and round number.
     private func getOperationDetails(for operation: OperationNames) -> OperationDetails {
         OperationDetails(operationName: operation,
                          isInverseMode: operationDetails.isInverseMode,
@@ -135,6 +145,11 @@ final class ProcessViewModel: AnimationViewModel {
     }
     
     // MARK: - Animation Data
+    // AES consists of three phases: Start, Main, and Final.
+    // These phases encompass both encryption and decryption processes.
+    // The `ProcessPhaseAnimation` data is utilized for visual representation
+    // and to facilitate the AES process.
+    // There’s also a phase zero called KeyExpansion.
     var phaseOne: [ProcessPhaseAnimation] {
         operationDetails.isInverseMode ?
         [
@@ -283,8 +298,11 @@ final class ProcessViewModel: AnimationViewModel {
     }
     
     // MARK: - Animation Phase Creation Functions
+    
+    /// Helper functions to create the steps for phase zero
     func phaseZeroSteps() { addSteps(addKeyExpansionSteps()) }
     
+    /// Helper functions to create the steps for phase two
     func phaseTwoSteps() {
         for round in 1..<rounds { addSteps(createAESLoop(round: round)) }
     }
@@ -640,10 +658,13 @@ final class ProcessViewModel: AnimationViewModel {
     }
     
     // MARK: - Toggle Functions
+    /// Helper function to show the `CipherHistoryView` in a sheet
     func toggleCipherHistory() {
         showCipherHistory.toggle()
     }
     
+    /// Helper function to show the full input key in a sheet
+    /// (only available for AES-192 and -256)
     func toggleFullKey() {
         showFullKey.toggle()
     }

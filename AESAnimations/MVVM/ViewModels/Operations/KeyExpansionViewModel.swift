@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// ViewModel that displays the animation of the KeyExpansion
 final class KeyExpansionViewModel: AnimationViewModel {
     // MARK: - Properties
     let operationDetails: OperationDetails

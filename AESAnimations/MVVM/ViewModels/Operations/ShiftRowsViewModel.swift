@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// ViewModel that displays the animation of the ShiftRows based on the current state.
 final class ShiftRowsViewModel: AnimationViewModel {
     // MARK: - Properties
     let operationDetails: OperationDetails
@@ -96,7 +97,9 @@ final class ShiftRowsViewModel: AnimationViewModel {
     /// This function moves the cells of the specified row during the "Shift Rows" operation in AES, adjusting their positions
     /// based on the shifting logic. It returns two sets of animation steps: one for shifting forward and one for reversing the shift.
     ///
-    /// - Parameter index: The index of the row in the state where the shift operation is performed.
+    /// - Parameters:
+    ///   - index: The index of the row in the state where the shift operation is performed.
+    ///   - currentRepetition: The number of the current repetition
     /// - Returns: A tuple containing two arrays of `AnimationStep` objects. The first array handles the forward animation,
     ///            and the second array handles the reverse animation.
     @MainActor

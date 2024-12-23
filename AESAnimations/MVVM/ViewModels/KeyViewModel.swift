@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// ViewModel responsible for displaying round keys in an animation.
+/// Also manages navigation to the `KeyExpansionAnimationView`.
 final class KeyViewModel: ObservableObject {
     // MARK: - Properties
     @Published var animateKeys: [Bool] = []
@@ -14,6 +16,7 @@ final class KeyViewModel: ObservableObject {
     @Published var showAnimationScreen = false
     @Published var showButtons = 0.0
     
+    // To execute code within a synchronous function
     var animationTask: Task<Void, Never>? = nil
     
     var aesCipher: AESCipher
@@ -37,6 +40,8 @@ final class KeyViewModel: ObservableObject {
     }
     
     // MARK: - Animation Functions
+    /// Animates the display of round keys at intervals of 250 milliseconds.
+    /// Cancels any existing animation task before starting a new one.
     @MainActor
     func animateKeysFunction() {
         animationTask?.cancel()
