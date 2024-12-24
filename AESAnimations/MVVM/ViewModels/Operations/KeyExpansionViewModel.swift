@@ -24,7 +24,7 @@ final class KeyExpansionViewModel: AnimationViewModelProtocol {
     @Published var positionKey: [Position] = Position.default1DPositions(count: 4)
     
     // Flags for the Animations
-    @Published var showSubBytes = false
+    @Published var showSubWords = false
     @Published var showRCONs = 0.0
     @Published var showColumnOne = 0.0
     @Published var showColumnTwo = 0.0
@@ -470,7 +470,7 @@ final class KeyExpansionViewModel: AnimationViewModelProtocol {
                                                            operationDetails: self.operationDetailsSubBytes,
                                                            animationControl: self.animationControl)
             },
-            AnimationStep { withAnimation { self.showSubBytes = true } },
+            AnimationStep { withAnimation { self.showSubWords = true } },
             AnimationStep { await self.checkIfSubBytesIsDone() },
             invisbleTextStep
         ]
@@ -480,7 +480,7 @@ final class KeyExpansionViewModel: AnimationViewModelProtocol {
             AnimationStep { await self.checkIfSubBytesIsDone() },
             AnimationStep(animation: {
                 withAnimation {
-                    self.showSubBytes = true
+                    self.showSubWords = true
                     self.subBytesViewModel.animationControl = self.animationControl
                     self.subBytesViewModel.animationControl.direction = .backward
                 }
@@ -586,7 +586,7 @@ final class KeyExpansionViewModel: AnimationViewModelProtocol {
         
         await sleep(for: short)
         
-        withAnimation { showSubBytes = false }
+        withAnimation { showSubWords = false }
         
         await sleep(for: normal)
     }
@@ -715,7 +715,7 @@ final class KeyExpansionViewModel: AnimationViewModelProtocol {
             showRoundKeyColumn = Array.create1DArray(repeating: showResult, count: arraySize)
             for i in 0..<nK { showRoundKeyColumn[i] = 1.0 }
             
-            showSubBytes = false
+            showSubWords = false
             showRCONs = 0.0
             
             startRCONAnimation = false

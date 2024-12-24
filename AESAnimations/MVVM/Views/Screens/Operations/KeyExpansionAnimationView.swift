@@ -34,7 +34,7 @@ struct KeyExpansionAnimationView: View {
     
     // MARK: -
     var body: some View {
-        if viewModel.showSubBytes {
+        if viewModel.showSubWords {
             SubBytesAnimationView(viewModel: viewModel.subBytesViewModel,
                                   showRepeatButtons: false,
                                   showSBoxButton: false)
