@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// ViewModel that displays the animation of the MixColumn based on the current state.
-final class MixColumnsViewModel: AnimationViewModel {
+final class MixColumnsViewModel: AnimationViewModelProtocol {
     // MARK: - Properties
     let operationDetails: OperationDetails
     

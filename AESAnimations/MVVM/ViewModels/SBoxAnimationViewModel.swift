@@ -9,7 +9,7 @@ import SwiftUI
 
 /// ViewModel for creating the AES S-Box Creation Animation
 /// for both encryption and decryption.
-final class SBoxAnimationViewModel: AnimationViewModel {
+final class SBoxAnimationViewModel: AnimationViewModelProtocol {
     // MARK: - Properties
     var operationDetails: OperationDetails
     var result: [[Byte]] = []

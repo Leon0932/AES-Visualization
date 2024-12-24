@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// ViewModel that displays the animation of the ShiftRows based on the current state.
-final class ShiftRowsViewModel: AnimationViewModel {
+final class ShiftRowsViewModel: AnimationViewModelProtocol {
     // MARK: - Properties
     let operationDetails: OperationDetails
     

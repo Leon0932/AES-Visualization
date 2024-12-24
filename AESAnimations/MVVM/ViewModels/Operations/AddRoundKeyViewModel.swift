@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// ViewModel that displays the animation of the AddRoundKey based on the current state and round key.
-final class AddRoundKeyViewModel: AnimationViewModel {
+final class AddRoundKeyViewModel: AnimationViewModelProtocol {
     // MARK: - Properties
     let operationDetails: OperationDetails
     

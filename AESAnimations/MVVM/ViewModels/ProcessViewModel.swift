@@ -13,7 +13,7 @@ import SwiftUI
 /// Additionally, navigation to the various operations is implemented, allowing you
 /// to observe the animation of these operations as they progress through the
 /// current state and round key.
-final class ProcessViewModel: AnimationViewModel {
+final class ProcessViewModel: AnimationViewModelProtocol {
     // MARK: - Properties
     let operationDetails: OperationDetails
     let aesState = AESState.shared

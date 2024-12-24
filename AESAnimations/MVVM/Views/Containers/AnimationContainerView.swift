@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AnimationContainerView<Content: View, ViewModel: AnimationViewModel>: View {
+struct AnimationContainerView<Content: View, ViewModel: AnimationViewModelProtocol>: View {
     // MARK: - Properties
     @Environment(\.dismiss) var dismiss
     

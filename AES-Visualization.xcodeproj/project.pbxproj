@@ -47,7 +47,7 @@
 		C33A3C302CCD93D4004CF720 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A3C2F2CCD93D4004CF720 /* SettingsViewModel.swift */; };
 		C33E45082C7A9B2100F38593 /* OperationSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33E45072C7A9B2100F38593 /* OperationSymbolView.swift */; };
 		C33E450A2C7A9D0800F38593 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33E45092C7A9D0800F38593 /* StateView.swift */; };
-		C34310112C9373DA0004F4C7 /* AnimationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34310102C9373DA0004F4C7 /* AnimationViewModel.swift */; };
+		C34310112C9373DA0004F4C7 /* AnimationViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34310102C9373DA0004F4C7 /* AnimationViewModelProtocol.swift */; };
 		C34310132C948AA10004F4C7 /* OperationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34310122C948AA10004F4C7 /* OperationDetails.swift */; };
 		C34310152C948AB10004F4C7 /* AnimationControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34310142C948AB10004F4C7 /* AnimationControl.swift */; };
 		C346320B2D011CC600149FE3 /* AnimationControlEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C346320A2D011CC600149FE3 /* AnimationControlEnums.swift */; };
@@ -152,7 +152,7 @@
 		C33A3C2F2CCD93D4004CF720 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		C33E45072C7A9B2100F38593 /* OperationSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationSymbolView.swift; sourceTree = "<group>"; };
 		C33E45092C7A9D0800F38593 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
-		C34310102C9373DA0004F4C7 /* AnimationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewModel.swift; sourceTree = "<group>"; };
+		C34310102C9373DA0004F4C7 /* AnimationViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewModelProtocol.swift; sourceTree = "<group>"; };
 		C34310122C948AA10004F4C7 /* OperationDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDetails.swift; sourceTree = "<group>"; };
 		C34310142C948AB10004F4C7 /* AnimationControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationControl.swift; sourceTree = "<group>"; };
 		C346320A2D011CC600149FE3 /* AnimationControlEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationControlEnums.swift; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 		C310C91A2C7152F700E91AB7 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				C34310102C9373DA0004F4C7 /* AnimationViewModel.swift */,
+				C34310102C9373DA0004F4C7 /* AnimationViewModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -626,7 +626,7 @@
 				C31E69C32C887D9D00230D22 /* ShiftRowsHelper.swift in Sources */,
 				C37BA0812C397D5800C87BB7 /* MainView.swift in Sources */,
 				C30E9B022CBF00D400DF5AE5 /* SBoxRound.swift in Sources */,
-				C34310112C9373DA0004F4C7 /* AnimationViewModel.swift in Sources */,
+				C34310112C9373DA0004F4C7 /* AnimationViewModelProtocol.swift in Sources */,
 				C310C9152C714DED00E91AB7 /* MixColumnViewModel.swift in Sources */,
 				C35F80262CAAA40F00C54393 /* CipherRound.swift in Sources */,
 				C3BB7C422D0DF167004CD800 /* TextStyles.swift in Sources */,

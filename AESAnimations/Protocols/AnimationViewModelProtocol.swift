@@ -1,5 +1,5 @@
 //
-//  AnimationViewModelv2.swift
+//  AnimationViewModelProtocol.swift
 //  AES-Visualization
 //
 //  Created by Leon Chamoun on 12.09.24.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Protocol defining requirements for a view model that manages animations.
-protocol AnimationViewModel: ObservableObject {
+protocol AnimationViewModelProtocol: ObservableObject {
     /// View Variables
     var operationDetails: OperationDetails { get }
     var result: [[Byte]] { get }
@@ -25,7 +25,7 @@ protocol AnimationViewModel: ObservableObject {
 }
 
 /// Implementation of animation control logic.
-extension AnimationViewModel {
+extension AnimationViewModelProtocol {
     // Standard values for the animation duration
     /// 1 second
     var normal: UInt64 { return 1_000_000_000 }
