@@ -1,5 +1,5 @@
 //
-//  ShiftRowHistory.swift
+//  ShiftRowsHistory.swift
 //  AES-Visualization
 //
 //  Created by Leon Chamoun on 29.09.24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ShiftRowHistory: View {
+struct ShiftRowsHistory: View {
     let navigationTitle: String
     let shiftRowRounds: [ShiftRowRound]
     
