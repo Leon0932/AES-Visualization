@@ -70,7 +70,7 @@ struct Matrix {
     
     /// Indicates whether all fields contain valid and non-empty values.
     var areAllFieldsValid: Bool {
-        !invalidInputFlags.flatMap { $0 }.contains(true) && !data.flatMap { $0 }.contains { $0.isEmpty }
+        !invalidInputFlags.flatMap { $0 }.contains(true) && !data.compactMap { $0 }.contains { $0.isEmpty }
     }
     
     /// Indicates if any cell contains invalid input.
