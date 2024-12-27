@@ -10,6 +10,7 @@ import SwiftUI
 struct AnimationContainerView<Content: View, ViewModel: AnimationViewModelProtocol>: View {
     // MARK: - Properties
     @Environment(\.dismiss) var dismiss
+    @Environment(\.scenePhase) var scenePhase
     
     @ObservedObject var viewModel: ViewModel
     var showReverseAnimationButton: Bool
@@ -43,6 +44,11 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModelProtoc
                             if viewModel.animationData.animationSteps.isEmpty || viewModel.animationData.reverseAnimationSteps.isEmpty {
                                 viewModel.createAnimationSteps(with: geometry)
                                 viewModel.checkAnimationStart()
+                            }
+                        }
+                        .onChange(of: scenePhase) { oldValue, newValue in
+                            if newValue != .active {
+                                viewModel.animationControl.changePause(to: true)
                             }
                         }
                     
