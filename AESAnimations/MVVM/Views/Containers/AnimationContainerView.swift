@@ -42,7 +42,7 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModelProtoc
                         .onAppear {
                             if viewModel.animationData.animationSteps.isEmpty || viewModel.animationData.reverseAnimationSteps.isEmpty {
                                 viewModel.createAnimationSteps(with: geometry)
-                                viewModel.handleAnimationStart()
+                                viewModel.checkAnimationStart()
                             }
                         }
                     

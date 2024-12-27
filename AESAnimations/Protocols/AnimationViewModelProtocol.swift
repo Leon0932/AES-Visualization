@@ -192,7 +192,7 @@ extension AnimationViewModelProtocol {
     
     /// Handles the start of the animation by checking the appropriate flags.
     @MainActor
-    func handleAnimationStart() {
+    func checkAnimationStart() {
         if animationOnAppearKey || animationControl.animationHasStarted {
             startAnimations()
         }
