@@ -286,11 +286,9 @@ final class ShiftRowsViewModel: AnimationViewModelProtocol {
     ///   - newState: The modified state after the animation.
     ///   - showResult: Controls whether the new state is visible or not after resetting.
     func updateAnimationState(state newState: [[Byte]], showResult: Double) {
-        withAnimation {
             state = newState
             isShiftTextVisible = Array.create1DArray(repeating: false, count: 4)
             positionCell = Position.default2DPositions(rows: 4, cols: 4)
-        }
     }
     
     // MARK: - Toggle Functions

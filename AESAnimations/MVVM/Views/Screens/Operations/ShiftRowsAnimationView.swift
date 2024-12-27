@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ShiftRowsAnimationView: View {
     @Environment(\.locale) var locale
+    @Namespace var animationNamespace
     @StateObject var viewModel: ShiftRowsViewModel
     
     // MARK: -
@@ -61,6 +62,7 @@ struct ShiftRowsAnimationView: View {
                          boxSize: 70,
                          backgroundColor: .reducedByteColor(value))
                 .offset(x: positions.x, y: positions.y)
+                .matchedGeometryEffect(id: "\(row)-\(col)", in: animationNamespace)
             }
         }
     }
