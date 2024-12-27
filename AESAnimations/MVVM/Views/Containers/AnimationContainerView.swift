@@ -39,7 +39,12 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModelProtoc
                     content
                         .frame(width: geometry.size.width * 0.95, height: geometry.size.height * 0.95)
                         .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                        .onAppear { viewModel.createAnimationSteps(with: geometry) }
+                        .onAppear {
+                            if viewModel.animationData.animationSteps.isEmpty || viewModel.animationData.reverseAnimationSteps.isEmpty {
+                                viewModel.createAnimationSteps(with: geometry)
+                                viewModel.handleAnimationStart()
+                            }
+                        }
                     
                     VStack {
                         Spacer()

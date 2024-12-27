@@ -62,8 +62,6 @@ final class SBoxAnimationViewModel: AnimationViewModelProtocol {
             animationData.animationSteps.append(contentsOf: steps)
             animationData.reverseAnimationSteps.append(contentsOf: reverse)
         }
-        
-        handleAnimationStart()
     }
     
     // MARK: - Animation Steps Creation Helper Functions

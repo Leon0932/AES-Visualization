@@ -108,27 +108,22 @@ final class KeyExpansionViewModel: AnimationViewModelProtocol {
     /// - Parameter geometry: The `GeometryProxy` object used to calculate the view's layout for positioning animations.
     @MainActor
     func createAnimationSteps(with geometry: GeometryProxy) {
-        // Check Empyt Array
-        if animationData.animationSteps.isEmpty || animationData.reverseAnimationSteps.isEmpty {
-            // Using the Key Expansion Algorithm
-            for index in nK..<arraySize {
-                if index % nK == 0 {
-                    let roundKeyWithOps = performRoundKeyWithOperations(index: index)
-                    animationData.animationSteps.append(contentsOf: roundKeyWithOps.0)
-                    animationData.reverseAnimationSteps.append(contentsOf: roundKeyWithOps.1)
-                    
-                } else if keySize == .key256 && index % nK == 4 {
-                    let subBytesAnimation = performSubBytesFor256(index: index)
-                    animationData.animationSteps.append(contentsOf: subBytesAnimation.0)
-                    animationData.reverseAnimationSteps.append(contentsOf: subBytesAnimation.1)
-                } else {
-                    let roundKeyAnimation = performRoundKey(index: index)
-                    animationData.animationSteps.append(contentsOf: roundKeyAnimation.0)
-                    animationData.reverseAnimationSteps.append(contentsOf: roundKeyAnimation.1)
-                }
+        // Using the Key Expansion Algorithm
+        for index in nK..<arraySize {
+            if index % nK == 0 {
+                let roundKeyWithOps = performRoundKeyWithOperations(index: index)
+                animationData.animationSteps.append(contentsOf: roundKeyWithOps.0)
+                animationData.reverseAnimationSteps.append(contentsOf: roundKeyWithOps.1)
+                
+            } else if keySize == .key256 && index % nK == 4 {
+                let subBytesAnimation = performSubBytesFor256(index: index)
+                animationData.animationSteps.append(contentsOf: subBytesAnimation.0)
+                animationData.reverseAnimationSteps.append(contentsOf: subBytesAnimation.1)
+            } else {
+                let roundKeyAnimation = performRoundKey(index: index)
+                animationData.animationSteps.append(contentsOf: roundKeyAnimation.0)
+                animationData.reverseAnimationSteps.append(contentsOf: roundKeyAnimation.1)
             }
-            
-            handleAnimationStart()
         }
     }
     
@@ -326,7 +321,7 @@ final class KeyExpansionViewModel: AnimationViewModelProtocol {
                     if self.positionKey[3].x == -shiftRowsHelper.middleOffset {
                         return
                     }
-
+                    
                     // Normal Step
                     self.positionKey[0].x = -shiftRowsHelper.middleOffset
                     self.positionKey[0].y = 100
@@ -342,7 +337,7 @@ final class KeyExpansionViewModel: AnimationViewModelProtocol {
                 if self.positionKey[3].x == -shiftRowsHelper.middleOffset {
                     return
                 }
-
+                
                 // Normal Step
                 withAnimation {
                     for i in 1...3 { self.positionKey[i].y = -shiftRowsHelper.boxSizeWithSpacing }

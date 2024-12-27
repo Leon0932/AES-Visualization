@@ -59,8 +59,6 @@ final class MixColumnsViewModel: AnimationViewModelProtocol {
             animationData.animationSteps.append(contentsOf: animations.0)
             animationData.reverseAnimationSteps.append(contentsOf: animations.1)
         }
-        
-        handleAnimationStart()
     }
     
     /// Animates the transformation of a column in the state, including both forward and reverse animation sequences.

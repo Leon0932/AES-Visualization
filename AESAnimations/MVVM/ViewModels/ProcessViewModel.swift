@@ -267,8 +267,6 @@ final class ProcessViewModel: AnimationViewModelProtocol {
     ///
     /// - Parameter geometry: The `GeometryProxy` object used to calculate the view's layout for positioning animations.
     func createAnimationSteps(with geometry: GeometryProxy) {
-        guard animationData.animationSteps.isEmpty else { return }
-        
         phaseZeroSteps()
         createPhase(phase: 1, round: 0, phaseAnimations: phaseOne)
         
@@ -293,8 +291,6 @@ final class ProcessViewModel: AnimationViewModelProtocol {
         animationData.animationSteps.append(contentsOf: [moveToEnd.0, resetSavedPosition])
         animationData.reverseAnimationSteps.append(contentsOf: [moveToEnd.1, resetSavedPosition])
         addShowHideRoundKeySteps(hide: 0.0, show: 1.0)
-        
-        handleAnimationStart()
     }
     
     // MARK: - Animation Phase Creation Functions

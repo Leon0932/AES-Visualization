@@ -73,8 +73,6 @@ final class AddRoundKeyViewModel: AnimationViewModelProtocol {
                 animationData.reverseAnimationSteps.append(contentsOf: animations.1)
             }
         }
-        
-        handleAnimationStart()
     }
     
     /// Animates the process of adding a round key in the AES encryption round.

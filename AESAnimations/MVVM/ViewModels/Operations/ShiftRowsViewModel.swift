@@ -63,8 +63,6 @@ final class ShiftRowsViewModel: AnimationViewModelProtocol {
         let animations = performShiftRowsSequentially()
         animationData.animationSteps.append(contentsOf: animations.0)
         animationData.reverseAnimationSteps.append(contentsOf: animations.1)
-        
-        handleAnimationStart()
     }
     
     // MARK: - Animation Steps Creation Helper Functions
