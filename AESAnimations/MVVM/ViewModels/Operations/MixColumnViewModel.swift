@@ -165,7 +165,7 @@ final class MixColumnsViewModel: AnimationViewModelProtocol {
     ///   - newState: The modified state after the animation. This parameter is not used in this function
     ///     because the result simply appear without requiring changes.
     ///   - showResult: Controls whether the result is visible after resetting.
-    func resetAnimationState(state newState: [[Byte]], showResult: Double) {
+    func updateAnimationState(state newState: [[Byte]], showResult: Double) {
         resetVisibility()
         withAnimation {
             showMatrix = 0

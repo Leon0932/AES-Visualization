@@ -633,7 +633,7 @@ final class ProcessViewModel: AnimationViewModelProtocol {
     /// - Parameters:
     ///   - newState: The modified key after the animation. This parameter is not used in this function.
     ///   - showResult: Controls whether the result is visible after resetting.
-    func resetAnimationState(state newState: [[Byte]], showResult: Double) {
+    func updateAnimationState(state newState: [[Byte]], showResult: Double) {
         withAnimation {
             ballPosition = showResult == 1.0 ? horizontalLineHeight : -60
             ballPositionX = 0

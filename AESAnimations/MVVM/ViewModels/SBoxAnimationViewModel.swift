@@ -313,7 +313,7 @@ final class SBoxAnimationViewModel: AnimationViewModelProtocol {
     /// - Parameters:
     ///   - newState: The modified key after the animation. This parameter is not used in this function.
     ///   - showResult: Controls whether the result is visible after resetting.
-    func resetAnimationState(state newState: [[Byte]], showResult: Double) {
+    func updateAnimationState(state newState: [[Byte]], showResult: Double) {
         withAnimation {
             changeValues()
             opacityOfSBox = Array.create2DArray(repeating: showResult, rows: 16, cols: 16)

@@ -203,7 +203,7 @@ final class AddRoundKeyViewModel: AnimationViewModelProtocol {
     ///   - newState: The modified state after the animation. This parameter is not used in this function
     ///     because the round keys simply appear without requiring changes.
     ///   - showResult: Controls whether the result is visible after resetting.
-    func resetAnimationState(state newState: [[Byte]], showResult: Double) {
+    func updateAnimationState(state newState: [[Byte]], showResult: Double) {
         withAnimation {
             positionState = Position.default2DPositions(rows: 4, cols: 4)
             positionKey = Position.default2DPositions(rows: 4, cols: 4)

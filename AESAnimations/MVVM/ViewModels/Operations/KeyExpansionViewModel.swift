@@ -704,7 +704,7 @@ final class KeyExpansionViewModel: AnimationViewModelProtocol {
     ///   - newState: The modified key after the animation. This parameter is not used in this function
     ///     because the round keys simply appear without requiring changes.
     ///   - showResult: Controls whether the round keys are visible after resetting.
-    func resetAnimationState(state newState: [[Byte]], showResult: Double) {
+    func updateAnimationState(state newState: [[Byte]], showResult: Double) {
         withAnimation {
             positionKey = Position.default1DPositions(count: 4)
             showRoundKeyColumn = Array.create1DArray(repeating: showResult, count: arraySize)

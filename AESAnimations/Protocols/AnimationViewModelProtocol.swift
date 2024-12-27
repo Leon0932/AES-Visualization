@@ -20,7 +20,7 @@ protocol AnimationViewModelProtocol: ObservableObject {
     
     @MainActor
     func createAnimationSteps(with geometry: GeometryProxy)
-    func resetAnimationState(state newState: [[Byte]], showResult: Double)
+    func updateAnimationState(state newState: [[Byte]], showResult: Double)
     
 }
 
@@ -219,7 +219,7 @@ extension AnimationViewModelProtocol {
     private func cancelAndResetAnimation(state: [[Byte]], showResult: Double) {
         animationData.animationTask?.cancel()
         Task { await sleep(for: normal) }
-        self.resetAnimationState(state: state, showResult: showResult)
+        self.updateAnimationState(state: state, showResult: showResult)
         
         withAnimation {
             self.animationControl.resetAnimationFlags()

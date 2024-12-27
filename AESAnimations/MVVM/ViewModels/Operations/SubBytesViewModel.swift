@@ -339,7 +339,7 @@ final class SubBytesViewModel: AnimationViewModelProtocol {
     /// - Parameters:
     ///   - newState: The modified state after the animation.
     ///   - showResult: Controls whether the new state is visible or not after resetting.
-    func resetAnimationState(state newState: [[Byte]], showResult: Double) {
+    func updateAnimationState(state newState: [[Byte]], showResult: Double) {
         setSearchState(for: (nil, nil, nil), showText: 0)
         currentByte = 0x00
         splitByte = Array.create2DArray(repeating: false, rows: 4, cols: 4)
