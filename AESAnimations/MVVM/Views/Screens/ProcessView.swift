@@ -62,7 +62,7 @@ struct ProcessView: View {
                 
                 StateView(state: leftColumn ? viewModel.state : viewModel.currentState)
             }
-
+            
             if leftColumn {
                 if viewModel.nk > 4 {
                     keyButton
@@ -104,22 +104,22 @@ struct ProcessView: View {
             VStack(alignment: .center, spacing: 25) {
                 roundView(phase: 0)
                     .frame(maxWidth: .infinity)
-
+                
                 
                 roundView(phase: 1, data: viewModel.phaseOne)
                     .frame(maxWidth: .infinity)
-    
+                
                 
                 roundView(phase: 2, data: viewModel.phaseTwo)
                     .background(
                         HorizontalLine(mainRounds: viewModel.rounds,
                                        currentRound: $viewModel.currentRoundNumber)
                     )
-        
+                
                 
                 roundView(phase: 3, data: viewModel.phaseThree)
                     .frame(maxWidth: .infinity)
-              
+                
             }
             .padding(.vertical, 10)
             .background(VerticalLine(horizontalLineHeight: $viewModel.horizontalLineHeight))
@@ -251,9 +251,9 @@ struct ProcessView: View {
     }
     
     func createCipherHistory() -> some View {
-        CipherHistoryView(navigationTitle: sheetTitle,
-                          cipherRounds: viewModel.cipherHistory,
-                          isDecryption: viewModel.operationDetails.isInverseMode)
+        CipherHistory(navigationTitle: sheetTitle,
+                      cipherRounds: viewModel.cipherHistory,
+                      isDecryption: viewModel.operationDetails.isInverseMode)
     }
     
     
