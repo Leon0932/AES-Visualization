@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CipherHistoryView: View {
+struct CipherHistory: View {
     let navigationTitle: String
     let cipherRounds: [CipherRound]
     let isDecryption: Bool
