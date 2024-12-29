@@ -1,5 +1,5 @@
 //
-//  AESCipherTest.swift
+//  AESCipherTests.swift
 //  AES-ArchitectureTests
 //
 //  Created by Leon Chamoun on 30.09.24.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import AES_Visualization
 
-final class AESCipherTest: XCTestCase {
+final class AESCipherTests: XCTestCase {
     
     override func setUpWithError() throws {
         super.setUp()
