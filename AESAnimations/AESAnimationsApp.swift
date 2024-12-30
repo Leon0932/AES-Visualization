@@ -19,6 +19,12 @@ struct AESAnimationsApp: App {
         WindowGroup {
             content
         }
+        #if os(macOS)
+        .windowResizability(.contentSize)
+        .commands {
+            CommandGroup(replacing: .windowSize) {}
+        }
+        #endif
     }
 
     var content: some View {
