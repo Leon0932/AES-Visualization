@@ -163,7 +163,7 @@ struct SBoxView: View {
     /// - Returns: The calculated box size in points.
     private func calculateCellSize() -> CGFloat {
         #if os(iOS)
-        return DeviceDetector.isPad13Size() ? 40 : 35
+        return DeviceDetector.isPad13Size() ? 40 : 32
         #else
         return 35
         #endif
