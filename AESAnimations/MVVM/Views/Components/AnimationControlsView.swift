@@ -72,7 +72,7 @@ struct AnimationControlsView: View {
     
     // MARK: - Control buttons
     private var controlButtons: some View {
-        HStack(spacing: 35) {
+        HStack(spacing: 25) {
             controlButton(icon: "arrow.uturn.left.circle.fill", action: resetAnimation)
             controlStack(isForward: false)
             pausePlayControl
@@ -92,7 +92,7 @@ struct AnimationControlsView: View {
     }
     
     private func controlStack(isForward: Bool) -> some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 5) {
             if isForward {
                 forwardButton()
                 doubleTextView(showText: animationControl.direction == .forward && animationControl.speed != .normal)
