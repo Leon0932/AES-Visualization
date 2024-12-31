@@ -54,15 +54,30 @@ struct KeyView: View {
             .fontWeight(.bold)
             
             HStack(spacing: 8) {
-                let key = viewModel.aesCipher.key.convertTo1DArray().enumerated()
+                let key = viewModel.aesCipher.key.convertTo1DArray()
                 
-                ForEach(Array(key), id: \.offset) { index, element in
-                    Text(String(format: "%02X", element))
+                if key.count == 32 {
+                    VStack(spacing: 10) {
+                        keySection(key: key, range: 0..<16)
+                        keySection(key: key, range: 16..<32)
+                    }
+                } else {
+                    ForEach(Array(key.enumerated()), id: \.offset) { index, element in
+                        Text(String(format: "%02X", element))
+                    }
                 }
             }
         }
         .fontDesign(.monospaced)
         .font(.title2)
+    }
+    
+    private func keySection(key: [Byte], range: Range<Int>) -> some View {
+        HStack(spacing: 8) {
+            ForEach(range, id: \.self) { index in
+                Text(String(format: "%02X", key[index]))
+            }
+        }
     }
     
     // MARK: - Round Keys List
