@@ -19,7 +19,7 @@ struct EditableMatrix: View {
     // MARK: - Computed Properties for View
     var boxSize: CGFloat {
         #if os(iOS)
-        DeviceDetector.isPad13Size() ? 80 : 70
+        DeviceDetector.isPad13Size() ? 100 : 70
         #else
         80
         #endif
