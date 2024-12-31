@@ -11,6 +11,23 @@ struct SBoxAnimationView: View {
     @StateObject var viewModel: SBoxAnimationViewModel
     @Environment(\.dismiss) var dismiss
     
+    // MARK: - Computed Properties for View
+    var boxSize: CGFloat {
+        #if os(iOS)
+        DeviceDetector.isPad13Size() ? 35 : 30
+        #else
+        35
+        #endif
+    }
+    
+    var spacing: CGFloat { 5 }
+    
+    var frameWidthForBinary: CGFloat {
+        (boxSize + spacing) * 7 + boxSize
+    }
+    
+    var frameWidthTotal: CGFloat { frameWidthForBinary + 85 }
+    
     // MARK: -
     var body: some View {
         AnimationContainerView(viewModel: viewModel) {
@@ -81,7 +98,7 @@ struct SBoxAnimationView: View {
                 .opacity(viewModel.showTitleOfAff)
                 .font(.headline)
             
-            VStack(spacing: 5) {
+            VStack(spacing: spacing) {
                 ForEach(0..<viewModel.values.count, id: \.self) { index in
                     let shiftValues = ["b'", "b' >> 1", "b' >> 2", "b' >> 3", "b' >> 4", "0x63", "Ergebnis"]
                     let operators = ["⊕", "⊕", "⊕", "⊕", "⊕", "="]
@@ -97,17 +114,18 @@ struct SBoxAnimationView: View {
     private func transformationRow(index: Int,
                                    shiftValues: [String],
                                    operators: [String]) -> some View {
-        VStack(spacing: 5) {
+        VStack(spacing: spacing) {
             // Text and box perfectly aligned center
             HStack {
                 Text(shiftValues[index])
                     .font(.headline)
+                
                 Spacer()
                 
-                HStack(spacing: 5) {
+                HStack(spacing: spacing) {
                     ForEach(Array(viewModel.values[index].enumerated()), id: \.offset) { (_, value) in
                         CellView(value: Byte(value),
-                                 boxSize: 35,
+                                 boxSize: boxSize,
                                  backgroundColor: .lightGray,
                                  valueFormat: .number)
                     }
@@ -121,13 +139,13 @@ struct SBoxAnimationView: View {
                     Text(operators[index])
                         .font(.headline)
                         .opacity(viewModel.showOperators[index])
-                        .frame(width: 315, alignment: .center)
+                        .frame(width: frameWidthForBinary, alignment: .center)
                     
                 }
             }
             
         }
         .opacity(viewModel.showValues[index])
-        .frame(width: 425)
+        .frame(width: frameWidthTotal)
     }
 }
