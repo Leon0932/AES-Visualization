@@ -34,8 +34,10 @@ struct DeviceDetector {
     ///
     /// - Returns: `true` if the device is an iPad Mini, otherwise `false`.
     static func isiPadMini() -> Bool {
-        let screenSize = UIScreen.main.bounds.size
-        return screenSize.width <= 1133 // iPad Mini 6-Generation Width
+        let screenHeight = UIScreen.main.bounds.height
+        let screenWidth = UIScreen.main.bounds.width
+        // iPad Mini hat eine typische Breite und Höhe von ~744x1133 (9 Zoll)
+        return max(screenHeight, screenWidth) <= 1133 && min(screenHeight, screenWidth) <= 744
     }
 }
 #endif
