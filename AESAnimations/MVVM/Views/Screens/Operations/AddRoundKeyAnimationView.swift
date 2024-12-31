@@ -13,37 +13,35 @@ struct AddRoundKeyAnimationView: View {
     // MARK: -
     var body: some View {
         AnimationContainerView(viewModel: viewModel) {
-            VStack(spacing: 50) {
+            VStack(spacing: viewModel.spacingBetweenComponentes) {
                 calculationView
                 stateAndKeyView
                 newStateView
             }
         }
-        #if os(iOS)
-        .onAppear { viewModel.isPad13Size = DeviceDetector.isPad13Size() }
-        #endif
     }
     
     // MARK: - Calculation View
     private var calculationView: some View {
-        HStack(spacing: 12) {
-            HStack(spacing: 80) {
-                OperationSymbolView(text: "⊕",
-                                    isVisible: viewModel.showXOR)
-                OperationSymbolView(text: "=",
-                                    isVisible: viewModel.showEqual)
-            }
+        HStack(spacing: 20) {
+            invisibleCellView { viewModel.positionCellState = $0 }
             
+            OperationSymbolView(text: "⊕",
+                                isVisible: viewModel.showXOR)
+            
+            invisibleCellView { viewModel.positionCellKey = $0 }
+            
+            OperationSymbolView(text: "=",
+                                isVisible: viewModel.showEqual)
             resultCellView
         }
-        .padding(.bottom)
     }
     
     private var resultCellView: some View {
         let value = viewModel.resultOfAdd
         
         return CellView(value: value,
-                        boxSize: 50,
+                        boxSize: LayoutStyles.cellSize,
                         backgroundColor: .reducedByteColor(value))
         .opacity(viewModel.showResult)
     }
@@ -54,12 +52,14 @@ struct AddRoundKeyAnimationView: View {
             StateView(title: "Zustand",
                       state: viewModel.state,
                       position: .twoD(viewModel.positionState))
+            .trackPosition { viewModel.positionStateMatrix = $0 }
             
             Spacer()
             
             StateView(title: "Schlüssel",
                       state: viewModel.key,
                       position: .twoD(viewModel.positionKey))
+            .trackPosition { viewModel.positionKeyMatrix = $0 }
         }
         
     }
@@ -69,5 +69,12 @@ struct AddRoundKeyAnimationView: View {
         StateView(title: "Neuer Zustand",
                   state: viewModel.result,
                   opacity: .twoD(viewModel.showNewState))
+    }
+    
+    // MARK: - Helper functions
+    private func invisibleCellView(onPosition: @escaping (Position) -> Void) -> some View {
+        CellView(value: 0x00, boxSize: LayoutStyles.cellSize, backgroundColor: .clear)
+            .trackPosition(onPosition: onPosition)
+            .opacity(0)
     }
 }

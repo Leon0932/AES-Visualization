@@ -24,6 +24,14 @@ final class AddRoundKeyViewModel: AnimationViewModelProtocol {
     @Published var positionKey: [[Position]] = Position.default2DPositions(rows: 4,
                                                                            cols: 4)
     
+    // Properties to track the Position of:
+    // - Matrix (State and Key)
+    // - XOR-Operation: State + Key
+    @Published var positionStateMatrix: Position = Position(x: 0, y: 0)
+    @Published var positionKeyMatrix: Position = Position(x: 0, y: 0)
+    @Published var positionCellState: Position = Position(x: 0, y: 0)
+    @Published var positionCellKey: Position = Position(x: 0, y: 0)
+    
     @Published var resultOfAdd: Byte = 0x00
     
     // Flags for the view
@@ -39,9 +47,17 @@ final class AddRoundKeyViewModel: AnimationViewModelProtocol {
     var animationData = AnimationData()
     
     // Constants
-    private let verticalOffset: CGFloat = 140
-    private let horizontalSpacing: CGFloat = 60
-    var isPad13Size = false
+    let spacingBetweenComponentes: CGFloat = 50
+    private var horizontalSpacing: CGFloat {
+        LayoutStyles.cellSize + LayoutStyles.spacingMatrix
+    }
+    private var verticalOffset: CGFloat {
+        LayoutStyles.cellSize
+        + LayoutStyles.titleHeight
+        + LayoutStyles.spacingMatrix
+        + spacingBetweenComponentes
+    }
+
     
     // MARK: - Initializer
     init(state: [[Byte]],
@@ -139,14 +155,25 @@ final class AddRoundKeyViewModel: AnimationViewModelProtocol {
     private func updatePosition(row: Int, col: Int, width: CGFloat, isX: Bool) async {
         withAnimation {
             if isX {
-                let widthPosition = self.isPad13Size ? 0.3525 : 0.345
-                self.positionState[row][col].x = width * widthPosition - CGFloat(col) * self.horizontalSpacing
-                self.positionKey[row][col].x = -(width * 0.475) + CGFloat(3 - col) * self.horizontalSpacing
+                // The idea is as follows:
+                // The positions of the State/Key are determined.
+                // Based on that, the position of the AddRoundKey operation is calculated,
+                // and a formula is established.
+                // NewPosition =
+                // Position of State - Position of Operation - (CGFloat(col) * self.horizontalSpacing)
+                let spacing = CGFloat(col) * self.horizontalSpacing
+                let xOffsetState = self.positionCellState.x - self.positionStateMatrix.x - spacing
+                let xOffsetKey = self.positionCellKey.x - self.positionKeyMatrix.x - spacing
                 
+                self.positionState[row][col].x = xOffsetState
+                self.positionKey[row][col].x = xOffsetKey
             } else {
-                self.positionState[row][col].y -= self.verticalOffset + CGFloat(row) * self.horizontalSpacing
-                self.positionKey[row][col].y -= self.verticalOffset + CGFloat(row) * self.horizontalSpacing
+                // The y-position is calculated based on the spacing between the matrix and the operations,
+                // using the `verticalOffset` value.
+                let yOffset = self.verticalOffset + CGFloat(row) * self.horizontalSpacing
                 
+                self.positionState[row][col].y -= yOffset
+                self.positionKey[row][col].y -= yOffset
             }
         }
         
