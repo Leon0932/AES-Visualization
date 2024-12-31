@@ -16,7 +16,22 @@ struct EditableMatrix: View {
     let icon: String
     @Binding var matrix: Matrix
     
-    var boxSize: CGFloat = 80
+    // MARK: - Computed Properties for View
+    var boxSize: CGFloat {
+        #if os(iOS)
+        DeviceDetector.isPad13Size() ? 80 : 70
+        #else
+        80
+        #endif
+    }
+    
+    var font: Font {
+        #if os(iOS)
+        DeviceDetector.isPad13Size() ? .title : .title2
+        #else
+        .title
+        #endif
+    }
     
     // MARK: - Body
     var body: some View {
@@ -35,10 +50,11 @@ struct EditableMatrix: View {
             HStack(spacing: 4) {
                 Label(title: { Text(title) },
                       icon: { Image(systemName: icon) })
-                .font(.title)
+                .font(font)
                 
                 CustomButtonView(icon: "arrow.uturn.left",
-                                 buttonStyle: StandardButtonStyle(font: .title2, isDisabled: matrix.checkNullBytes)) {
+                                 buttonStyle: StandardButtonStyle(font: .title2,
+                                                                  isDisabled: matrix.checkNullBytes)) {
                     matrix.fillData()
                 }
             }
@@ -46,12 +62,12 @@ struct EditableMatrix: View {
             Spacer()
             
             CustomButtonView(icon: "dice",
-                             buttonStyle: SecondaryButtonStyle(font: .title)) {
+                             buttonStyle: SecondaryButtonStyle(font: font)) {
                 matrix.generateAndFillRandomBytes()
             }
             
             CustomButtonView(icon: "trash",
-                             buttonStyle: SecondaryButtonStyle(font: .title)) {
+                             buttonStyle: SecondaryButtonStyle(font: font)) {
                 matrix.clearData()
             }
         }
