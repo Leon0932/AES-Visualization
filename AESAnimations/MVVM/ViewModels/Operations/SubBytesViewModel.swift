@@ -28,7 +28,6 @@ final class SubBytesViewModel: AnimationViewModelProtocol {
     // Properties for the S-Box View
     @Published var searchResult: Byte? = nil
     @Published var searchState: Double = 0
-    @Published var searchStatePosition: Position
     @Published var searchX: Byte? = nil
     @Published var searchY: Byte? = nil
     
@@ -42,7 +41,12 @@ final class SubBytesViewModel: AnimationViewModelProtocol {
     var animationData = AnimationData()
     
     // Helper Variables for View and Calculating the S-Box
-    private let boxSize = 50
+    let boxSize: CGFloat = 40
+    @Published var positionOfSearchByte: Position = Position(x: 0, y: 0)
+    @Published var positionOfCurrentState: Position = Position(x: 0, y: 0)
+    private var verticalOffset: CGFloat {
+        LayoutStyles.titleHeight + LayoutStyles.spacingMatrix
+    }
     
     // Computed Properties
     var sBoxAnimationViewModel: SBoxAnimationViewModel {
@@ -63,7 +67,7 @@ final class SubBytesViewModel: AnimationViewModelProtocol {
         self.operationDetails = operationDetails
         self.animationControl = animationControl
         
-        self.searchStatePosition = Position(x: -1, y: -1)
+
         copyOfMatrix = state
     }
     
@@ -76,25 +80,9 @@ final class SubBytesViewModel: AnimationViewModelProtocol {
     /// - Parameter geometry: The `GeometryProxy` object used to calculate the view's layout for positioning animations.
     @MainActor
     func createAnimationSteps(with geometry: GeometryProxy) {
-        // The state position is further to the left and slightly above the center. Therefore, a cell
-        // is shifted by 75 units along the x-axis and its height is adjusted by 35% on the y-axis.
-        var position = Position(x: geometry.size.width * 0.75,
-                                y: geometry.size.height * 0.35)
-        
-        #if os(iOS)
-        position.y = geometry.size.height * 0.32 // Position on iPad is too high
-        #endif
-        
-        // The calculation was made as follows:
-        // The text "Search State" should display the position where the "Cell" is located,
-        // but further to the left, leaving enough space for the text. The centering
-        // should also be maintained to keep the layout consistent.
-        searchStatePosition = Position(x: position.x - CGFloat(3 * boxSize),
-                                       y: -(position.y + CGFloat(3 * boxSize + 40)))
-        
         for row in 0..<state.count {
             for col in 0..<state[row].count {
-                let animations = processGridCell(row: row, col: col, targetPosition: position)
+                let animations = processGridCell(row: row, col: col)
                 animationData.animationSteps.append(contentsOf: animations.0)
                 animationData.reverseAnimationSteps.append(contentsOf: animations.1)
             }
@@ -114,22 +102,17 @@ final class SubBytesViewModel: AnimationViewModelProtocol {
     /// - Returns: A tuple containing two arrays of `AnimationStep` objects. The first array handles the forward animation,
     ///            and the second array handles the reverse animation.
     @MainActor
-    private func processGridCell(row: Int, col: Int, targetPosition: Position) -> ([AnimationStep], [AnimationStep]) {
+    private func processGridCell(row: Int, col: Int) -> ([AnimationStep], [AnimationStep]) {
         var normalSteps = [
             AnimationStep(animation: { self.changeCurrentBytes(row: row, col: col, to: (self.state[row][col], true)) },
                           delay: normal)
         ]
         
         var reverseSteps = [AnimationStep { self.changeCurrentBytes(row: row, col: col, to: (0x00, false)) }]
-        
-        let newPosition = Position(
-            x: targetPosition.x - CGFloat(col * boxSize),
-            y: -(targetPosition.y + CGFloat(row * boxSize))
-        )
-        
-        let cellMovements = animateCellMovement(row: row, col: col, to: newPosition)
+
+        let cellMovements = animateCellMovement(row: row, col: col)
         let searchSteps = performSearchAndUpdate(row: row, col: col)
-        let resetSteps = resetCellPosition(row: row, col: col, to: newPosition)
+        let resetSteps = resetCellPosition(row: row, col: col)
         
         normalSteps.append(contentsOf: cellMovements.0 + searchSteps.0 + resetSteps.0)
         reverseSteps.append(contentsOf: cellMovements.1 + searchSteps.1 + resetSteps.1)
@@ -150,10 +133,12 @@ final class SubBytesViewModel: AnimationViewModelProtocol {
     /// - Returns: A tuple containing two arrays of `AnimationStep` objects. The first array handles the forward animation,
     ///            and the second array handles the reverse animation.
     @MainActor
-    private func animateCellMovement(row: Int, col: Int, to newPosition: Position) -> ([AnimationStep], [AnimationStep]) {
+    private func animateCellMovement(row: Int, col: Int) -> ([AnimationStep], [AnimationStep]) {
         let normalSteps = [
-            AnimationStep(animation: { await self.changePosition(row: row, col: col, y: newPosition.y) }, delay: short),
-            AnimationStep(animation: { await self.changePosition(row: row, col: col, x: newPosition.x) }, delay: short)
+            AnimationStep(animation: { await self.changePosition(row: row, col: col, y: self.calculatePosition(row: row, col: col).y) },
+                          delay: short),
+            AnimationStep(animation: { await self.changePosition(row: row, col: col, x: self.calculatePosition(row: row, col: col).x) },
+                          delay: short)
         ]
         
         let reverseSteps = [
@@ -209,15 +194,17 @@ final class SubBytesViewModel: AnimationViewModelProtocol {
     /// - Returns: A tuple containing two arrays of `AnimationStep` objects. The first array handles the forward animation,
     ///            and the second array handles the reverse animation.
     @MainActor
-    private func resetCellPosition(row: Int, col: Int, to position: Position) -> ([AnimationStep], [AnimationStep]) {
+    private func resetCellPosition(row: Int, col: Int) -> ([AnimationStep], [AnimationStep]) {
         let normalSteps = [
             AnimationStep(animation: { await self.changePosition(row: row, col: col, x: 0) }, delay: short),
             AnimationStep(animation: { await self.changePosition(row: row, col: col, y: 0) }, delay: normal)
         ]
         
         let reverseSteps = [
-            AnimationStep(animation: { await self.changePosition(row: row, col: col, x: position.x) }, delay: normal),
-            AnimationStep(animation: { await self.changePosition(row: row, col: col, y: position.y) }, delay: normal)
+            AnimationStep(animation: { await self.changePosition(row: row, col: col, x: self.calculatePosition(row: row, col: col).x) },
+                          delay: normal),
+            AnimationStep(animation: { await self.changePosition(row: row, col: col, y: self.calculatePosition(row: row, col: col).y) },
+                          delay: normal)
         ]
         
         return (normalSteps, reverseSteps)
@@ -251,6 +238,27 @@ final class SubBytesViewModel: AnimationViewModelProtocol {
         ]
         
         return (normalSteps, reverseSteps)
+    }
+    
+    /// Helper function to calculate the position of a cell based on its row and column indices.
+    ///
+    /// This function computes the global position of a component relative to the current state and to the searching byte position
+    /// (`positionOfSearchByte`). The calculation accounts for the horizontal and vertical offsets between rows
+    /// and columns, as well as predefined spacing (10.0 Points) and box sizes (40.0 Points).
+    ///
+    /// - Parameters:
+    ///   - row: The row index of the component. Used to calculate the vertical offset.
+    ///   - col: The column index of the component. Used to calculate the horizontal offset.
+    /// - Returns: The calculated `Position` of the component as a `Position` object.
+    private func calculatePosition(row: Int, col: Int) -> Position {
+        let offset: CGFloat = boxSize + LayoutStyles.spacingMatrix
+        
+        return Position(x: positionOfSearchByte.x - positionOfCurrentState.x
+                 - (CGFloat(col) * offset),
+                 y: positionOfSearchByte.y - positionOfCurrentState.y
+                 - verticalOffset
+                 - (CGFloat(row) * offset)
+        )
     }
     
     // MARK: - Modifier Helper Functions

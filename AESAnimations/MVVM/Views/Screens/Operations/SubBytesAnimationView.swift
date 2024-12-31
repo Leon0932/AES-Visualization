@@ -18,8 +18,7 @@ struct SubBytesAnimationView: View {
         AnimationContainerView(viewModel: viewModel, showRepeatButtons: showRepeatButtons) {
             HStack {
                 currentStateView
-                sBoxView
-                    .padding(.top, 85)
+                searchByteInSBoxView
             }
         }
         .toolbar {
@@ -34,35 +33,52 @@ struct SubBytesAnimationView: View {
     
     // MARK: - State View
     private var currentStateView: some View {
-        let searchPosition = viewModel.searchStatePosition
-        
-        return VStack(alignment: .leading, spacing: 10) {
-            Text(viewModel.animationControl.isDone ? "Neuer Zustand" : "Aktueller Zustand")
-                .font(.headline)
-            
+        VStack(alignment: .leading, spacing: 10) {
+            StateTitle(title: viewModel.animationControl.isDone ? "Neuer Zustand" : "Aktueller Zustand")
             stateGridView
-            
-            Text("Suche Byte")
-                .offset(x: searchPosition.x, y: searchPosition.y)
-                .opacity(viewModel.searchState)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .trackPosition { viewModel.positionOfCurrentState = $0 }
+    }
+    
+    private var searchByteInSBoxView: some View {
+        VStack(spacing: 50) {
+            result
+            sBoxView
+        }
     }
     
     private var stateGridView: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: LayoutStyles.spacingMatrix) {
             ForEach(0..<viewModel.state.count, id: \.self) { row in
-                HStack(spacing: 10) {
+                HStack(spacing: LayoutStyles.spacingMatrix) {
                     ForEach(0..<viewModel.state[row].count, id: \.self) { col in
                         let position = viewModel.positions[row][col]
                         
                         cellStack(row: row, col: col)
-                            .frame(width: 40, height: 40)
+                            .frame(width: viewModel.boxSize,
+                                   height: viewModel.boxSize)
                             .offset(x: position.x, y: position.y)
                             .matchedGeometryEffect(id: "\(row)-\(col)", in: animationNamespace)
                     }
                 }
             }
+        }
+    }
+    
+    private var result: some View {
+        HStack(spacing: 50) {
+            Text("Suche Byte")
+                .opacity(viewModel.searchState)
+            
+            CellView(
+                value: 0x00,
+                boxSize: viewModel.boxSize,
+                backgroundColor: .clear
+            )
+            .opacity(0)
+            .trackPosition { viewModel.positionOfSearchByte = $0 }
+            
         }
     }
     
@@ -79,7 +95,7 @@ struct SubBytesAnimationView: View {
             
             CellView(
                 value: value,
-                boxSize: 40,
+                boxSize: viewModel.boxSize,
                 backgroundColor: viewModel.backgroundColor(row: row, col: col)
             )
             .opacity(splitByte ? 0 : 1)
