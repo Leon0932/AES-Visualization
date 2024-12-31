@@ -57,6 +57,8 @@
 		C362CBFE2D062296008A8954 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362CBFD2D062296008A8954 /* WarningView.swift */; };
 		C362CC002D0625A9008A8954 /* DeviceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C362CBFF2D0625A9008A8954 /* DeviceDetector.swift */; };
 		C36566362C61F6BD007A4A1E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36566352C61F6BD007A4A1E /* SettingsView.swift */; };
+		C371552E2D24093900E3ADCF /* LayoutStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C371552D2D24093900E3ADCF /* LayoutStyles.swift */; };
+		C37155302D240BDE00E3ADCF /* PositionTrackingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C371552F2D240BDE00E3ADCF /* PositionTrackingModifier.swift */; };
 		C37BA07F2C397D5800C87BB7 /* AESAnimationsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BA07E2C397D5800C87BB7 /* AESAnimationsApp.swift */; };
 		C37BA0812C397D5800C87BB7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BA0802C397D5800C87BB7 /* MainView.swift */; };
 		C37BA0832C397D5900C87BB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C37BA0822C397D5900C87BB7 /* Assets.xcassets */; };
@@ -162,6 +164,8 @@
 		C362CBFD2D062296008A8954 /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		C362CBFF2D0625A9008A8954 /* DeviceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetector.swift; sourceTree = "<group>"; };
 		C36566352C61F6BD007A4A1E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C371552D2D24093900E3ADCF /* LayoutStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutStyles.swift; sourceTree = "<group>"; };
+		C371552F2D240BDE00E3ADCF /* PositionTrackingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionTrackingModifier.swift; sourceTree = "<group>"; };
 		C37BA07B2C397D5800C87BB7 /* AES-Visualization.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AES-Visualization.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C37BA07E2C397D5800C87BB7 /* AESAnimationsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESAnimationsApp.swift; sourceTree = "<group>"; };
 		C37BA0802C397D5800C87BB7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -466,6 +470,7 @@
 				C3BDC1422CB32F5700847363 /* NavigationBackButtonModifier.swift */,
 				C33A3C212CCB8310004CF720 /* PressEffectModifier.swift */,
 				C33A3C2B2CCBE676004CF720 /* HighlightEffectModifier.swift */,
+				C371552F2D240BDE00E3ADCF /* PositionTrackingModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -494,6 +499,7 @@
 				C38ED05E2CD191720023C4F9 /* AnimationData.swift */,
 				C362CBFF2D0625A9008A8954 /* DeviceDetector.swift */,
 				C3BB7C412D0DF167004CD800 /* TextStyles.swift */,
+				C371552D2D24093900E3ADCF /* LayoutStyles.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -640,6 +646,7 @@
 				C310C9292C7254BA00E91AB7 /* AddRoundKeyViewModel.swift in Sources */,
 				C38734F22C6943E600E835DB /* ShiftRowsAnimationView.swift in Sources */,
 				C3E1F2C42C7B6FF80030B994 /* OperationNames.swift in Sources */,
+				C371552E2D24093900E3ADCF /* LayoutStyles.swift in Sources */,
 				C31E69BD2C8721B900230D22 /* ColumnView.swift in Sources */,
 				C3E1F2C22C7B6EE80030B994 /* KeyExpansionViewModel.swift in Sources */,
 				C33A3C2C2CCBE676004CF720 /* HighlightEffectModifier.swift in Sources */,
@@ -662,6 +669,7 @@
 				C37BA07F2C397D5800C87BB7 /* AESAnimationsApp.swift in Sources */,
 				C30E9AFC2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift in Sources */,
 				C33940212C56D839008802BC /* AESKeySchedule.swift in Sources */,
+				C37155302D240BDE00E3ADCF /* PositionTrackingModifier.swift in Sources */,
 				C38734E72C692F2000E835DB /* ViewExtensions.swift in Sources */,
 				C351F31F2C8C605D000890AF /* AppScheme.swift in Sources */,
 				C3C476D72C593C11009D718D /* ProcessView.swift in Sources */,

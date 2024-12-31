@@ -17,9 +17,9 @@ struct StateView: View {
     var backgroundColor: Color? = nil
     var foregroundStyle: Color = .primary
     
-    var boxSize: CGFloat = 50
+    var boxSize: CGFloat = LayoutStyles.cellSize
     var alignment: HorizontalAlignment = .center
-    var spacing: CGFloat = 10
+    var spacing: CGFloat = LayoutStyles.spacingMatrix
     
     // MARK: -
     var body: some View {
@@ -102,6 +102,6 @@ struct StateTitle: View {
     var body: some View {
         Text(title)
             .font(TextStyles.headline)
-            .frame(maxHeight: 15)
+            .frame(maxHeight: LayoutStyles.titleHeight)
     }
 }

@@ -17,8 +17,8 @@ struct ColumnView: View {
     var foregroundStyle: Color = .primary
     var highlightColumn: Bool? = nil
     
-    var boxSize: CGFloat = 50
-    var spacing: CGFloat = 10
+    var boxSize: CGFloat = LayoutStyles.cellSize
+    var spacing: CGFloat = LayoutStyles.spacingMatrix
     
     // MARK: - Body
     var body: some View {
