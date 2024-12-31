@@ -88,6 +88,7 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModelProtoc
         || operationName == .addRoundKey
         || operationName == .invSBox
         || operationName == .sBox
+        || operationName == .subWord
     }
     
     func toolbarItem() -> some ToolbarContent {

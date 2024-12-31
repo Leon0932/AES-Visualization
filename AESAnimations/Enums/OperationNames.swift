@@ -12,7 +12,7 @@ import SwiftUI
 /// On macOS, language support is not integrated automatically, so titles may
 /// need to be manually set in both English and German.
 enum OperationNames: CustomStringConvertible {
-    case shiftRows, subBytes, mixColumns, addRoundKey, keyExpansion, encryptionProcess, decryptionProcess, invSBox, sBox
+    case shiftRows, subBytes, mixColumns, addRoundKey, keyExpansion, encryptionProcess, decryptionProcess, invSBox, sBox, subWord
     
     var description: String {
         let languageCode = UserDefaults.standard.string(forKey: StorageKeys.appLanguage.key) ?? "en"
@@ -36,6 +36,8 @@ enum OperationNames: CustomStringConvertible {
             return languageCode == "de" ? "Inverse S-Box Erstellung" : "Inverse S-Box Creation"
         case .sBox:
             return languageCode == "de" ? "S-Box Erstellung" : "S-Box Creation"
+        case .subWord:
+            return "SubWord"
         }
     }
 }
