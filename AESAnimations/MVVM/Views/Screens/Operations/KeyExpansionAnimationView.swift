@@ -85,6 +85,7 @@ struct KeyExpansionAnimationView: View {
             if viewModel.showAnimationText {
                 Text(viewModel.animationText)
                     .font(.title)
+                    .frame(width: 125) // Smaller iPads (less than 11-Inc), doesn't show the full Title
             }
             ColumnView(column: viewModel.columnTwo,
                        position: viewModel.positionKey,
