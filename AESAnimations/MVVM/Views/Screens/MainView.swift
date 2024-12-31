@@ -36,13 +36,16 @@ struct MainView: View {
     
     // MARK: - Main Content
     private var mainContent: some View {
-        VStack(spacing: estimateSpacing) {
+        VStack {
             modePicker
+            Spacer()
             matrixViews
+            Spacer()
             actionButtons
         }
-        .padding()
         .frame(maxHeight: .infinity, alignment: .top)
+        .padding()
+        .padding(.bottom, 20)
     }
     
     // MARK: - Encryption Mode Selection
@@ -92,15 +95,6 @@ struct MainView: View {
                              buttonStyle: StandardButtonStyle(font: .title2),
                              action: viewModel.toggleSettings)
         }
-    }
-    
-    // MARK: - Computed Properties
-    var estimateSpacing: CGFloat {
-        #if os(macOS)
-        105
-        #else
-        DeviceDetector.isPad13Size() ? 140 : 45
-        #endif
     }
 }
 
