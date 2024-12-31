@@ -30,7 +30,14 @@ final class MixColumnsViewModel: AnimationViewModelProtocol {
     @Published var animationControl = AnimationControl()
     var animationData = AnimationData()
     
-    let boxSize: CGFloat = 50.0
+    @Published var positionOfMultiplicableColumn: Position = Position(x: 0, y: 0)
+    @Published var positionOfOldState: Position = Position(x: 0, y: 0)
+    private var verticalOffset: CGFloat {
+        LayoutStyles.spacingMatrix
+        + LayoutStyles.spacingBetweenComponentes
+        + ((LayoutStyles.cellSize + LayoutStyles.spacingMatrix) * 3 + LayoutStyles.cellSize)
+        + LayoutStyles.titleHeight
+    }
     var transformationMatrix: [[Byte]]
     
     // MARK: - Initializer
@@ -74,12 +81,11 @@ final class MixColumnsViewModel: AnimationViewModelProtocol {
     ///            and the second array handles the reverse animation.
     @MainActor
     private func animateColumnTransformation(width: CGFloat, index: Int) -> ([AnimationStep], [AnimationStep]) {
-        let widthColumn = width * 0.515 - CGFloat(index * 60)
-        
         let normalSteps: [AnimationStep] = [
             AnimationStep { for i in 0..<4 { self.resultOfMixColumn[i] = self.result[i][index] } },
-            AnimationStep(animation: { await self.changePosition(col: index, y: -305) }, delay: short),
-            AnimationStep(animation: { withAnimation { self.columnPositions[index].x = widthColumn } }, delay: short),
+            AnimationStep(animation: { await self.changePosition(col: index, y: -self.verticalOffset) }, delay: short),
+            AnimationStep(animation: { await self.changePosition(col: index, x: self.calculateWidthColumn(index: index)) },
+                          delay: short),
             AnimationStep(animation: { withAnimation { self.showMatrix = 1 } }, delay: short),
             AnimationStep(animation: { withAnimation { self.isShowingMultiplication = 1 } }, delay: short),
             AnimationStep(animation: { withAnimation { self.isShowingEquality = 1 } }, delay: short),
@@ -101,11 +107,11 @@ final class MixColumnsViewModel: AnimationViewModelProtocol {
             AnimationStep(animation: { withAnimation { self.showMatrix = 1 } }, delay: short),
             AnimationStep(animation: { withAnimation { self.isShowingMultiplication = 1 } }, delay: short),
             AnimationStep(animation: {
-                withAnimation {
-                    self.columnPositions[index].x = widthColumn
-                    self.columnPositions[index].y = -305
-                }
-            }, delay: short),
+                await self.changePosition(col: index,
+                                          x: self.calculateWidthColumn(index: index),
+                                          y: -self.verticalOffset)
+            },
+                          delay: short),
             AnimationStep(animation: { withAnimation { self.isShowingEquality = 1 } }, delay: short),
             AnimationStep(animation: {
                 withAnimation {
@@ -127,6 +133,22 @@ final class MixColumnsViewModel: AnimationViewModelProtocol {
             isShowingEquality = 0
             isShowingMultiplication = 0
         }
+    }
+    
+    /// Calculates the width of a specific column based on its index.
+    ///
+    /// This function determines the width of a column by calculating the horizontal distance
+    /// between the position of the multiplicable column (`positionOfMultiplicableColumn`)
+    /// and the position of the old state (`positionOfOldState`), subtracting an additional
+    /// offset based on the column index.
+    ///
+    /// - Parameter index: The index of the column for which the width is being calculated.
+    ///                    Each index applies a horizontal offset.
+    /// - Returns: The calculated width of the column as a `CGFloat`
+    private func calculateWidthColumn(index: Int) -> CGFloat {
+        self.positionOfMultiplicableColumn.x
+        - self.positionOfOldState.x
+        - CGFloat(index) * (LayoutStyles.cellSize + LayoutStyles.spacingMatrix)
     }
     
     /// Updates the position of a column in the state.
