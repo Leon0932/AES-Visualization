@@ -75,4 +75,16 @@ extension View {
     func highlightEffect(isHovered: Binding<Bool>) -> some View {
         modifier(HighlightEffectModifier(isHovered: isHovered))
     }
+    
+    /// Tracks the position of a component in a view.
+    ///
+    /// This method applies a `PositionTrackingModifier` to the view, allowing the position of the component
+    /// to be tracked and returned as a `Position` object. The position is calculated in the global coordinate space.
+    ///
+    /// - Parameter onPosition: A closure that receives the tracked position (`Position`) of the view as an argument.
+    ///                         This closure is called whenever the position of the view changes.
+    /// - Returns: A modified view with position tracking applied.
+    func trackPosition(onPosition: @escaping (Position) -> Void) -> some View {
+        modifier(PositionTrackingModifier(onPosition: onPosition))
+    }
 }
