@@ -46,8 +46,7 @@ final class AddRoundKeyViewModel: AnimationViewModelProtocol {
     @Published var animationControl = AnimationControl()
     var animationData = AnimationData()
     
-    // Constants
-    let spacingBetweenComponentes: CGFloat = 50
+    // Computed Properties
     private var horizontalSpacing: CGFloat {
         LayoutStyles.cellSize + LayoutStyles.spacingMatrix
     }
@@ -55,7 +54,7 @@ final class AddRoundKeyViewModel: AnimationViewModelProtocol {
         LayoutStyles.cellSize
         + LayoutStyles.titleHeight
         + LayoutStyles.spacingMatrix
-        + spacingBetweenComponentes
+        + LayoutStyles.spacingBetweenComponentes
     }
 
     

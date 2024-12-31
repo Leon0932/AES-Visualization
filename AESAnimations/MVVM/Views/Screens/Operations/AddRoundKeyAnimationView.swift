@@ -13,7 +13,7 @@ struct AddRoundKeyAnimationView: View {
     // MARK: -
     var body: some View {
         AnimationContainerView(viewModel: viewModel) {
-            VStack(spacing: viewModel.spacingBetweenComponentes) {
+            VStack(spacing: LayoutStyles.spacingBetweenComponentes) {
                 calculationView
                 stateAndKeyView
                 newStateView

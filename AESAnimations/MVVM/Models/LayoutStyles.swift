@@ -11,4 +11,5 @@ struct LayoutStyles {
     static let spacingMatrix: CGFloat = 10 // Between Cells and between Matrix and Title
     static let titleHeight: CGFloat = 15
     static let cellSize: CGFloat = 50
+    static let spacingBetweenComponentes: CGFloat = 50
 }
