@@ -68,7 +68,7 @@ final class KeyExpansionViewModel: AnimationViewModelProtocol {
     // For SubBytes
     var resultSubBytes: [[Byte]] = []
     var substitudedByte: [[Byte]] = []
-    let operationDetailsSubBytes = OperationDetails(operationName: .subBytes, isInverseMode: false, currentRound: -1)
+    let operationDetailsSubBytes = OperationDetails(operationName: .subWord, isInverseMode: false, currentRound: -1)
     lazy var subBytesViewModel = {
         return SubBytesViewModel(state: self.substitudedByte,
                                  result: self.resultSubBytes,
