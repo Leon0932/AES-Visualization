@@ -165,7 +165,7 @@ struct SBoxView: View {
         #if os(iOS)
         return DeviceDetector.isPad13Size() ? 40 : 35
         #else
-        return 37
+        return 35
         #endif
     }
     
