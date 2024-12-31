@@ -71,7 +71,7 @@ struct EditableMatrix: View {
                 matrix.clearData()
             }
         }
-        .frame(maxWidth: boxSize * CGFloat(matrix.columns))
+        .frame(maxWidth: (boxSize + 8) * CGFloat(matrix.columns - 1) + boxSize)
     }
     
     // MARK: - Matrix View
