@@ -14,6 +14,18 @@ struct ProcessView: View {
     @StateObject var viewModel: ProcessViewModel
     @EnvironmentObject var settingsVM: SettingsViewModel
     
+    var boxSize: CGFloat {
+        #if os(iOS)
+        DeviceDetector.isPad13Size() ? 50 : 45
+        #else
+        50
+        #endif
+    }
+    
+    var matrixWidth: CGFloat {
+        (boxSize + LayoutStyles.spacingMatrix) * 3 + boxSize
+    }
+    
     // MARK: -
     var body: some View {
         AnimationContainerView(viewModel: viewModel, showReverseAnimationButton: false) {
@@ -25,7 +37,6 @@ struct ProcessView: View {
                 Spacer()
                 buildStateColumn(leftColumn: false)
             }
-            .padding()
         }
         .toolbar(content: cipherHistoryButton)
         .navigationDestination(isPresented: $viewModel.showAnimationView,
@@ -58,9 +69,10 @@ struct ProcessView: View {
                         
                     }
                 }
-                .frame(width: 230, height: 10)
+                .frame(width: matrixWidth, height: 10)
                 
-                StateView(state: leftColumn ? viewModel.state : viewModel.currentState)
+                StateView(state: leftColumn ? viewModel.state : viewModel.currentState,
+                          boxSize: boxSize)
             }
             
             if leftColumn {
@@ -73,6 +85,7 @@ struct ProcessView: View {
                 StateView(
                     title: "Rundenschlüssel \(viewModel.currentRoundKeyNumber)",
                     state: viewModel.currentRoundKey,
+                    boxSize: boxSize,
                     alignment: .leading
                 )
                 .opacity(viewModel.showRoundKeyColumn)
@@ -81,7 +94,11 @@ struct ProcessView: View {
     }
     
     private func keyView(title: LocalizedStringKey? = nil) -> some View {
-        StateView(title: title, state: viewModel.key, alignment: .leading)
+        StateView(title: title,
+                  state: viewModel.key,
+                  boxSize: boxSize,
+                  alignment: .leading
+        )
     }
     
     private var keyButton: some View {
