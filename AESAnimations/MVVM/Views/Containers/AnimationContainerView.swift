@@ -63,8 +63,7 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModelProtoc
                                               showRepeatButtons: showRepeatButtons,
                                               showReverseAnimationButton: showReverseAnimationButton,
                                               showPlusMinusButtons: showPlusMinusButtons)
-                        .padding(.bottom, 10)
-                        .padding(.leading, checkAlignment() ? 10 : 0)
+                        .padding([.bottom, .leading], 20)
                     }
                 }
                 .frame(width: geometry.size.width)
