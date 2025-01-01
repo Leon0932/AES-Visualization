@@ -80,7 +80,7 @@ struct AnimationControlsView: View {
             controlButton(icon: "checkmark.circle.fill", action: completeAnimations)
         }
         .font(.title2)
-        .padding(15)
+        .padding(10)
         .background(
             RoundedRectangle(cornerRadius: 10).fill(Color.ultraLightGray)
         )
