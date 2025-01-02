@@ -32,12 +32,6 @@ final class MixColumnsViewModel: AnimationViewModelProtocol {
     
     @Published var positionOfMultiplicableColumn: Position = Position(x: 0, y: 0)
     @Published var positionOfOldState: Position = Position(x: 0, y: 0)
-    private var verticalOffset: CGFloat {
-        LayoutStyles.spacingMatrix
-        + LayoutStyles.spacingBetweenComponentes
-        + ((LayoutStyles.cellSize + LayoutStyles.spacingMatrix) * 3 + LayoutStyles.cellSize)
-        + LayoutStyles.titleHeight
-    }
     var transformationMatrix: [[Byte]]
     
     // MARK: - Initializer
@@ -83,7 +77,7 @@ final class MixColumnsViewModel: AnimationViewModelProtocol {
     private func animateColumnTransformation(width: CGFloat, index: Int) -> ([AnimationStep], [AnimationStep]) {
         let normalSteps: [AnimationStep] = [
             AnimationStep { for i in 0..<4 { self.resultOfMixColumn[i] = self.result[i][index] } },
-            AnimationStep(animation: { await self.changePosition(col: index, y: -self.verticalOffset) }, delay: short),
+            AnimationStep(animation: { await self.changePosition(col: index, y: self.calculateHeight()) }, delay: short),
             AnimationStep(animation: { await self.changePosition(col: index, x: self.calculateWidthColumn(index: index)) },
                           delay: short),
             AnimationStep(animation: { withAnimation { self.showMatrix = 1 } }, delay: short),
@@ -109,7 +103,7 @@ final class MixColumnsViewModel: AnimationViewModelProtocol {
             AnimationStep(animation: {
                 await self.changePosition(col: index,
                                           x: self.calculateWidthColumn(index: index),
-                                          y: -self.verticalOffset)
+                                          y: self.calculateHeight())
             },
                           delay: short),
             AnimationStep(animation: { withAnimation { self.isShowingEquality = 1 } }, delay: short),
@@ -149,6 +143,15 @@ final class MixColumnsViewModel: AnimationViewModelProtocol {
         self.positionOfMultiplicableColumn.x
         - self.positionOfOldState.x
         - CGFloat(index) * (LayoutStyles.cellSize + LayoutStyles.spacingMatrix)
+    }
+    
+    /// Calculates the height based on the difference between
+    /// the y-positions of the old state and the multiplicable column.
+    /// Returns a negative value for upward movement in SwiftUI.
+    ///
+    /// - Returns: The calculated height as `CGFloat`.
+    private func calculateHeight() -> CGFloat {
+        return -(positionOfOldState.y - positionOfMultiplicableColumn.y)
     }
     
     /// Updates the position of a column in the state.

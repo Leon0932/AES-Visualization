@@ -72,8 +72,8 @@ struct MixColumnAnimationView: View {
         HStack {
             StateView(title: "Alter Zustand",
                       state: viewModel.state,
-                      position: .oneD(viewModel.columnPositions))
-            .trackPosition { viewModel.positionOfOldState = $0 }
+                      position: .oneD(viewModel.columnPositions),
+                      currentPosition: $viewModel.positionOfOldState)
             
             Spacer()
             
