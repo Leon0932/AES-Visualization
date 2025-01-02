@@ -51,15 +51,15 @@ struct AddRoundKeyAnimationView: View {
         HStack {
             StateView(title: "Zustand",
                       state: viewModel.state,
-                      position: .twoD(viewModel.positionState))
-            .trackPosition { viewModel.positionStateMatrix = $0 }
+                      position: .twoD(viewModel.positionState),
+                      currentPosition: $viewModel.positionStateMatrix)
             
             Spacer()
             
             StateView(title: "Schlüssel",
                       state: viewModel.key,
-                      position: .twoD(viewModel.positionKey))
-            .trackPosition { viewModel.positionKeyMatrix = $0 }
+                      position: .twoD(viewModel.positionKey),
+                      currentPosition: $viewModel.positionKeyMatrix)
         }
         
     }

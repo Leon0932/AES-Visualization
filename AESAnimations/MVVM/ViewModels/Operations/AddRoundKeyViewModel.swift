@@ -50,14 +50,7 @@ final class AddRoundKeyViewModel: AnimationViewModelProtocol {
     private var horizontalSpacing: CGFloat {
         LayoutStyles.cellSize + LayoutStyles.spacingMatrix
     }
-    private var verticalOffset: CGFloat {
-        LayoutStyles.cellSize
-        + LayoutStyles.titleHeight
-        + LayoutStyles.spacingMatrix
-        + LayoutStyles.spacingBetweenComponentes
-    }
 
-    
     // MARK: - Initializer
     init(state: [[Byte]],
          key: [[Byte]],
@@ -167,10 +160,9 @@ final class AddRoundKeyViewModel: AnimationViewModelProtocol {
                 self.positionState[row][col].x = xOffsetState
                 self.positionKey[row][col].x = xOffsetKey
             } else {
-                // The y-position is calculated based on the spacing between the matrix and the operations,
-                // using the `verticalOffset` value.
-                let yOffset = self.verticalOffset + CGFloat(row) * self.horizontalSpacing
-                
+                // The y-position is calculated based on the spacing between the matrix and the operations
+                let yOffset = (self.positionStateMatrix.y - self.positionCellState.y)
+                + CGFloat(row) * self.horizontalSpacing // = Positive Value
                 self.positionState[row][col].y -= yOffset
                 self.positionKey[row][col].y -= yOffset
             }
