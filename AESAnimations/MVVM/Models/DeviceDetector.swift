@@ -8,7 +8,6 @@
 import SwiftUI
 
 /// A helper struct for detecting iPad devices.
-#if os(iOS)
 struct DeviceDetector {
     /// Determines if the current iPad is a 13-inch model.
     ///
@@ -16,6 +15,7 @@ struct DeviceDetector {
     /// If the device is not an iPad or the screen size does not meet the 13-inch criteria, it returns `false`.
     ///
     /// - Returns: `true` if the device is an iPad and the screen size corresponds to a 13-inch iPad Pro, otherwise `false`.
+    #if os(iOS)
     static func isPad13Size() -> Bool {
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
@@ -39,5 +39,14 @@ struct DeviceDetector {
         // iPad Mini hat eine typische Breite und Höhe von ~744x1133 (9 Zoll)
         return max(screenHeight, screenWidth) <= 1133 && min(screenHeight, screenWidth) <= 744
     }
+    #else
+    static func isMacBigWindow() -> Bool {
+        if let keyWindow = NSApplication.shared.keyWindow {
+            let frame = keyWindow.frame
+            
+            return frame.width >= 1500 && frame.height >= 900
+        }
+        return false
+    }
+    #endif
 }
-#endif
