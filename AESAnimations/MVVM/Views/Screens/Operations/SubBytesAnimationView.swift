@@ -36,9 +36,9 @@ struct SubBytesAnimationView: View {
         VStack(alignment: .leading, spacing: 10) {
             StateTitle(title: viewModel.animationControl.isDone ? "Neuer Zustand" : "Aktueller Zustand")
             stateGridView
+                .trackPosition { viewModel.positionOfCurrentState = $0 }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .trackPosition { viewModel.positionOfCurrentState = $0 }
     }
     
     private var searchByteInSBoxView: some View {

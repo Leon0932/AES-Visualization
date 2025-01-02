@@ -44,9 +44,6 @@ final class SubBytesViewModel: AnimationViewModelProtocol {
     let boxSize: CGFloat = 40
     @Published var positionOfSearchByte: Position = Position(x: 0, y: 0)
     @Published var positionOfCurrentState: Position = Position(x: 0, y: 0)
-    private var verticalOffset: CGFloat {
-        LayoutStyles.titleHeight + LayoutStyles.spacingMatrix
-    }
     
     // Computed Properties
     var sBoxAnimationViewModel: SBoxAnimationViewModel {
@@ -256,7 +253,6 @@ final class SubBytesViewModel: AnimationViewModelProtocol {
         return Position(x: positionOfSearchByte.x - positionOfCurrentState.x
                  - (CGFloat(col) * offset),
                  y: positionOfSearchByte.y - positionOfCurrentState.y
-                 - verticalOffset
                  - (CGFloat(row) * offset)
         )
     }
