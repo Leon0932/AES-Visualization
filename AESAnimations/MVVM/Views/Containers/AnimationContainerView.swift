@@ -36,37 +36,32 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModelProtoc
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                ZStack(alignment: checkAlignment() ? .bottomLeading : .center) {
+                let width = geometry.size.width
+                let height = geometry.size.height
+                let frameWidth = width * 0.95
+                let frameHeight = height * 0.95
+                
+                VStack {
                     content
-                        .frame(width: geometry.size.width * 0.95, height: geometry.size.height * 0.95)
-                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                        .onAppear {
-                            if viewModel.animationData.animationSteps.isEmpty || viewModel.animationData.reverseAnimationSteps.isEmpty {
-                                viewModel.createAnimationSteps(with: geometry)
-                                viewModel.checkAnimationStart()
-                            }
-                        }
-                        .onChange(of: scenePhase) { oldValue, newValue in
-                            if newValue != .active {
-                                viewModel.animationControl.changePause(to: true)
-                            }
-                        }
+                        .frame(width: frameWidth, height: frameHeight)
+                        .position(x: width / 2, y: height / 2)
+                        .onAppear { performAppearance(geometry: geometry) }
+                        .onDisappear(perform: performDisappearance)
+                        .onChange(of: scenePhase) { performOnChange(oldValue: $0, newValue: $1) }
                     
-                    VStack {
-                        Spacer()
-                        
-                        
-                        AnimationControlsView(animationControl: $viewModel.animationControl,
-                                              startAnimations: viewModel.startAnimations,
-                                              completeAnimations: viewModel.completeAnimations,
-                                              resetAnimation: viewModel.resetAnimations,
-                                              showRepeatButtons: showRepeatButtons,
-                                              showReverseAnimationButton: showReverseAnimationButton,
-                                              showPlusMinusButtons: showPlusMinusButtons)
-                        .padding([.bottom, .leading], 20)
-                    }
+                    AnimationControlsView(animationControl: $viewModel.animationControl,
+                                          startAnimations: viewModel.startAnimations,
+                                          completeAnimations: viewModel.completeAnimations,
+                                          resetAnimation: viewModel.resetAnimations,
+                                          showRepeatButtons: showRepeatButtons,
+                                          showReverseAnimationButton: showReverseAnimationButton,
+                                          showPlusMinusButtons: showPlusMinusButtons)
+                    .padding(.bottom, padding)
+                    .frame(width: frameWidth,
+                           height: frameHeight,
+                           alignment: checkAlignment() ? .bottomLeading : .bottom)
+                    
                 }
-                .frame(width: geometry.size.width)
             }
         }
         .navigationTitle(viewModel.navigationTitle)
@@ -74,30 +69,67 @@ struct AnimationContainerView<Content: View, ViewModel: AnimationViewModelProtoc
         .navigationBarBackButtonHidden(!viewModel.animationControl.isDone)
         .navigationBarTitleDisplayMode(.inline)
         #else
-        .navigationBarBackButtonHidden(true)
-        .toolbar(content: toolbarItem)
+        .customNavigationBackButton(isDone: viewModel.animationControl.isDone)
         #endif
     }
     
-    // MARK: - Helper functions
-    func checkAlignment() -> Bool {
-        let operationName = viewModel.operationDetails.operationName
+    // MARK: - View functions
+    private var operationName: OperationNames {
+        viewModel.operationDetails.operationName
+    }
+    
+    private func performAppearance(geometry: GeometryProxy) {
+        if viewModel.animationData.animationSteps.isEmpty || viewModel.animationData.reverseAnimationSteps.isEmpty {
+            viewModel.createAnimationSteps(with: geometry)
+            viewModel.checkAnimationStart()
+        }
         
-        return operationName == .subBytes
+        #if os(macOS)
+        // Disable window scaling via the zoom button
+        // and prevent windows from being resizable
+        // ProcessView can change Window Size
+        if operationName != .decryptionProcess && operationName != .encryptionProcess {
+            updateWindowResizability(isResizable: false)
+        }
+        #endif
+    }
+    
+    private func performDisappearance() {
+        updateWindowResizability(isResizable: true)
+    }
+    
+    private func performOnChange(oldValue: ScenePhase, newValue: ScenePhase) {
+        if newValue != .active {
+            viewModel.animationControl.changePause(to: true)
+        }
+    }
+    
+    // MARK: - Helper functions / Computed Properties
+    private func updateWindowResizability(isResizable: Bool) {
+        #if os(macOS)
+        for window in NSApplication.shared.windows {
+            if let zoomButton = window.standardWindowButton(.zoomButton) {
+                zoomButton.isEnabled = isResizable
+            }
+            
+            if isResizable {
+                window.styleMask.insert(.resizable)
+            } else {
+                window.styleMask.remove(.resizable)
+            }
+        }
+        #endif
+    }
+    
+    private func checkAlignment() -> Bool {
+        operationName == .subBytes
         || operationName == .addRoundKey
         || operationName == .invSBox
         || operationName == .sBox
         || operationName == .subWord
     }
     
-    func toolbarItem() -> some ToolbarContent {
-        ToolbarItem(placement: .navigation) {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "chevron.backward")
-            }
-            .opacity(viewModel.animationControl.isDone ? 1 : 0)
-        }
+    private var padding: CGFloat {
+        operationName != .encryptionProcess && operationName != .decryptionProcess ? 35 : 20
     }
 }
