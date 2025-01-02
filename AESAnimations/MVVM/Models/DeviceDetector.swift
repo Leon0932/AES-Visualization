@@ -40,7 +40,7 @@ struct DeviceDetector {
         return max(screenHeight, screenWidth) <= 1133 && min(screenHeight, screenWidth) <= 744
     }
     #else
-    static func isMacBigWindow() -> Bool {
+    static func isLargeWindow() -> Bool {
         if let keyWindow = NSApplication.shared.keyWindow {
             let frame = keyWindow.frame
             
