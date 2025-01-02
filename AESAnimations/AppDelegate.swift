@@ -22,6 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.setContentSize(NSSize(width: windowWidth, height: windowHeight))
         window.minSize = NSSize(width: windowWidth, height: windowHeight)
         window.maxSize = NSSize(width: windowWidth, height: windowHeight)
+        window.styleMask.remove(.fullScreen)
     }
     
     private var defaultScreenSize: NSSize {
