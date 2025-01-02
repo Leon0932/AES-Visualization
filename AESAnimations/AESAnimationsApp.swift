@@ -19,12 +19,6 @@ struct AESAnimationsApp: App {
         WindowGroup {
             content
         }
-        #if os(macOS)
-        .windowResizability(.contentSize)
-        .commands {
-            CommandGroup(replacing: .windowSize) {}
-        }
-        #endif
     }
 
     var content: some View {
@@ -47,7 +41,8 @@ struct AESAnimationsApp: App {
             .tint(settingsViewModel.primaryColor.color)
             .accentColor(settingsViewModel.primaryColor.color)
             #if os(macOS)
-            .frame(width: 1300, height: 800)
+            .frame(minWidth: 1200, minHeight: 700)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             #endif
             .environment(\.locale, .init(identifier: settingsViewModel.appLanguage))
             .onChange(of: settingsViewModel.colorScheme) { settingsViewModel.updateScheme() }
