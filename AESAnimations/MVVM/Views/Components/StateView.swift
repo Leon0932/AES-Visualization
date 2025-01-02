@@ -12,14 +12,40 @@ struct StateView: View {
     // MARK: - Properties
     var title: LocalizedStringKey?
     var state: [[Byte]]
-    var position: PositionType = .oneD(Array(repeating: Position(x: 0.0, y: 0.0), count: 8))
-    var opacity: OpacityType = .oneD(Array(repeating: 1.0, count: 8))
-    var backgroundColor: Color? = nil
-    var foregroundStyle: Color = .primary
+    var position: PositionType
+    var opacity: OpacityType
+    var backgroundColor: Color?
+    var foregroundStyle: Color
     
-    var boxSize: CGFloat = LayoutStyles.cellSize
-    var alignment: HorizontalAlignment = .center
-    var spacing: CGFloat = LayoutStyles.spacingMatrix
+    var boxSize: CGFloat
+    var alignment: HorizontalAlignment
+    var spacing: CGFloat
+    
+    @Binding var currentPosition: Position
+    
+    init(
+        title: LocalizedStringKey? = nil,
+        state: [[Byte]],
+        position: PositionType = .oneD(Array(repeating: Position(x: 0.0, y: 0.0), count: 8)),
+        opacity: OpacityType = .oneD(Array(repeating: 1.0, count: 8)),
+        backgroundColor: Color? = nil,
+        foregroundStyle: Color = .primary,
+        boxSize: CGFloat = LayoutStyles.cellSize,
+        alignment: HorizontalAlignment = .center,
+        spacing: CGFloat = LayoutStyles.spacingMatrix,
+        currentPosition: Binding<Position> = .constant(Position(x: -1.0, y: -1.0))
+    ) {
+        self.title = title
+        self.state = state
+        self.position = position
+        self.opacity = opacity
+        self.backgroundColor = backgroundColor
+        self.foregroundStyle = foregroundStyle
+        self.boxSize = boxSize
+        self.alignment = alignment
+        self.spacing = spacing
+        self._currentPosition = currentPosition
+    }
     
     // MARK: -
     var body: some View {
@@ -32,6 +58,7 @@ struct StateView: View {
             ForEach(0..<state.count,
                     id: \.self,
                     content: matrixRowView(row:))
+            .trackPosition { currentPosition = $0 }
         }
     }
     
