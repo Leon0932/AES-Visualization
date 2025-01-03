@@ -241,7 +241,7 @@ struct ProcessView: View {
         case \.afterAddRound:   AddRoundKeyAnimationView(viewModel: viewModel.addRoundKeyViewModel)
         case \.afterSubBytes:   SubBytesAnimationView(viewModel: viewModel.subBytesViewModel)
         case \.afterShiftRows:  ShiftRowsAnimationView(viewModel: viewModel.shiftRowsViewModel)
-        case \.afterMixColumns: MixColumnAnimationView(viewModel: viewModel.mixColumnsViewModel)
+        case \.afterMixColumns: MixColumnsAnimationView(viewModel: viewModel.mixColumnsViewModel)
             
         default:
             Text("Die Operation existiert nicht")

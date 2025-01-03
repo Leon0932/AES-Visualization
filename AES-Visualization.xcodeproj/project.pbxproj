@@ -12,8 +12,8 @@
 		C30E9AFE2CBECD1200DF5AE5 /* ByteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AFD2CBECD1200DF5AE5 /* ByteExtension.swift */; };
 		C30E9B002CBECEAB00DF5AE5 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AFF2CBECEAB00DF5AE5 /* StringExtension.swift */; };
 		C30E9B022CBF00D400DF5AE5 /* SBoxRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9B012CBF00D400DF5AE5 /* SBoxRound.swift */; };
-		C310C9112C6FCA1000E91AB7 /* MixColumnAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9102C6FCA1000E91AB7 /* MixColumnAnimationView.swift */; };
-		C310C9152C714DED00E91AB7 /* MixColumnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9142C714DED00E91AB7 /* MixColumnViewModel.swift */; };
+		C310C9112C6FCA1000E91AB7 /* MixColumnsAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9102C6FCA1000E91AB7 /* MixColumnsAnimationView.swift */; };
+		C310C9152C714DED00E91AB7 /* MixColumnsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9142C714DED00E91AB7 /* MixColumnsViewModel.swift */; };
 		C310C9192C7152A200E91AB7 /* AnimationContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9182C7152A200E91AB7 /* AnimationContainerView.swift */; };
 		C310C9252C72529200E91AB7 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9242C72529200E91AB7 /* ColorExtensions.swift */; };
 		C310C9272C72548800E91AB7 /* AddRoundKeyAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9262C72548800E91AB7 /* AddRoundKeyAnimationView.swift */; };
@@ -117,8 +117,8 @@
 		C30E9AFD2CBECD1200DF5AE5 /* ByteExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteExtension.swift; sourceTree = "<group>"; };
 		C30E9AFF2CBECEAB00DF5AE5 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		C30E9B012CBF00D400DF5AE5 /* SBoxRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBoxRound.swift; sourceTree = "<group>"; };
-		C310C9102C6FCA1000E91AB7 /* MixColumnAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixColumnAnimationView.swift; sourceTree = "<group>"; };
-		C310C9142C714DED00E91AB7 /* MixColumnViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixColumnViewModel.swift; sourceTree = "<group>"; };
+		C310C9102C6FCA1000E91AB7 /* MixColumnsAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixColumnsAnimationView.swift; sourceTree = "<group>"; };
+		C310C9142C714DED00E91AB7 /* MixColumnsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixColumnsViewModel.swift; sourceTree = "<group>"; };
 		C310C9182C7152A200E91AB7 /* AnimationContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContainerView.swift; sourceTree = "<group>"; };
 		C310C9242C72529200E91AB7 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		C310C9262C72548800E91AB7 /* AddRoundKeyAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoundKeyAnimationView.swift; sourceTree = "<group>"; };
@@ -303,7 +303,7 @@
 			children = (
 				C38734F52C6EA47F00E835DB /* SubBytesViewModel.swift */,
 				C38734FD2C6EAADF00E835DB /* ShiftRowsViewModel.swift */,
-				C310C9142C714DED00E91AB7 /* MixColumnViewModel.swift */,
+				C310C9142C714DED00E91AB7 /* MixColumnsViewModel.swift */,
 				C310C9282C7254BA00E91AB7 /* AddRoundKeyViewModel.swift */,
 				C3E1F2C12C7B6EE80030B994 /* KeyExpansionViewModel.swift */,
 			);
@@ -454,7 +454,7 @@
 				C3E1F2BF2C7B6ECE0030B994 /* KeyExpansionAnimationView.swift */,
 				C38734F12C6943E600E835DB /* ShiftRowsAnimationView.swift */,
 				C310C9262C72548800E91AB7 /* AddRoundKeyAnimationView.swift */,
-				C310C9102C6FCA1000E91AB7 /* MixColumnAnimationView.swift */,
+				C310C9102C6FCA1000E91AB7 /* MixColumnsAnimationView.swift */,
 				C37BA08D2C39882F00C87BB7 /* SubBytesAnimationView.swift */,
 			);
 			path = Operations;
@@ -625,12 +625,12 @@
 				C31E69C62C88988E00230D22 /* RoundKeyHistory.swift in Sources */,
 				C38ED05F2CD191720023C4F9 /* AnimationData.swift in Sources */,
 				C339401D2C56D7C6008802BC /* DataTypes.swift in Sources */,
-				C310C9112C6FCA1000E91AB7 /* MixColumnAnimationView.swift in Sources */,
+				C310C9112C6FCA1000E91AB7 /* MixColumnsAnimationView.swift in Sources */,
 				C31E69C32C887D9D00230D22 /* ShiftRowsHelper.swift in Sources */,
 				C37BA0812C397D5800C87BB7 /* MainView.swift in Sources */,
 				C30E9B022CBF00D400DF5AE5 /* SBoxRound.swift in Sources */,
 				C34310112C9373DA0004F4C7 /* AnimationViewModelProtocol.swift in Sources */,
-				C310C9152C714DED00E91AB7 /* MixColumnViewModel.swift in Sources */,
+				C310C9152C714DED00E91AB7 /* MixColumnsViewModel.swift in Sources */,
 				C35F80262CAAA40F00C54393 /* CipherRound.swift in Sources */,
 				C3BB7C422D0DF167004CD800 /* TextStyles.swift in Sources */,
 				C329DF762CDE529400959851 /* HSAalenLogo.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  MixColumnAnimationView.swift
+//  MixColumnsAnimationView.swift
 //  AESAnimations
 //
 //  Created by Leon Chamoun on 16.08.24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MixColumnAnimationView: View {
+struct MixColumnsAnimationView: View {
     @StateObject var viewModel: MixColumnsViewModel
     
     // MARK: -
