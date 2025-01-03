@@ -95,7 +95,7 @@ struct EditableMatrix: View {
             
             cellEditorView(row: row, column: column)
                 .fontDesign(.monospaced)
-                .frame(width: 40, height: 40)
+                .frame(width: boxSize / 2, height: boxSize / 2)
                 .multilineTextAlignment(.center)
         }
     }
