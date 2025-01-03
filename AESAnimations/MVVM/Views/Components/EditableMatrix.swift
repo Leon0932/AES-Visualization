@@ -116,6 +116,7 @@ struct EditableMatrix: View {
             #if os(iOS)
             .padding(4)
             .keyboardType(.asciiCapable)
+            .disableAutocorrection(true)
             #else
             .textFieldStyle(PlainTextFieldStyle())
             .focusable(true)
