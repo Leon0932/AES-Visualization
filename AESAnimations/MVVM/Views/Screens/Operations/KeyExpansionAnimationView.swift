@@ -17,14 +17,25 @@ struct KeyExpansionAnimationView: View {
         if viewModel.showBlockForm {
             switch viewModel.keySize {
             case .key128:
-                return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 4), spacing: 15), count: 4)
+                return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 4), spacing: 15),
+                             count: 4)
             case .key192:
-                return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 6), spacing: 15), count: 3)
+                let gridCount: Int
+                #if os(iOS)
+                gridCount = DeviceDetector.isPad13Size() ? 3 : 2
+                #else
+                gridCount = DeviceDetector.isLargeWindow() ? 3 : 2
+                #endif
+
+                return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 6), spacing: 15),
+                             count: gridCount)
             case .key256:
-                return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 8), spacing: 15), count: 2)
+                return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 8), spacing: 15),
+                             count: 2)
             }
         } else {
-            return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 4)), count: 4)
+            return Array(repeating: GridItem(.flexible(minimum: viewModel.boxSize * 4)),
+                         count: 4)
         }
     }
     
