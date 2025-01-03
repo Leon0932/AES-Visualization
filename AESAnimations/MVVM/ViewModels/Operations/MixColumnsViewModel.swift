@@ -1,5 +1,5 @@
 //
-//  MixColumnAnimationViewModel.swift
+//  MixColumnsViewModel.swift
 //  AESAnimations
 //
 //  Created by Leon Chamoun on 17.08.24.
