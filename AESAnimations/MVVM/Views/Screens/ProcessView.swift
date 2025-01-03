@@ -112,7 +112,7 @@ struct ProcessView: View {
                              action: viewModel.toggleFullKey)
         }
         .font(TextStyles.headline)
-        .frame(width: 230, height: 250, alignment: .topLeading)
+        .frame(width: matrixWidth, height: 250, alignment: .topLeading)
     }
     
     // MARK: - Center Column with Animation and Rounds
