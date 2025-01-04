@@ -40,6 +40,11 @@ struct DeviceDetector {
         return max(screenHeight, screenWidth) <= 1133 && min(screenHeight, screenWidth) <= 744
     }
     #else
+    
+    /// Checks if the application's main window on macOS has dimensions greater than or equal to 1500x900.
+    ///
+    /// This method retrieves the application's key window and evaluates its frame dimensions.
+    /// - Returns: `true` if the key window's width is at least 1500 points and its height is at least 900 points; otherwise, `false`.
     static func isLargeWindow() -> Bool {
         if let keyWindow = NSApplication.shared.keyWindow {
             let frame = keyWindow.frame
