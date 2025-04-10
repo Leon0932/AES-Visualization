@@ -210,6 +210,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		C32432BF2DA7D47D00D2575F /* Assets */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Assets; sourceTree = "<group>"; };
 		C331511A2CA03AA40047B513 /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -327,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				C38B28B22CB4092900FCE203 /* README.md */,
+				C32432BF2DA7D47D00D2575F /* Assets */,
 				C37BA07D2C397D5800C87BB7 /* AESAnimations */,
 				C331511A2CA03AA40047B513 /* Tests */,
 				C37BA07C2C397D5800C87BB7 /* Products */,
@@ -518,6 +520,7 @@
 				C331511E2CA03AA40047B513 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				C32432BF2DA7D47D00D2575F /* Assets */,
 				C331511A2CA03AA40047B513 /* Tests */,
 			);
 			name = Tests;
