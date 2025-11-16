@@ -9,12 +9,25 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.locale) var locale
-    @StateObject var viewModel = MainViewModel()
+    @StateObject private var viewModel = MainViewModel()
+    #if os(iOS)
+    @StateObject private var orientation = OrientationManager()
+    #endif
     
     // MARK: - Body
     var body: some View {
         if viewModel.showMainView {
+            #if os(iOS)
+            ZStack {
+                mainView
+                
+                if orientation.orientation == .portrait {
+                    PortraitBlockerOverlay()
+                }
+            }
+            #else
             mainView
+            #endif
         } else {
             WelcomeView(showMainView: $viewModel.showMainView,
                         showSafariView: $viewModel.showSafariView)

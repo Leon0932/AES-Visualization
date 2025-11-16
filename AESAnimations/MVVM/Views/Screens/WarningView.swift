@@ -22,6 +22,7 @@ struct WarningView: View {
             Text("Diese App ist NICHT für iPad Mini verfügbar.")
                 .font(.system(size: 40))
         }
+        .multilineTextAlignment(.center)
     }
 }
 

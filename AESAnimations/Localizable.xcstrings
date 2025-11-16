@@ -79,6 +79,16 @@
         }
       }
     },
+    "Bitte drehe dein Gerät ins Querformat." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please rotate your device to landscape."
+          }
+        }
+      }
+    },
     "Blockform aus" : {
       "localizations" : {
         "en" : {

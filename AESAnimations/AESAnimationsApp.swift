@@ -9,8 +9,8 @@ import SwiftUI
 
 @main
 struct AESAnimationsApp: App {
-    @StateObject var settingsViewModel = SettingsViewModel()
-
+    @StateObject private var settingsViewModel = SettingsViewModel()
+    
     var body: some Scene {
         WindowGroup {
             content
@@ -30,7 +30,7 @@ struct AESAnimationsApp: App {
             #endif
         }
     }
-
+    
     var mainContent: some View {
         MainView()
             .environmentObject(settingsViewModel)
