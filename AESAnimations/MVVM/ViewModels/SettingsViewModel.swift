@@ -11,7 +11,9 @@ import SwiftUI
 final class SettingsViewModel: ObservableObject {
     // MARK: - Properties
     @AppStorage(StorageKeys.colorScheme.key) var colorScheme: AppScheme = .system
+    #if os(iOS)
     @AppStorage(StorageKeys.primaryColor.key) var primaryColor: PrimaryColor = .blue
+    #endif
     @AppStorage(StorageKeys.appLanguage.key) var appLanguage: String = Locale.current.language.languageCode?.identifier ?? "en"
     @AppStorage(StorageKeys.includeReverseAnimation.key) var includeReverseAnimation: Bool = false
     @AppStorage(StorageKeys.startAnimationOnAppear.key) var startAnimationOnAppear: Bool = false
@@ -26,9 +28,11 @@ final class SettingsViewModel: ObservableObject {
         if UserDefaults.standard.object(forKey: StorageKeys.colorScheme.key) == nil {
             UserDefaults.standard.set(colorScheme.rawValue, forKey: StorageKeys.colorScheme.key)
         }
+        #if os(iOS)
         if UserDefaults.standard.object(forKey: StorageKeys.primaryColor.key) == nil {
             UserDefaults.standard.set(primaryColor.rawValue, forKey: StorageKeys.primaryColor.key)
         }
+        #endif
         if UserDefaults.standard.object(forKey: StorageKeys.appLanguage.key) == nil {
             UserDefaults.standard.set(appLanguage, forKey: StorageKeys.appLanguage.key)
         }

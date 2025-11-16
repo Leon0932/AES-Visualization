@@ -71,24 +71,27 @@ struct KeyExpansionAnimationView: View {
     private var keyAnimationSection: some View {
         HStack(spacing: 25) {
             columnOne
-            OperationSymbolView(text: "⊕", isVisible: viewModel.showFirstXOR)
+            OperationSymbol(text: "⊕",
+                            isVisible: viewModel.showFirstXOR)
             columnTwo
             
             if viewModel.startRCONAnimation {
-                OperationSymbolView(text: "⊕", isVisible: viewModel.showSecondXOR)
+                OperationSymbol(text: "⊕",
+                                isVisible: viewModel.showSecondXOR)
                 rconAnimationSection
             }
             
-            OperationSymbolView(text: "=", isVisible: viewModel.showEqual)
+            OperationSymbol(text: "=",
+                            isVisible: viewModel.showEqual)
             columnResult
         }
         .frame(maxWidth: .infinity, alignment: .center)
     }
     
     private var columnOne: some View {
-        ColumnView(column: viewModel.columnOne,
-                   opacity: viewModel.showColumnOne,
-                   highlightColumn: true)
+        Column(column: viewModel.columnOne,
+               opacity: viewModel.showColumnOne,
+               highlightColumn: true)
     }
     
     private var columnTwo: some View {
@@ -98,15 +101,15 @@ struct KeyExpansionAnimationView: View {
                     .font(.title)
                     .frame(width: 125) // Smaller iPads (less than 11-Inc), doesn't show the full Title
             }
-            ColumnView(column: viewModel.columnTwo,
-                       position: viewModel.positionKey,
-                       opacity: viewModel.showColumnTwo,
-                       highlightColumn: true)
+            Column(column: viewModel.columnTwo,
+                   position: viewModel.positionKey,
+                   opacity: viewModel.showColumnTwo,
+                   highlightColumn: true)
         }
     }
     
     private var columnResult: some View {
-        ColumnView(column: viewModel.columnResult,
+        Column(column: viewModel.columnResult,
                    opacity: viewModel.showResult,
                    highlightColumn: true)
     }
@@ -121,9 +124,10 @@ struct KeyExpansionAnimationView: View {
             
             HStack(spacing: 10) {
                 ForEach(1..<viewModel.rConstants.count, id: \.self) { row in
-                    ColumnView(
-                        column: viewModel.rConstants[row],
-                        backgroundColor: viewModel.highlightRCon[row] ? .yellow : .yellow.opacity(0.3)
+                    Column(column: viewModel.rConstants[row],
+                           backgroundColor: viewModel.highlightRCon[row]
+                           ? .yellow
+                           : .yellow.opacity(0.3)
                     )
                 }
             }
@@ -160,9 +164,9 @@ struct KeyExpansionAnimationView: View {
                     let index = groupIndex * groupSize + row
                     
                     if index < viewModel.roundKeys.count {
-                        ColumnView(column: viewModel.roundKeys[index],
-                                   opacity: viewModel.showRoundKeyColumn[index],
-                                   highlightColumn: viewModel.highlightColumn[index])
+                        Column(column: viewModel.roundKeys[index],
+                               opacity: viewModel.showRoundKeyColumn[index],
+                               highlightColumn: viewModel.highlightColumn[index])
                     }
                 }
             }
@@ -184,15 +188,17 @@ struct KeyExpansionAnimationView: View {
         ToolbarItem {
             HStack {
                 if viewModel.keySize.rawValue > 4 {
-                    Toggle(isOn: $viewModel.showBlockForm, label: { Text("Zeige Blockform") })
-                        .padding(.trailing, padding)
+                    CustomToolbarToggle(title: viewModel.showBlockForm
+                                        ? "Blockform aus"
+                                        : "Blockform ein",
+                                        isOn: $viewModel.showBlockForm)
                 }
                 
                 if viewModel.animationControl.isDone {
-                    CustomButtonView(title: LocalizedStringKey(buttonTitle),
-                                     buttonStyle: .secondary,
-                                     action: viewModel.toggleKeyExpRounds)
-                    
+                    CustomToolbarButton(title: LocalizedStringKey(buttonTitle),
+                                        buttonStyle: .secondary,
+                                        action: viewModel.toggleKeyExpRounds)
+                    .transition(.opacity)
                 }
             }
         }

@@ -34,8 +34,9 @@ struct AESAnimationsApp: App {
     var mainContent: some View {
         MainView()
             .environmentObject(settingsViewModel)
+            #if os(iOS)
             .tint(settingsViewModel.primaryColor.color)
-            .accentColor(settingsViewModel.primaryColor.color)
+            #endif
             #if os(macOS)
             .frame(minWidth: 1200, minHeight: 700)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Helper view for displaying a title and an icon arranged horizontally.
-struct CustomLabelView: View {
+struct CustomLabel: View {
     // MARK: - Properties
     let title: LocalizedStringKey?
     let icon: String?

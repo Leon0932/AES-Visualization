@@ -26,11 +26,13 @@ struct MixColumnsAnimationView: View {
         HStack(spacing: 25) {
             matrixView
             
-            OperationSymbolView(text: "*", isVisible: viewModel.isShowingMultiplication)
+            OperationSymbol(text: "*",
+                            isVisible: viewModel.isShowingMultiplication)
             
             emptyColumnView
             
-            OperationSymbolView(text: "=", isVisible: viewModel.isShowingEquality)
+            OperationSymbol(text: "=",
+                            isVisible: viewModel.isShowingEquality)
             
             resultCellView
         }

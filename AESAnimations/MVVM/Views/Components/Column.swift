@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// A helper view for Key Expansion, representing a single column with animation properties.
-struct ColumnView: View {
+struct Column: View {
     // MARK: - Properties
     var column: [Byte]
     var position: [Position] = Position.default1DPositions(count: 4)

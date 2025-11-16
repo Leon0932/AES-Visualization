@@ -12,7 +12,9 @@ import SwiftUI
 enum StorageKeys: String {
     case appLanguage
     case colorScheme
+    #if os(iOS)
     case primaryColor
+    #endif
     case includeReverseAnimation
     case startAnimationOnAppear
     

@@ -36,7 +36,7 @@ struct AuthorMessage: View {
                     .multilineTextAlignment(.center)
                 
                 #if os(iOS)
-                CustomButtonView(title: buttonTitle, buttonStyle: .standard) {
+                CustomButton(title: buttonTitle, buttonStyle: .standard) {
                     showSafariView = true
                 }
                 #else

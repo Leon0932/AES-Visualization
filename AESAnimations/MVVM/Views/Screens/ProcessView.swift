@@ -107,9 +107,9 @@ struct ProcessView: View {
             
             Spacer()
             
-            CustomButtonView(icon: "arrow.up.left.and.arrow.down.right",
-                             buttonStyle: StandardButtonStyle(font: .title2),
-                             action: viewModel.toggleFullKey)
+            CustomButton(icon: "arrow.up.left.and.arrow.down.right",
+                         buttonStyle: StandardButtonStyle(font: .title2),
+                         action: viewModel.toggleFullKey)
         }
         .font(TextStyles.headline)
         .frame(width: matrixWidth, height: 250, alignment: .topLeading)
@@ -250,10 +250,12 @@ struct ProcessView: View {
     
     private func cipherHistoryButton() -> some ToolbarContent {
         ToolbarItem {
-            CustomButtonView(title: LocalizedStringKey(sheetTitle),
-                             buttonStyle: .secondary,
-                             action: viewModel.toggleCipherHistory)
-            .opacity(viewModel.animationControl.isDone ? 1 : 0)
+            if viewModel.animationControl.isDone {
+                CustomToolbarButton(title: LocalizedStringKey(sheetTitle),
+                                    buttonStyle: .secondary,
+                                    action: viewModel.toggleCipherHistory)
+                .transition(.opacity)
+            }
         }
     }
     

@@ -30,7 +30,8 @@ struct MainView: View {
                 .onChange(of: viewModel.selectedEncryptionMode) {
                     viewModel.handlePickerChange(newValue: $1)
                 }
-                .sheet(isPresented: $viewModel.showSettings, content: SettingsView.init)
+                .sheet(isPresented: $viewModel.showSettings,
+                       content: SettingsView.init)
         }
     }
     
@@ -61,8 +62,12 @@ struct MainView: View {
     // MARK: - State and Key View
     private var matrixViews: some View {
         HStack(spacing: 40) {
-            EditableMatrix(title: "Zustand", icon: "rectangle.split.3x3", matrix: $viewModel.stateMatrix)
-            EditableMatrix(title: "Schlüssel", icon: "key", matrix: $viewModel.keyMatrix)
+            EditableMatrix(title: "Zustand",
+                           icon: "rectangle.split.3x3",
+                           matrix: $viewModel.stateMatrix)
+            EditableMatrix(title: "Schlüssel",
+                           icon: "key",
+                           matrix: $viewModel.keyMatrix)
         }
     }
     
@@ -72,11 +77,15 @@ struct MainView: View {
         let primaryStyle = PrimaryButtonStyle(useMaxWidth: true, isDisabled: isDisabled)
         
         return HStack(spacing: 32) {
-            CustomNavigationButton(title: "Verschlüsseln", icon: "lock",  buttonStyle: primaryStyle) {
+            CustomNavigationButton(title: "Verschlüsseln",
+                                   icon: "lock",
+                                   buttonStyle: primaryStyle) {
                 ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: false))
             }
             
-            CustomNavigationButton(title: "Entschlüsseln", icon: "lock.open", buttonStyle: primaryStyle) {
+            CustomNavigationButton(title: "Entschlüsseln",
+                                   icon: "lock.open",
+                                   buttonStyle: primaryStyle) {
                 ProcessView(viewModel: viewModel.createProcessViewModel(isDecryption: true))
             }
         }
@@ -91,9 +100,9 @@ struct MainView: View {
             .automatic
             #endif
         }()) {
-            CustomButtonView(icon: "gear",
-                             buttonStyle: StandardButtonStyle(font: .title2),
-                             action: viewModel.toggleSettings)
+            CustomToolbarButton(icon: "gear",
+                                buttonStyle: StandardButtonStyle(font: .title2),
+                                action: viewModel.toggleSettings)
         }
     }
 }

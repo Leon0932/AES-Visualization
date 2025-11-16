@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// A component for animating and displaying an operation.
-struct OperationSymbolView: View {
+struct OperationSymbol: View {
     // MARK: - Properties
     var text: String
     var isVisible: Double

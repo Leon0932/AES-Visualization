@@ -9,5 +9,10 @@ import Foundation
 
 /// Represents different configuration categories within the app's settings.
 enum SettingsConfigurations {
-    case language, appearance, color, others
+    case language
+    case appearance
+    #if os(iOS)
+    case color
+    #endif
+    case others
 }

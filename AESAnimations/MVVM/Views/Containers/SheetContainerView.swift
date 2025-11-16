@@ -53,20 +53,28 @@ struct SheetContainerView<Content: View>: View {
                                 content: toolbarContent)
                 }
             }
+            .accentColor(settingsVM.primaryColor.color)
             #endif
             .environment(\.locale, .init(identifier: settingsVM.appLanguage))
-            .accentColor(settingsVM.primaryColor.color)
         }
     }
     
     // MARK: - Title macOs
     private var navigationTitleMac: some View {
         ZStack(alignment: .leading) {
-            CustomButtonView(icon: "xmark",
+            if #available(macOS 26.0, *) {
+                Button(action: {
+                    dismiss()
+                }) {
+                    Image(systemName: "xmark")
+                }
+            } else {
+                CustomButton(icon: "xmark",
                              buttonStyle: StandardButtonStyle(font: .title2)) {
-                dismiss()
+                    dismiss()
+                }
             }
-            
+
             Text(navigationTitle)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .font(.headline)

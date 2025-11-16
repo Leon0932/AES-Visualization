@@ -150,10 +150,12 @@ struct SubBytesAnimationView: View {
             let sBox = LocalizedStringKey(OperationNames.sBox.description)
             let invSBox = LocalizedStringKey(OperationNames.invSBox.description)
             
-            CustomButtonView(title: viewModel.operationDetails.isInverseMode ? invSBox : sBox,
-                             buttonStyle: .secondary,
-                             action: viewModel.toggleSBoxAnimation)
-            .opacity(viewModel.animationControl.isDone ? 1 : 0)
+            if viewModel.animationControl.isDone {
+                CustomToolbarButton(title: viewModel.operationDetails.isInverseMode ? invSBox : sBox,
+                                    buttonStyle: .secondary,
+                                    action: viewModel.toggleSBoxAnimation)
+                .transition(.opacity)
+            }
         }
     }
 }

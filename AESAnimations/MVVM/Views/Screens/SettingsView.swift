@@ -38,7 +38,9 @@ struct SettingsView: View {
         Group {
             sectionView(title: getTitle(configuration: .language), selectionsView: languageSelections)
             sectionView(title: getTitle(configuration: .appearance), selectionsView: colorSchemeSelections)
+            #if os(iOS)
             sectionView(title: getTitle(configuration: .color), selectionsView: primaryColorSelection)
+            #endif
             sectionView(title: getTitle(configuration: .others), showDivider: false, selectionsView: furtherSettingsSelections)
         }
     }
@@ -81,6 +83,7 @@ struct SettingsView: View {
         }
     }
     
+    #if os(iOS)
     private func primaryColorSelection() -> some View {
         selectionView {
             ForEach(PrimaryColor.allCases, id: \.self) { color in
@@ -92,6 +95,7 @@ struct SettingsView: View {
             }
         }
     }
+    #endif
     
     private func furtherSettingsSelections() -> some View {
         VStack(alignment: .leading,
@@ -103,7 +107,9 @@ struct SettingsView: View {
     
     private var toolbarButton: AnyView {
         AnyView(
-            CustomButtonView(icon: "info.circle", buttonStyle: .standard) {
+            CustomToolbarButton(title: "Info",
+                                icon: "info.circle",
+                                buttonStyle: .standard) {
                 viewModel.showAuthorView = true
             }
         )
@@ -170,7 +176,12 @@ struct SettingsView: View {
                                imageName: String? = nil) -> some View {
         let frameSize: CGFloat = isSelected ? 55 : 50
         let overlayFrameSize: CGFloat = isSelected ? 55 : 52
-        let overlayColor = isSelected ? viewModel.primaryColor.color : Color.gray.opacity(0.3)
+        #if os(iOS)
+        let primaryColor = viewModel.primaryColor.color
+        #else
+        let primaryColor = Color.accentColor
+        #endif
+        let overlayColor = isSelected ? primaryColor : Color.gray.opacity(0.3)
         
         return ZStack {
             if isSystem {
@@ -208,8 +219,10 @@ struct SettingsView: View {
     // MARK: - Title Helper Function
     private func getTitle(configuration: SettingsConfigurations) -> LocalizedStringKey {
         switch configuration {
+        #if os(iOS)
         case .color:
             return LocalizedStringKey("Wähle Akzentfarbe (\(viewModel.primaryColor.rawValue.capitalized))")
+        #endif
         case .appearance:
             return LocalizedStringKey("Wähle Erscheinungsbild (\(viewModel.colorScheme.rawValue))")
         case .language:

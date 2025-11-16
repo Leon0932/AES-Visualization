@@ -130,7 +130,8 @@ struct GenericDataView: View {
     
     private func switchButton() -> some ToolbarContent {
         ToolbarItem(placement: .automatic) {
-            Toggle("Zeige Bunte Farben", isOn: $showByteColors)
+            CustomToolbarToggle(title: showByteColors ? "Zeige Akzent Farben" : "Zeige Bunte Farben",
+                                isOn: $showByteColors)
         }
     }
 }

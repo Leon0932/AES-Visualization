@@ -43,12 +43,12 @@ struct WelcomeView: View {
         
         Spacer()
         
-        CustomButtonView(title: "Starten",
-                         buttonStyle: PrimaryButtonStyle(useMaxWidth: true)) {
+        CustomButton(title: "Starten",
+                     buttonStyle: PrimaryButtonStyle(useMaxWidth: true)) {
             withAnimation {
                 showMainView = true
             }
         }
-                         .padding(.bottom, 25)
+        .padding(.bottom, 25)
     }
 }

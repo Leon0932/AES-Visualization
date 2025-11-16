@@ -39,7 +39,9 @@ struct StandardButtonStyle: ButtonStyle {
     /// Checks if the button is pressed, or if on an iPad with a keyboard or on a Mac, checks if it is hovered.
     var fillColor: some View {
         isHovered
-        ? (padding > 0 ? RoundedRectangle(cornerRadius: 5).fill(Color.ultraLightGray) : nil)
+        ? (padding > 0
+           ? RoundedRectangle(cornerRadius: 5).fill(Color.ultraLightGray)
+           : nil)
         : nil
     }
 }

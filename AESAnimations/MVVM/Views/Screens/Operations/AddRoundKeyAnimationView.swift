@@ -26,13 +26,13 @@ struct AddRoundKeyAnimationView: View {
         HStack(spacing: 20) {
             invisibleCellView { viewModel.positionCellState = $0 }
             
-            OperationSymbolView(text: "⊕",
-                                isVisible: viewModel.showXOR)
+            OperationSymbol(text: "⊕",
+                            isVisible: viewModel.showXOR)
             
             invisibleCellView { viewModel.positionCellKey = $0 }
             
-            OperationSymbolView(text: "=",
-                                isVisible: viewModel.showEqual)
+            OperationSymbol(text: "=",
+                            isVisible: viewModel.showEqual)
             resultCellView
         }
     }

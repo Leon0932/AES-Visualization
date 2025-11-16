@@ -14,13 +14,13 @@ struct SecondaryButtonStyle: ButtonStyle {
     // MARK: - Properties
     @State private var isHovered: Bool = false
     
-    var padding: CGFloat = 8
+    var padding: CGFloat = 12
     var font: Font = .body
 
     /// Creates a view that represents the body of a button.
     ///
     /// Creates a style with a light primary color for the background, the primary color
-    ///  for the foreground and including `highlightEffect` and `pressEffect`
+    ///  for the foreground including `pressEffect`
     ///
     /// - Parameter configuration: The properties of a button.
     /// - Returns: A view that represents the body of a button.
@@ -28,12 +28,8 @@ struct SecondaryButtonStyle: ButtonStyle {
         configuration.label
             .padding(padding)
             .font(font)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(fillColor(configuration))
-            )
+            .buttonBackground(fillColor(configuration))
             .foregroundStyle(Color.accentColor)
-            .highlightEffect(isHovered: $isHovered)
             .pressEffect(isPressed: configuration.isPressed)
     }
     
@@ -42,7 +38,9 @@ struct SecondaryButtonStyle: ButtonStyle {
     /// - Parameter configuration: The properties of a button.
     /// - Returns: Color of the button
     func fillColor(_ configuration: Configuration) -> Color {
-        configuration.isPressed || isHovered ? Color.accentColor.opacity(0.4) : Color.accentColor.opacity(0.2)
+        configuration.isPressed || isHovered
+        ? Color.accentColor.opacity(0.4)
+        : Color.accentColor.opacity(0.2)
     }
     
 }

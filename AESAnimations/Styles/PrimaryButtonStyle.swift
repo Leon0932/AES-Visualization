@@ -30,10 +30,7 @@ struct PrimaryButtonStyle: ButtonStyle {
             .foregroundStyle(Color.white)
             .frame(maxWidth: useMaxWidth ? .infinity : nil)
             .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(fillColor(configuration))
-            )
+            .buttonBackground(fillColor(configuration))
             .disabled(isDisabled)
             .highlightEffect(isHovered: $isHovered)
             .pressEffect(isPressed: configuration.isPressed)

@@ -39,9 +39,9 @@ struct AnimationControlsView: View {
     
     // MARK: - Start Button
     private var startButton: some View {
-        CustomButtonView(title: "Animation starten",
-                         icon: "play.circle",
-                         buttonStyle: .primary) {
+        CustomButton(title: "Animation starten",
+                     icon: "play.circle",
+                     buttonStyle: .primary) {
             withAnimation { startAnimations() }
         }
     }
@@ -51,23 +51,19 @@ struct AnimationControlsView: View {
         let secondaryButton = SecondaryButtonStyle(padding: 16, font: .headline)
         
         return HStack(spacing: 15) {
-            CustomButtonView(title: "Wiederholen",
-                             icon: "repeat",
-                             buttonStyle: secondaryButton,
-                             action: repeatAnimation)
+            CustomButton(title: "Wiederholen",
+                         icon: "repeat",
+                         buttonStyle: secondaryButton,
+                         action: repeatAnimation)
             
             if showReverseAnimationButton {
-                CustomButtonView(title: "Umgekehrt",
-                                 icon: "arrowshape.turn.up.backward",
-                                 buttonStyle: secondaryButton,
-                                 action: startReverseAnimation)
+                CustomButton(title: "Umgekehrt",
+                             icon: "arrowshape.turn.up.backward",
+                             buttonStyle: secondaryButton,
+                             action: startReverseAnimation)
             }
         }
         .padding(10)
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.ultraLightGray)
-        )
     }
     
     // MARK: - Control buttons
@@ -132,9 +128,9 @@ struct AnimationControlsView: View {
     ///   - action: The action to execute when the control is activated.
     /// - Returns: A custom button view with a standard style.
     private func controlButton(icon: String, action: @escaping () -> Void) -> some View {
-        CustomButtonView(icon: icon,
-                         buttonStyle: StandardButtonStyle(font: .title2),
-                         action: action)
+        CustomButton(icon: icon,
+                     buttonStyle: StandardButtonStyle(font: .title2),
+                     action: action)
     }
     
     /// A view for displaying the animation speed.

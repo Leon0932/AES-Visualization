@@ -79,6 +79,26 @@
         }
       }
     },
+    "Blockform aus" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockform off"
+          }
+        }
+      }
+    },
+    "Blockform ein" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockform on"
+          }
+        }
+      }
+    },
     "Die App wurde von **Leon Chamoun** im Rahmen einer Bachelorarbeit entwickelt, die von **Prof. Dr. Christoph Karg** betreut wurde." : {
       "localizations" : {
         "en" : {
@@ -222,6 +242,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Index"
+          }
+        }
+      }
+    },
+    "Info" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Info"
           }
         }
       }
@@ -751,12 +781,12 @@
         }
       }
     },
-    "Zeige Blockform" : {
+    "Zeige Akzent Farben" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Block Form"
+            "value" : "Show Accent Colors"
           }
         }
       }

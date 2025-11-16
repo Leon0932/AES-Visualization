@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35E484292EC7F0B500D2DEA5 /* CustomToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E484282EC7F0B500D2DEA5 /* CustomToolbarButton.swift */; };
+		35E4842D2EC7F48000D2DEA5 /* CustomToolbarToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4842C2EC7F48000D2DEA5 /* CustomToolbarToggle.swift */; };
 		C30E9AFA2CBE43E100DF5AE5 /* SBoxAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AF92CBE43E100DF5AE5 /* SBoxAnimationView.swift */; };
 		C30E9AFC2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AFB2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift */; };
 		C30E9AFE2CBECD1200DF5AE5 /* ByteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AFD2CBECD1200DF5AE5 /* ByteExtension.swift */; };
@@ -18,7 +20,7 @@
 		C310C9252C72529200E91AB7 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9242C72529200E91AB7 /* ColorExtensions.swift */; };
 		C310C9272C72548800E91AB7 /* AddRoundKeyAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9262C72548800E91AB7 /* AddRoundKeyAnimationView.swift */; };
 		C310C9292C7254BA00E91AB7 /* AddRoundKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310C9282C7254BA00E91AB7 /* AddRoundKeyViewModel.swift */; };
-		C31E69BD2C8721B900230D22 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69BC2C8721B900230D22 /* ColumnView.swift */; };
+		C31E69BD2C8721B900230D22 /* Column.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69BC2C8721B900230D22 /* Column.swift */; };
 		C31E69C12C872C3300230D22 /* AnimationControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C02C872C3300230D22 /* AnimationControlsView.swift */; };
 		C31E69C32C887D9D00230D22 /* ShiftRowsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C22C887D9D00230D22 /* ShiftRowsHelper.swift */; };
 		C31E69C62C88988E00230D22 /* RoundKeyHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E69C52C88988E00230D22 /* RoundKeyHistory.swift */; };
@@ -44,7 +46,7 @@
 		C33A3C2A2CCB8EA7004CF720 /* CustomLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A3C292CCB8EA7004CF720 /* CustomLabelView.swift */; };
 		C33A3C2C2CCBE676004CF720 /* HighlightEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A3C2B2CCBE676004CF720 /* HighlightEffectModifier.swift */; };
 		C33A3C302CCD93D4004CF720 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A3C2F2CCD93D4004CF720 /* SettingsViewModel.swift */; };
-		C33E45082C7A9B2100F38593 /* OperationSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33E45072C7A9B2100F38593 /* OperationSymbolView.swift */; };
+		C33E45082C7A9B2100F38593 /* OperationSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33E45072C7A9B2100F38593 /* OperationSymbol.swift */; };
 		C33E450A2C7A9D0800F38593 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33E45092C7A9D0800F38593 /* StateView.swift */; };
 		C34310112C9373DA0004F4C7 /* AnimationViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34310102C9373DA0004F4C7 /* AnimationViewModelProtocol.swift */; };
 		C34310132C948AA10004F4C7 /* OperationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34310122C948AA10004F4C7 /* OperationDetails.swift */; };
@@ -112,6 +114,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		35E484282EC7F0B500D2DEA5 /* CustomToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolbarButton.swift; sourceTree = "<group>"; };
+		35E4842C2EC7F48000D2DEA5 /* CustomToolbarToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolbarToggle.swift; sourceTree = "<group>"; };
 		C30E9AF92CBE43E100DF5AE5 /* SBoxAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBoxAnimationView.swift; sourceTree = "<group>"; };
 		C30E9AFB2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBoxAnimationViewModel.swift; sourceTree = "<group>"; };
 		C30E9AFD2CBECD1200DF5AE5 /* ByteExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteExtension.swift; sourceTree = "<group>"; };
@@ -123,7 +127,7 @@
 		C310C9242C72529200E91AB7 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		C310C9262C72548800E91AB7 /* AddRoundKeyAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoundKeyAnimationView.swift; sourceTree = "<group>"; };
 		C310C9282C7254BA00E91AB7 /* AddRoundKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoundKeyViewModel.swift; sourceTree = "<group>"; };
-		C31E69BC2C8721B900230D22 /* ColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnView.swift; sourceTree = "<group>"; };
+		C31E69BC2C8721B900230D22 /* Column.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Column.swift; sourceTree = "<group>"; };
 		C31E69C02C872C3300230D22 /* AnimationControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationControlsView.swift; sourceTree = "<group>"; };
 		C31E69C22C887D9D00230D22 /* ShiftRowsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftRowsHelper.swift; sourceTree = "<group>"; };
 		C31E69C52C88988E00230D22 /* RoundKeyHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundKeyHistory.swift; sourceTree = "<group>"; };
@@ -150,7 +154,7 @@
 		C33A3C292CCB8EA7004CF720 /* CustomLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabelView.swift; sourceTree = "<group>"; };
 		C33A3C2B2CCBE676004CF720 /* HighlightEffectModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightEffectModifier.swift; sourceTree = "<group>"; };
 		C33A3C2F2CCD93D4004CF720 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		C33E45072C7A9B2100F38593 /* OperationSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationSymbolView.swift; sourceTree = "<group>"; };
+		C33E45072C7A9B2100F38593 /* OperationSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationSymbol.swift; sourceTree = "<group>"; };
 		C33E45092C7A9D0800F38593 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 		C34310102C9373DA0004F4C7 /* AnimationViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewModelProtocol.swift; sourceTree = "<group>"; };
 		C34310122C948AA10004F4C7 /* OperationDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDetails.swift; sourceTree = "<group>"; };
@@ -295,6 +299,8 @@
 			children = (
 				C38734DD2C6921DD00E835DB /* CustomButton.swift */,
 				C33A3C252CCB87DA004CF720 /* CustomNavigationButton.swift */,
+				35E484282EC7F0B500D2DEA5 /* CustomToolbarButton.swift */,
+				35E4842C2EC7F48000D2DEA5 /* CustomToolbarToggle.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -400,9 +406,9 @@
 				C33940192C56D76A008802BC /* EditableMatrix.swift */,
 				C38734E32C692E7600E835DB /* SBoxView.swift */,
 				C38734E82C692FA100E835DB /* CellView.swift */,
-				C33E45072C7A9B2100F38593 /* OperationSymbolView.swift */,
+				C33E45072C7A9B2100F38593 /* OperationSymbol.swift */,
 				C33E45092C7A9D0800F38593 /* StateView.swift */,
-				C31E69BC2C8721B900230D22 /* ColumnView.swift */,
+				C31E69BC2C8721B900230D22 /* Column.swift */,
 				C31E69C02C872C3300230D22 /* AnimationControlsView.swift */,
 				C329DF752CDE529400959851 /* HSAalenLogo.swift */,
 				C32554B32CFB38EA00CDFC8B /* SafariWebView.swift */,
@@ -647,7 +653,7 @@
 				C38734F22C6943E600E835DB /* ShiftRowsAnimationView.swift in Sources */,
 				C3E1F2C42C7B6FF80030B994 /* OperationNames.swift in Sources */,
 				C371552E2D24093900E3ADCF /* LayoutStyles.swift in Sources */,
-				C31E69BD2C8721B900230D22 /* ColumnView.swift in Sources */,
+				C31E69BD2C8721B900230D22 /* Column.swift in Sources */,
 				C3E1F2C22C7B6EE80030B994 /* KeyExpansionViewModel.swift in Sources */,
 				C33A3C2C2CCBE676004CF720 /* HighlightEffectModifier.swift in Sources */,
 				C346320B2D011CC600149FE3 /* AnimationControlEnums.swift in Sources */,
@@ -659,6 +665,7 @@
 				C33A3C2A2CCB8EA7004CF720 /* CustomLabelView.swift in Sources */,
 				C34A85F82CDFBF7000CF3BAE /* StorageKeys.swift in Sources */,
 				C3C476D92C595876009D718D /* AESConfiguration.swift in Sources */,
+				35E4842D2EC7F48000D2DEA5 /* CustomToolbarToggle.swift in Sources */,
 				C31E69C82C88BF7400230D22 /* AnimationStep.swift in Sources */,
 				C3E1F2C02C7B6ECE0030B994 /* KeyExpansionAnimationView.swift in Sources */,
 				C32554B42CFB38EA00CDFC8B /* SafariWebView.swift in Sources */,
@@ -668,6 +675,7 @@
 				C32554B82CFB7C5100CDFC8B /* AuthorMessage.swift in Sources */,
 				C37BA07F2C397D5800C87BB7 /* AESAnimationsApp.swift in Sources */,
 				C30E9AFC2CBE458900DF5AE5 /* SBoxAnimationViewModel.swift in Sources */,
+				35E484292EC7F0B500D2DEA5 /* CustomToolbarButton.swift in Sources */,
 				C33940212C56D839008802BC /* AESKeySchedule.swift in Sources */,
 				C37155302D240BDE00E3ADCF /* PositionTrackingModifier.swift in Sources */,
 				C38734E72C692F2000E835DB /* ViewExtensions.swift in Sources */,
@@ -690,7 +698,7 @@
 				C30E9B002CBECEAB00DF5AE5 /* StringExtension.swift in Sources */,
 				C362CBFE2D062296008A8954 /* WarningView.swift in Sources */,
 				C38734DC2C68DC5D00E835DB /* Matrix.swift in Sources */,
-				C33E45082C7A9B2100F38593 /* OperationSymbolView.swift in Sources */,
+				C33E45082C7A9B2100F38593 /* OperationSymbol.swift in Sources */,
 				C38734E92C692FA100E835DB /* CellView.swift in Sources */,
 				C310C9252C72529200E91AB7 /* ColorExtensions.swift in Sources */,
 				C339401F2C56D7DB008802BC /* AESMath.swift in Sources */,

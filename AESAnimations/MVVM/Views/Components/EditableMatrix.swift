@@ -52,22 +52,22 @@ struct EditableMatrix: View {
                       icon: { Image(systemName: icon) })
                 .font(font)
                 
-                CustomButtonView(icon: "arrow.uturn.left",
-                                 buttonStyle: StandardButtonStyle(font: .title2,
-                                                                  isDisabled: matrix.checkNullBytes)) {
+                CustomButton(icon: "arrow.uturn.left",
+                             buttonStyle: StandardButtonStyle(font: .title2,
+                                                              isDisabled: matrix.checkNullBytes)) {
                     matrix.fillData()
                 }
             }
             
             Spacer()
             
-            CustomButtonView(icon: "dice",
-                             buttonStyle: SecondaryButtonStyle(font: font)) {
+            CustomButton(icon: "dice",
+                         buttonStyle: SecondaryButtonStyle(font: font)) {
                 matrix.generateAndFillRandomBytes()
             }
             
-            CustomButtonView(icon: "trash",
-                             buttonStyle: SecondaryButtonStyle(font: font)) {
+            CustomButton(icon: "trash",
+                         buttonStyle: SecondaryButtonStyle(font: font)) {
                 matrix.clearData()
             }
         }

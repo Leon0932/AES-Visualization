@@ -70,10 +70,12 @@ struct ShiftRowsAnimationView: View {
     // MARK: - Toolbar Item
     private func keyExpRoundsButton() -> some ToolbarContent {
         ToolbarItem {
-            CustomButtonView(title: LocalizedStringKey(buttonTitle),
-                             buttonStyle: .secondary,
-                             action: viewModel.toggleShiftRounds)
-            .opacity(viewModel.animationControl.isDone ? 1 : 0)
+            if viewModel.animationControl.isDone {
+                CustomToolbarButton(title: LocalizedStringKey(buttonTitle),
+                                    buttonStyle: .secondary,
+                                    action: viewModel.toggleShiftRounds)
+                .transition(.opacity)
+            }
         }
     }
     

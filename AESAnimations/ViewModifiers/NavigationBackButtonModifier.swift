@@ -28,12 +28,13 @@ struct NavigationBackButtonModifier: ViewModifier {
     /// Dismiss Button
     private func toolbarItem() -> some ToolbarContent {
         ToolbarItem(placement: .navigation) {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "chevron.backward")
+            if isDone {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                }
             }
-            .opacity(isDone ? 1 : 0)
         }
     }
 }

@@ -18,7 +18,7 @@ struct CustomNavigationButton<Content: View, Style: ButtonStyle>: View {
     // MARK: - Body
     var body: some View {
         NavigationLink(destination: destination()) {
-            CustomLabelView(title: title, icon: icon)
+            CustomLabel(title: title, icon: icon)
         }
         .buttonStyle(buttonStyle)
     }

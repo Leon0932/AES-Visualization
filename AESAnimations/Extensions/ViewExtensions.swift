@@ -23,9 +23,9 @@ extension View {
             .automatic
             #endif
         }()) {
-            CustomButtonView(icon: "xmark",
-                             buttonStyle: .standard,
-                             action: action)
+            CustomToolbarButton(icon: "xmark",
+                                buttonStyle: .standard,
+                                action: action)
         }
     }
     
@@ -86,5 +86,21 @@ extension View {
     /// - Returns: A modified view with position tracking applied.
     func trackPosition(onPosition: @escaping (Position) -> Void) -> some View {
         modifier(PositionTrackingModifier(onPosition: onPosition))
+    }
+    
+    /// Applies a button background that is Capsule() on iOS 26+
+    // and RoundedRectangle(cornerRadius: 10) on older versions.
+    func buttonBackground(_ color: Color) -> some View {
+        self.background(
+            Group {
+                if #available(iOS 26.0, macOS 26.0, *) {
+                    Capsule()
+                        .fill(color)
+                } else {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(color)
+                }
+            }
+        )
     }
 }

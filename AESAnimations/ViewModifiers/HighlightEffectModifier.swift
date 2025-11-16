@@ -20,14 +20,23 @@ struct HighlightEffectModifier: ViewModifier {
     /// - Parameter content: The content to which the modifier is applied.
     /// - Returns: The modified view with a platform-specific hover or highlight effect.
     func body(content: Content) -> some View {
+        #if os(iOS)
+        Group {
+            if #available(iOS 26.0, *) {
+                content
+                    .contentShape(AnyShape(Capsule()))
+                    .hoverEffect(.highlight)
+            } else {
+                content
+                    .contentShape(AnyShape(RoundedRectangle(cornerRadius: 10)))
+                    .hoverEffect(.highlight)
+            }
+        }
+        #else
         content
-            #if os(iOS)
-            .contentShape(RoundedRectangle(cornerRadius: 10))
-            .hoverEffect(.highlight)
-            #else
             .onHover { isHovered = $0 }
             .animation(.easeInOut, value: isHovered)
-            #endif
+        #endif
         
     }
 }
