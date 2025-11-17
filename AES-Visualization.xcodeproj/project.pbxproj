@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3516CCE02ECA186700015995 /* PortraitBlockerOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3516CCDF2ECA186700015995 /* PortraitBlockerOverlay.swift */; };
-		3516CCEB2ECA780800015995 /* AESLogo.icon in Resources */ = {isa = PBXBuildFile; fileRef = 3516CCE92ECA766400015995 /* AESLogo.icon */; };
 		35E484292EC7F0B500D2DEA5 /* CustomToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E484282EC7F0B500D2DEA5 /* CustomToolbarButton.swift */; };
 		35E4842D2EC7F48000D2DEA5 /* CustomToolbarToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4842C2EC7F48000D2DEA5 /* CustomToolbarToggle.swift */; };
 		C30E9AFA2CBE43E100DF5AE5 /* SBoxAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E9AF92CBE43E100DF5AE5 /* SBoxAnimationView.swift */; };
@@ -31,7 +30,6 @@
 		C32554B42CFB38EA00CDFC8B /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32554B32CFB38EA00CDFC8B /* SafariWebView.swift */; };
 		C32554B62CFB546F00CDFC8B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32554B52CFB546F00CDFC8B /* WelcomeView.swift */; };
 		C32554B82CFB7C5100CDFC8B /* AuthorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32554B72CFB7C5100CDFC8B /* AuthorMessage.swift */; };
-		C329B5222CDAD63300AD7E2F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */; };
 		C329DF762CDE529400959851 /* HSAalenLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329DF752CDE529400959851 /* HSAalenLogo.swift */; };
 		C33194E02CB1AF010036F830 /* ProcessPhaseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */; };
 		C339401A2C56D76A008802BC /* EditableMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33940192C56D76A008802BC /* EditableMatrix.swift */; };
@@ -64,7 +62,6 @@
 		C37155302D240BDE00E3ADCF /* PositionTrackingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C371552F2D240BDE00E3ADCF /* PositionTrackingModifier.swift */; };
 		C37BA07F2C397D5800C87BB7 /* AESAnimationsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BA07E2C397D5800C87BB7 /* AESAnimationsApp.swift */; };
 		C37BA0812C397D5800C87BB7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BA0802C397D5800C87BB7 /* MainView.swift */; };
-		C37BA0832C397D5900C87BB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C37BA0822C397D5900C87BB7 /* Assets.xcassets */; };
 		C37BA0872C397D5900C87BB7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C37BA0862C397D5900C87BB7 /* Preview Assets.xcassets */; };
 		C37BA08E2C39882F00C87BB7 /* SubBytesAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BA08D2C39882F00C87BB7 /* SubBytesAnimationView.swift */; };
 		C38734DA2C68DAD000E835DB /* PrimaryColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38734D92C68DAD000E835DB /* PrimaryColor.swift */; };
@@ -117,7 +114,6 @@
 
 /* Begin PBXFileReference section */
 		3516CCDF2ECA186700015995 /* PortraitBlockerOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitBlockerOverlay.swift; sourceTree = "<group>"; };
-		3516CCE92ECA766400015995 /* AESLogo.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AESLogo.icon; sourceTree = "<group>"; };
 		35E484282EC7F0B500D2DEA5 /* CustomToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolbarButton.swift; sourceTree = "<group>"; };
 		35E4842C2EC7F48000D2DEA5 /* CustomToolbarToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolbarToggle.swift; sourceTree = "<group>"; };
 		C30E9AF92CBE43E100DF5AE5 /* SBoxAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBoxAnimationView.swift; sourceTree = "<group>"; };
@@ -140,7 +136,6 @@
 		C32554B32CFB38EA00CDFC8B /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		C32554B52CFB546F00CDFC8B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		C32554B72CFB7C5100CDFC8B /* AuthorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorMessage.swift; sourceTree = "<group>"; };
-		C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C329DF752CDE529400959851 /* HSAalenLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSAalenLogo.swift; sourceTree = "<group>"; };
 		C33151192CA03AA40047B513 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33194DF2CB1AF010036F830 /* ProcessPhaseAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessPhaseAnimation.swift; sourceTree = "<group>"; };
@@ -175,7 +170,6 @@
 		C37BA07B2C397D5800C87BB7 /* AES-Visualization.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AES-Visualization.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C37BA07E2C397D5800C87BB7 /* AESAnimationsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESAnimationsApp.swift; sourceTree = "<group>"; };
 		C37BA0802C397D5800C87BB7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		C37BA0822C397D5900C87BB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C37BA0842C397D5900C87BB7 /* AESAnimations.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AESAnimations.entitlements; sourceTree = "<group>"; };
 		C37BA0862C397D5900C87BB7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C37BA08D2C39882F00C87BB7 /* SubBytesAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubBytesAnimationView.swift; sourceTree = "<group>"; };
@@ -218,7 +212,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		C32432BF2DA7D47D00D2575F /* Assets */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Assets; sourceTree = "<group>"; };
+		35BE72292ECBB57C0083804C /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
 		C331511A2CA03AA40047B513 /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -338,8 +332,6 @@
 			isa = PBXGroup;
 			children = (
 				C38B28B22CB4092900FCE203 /* README.md */,
-				3516CCE92ECA766400015995 /* AESLogo.icon */,
-				C32432BF2DA7D47D00D2575F /* Assets */,
 				C37BA07D2C397D5800C87BB7 /* AESAnimations */,
 				C331511A2CA03AA40047B513 /* Tests */,
 				C37BA07C2C397D5800C87BB7 /* Products */,
@@ -358,6 +350,7 @@
 		C37BA07D2C397D5800C87BB7 /* AESAnimations */ = {
 			isa = PBXGroup;
 			children = (
+				35BE72292ECBB57C0083804C /* Resources */,
 				C339401C2C56D7C6008802BC /* DataTypes.swift */,
 				C33A3C172CCA97BF004CF720 /* Styles */,
 				C3CD1D422CA9E186006C9804 /* ViewModifiers */,
@@ -367,10 +360,8 @@
 				C33940162C56D735008802BC /* Enums */,
 				C38734D62C68DA7D00E835DB /* MVVM */,
 				C37BA07E2C397D5800C87BB7 /* AESAnimationsApp.swift */,
-				C37BA0822C397D5900C87BB7 /* Assets.xcassets */,
 				C37BA0842C397D5900C87BB7 /* AESAnimations.entitlements */,
 				C37BA0852C397D5900C87BB7 /* Preview Content */,
-				C329B5212CDAD63300AD7E2F /* Localizable.xcstrings */,
 			);
 			path = AESAnimations;
 			sourceTree = "<group>";
@@ -532,7 +523,6 @@
 				C331511E2CA03AA40047B513 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				C32432BF2DA7D47D00D2575F /* Assets */,
 				C331511A2CA03AA40047B513 /* Tests */,
 			);
 			name = Tests;
@@ -553,6 +543,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				35BE72292ECBB57C0083804C /* Resources */,
 			);
 			name = "AES-Visualization";
 			packageProductDependencies = (
@@ -616,9 +609,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C37BA0872C397D5900C87BB7 /* Preview Assets.xcassets in Resources */,
-				3516CCEB2ECA780800015995 /* AESLogo.icon in Resources */,
-				C37BA0832C397D5900C87BB7 /* Assets.xcassets in Resources */,
-				C329B5222CDAD63300AD7E2F /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

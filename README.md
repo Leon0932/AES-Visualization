@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Assets/Logo.png" alt="AES Visualization Logo" width="200">
+  <img src="AESAnimations/Resources/AESLogo.png" alt="AES Visualization Logo" width="200">
 </p>
 
 # AES-Visualization App
