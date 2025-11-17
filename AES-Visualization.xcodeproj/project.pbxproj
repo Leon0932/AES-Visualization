@@ -922,7 +922,7 @@
 				CODE_SIGN_ENTITLEMENTS = AESAnimations/AESAnimations.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.0;
+				CURRENT_PROJECT_VERSION = 6.0;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"AESAnimations/Preview Content\"";
 				ENABLE_APP_SANDBOX = YES;
@@ -965,7 +965,7 @@
 				CODE_SIGN_ENTITLEMENTS = AESAnimations/AESAnimations.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.0;
+				CURRENT_PROJECT_VERSION = 6.0;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"AESAnimations/Preview Content\"";
 				ENABLE_APP_SANDBOX = YES;
